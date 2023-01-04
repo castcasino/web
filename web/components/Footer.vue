@@ -1,10 +1,5 @@
 <script setup lang="ts">
-useHead({
-    title: 'Blank — Nexa Games',
-    meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
-    ],
-})
+
 </script>
 
 <template>

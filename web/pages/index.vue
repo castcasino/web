@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useHead({
-    title: 'Nexa Games',
+    title: 'Nexa Games — Casual Blockchain Gaming',
     meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
+        { name: 'description', content: 'Nexa Games offers a premium blockchain gaming experience for Players over 18+.' }
     ],
 })
 </script>
@@ -21,8 +21,8 @@ useHead({
                         <div class="absolute inset-0">
                             <img
                                 class="h-full w-full object-cover"
-                                src="https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2830&q=80&sat=-100"
-                                alt="People working on laptops"
+                                src="https://images.unsplash.com/photo-1592398191627-25b41eeaa398?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
+                                alt="Casino room"
                             />
                             <div class="absolute inset-0 bg-gradient-to-r from-purple-800 to-indigo-700 mix-blend-multiply"></div>
                         </div>
@@ -34,7 +34,7 @@ useHead({
                                 </span>
 
                                 <span class="block text-indigo-200 text-4xl sm:text-5xl lg:text-6xl">
-                                    Real-money Gaming
+                                    Casual Blockchain Gaming
                                 </span>
                             </h1>
 
@@ -45,11 +45,11 @@ useHead({
                             <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                                 <div class="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
                                     <a href="javascript://" class="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-2xl font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8">
-                                        Get started
+                                        Browse the Games
                                     </a>
 
                                     <a href="javascript://" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-2xl font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8">
-                                        Watch the demo
+                                        Watch a demo
                                     </a>
                                 </div>
                             </div>
@@ -103,13 +103,14 @@ useHead({
                                 </div>
                                 <div class="mt-6">
                                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-                                        All games are published as Free and Open Source Software (FOSS)
+                                        Nexa Game Engine (NGE) guarantees 100% <em class="text-indigo-500">provably</em> fair play
                                     </h2>
 
                                     <p class="mt-4 text-lg text-gray-500">
-                                        Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum malesuada faucibus lacinia porttitor. Pulvinar laoreet sagittis viverra duis. In venenatis sem arcu pretium pharetra at. Lectus
-                                        viverra dui tellus ornare pharetra.
+                                        Every game action MUST pass through the NGE to protect Players from code bugs and malware.
+                                        The NGE protects both Players and Sponsors by offering mathematical proofs and/or hardware attestations for every action executed by the engine.
                                     </p>
+
                                     <div class="mt-6">
                                         <a
                                             href="javascript://"
@@ -164,14 +165,11 @@ useHead({
                                         </svg>
                                     </span>
                                 </div>
+
                                 <div class="mt-6">
                                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-                                        Nexa Game Engine (NGE) guarantees 100% <em class="text-indigo-500">provably</em> fair play
+                                        All games are published as Free and Open Source Software (FOSS)
                                     </h2>
-
-                                    <p class="mt-4 text-lg text-gray-500">
-                                        Every game action MUST pass through the NGE to protect Players from code bugs and malware.
-                                    </p>
 
                                     <p class="mt-4 text-lg text-gray-500">
                                         Semper curabitur ullamcorper posuere nunc sed. Ornare iaculis bibendum malesuada faucibus lacinia porttitor. Pulvinar laoreet sagittis viverra duis. In venenatis sem arcu pretium pharetra at. Lectus
@@ -181,9 +179,9 @@ useHead({
                                     <div class="mt-6">
                                         <a
                                             href="javascript://"
-                                            class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
+                                            class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-2xl font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                                         >
-                                            Get started
+                                            Learn more
                                         </a>
                                     </div>
                                 </div>
