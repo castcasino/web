@@ -7,11 +7,12 @@
         <div class="relative bg-white">
             <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-12">
                 <div class="flex justify-start lg:w-0 lg:flex-1">
-                    <a href="javascript://">
+                    <NuxtLink to="/">
                         <span class="sr-only">Your Company</span>
                         <img class="h-10 w-auto sm:h-14" src="~/assets/icon.png" alt="" />
-                    </a>
+                    </NuxtLink>
                 </div>
+
                 <div class="-my-2 -mr-2 md:hidden">
                     <button
                         type="button"
@@ -25,6 +26,7 @@
                         </svg>
                     </button>
                 </div>
+
                 <nav class="hidden space-x-10 md:flex">
                     <div class="relative">
                         <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
