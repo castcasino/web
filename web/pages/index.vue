@@ -34,12 +34,12 @@ useHead({
                                 </span>
 
                                 <span class="block text-indigo-200 text-4xl sm:text-5xl lg:text-6xl">
-                                    Casual Blockchain Gaming
+                                    Real-money Blockchain Gaming
                                 </span>
                             </h1>
 
                             <p class="mx-auto mt-6 max-w-lg text-center text-xl text-indigo-200 sm:max-w-3xl">
-                                Come and join our growing community of real-money Gamers; and the dedicated Creators who build &amp; publish the games they love.
+                                Join the excitement in our growing community of real-money Gamers and the talented Creators who build &amp; publish the games they love.
                             </p>
 
                             <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
