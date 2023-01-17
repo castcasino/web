@@ -12,7 +12,7 @@ The easiest way to integrate an existing game with Nexa Games is through our lib
 
 ## Virtual Machine
 
-The Nexa Games Engine (NGE) is a cross-chain, high-throughput virtual machine run by the Validators that secure the network.
+The Nexa Games Engine (NGE) is a cross-app-chain, high-throughput virtual machine run by the Validators that power & secure the network.
 
 ### Supported Appchain Networks
 
