@@ -14,10 +14,10 @@ The easiest way to integrate an existing game with Nexa Games is through our lib
 
 The Nexa Games Engine (NGE) is a cross-chain, high-throughput virtual machine run by the Validators that secure the network.
 
-### Supporting App Chain Networks
+### Supported App Chain Networks
 
 1. Avalanche Subnets
 2. Polygon Supernets
-3. Polkadot ??
-4. Binance ??
-5. Cosmos ??
+3. Polkadot Substrate?
+4. Cosmos Hub?
+5. Binance ??
