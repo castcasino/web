@@ -1,5 +1,5 @@
 /* Import types. */
-// import BlankType from '../types/Blank.js'
+// import GameType from '../types/Game.js'
 
 import {
     GraphQLBoolean,
@@ -20,13 +20,13 @@ export default {
     //     },
     // },
     resolve: (_root, args, ctx) => {
-        console.log('Blank (args):', args)
+        console.log('Game (args):', args)
 
         return [{
-            field1: 'This is a BLANK asset!',
+            field1: 'This is a GAME asset!',
             field2: 1337,
             field3: 88888888,
         }]
     },
-    description: `Blank description goes here.`,
+    description: `Game description goes here.`,
 }
