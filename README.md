@@ -4,6 +4,10 @@
 
 Presenting the first permissionless, real-money gaming engine for decentralized blockchain applications.
 
+### 100% Free and Open Source Software (FOSS)
+
+https://repo.hos.im/nyusternie/nexa-games
+
 
 ## Mini Games
 

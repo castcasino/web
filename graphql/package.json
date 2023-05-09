@@ -1,11 +1,11 @@
 {
-  "name": "nexa-exchange-graphql",
-  "version": "23.3.24",
-  "description": "Manages GraphQL requests.",
+  "name": "nexa-games-graphql",
+  "version": "23.5.9",
+  "description": "Manages GraphQL requests for Nexa Games.",
   "main": "index.js",
   "type": "module",
-  "repository": "https://github.com/avasdao/nexash",
-  "author": "Ava's DAO developers",
+  "repository": "https://repo.hos.im/nyusternie/nexa-games",
+  "author": "Shomari",
   "license": "MIT",
   "dependencies": {
     "@apollo/server": "4.5.0",
@@ -18,7 +18,10 @@
     "graphql-http": "1.16.0",
     "graphql-subscriptions": "2.0.0",
     "graphql-ws": "5.12.0",
+    "moment": "2.29.4",
+    "numeral": "2.0.6",
     "pouchdb": "8.0.1",
+    "uuid": "9.0.0",
     "ws": "8.13.0"
   }
 }
