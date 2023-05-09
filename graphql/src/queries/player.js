@@ -19,8 +19,8 @@ export default {
     //         description: `Field description goes here.`,
     //     },
     // },
-    resolve: (_root, args, ctx) => {
-        console.log('Player (args):', args)
+    resolve: (_root, _args, _ctx) => {
+        console.log('Player (args):', _args)
 
         return [{
             field1: 'This is a PLAYER asset!',

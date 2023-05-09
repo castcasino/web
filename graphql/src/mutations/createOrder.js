@@ -11,7 +11,7 @@ import {
 
 export default {
     type: GraphQLString,
-    resolve: (parent, args, params) => {
+    resolve: (_root, _args, _ctx) => {
         // Datastore logic lives in blockchainController
         // return blockchainController.broadcast(args)
         console.log('MUTATION PARAMS:', params)

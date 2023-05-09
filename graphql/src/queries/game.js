@@ -27,8 +27,8 @@ export default {
             description: `Enter a __Game ID__ string.`,
         },
     },
-    resolve: async (_root, args, ctx) => {
-        console.log('Game (args):', args)
+    resolve: async (_root, _args, _ctx) => {
+        console.log('Game (args):', _args)
 
         let response
 
