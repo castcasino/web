@@ -1,8 +1,10 @@
 /* Import modules. */
+import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
 /* Initialize databases. */
+const gamesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/games`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions`)
 
@@ -30,19 +32,31 @@ export default {
     resolve: async (_root, _args, _ctx) => {
         console.log('Game (args):', _args)
 
+        let game
+        let gameid
+
+        if (_args?.gameid) {
+            gameid = _args.gameid
+        }
+
+        if (gameid) {
+            game = await gamesDb
+                .get(gameid)
+                .catch(err => console.error(err))
+        }
+
         let response
 
-        if (true) {
-            response = await sessionsDb.put({
+        if (_args) {
+            response = await logsDb.put({
                 _id: uuidv4(),
-                hi: 'there!',
+                args: _args,
+                createdAt: moment().valueOf(),
             }).catch(err => console.error(err))
         }
 
         const pkg = {
-            field1: 'This is a GAME asset!',
-            field2: 1337,
-            field3: 88888888,
+            game,
             response,
         }
 
