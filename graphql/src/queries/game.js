@@ -13,12 +13,12 @@ import {
 
 export default {
     type: new GraphQLList(GraphQLString),
-    // args: {
-    //     fieldName: {
-    //         type: new GraphQLList(GraphQLString),
-    //         description: `Field description goes here.`,
-    //     },
-    // },
+    args: {
+        gameid: {
+            type: new GraphQLList(GraphQLString),
+            description: `Enter a __Game ID__ string.`,
+        },
+    },
     resolve: (_root, args, ctx) => {
         console.log('Game (args):', args)
 
