@@ -3,13 +3,8 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
-/* Initialize databases. */
-const gamesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/games`)
-const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
-const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions`)
-
 /* Import types. */
-// import GameType from '../types/Game.js'
+import GameType from '../types/Game.js'
 
 import {
     GraphQLBoolean,
@@ -21,8 +16,13 @@ import {
     GraphQLString,
 } from 'graphql'
 
+/* Initialize databases. */
+const gamesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/games`)
+const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
+const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions`)
+
 export default {
-    type: new GraphQLList(GraphQLString),
+    type: new GraphQLList(GameType),
     args: {
         gameid: {
             type: new GraphQLList(GraphQLString),
@@ -34,18 +34,26 @@ export default {
 
         let game
         let gameid
+        let response
 
         if (_args?.gameid) {
             gameid = _args.gameid
         }
 
         if (gameid) {
-            game = await gamesDb
+            response = await gamesDb
                 .get(gameid)
                 .catch(err => console.error(err))
-        }
 
-        let response
+            /* Validate response. */
+            if (response) {
+                game = {
+                    title: response.title,
+                    createdAt: response.createdAt,
+                    updatedAt: response.updatedAt,
+                }
+            }
+        }
 
         if (_args) {
             response = await logsDb.put({
@@ -55,12 +63,7 @@ export default {
             }).catch(err => console.error(err))
         }
 
-        const pkg = {
-            game,
-            response,
-        }
-
-        return [JSON.stringify(pkg)]
+        return [game]
     },
-    description: `Game description goes here.`,
+    description: `Game objects hold all relevent metadata.`,
 }
