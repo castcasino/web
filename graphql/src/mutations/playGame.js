@@ -3,6 +3,9 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
+import { randomBytes } from '@nexajs/crypto'
+import { entropyToMnemonic } from '@nexajs/hdnode'
+
 /* Import types. */
 import PlayType from '../types/Play.js'
 
@@ -30,10 +33,22 @@ export default {
 
         let response
 
+        const _id = uuidv4()
+
+        const args = _args
+
+        const bytes = randomBytes(32)
+
+        const mnemonic = entropyToMnemonic(entropy)
+
+        const createdAt = moment().valueOf()
+
         response = await playsDb.put({
-            _id: uuidv4(),
-            args: _args,
-            createdAt: moment().valueOf(),
+            _id,
+            args,
+            bytes,
+            mnemonic,
+            createdAt,
         }).catch(err => console.error(err))
 
         return response
