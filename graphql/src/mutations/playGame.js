@@ -38,6 +38,13 @@ export default {
 
         const args = _args
 
+        const gameid = 'DEMO'
+
+        const playerid = 'ANON'
+
+        const odds = 1.337
+        console.log('ODDS', odds)
+
         const entropy = binToHex(randomBytes(32))
         console.log('ENTROPY', entropy)
 
@@ -48,9 +55,10 @@ export default {
 
         response = await playsDb.put({
             _id,
-            args,
+            gameid,
+            playerid,
             entropy,
-            mnemonic,
+            odds,
             createdAt,
         }).catch(err => console.error(err))
 
