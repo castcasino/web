@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { randomBytes } from '@nexajs/crypto'
 import { entropyToMnemonic } from '@nexajs/hdnode'
+import { binToHex } from '@nexajs/utils'
 
 /* Import types. */
 import PlayType from '../types/Play.js'
@@ -37,9 +38,11 @@ export default {
 
         const args = _args
 
-        const entropy = randomBytes(32)
+        const entropy = binToHex(randomBytes(32))
+        console.log('ENTROPY', entropy)
 
         const mnemonic = entropyToMnemonic(entropy)
+        console.log('MNEMONIC', mnemonic);
 
         const createdAt = moment().valueOf()
 
