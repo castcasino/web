@@ -1,7 +1,7 @@
 {
   "name": "nexa-games-web",
+  "version": "23.4.30",
   "license": "MIT",
-  "version": "22.12.31",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -9,8 +9,12 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "devDependencies": {
-    "@nuxtjs/tailwindcss": "6.2.0",
+  "dependencies": {
+    "ethers": "6.0.8",
+    "nexajs": "22.12.23",
     "nuxt": "3.0.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "6.4.1"
   }
 }

@@ -38,7 +38,7 @@
 
                         <div class="mt-12 md:mt-0">
                             <h3 class="text-base font-medium text-gray-900">
-                                For Creators
+                                For Bankers
                             </h3>
 
                             <ul role="list" class="mt-4 space-y-4">
@@ -64,7 +64,7 @@
                     <div class="md:grid md:grid-cols-2 md:gap-8">
                         <div>
                             <h3 class="text-base font-medium text-gray-900">
-                                Company
+                                For Gamemasters
                             </h3>
 
                             <ul role="list" class="mt-4 space-y-4">
@@ -96,6 +96,12 @@
                             </h3>
 
                             <ul role="list" class="mt-4 space-y-4">
+                                <li>
+                                    <NuxtLink to="/license" class="text-base text-gray-500 hover:text-gray-900">
+                                        License
+                                    </NuxtLink>
+                                </li>
+
                                 <li>
                                     <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Claim</a>
                                 </li>

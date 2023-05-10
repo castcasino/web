@@ -103,7 +103,7 @@ useHead({
                                 </div>
                                 <div class="mt-6">
                                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-                                        Nexa Game Engine (NGE) guarantees 100% <em class="text-indigo-500">provably</em> fair play
+                                        Nexa Game Engine (NGE) guarantees 100% <em class="text-indigo-500">provably fair</em> gameplay
                                     </h2>
 
                                     <p class="mt-4 text-lg text-gray-500">
@@ -420,16 +420,16 @@ useHead({
                     </h2>
 
                     <div class="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
-                        <a
-                            href="javascript://"
+                        <NuxtLink
+                            to="/games"
                             class="flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-2xl font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                         >
-                            Browse games
-                        </a>
+                            Browse the games
+                        </NuxtLink>
 
-                        <a href="javascript://" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-50 px-4 py-3 text-2xl font-medium text-indigo-800 shadow-sm hover:bg-indigo-100">
+                        <NuxtLink to="/about" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-50 px-4 py-3 text-2xl font-medium text-indigo-800 shadow-sm hover:bg-indigo-100">
                             Learn more
-                        </a>
+                        </NuxtLink>
                     </div>
                 </div>
             </div>
