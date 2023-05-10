@@ -37,7 +37,7 @@ export default {
 
         const args = _args
 
-        const bytes = randomBytes(32)
+        const entropy = randomBytes(32)
 
         const mnemonic = entropyToMnemonic(entropy)
 
@@ -46,7 +46,7 @@ export default {
         response = await playsDb.put({
             _id,
             args,
-            bytes,
+            entropy,
             mnemonic,
             createdAt,
         }).catch(err => console.error(err))
