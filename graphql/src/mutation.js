@@ -5,6 +5,7 @@ import { GraphQLObjectType } from 'graphql'
 import addAffiliate from './mutations/addAffiliate.js'
 import createOrder from './mutations/createOrder.js'
 import createSession from './mutations/createSession.js'
+import playGame from './mutations/playGame.js'
 
 /* Set name. */
 const name = 'Mutation'
@@ -14,6 +15,7 @@ const fields = {
     addAffiliate,
     createOrder,
     createSession,
+    playGame,
 }
 
 /* Set (Mutation) description. */

@@ -1,5 +1,5 @@
 /* Import types. */
-// import Type from '../types/Type.js'
+// import BlankType from '../types/Blank.js'
 
 import {
     GraphQLBoolean,
