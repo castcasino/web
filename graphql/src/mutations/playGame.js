@@ -25,7 +25,7 @@ const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env
 
 export default {
     type: GraphQLString,
-    resolve: (_root, _args, _ctx) => {
+    resolve: async (_root, _args, _ctx) => {
         console.log('BLANK PARAMS:', _args)
 
         let response
