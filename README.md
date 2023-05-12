@@ -2,7 +2,7 @@
 
 ### https://nexa.games
 
-Presenting the first permissionless, real-money gaming engine for decentralized blockchain applications.
+Premier community and game engine for monetizing all levels of gamemakers and their projects/teams using provably fair micro-wagers.
 
 ### 100% Free and Open Source Software (FOSS)
 
