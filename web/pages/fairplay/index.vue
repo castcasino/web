@@ -19,6 +19,8 @@ useHead({
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur assumenda velit animi aut ipsa ab vero perferendis nam consequuntur sequi qui deleniti neque facere, laudantium dolore officiis earum tempore nesciunt.
         </p>
 
+        <h2>playid: {{$route.params.playid}}</h2>
+
         <div class="w-full py-5 flex justify-center">
             <input
                 type="text"

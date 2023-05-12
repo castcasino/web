@@ -36,6 +36,10 @@
                         Bankers
                     </NuxtLink>
 
+                    <NuxtLink to="/gamemakers" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                        Gamemakers
+                    </NuxtLink>
+
                     <NuxtLink to="/fairplay" class="text-base font-medium text-gray-500 hover:text-gray-900">
                         Fairplay
                     </NuxtLink>
