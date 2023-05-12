@@ -29,7 +29,7 @@ useHead({
 
                         <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
                             <h1 class="text-center font-bold tracking-tight">
-                                <span class="block text-white text-4xl sm:text-5xl lg:text-8xl">
+                                <span class="block text-white text-5xl lg:text-8xl">
                                     Nexa Games
                                 </span>
 
@@ -85,8 +85,8 @@ useHead({
                                     </h2>
 
                                     <p class="mt-4 text-lg text-gray-500">
-                                        Every game action MUST pass through the NGE to protect Players from code bugs and malware.
-                                        The NGE protects both Players and Sponsors by offering mathematical proofs and/or hardware attestations for every action executed by the engine.
+                                        Every game play MUST pass through the NGE to protect Players from code bugs and malware.
+                                        The NGE protects both Players and Bankers by offering mathematical proofs and/or hardware attestations for every action executed by the engine.
                                     </p>
 
                                     <div class="mt-6">
