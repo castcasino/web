@@ -153,7 +153,7 @@
             </div>
 
             <div class="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
-                <div class="flex space-x-6 md:order-2">
+                <div class="flex space-x-6 md:order-2 justify-center">
                     <a href="https://twitter.com/NEXAdotgames" target="_blank" class="text-gray-400 hover:text-gray-500">
                         <span class="sr-only">Twitter</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

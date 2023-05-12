@@ -9,7 +9,7 @@
                 <div class="flex justify-start lg:w-0 lg:flex-1">
                     <NuxtLink to="/">
                         <span class="sr-only">Nexa Games</span>
-                        <img class="h-10 w-auto sm:h-14" src="~/assets/icon.png" alt="" />
+                        <img class="h-12 w-auto sm:h-14" src="~/assets/icon.png" alt="" />
                     </NuxtLink>
                 </div>
 
