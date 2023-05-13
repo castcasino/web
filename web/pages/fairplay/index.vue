@@ -39,8 +39,8 @@ useHead({
 
             <ol class="list-decimal pt-3 pl-10">
                 <li>
-                    <NuxtLink to="/hashes/0001_public.txt" class="block text-blue-500 font-medium hover:underline">0001_public.txt</NuxtLink>
-                    <NuxtLink to="/hashes/0001_public_checksum.txt" class="block text-blue-500 font-medium hover:underline">0001_public_checksum.txt</NuxtLink>
+                    <a href="/hashes/0001_public.txt" class="block text-blue-500 font-medium hover:underline">0001_public.txt</a>
+                    <a href="/hashes/0001_public_checksum.txt" class="block text-blue-500 font-medium hover:underline">0001_public_checksum.txt</a>
                     <h3>SHA-512 -> 6cf09a52bf6638df ... 28c28783de600886</h3>
                 </li>
             </ol>
