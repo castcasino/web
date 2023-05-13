@@ -28,6 +28,7 @@ const timestamp = moment().utc().format('LLLL') + ' UTC'
 const header = `Nexa Games Hashes
 Generated: ${timestamp}
 Hash count: ${numeral(numHashes).format('0,0')}
+Epoch: ${epoch}
 `
 
 const privateName = `000${epoch}_private.txt`
@@ -78,9 +79,10 @@ for (let i = 0; i < numHashes; i++) {
 
     const response = hashesDb.put({
         _id: hash,
+        epoch,
+        secret,
         gameid: null,
         playid: null,
-        secret,
         createdAt: moment().unix(),
     })
     console.log('RESPONSE', response)
