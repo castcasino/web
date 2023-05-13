@@ -11,7 +11,7 @@ useHead({
     <main class="bg-white">
         <Header />
 
-        <main>
+        <div>
             <!-- Hero section -->
             <div class="relative lg:mt-10">
                 <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
@@ -286,8 +286,8 @@ useHead({
                     </div>
                 </div>
             </div>
-        </main>
-
-        <Footer />
+        </div>
     </main>
+
+    <Footer />
 </template>

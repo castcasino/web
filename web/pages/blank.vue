@@ -1,4 +1,10 @@
 <script setup lang="ts">
+/* Initialize stores. */
+import { useSystemStore } from '@/stores/system'
+
+/* Initialize System. */
+const System = useSystemStore()
+
 useHead({
     title: 'Blank — Nexa Games',
     meta: [
