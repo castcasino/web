@@ -1,12 +1,16 @@
 {
   "name": "nexa-games",
-  "version": "23.5.12",
+  "version": "23.5.13",
   "license": "MIT",
   "scripts": {},
   "dependencies": {
-    "moment": "^2.29.4",
-    "numeral": "^2.0.6",
+    "@nexajs/crypto": "23.4.5",
+    "moment": "2.29.4",
+    "numeral": "2.0.6",
+    "pouchdb": "8.0.1",
     "uuid": "9.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "debug": "4.3.4"
+  }
 }

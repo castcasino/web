@@ -2,7 +2,11 @@
 
 import crypto from 'crypto'
 import fs from 'fs'
+import moment from 'moment'
+import numeral from 'numeral'
+import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
+import { randomBytes } from '@nexajs/crypto'
 
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -10,28 +14,47 @@ import path from 'path'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+/* Initialize databases. */
+const hashesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/hashes`)
+const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
+
 console.log('\n  Generating random hashes...')
 
+const epoch = 1
+const numHashes = 100
+
+const timestamp = moment().utc().format('LLLL') + ' UTC'
+
 const header = `Nexa Games Hashes
-Generated: 2023.5.12 @ 12:00:00 UTC
-Hash count: 10,000
+Generated: ${timestamp}
+Hash count: ${numeral(numHashes).format('0,0')}
 `
 
-const secretName = '0001_secret.txt'
-const secretPath = path.join(__dirname, '..', 'web', 'public', 'hashes', secretName)
+const privateName = `000${epoch}_private.txt`
+const privatePath = path.join(__dirname, '..', 'secrets', privateName)
 
-fs.writeFileSync(secretPath, header)
+fs.writeFileSync(privatePath, header)
 console.log('\n  Write (header) completed successfully!')
 
-const hiddenName = '0001_hidden.txt'
-const hiddenPath = path.join(__dirname, '..', 'web', 'public', 'hashes', hiddenName)
+const publicName = `000${epoch}_public.txt`
+const publicPath = path.join(__dirname, '..', 'web', 'public', 'hashes', publicName)
 
-fs.writeFileSync(hiddenPath, header)
+fs.writeFileSync(publicPath, header)
 console.log('\n  Write (header) completed successfully!')
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0; i < numHashes; i++) {
+    const entropy = randomBytes(16)
+    // console.log('ENTROPY', entropy)
+
+    const v4options = {
+        random: entropy,
+    }
+    // console.log('V4OPTIONS', v4options)
+
     /* Generate secret. */
     const secret = uuidv4()
+
+    const idx = String(i).padStart(4, '0')
 
     /* Generate hash. */
     const hash = crypto
@@ -40,18 +63,28 @@ for (let i = 0; i < 5; i++) {
         .digest('hex')
 
     /* Create secret line. */
-    const secretLine = `1:${secret}:${hash}`
+    const privateLine = `${idx}:${secret}:${hash}`
 
-    /* Append to hidden file. */
-    fs.appendFileSync(secretPath, '\n' + secretLine)
-    console.log('\n  Write (hashes) completed successfully!')
+    /* Append to public file. */
+    fs.appendFileSync(privatePath, '\n' + privateLine)
+    // console.log('\n  Write (hashes) completed successfully!')
 
-    /* Create hidden line. */
-    const hiddenLine = `1:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx:${hash}`
+    /* Create public line. */
+    const publicLine = `${idx}:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx:${hash}`
 
-    /* Append to hidden file. */
-    fs.appendFileSync(hiddenPath, '\n' + hiddenLine)
-    console.log('\n  Write (hashes) completed successfully!')
+    /* Append to public file. */
+    fs.appendFileSync(publicPath, '\n' + publicLine)
+    // console.log('\n  Write (hashes) completed successfully!')
+
+    const response = hashesDb.put({
+        _id: hash,
+        gameid: null,
+        playid: null,
+        secret,
+        createdAt: moment().unix(),
+    })
+    console.log('RESPONSE', response)
 }
 
+console.log('\n  Write (hashes) completed successfully!')
 console.log()
