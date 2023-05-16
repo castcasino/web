@@ -13,6 +13,7 @@ const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COU
 const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
 
 /* Initialize locals. */
+const queue = {}
 let response
 
 console.info('\n  Starting Nexa Games daemon...\n')
@@ -27,8 +28,8 @@ console.info('\n  Starting Nexa Games daemon...\n')
 const handleWalletQueue = async () => {
     console.info('\n  Checking wallet queue...\n')
 
-    let queue
     let response
+    let rows
 
     /* Request pending transactions. */
     response = await walletDb.query('api/isPending', {
@@ -39,17 +40,23 @@ const handleWalletQueue = async () => {
 
     /* Validate response. */
     if (response?.rows?.length > 0) {
-        queue = response.rows
-        console.log('QUEUE', queue)
+        rows = response.rows
+        console.log('QUEUE', rows)
     }
 
-    /* Validate queue. */
-    if (queue) {
-        queue.forEach(_item => {
+    /* Validate rows. */
+    if (rows) {
+        rows.forEach(_item => {
             const payment = _item.doc
             console.log('PAYMENT', payment)
+
+            if (!queue[payment._id]) {
+                queue[payment._id] = payment
+            }
         })
     }
+
+    console.log('QUEUE', queue)
 
 }
 
