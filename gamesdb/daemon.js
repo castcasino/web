@@ -126,18 +126,32 @@ const handleQueue = async (_pending) => {
         //     satoshis: -1, // alias for send MAX
         // })
         console.log('\n  Receivers:', receivers)
-break
 
         /* Set automatic fee (handling) flag. */
         const autoFee = true
 
         /* Send UTXO request. */
-        const response = await sendCoin(coins, receivers, autoFee)
+        response = await sendCoin(coins, receivers, autoFee)
         console.log('Send UTXO (response):', response)
 
         try {
             const txResult = JSON.parse(response)
             console.log('TX RESULT', txResult)
+
+            const latest = walletDb.get(payment.id)
+                .catch(err => console.err(err))
+            console.log('LATEST', latest)
+
+            const updated = {
+                ...latest,
+                txid: txResult,
+                updatedAt: moment().valueOf(),
+            }
+            console.log('UPDATED', updated)
+
+            response = walletDb.put(updated)
+                .catch(err => console.error(err))
+            console.log('UPDATE RESPONSE', response)
         } catch (err) {
             console.error(err)
         }
