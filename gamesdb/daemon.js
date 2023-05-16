@@ -3,6 +3,7 @@ import { encodePrivateKeyWif } from '@nexajs/hdnode'
 import { listUnspent } from '@nexajs/address'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
+import { reverseHex } from '@nexajs/utils'
 import { sendCoin } from '@nexajs/purse'
 import { v4 as uuidv4 } from 'uuid'
 import { Wallet } from '@nexajs/wallet'
@@ -78,7 +79,7 @@ const handleQueue = async (_pending) => {
 
         /* Build parameters. */
         const coins = unspent.map(_unspent => {
-            const outpoint = _unspent.outpointHash
+            const outpoint = reverseHex(_unspent.outpointHash)
             const satoshis = _unspent.value
 
             return {
@@ -138,7 +139,8 @@ const handleQueue = async (_pending) => {
             const txResult = JSON.parse(response)
             console.log('TX RESULT', txResult)
 
-            const latest = walletDb.get(payment.id)
+            const latest = await walletDb
+                .get(payment.id)
                 .catch(err => console.err(err))
             console.log('LATEST', latest)
 
@@ -149,7 +151,8 @@ const handleQueue = async (_pending) => {
             }
             console.log('UPDATED', updated)
 
-            response = walletDb.put(updated)
+            response = await walletDb
+                .put(updated)
                 .catch(err => console.error(err))
             console.log('UPDATE RESPONSE', response)
         } catch (err) {
