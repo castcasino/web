@@ -39,7 +39,7 @@ const handleWalletQueue = async () => {
     if (response?.rows > 0) {
         queue = response.rows
         console.log('QUEUE', queue)
-    })
+    }
 
 }
 
