@@ -1,6 +1,6 @@
 {
   "name": "nexa-games-web",
-  "version": "23.4.30",
+  "version": "23.5.14",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -10,9 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nexajs/wallet": "23.5.13",
     "@pinia/nuxt": "0.4.7",
     "ethers": "6.0.8",
-    "nexajs": "22.12.23",
     "nuxt": "3.0.0",
     "pinia": "2.0.32"
   },
