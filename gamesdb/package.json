@@ -8,7 +8,7 @@
   "author": "Ava's DAO developers",
   "license": "MIT",
   "dependencies": {
-    "@nexajs/wallet": "23.5.13",
+    "@nexajs/wallet": "23.5.15",
     "moment": "2.29.4",
     "numeral": "2.0.6",
     "pouchdb": "8.0.1",
