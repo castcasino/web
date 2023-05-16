@@ -13,5 +13,8 @@
     "numeral": "2.0.6",
     "pouchdb": "8.0.1",
     "uuid": "9.0.0"
+  },
+  "devDependencies": {
+    "debug": "4.3.4"
   }
 }
