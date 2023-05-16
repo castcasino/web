@@ -174,16 +174,17 @@ const handleWalletQueue = async () => {
     let rows
 
     /* Request pending transactions. */
-    response = await walletDb.query('api/isPending', {
-        include_docs: true,
-    })
-    .catch(err => console.error(err))
-    // console.log('RESPONSE', response)
+    response = await walletDb
+        .query('api/isPending', {
+            include_docs: true,
+        })
+        .catch(err => console.error(err))
+    console.log('RESPONSE', response)
 
     /* Validate response. */
     if (response?.rows?.length > 0) {
         rows = response.rows
-        // console.log('ROWS', rows)
+        console.log('ROWS', rows)
     }
 
     /* Validate rows. */
@@ -203,7 +204,7 @@ const handleWalletQueue = async () => {
             }
         })
     }
-    // console.log('QUEUE', queue)
+    console.log('QUEUE', queue)
 
     const pending = Object.keys(queue).filter(_paymentid => {
         /* Set payment. */
@@ -212,7 +213,7 @@ const handleWalletQueue = async () => {
         /* Return unprocessed .*/
         return payment.txidem === null
     })
-    // console.log('PENDING', pending)
+    console.log('PENDING', pending)
 
     /* Handle queue. */
     handleQueue(pending)
