@@ -1,13 +1,8 @@
 /* Import modules. */
 import { callNode } from '@nexajs/rpc'
-import cors from 'cors'
-import express from 'express'
-import http from 'http'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
-import SSE from 'express-sse'
 import { v4 as uuidv4 } from 'uuid'
-import zmq from 'zeromq'
 
 /* Import handlers. */
 import handleAddress from './handlers/address.js'
@@ -29,36 +24,10 @@ const RPC_OPTIONS = {
 
 /* Set constants. */
 const LOCAL_HOST = '127.0.0.1'
-const SSE_PORT = process.env.SSE_PORT || 5000
 
 /* Initialize locals. */
 let blockchainInfo
 let response
-
-/* Set welcome message. */
-const welcomeMsg = 'Nexa memory pool firehose!'
-
-/* Initialize server-side event handler. */
-const sse = new SSE([ welcomeMsg ])
-
-/* Initialize Express app. */
-const app = express()
-
-/* Enable CORS. */
-app.use(cors())
-
-/* Initialize data stream endpoint. */
-app.get('/stream', sse.init)
-
-/* Handle default endpoint. */
-app.get('/', (req, res) => {
-    res.send(welcomeMsg)
-})
-
-/* Start listening. */
-app.listen(SSE_PORT, LOCAL_HOST, () => {
-    console.log(`Express SSE listening on port ${SSE_PORT}`)
-})
 
 const decodeRawTransaction = async (_rawTx) => {
     /* Set method. */
@@ -222,82 +191,6 @@ const checkDbSync = async () => {
     blockchainInfo = await getBlockchainInfo()
     console.log('\n\n  Blockchain info:\n', blockchainInfo)
 
-    /* Initialize Zero Message Queue (ZMQ) socket. */
-    const sock = new zmq.Subscriber
-
-    /* Connect to local node. */
-    sock.connect('tcp://127.0.0.1:28332')
-
-    /* Subscribe to messages. */
-    sock.subscribe()
-    console.log(`Subscriber connected to port 28332`)
-
-    /* Handle incoming messages. */
-    for await (const [ _topic, _msg ] of sock) {
-        const topic = Buffer.from(_topic).toString()
-        const msg = Buffer.from(_msg).toString('hex')
-
-        console.log('received a message related to:',
-            topic,
-            'containing message:',
-            msg,
-            '\n')
-
-        /* Handle hash block. */
-        if (topic === 'hashblock') {
-            const decoded = await getBlock(msg)
-                .catch(err => {
-                    console.error(err)
-                })
-            console.log('DECODED', decoded)
-
-            blocksDb.put({
-                _id: decoded.height.toString(),
-                ...decoded,
-            })
-            .catch(err => {
-                console.error(err)
-            })
-
-            try {
-                /* Broadcast event. */
-                sse.send(decoded)
-            } catch (err) {
-                console.error(err)
-            }
-        }
-
-        /* Handle raw transaction. */
-        if (topic === 'rawtx') {
-            const decoded = await decodeRawTransaction(msg)
-                .catch(err => {
-                    console.error(err)
-                })
-            console.log('DECODED', decoded)
-
-            transactionsDb.put({
-                _id: decoded.txidem,
-                ...decoded
-            })
-            .catch(err => {
-                console.error(err)
-            })
-
-            /* Handle Address. */
-            await handleAddress(decoded)
-
-            /* Handle Outpoint. */
-            await handleOutpoint(decoded)
-
-            try {
-                /* Broadcast event. */
-                sse.send(decoded)
-            } catch (err) {
-                console.error(err)
-            }
-        }
-    }
-
 })()
 
-checkDbSync()
+// checkDbSync()
