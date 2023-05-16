@@ -105,7 +105,7 @@ const handleQueue = async (_pending) => {
             /* Add hex code to string. */
             hexData += code
         }
-        return console.log('HEX DATA', hexData)
+        console.log('HEX DATA', hexData)
 
         // TODO Validate data length is less than OP_RETURN max (220).
 
@@ -116,10 +116,17 @@ const handleQueue = async (_pending) => {
 
         /* Add value output. */
         receivers.push({
-            address: receiver,
+            address: payment.receiver,
             satoshis: -1, // alias for send MAX
         })
-        console.log('\n  Receivers:', receivers)
+
+        /* Add (change) value output. */
+        // receivers.push({
+        //     address: address,
+        //     satoshis: -1, // alias for send MAX
+        // })
+        // console.log('\n  Receivers:', receivers)
+break
 
         /* Set automatic fee (handling) flag. */
         const autoFee = true
@@ -170,6 +177,7 @@ const handleWalletQueue = async () => {
 
             if (!queue[payment._id]) {
                 queue[payment._id] = {
+                    id: payment._id,
                     receiver: payment.receiver,
                     satoshis: payment.satoshis,
                     txid: payment.txid,
