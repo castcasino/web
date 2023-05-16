@@ -146,7 +146,7 @@ const handleQueue = async (_pending) => {
 
             const updated = {
                 ...latest,
-                txid: txResult,
+                txid: txResult?.result,
                 updatedAt: moment().valueOf(),
             }
             console.log('UPDATED', updated)
