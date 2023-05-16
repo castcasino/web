@@ -51,12 +51,21 @@ const handleWalletQueue = async () => {
             console.log('PAYMENT', payment)
 
             if (!queue[payment._id]) {
-                queue[payment._id] = payment
+                queue[payment._id] = {
+                    receiver: payment.receiver,
+                    satoshis: payment.satoshis,
+                    txid: payment.txid,
+                    createdAt: payment.createdAt,
+                }
             }
         })
     }
-
     console.log('QUEUE', queue)
+
+    const pending = queue.filter(_payment => {
+        return _payment.txid === null
+    })
+    console.log('PENDING', pending)
 
 }
 
