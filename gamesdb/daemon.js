@@ -62,8 +62,12 @@ const handleWalletQueue = async () => {
     }
     console.log('QUEUE', queue)
 
-    const pending = queue.filter(_payment => {
-        return _payment.txid === null
+    const pending = Object(queue).keys.filter(_paymentid => {
+        /* Set payment. */
+        const payment = queue[_paymentid]
+
+        /* Return unprocessed .*/
+        return payment.txid === null
     })
     console.log('PENDING', pending)
 
