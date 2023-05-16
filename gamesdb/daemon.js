@@ -35,11 +35,11 @@ console.info('\n  Starting Nexa Games daemon...\n')
  */
 const handleQueue = async (_pending) => {
     for (let i = 0; i < _pending.length; i++) {
-        const payment = _pending[i]
-        console.log('PAYMENT (pending):', payment, MNEMONIC)
+        const payment = queue[_pending[i]]
+        console.log('PAYMENT (pending):', payment)
 
         const wallet = new Wallet(MNEMONIC)
-        console.log('WALLET', wallet)
+        // console.log('WALLET', wallet)
 
         const address = wallet.address
         console.log('TREASURY ADDRESS', address)
@@ -48,7 +48,7 @@ const handleQueue = async (_pending) => {
         const receivers = []
 
         let unspent = await listUnspent(address)
-        return console.log('UNSPENT', unspent)
+        console.log('UNSPENT', unspent)
 
         /* Filter out ANY tokens. */
         // FIXME We should probably do something better than this, lol.
@@ -90,7 +90,7 @@ const handleQueue = async (_pending) => {
             /* Add hex code to string. */
             hexData += code
         }
-        console.log('HEX DATA', hexData)
+        return console.log('HEX DATA', hexData)
 
         // TODO Validate data length is less than OP_RETURN max (220).
 
