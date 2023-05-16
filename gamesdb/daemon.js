@@ -14,6 +14,7 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 
 /* Set constants. */
 const QUEUE_INTERVAL = 5000
+const MNEMONIC = process.env.MNEMONIC
 
 /* Initialize locals. */
 const queue = {}
@@ -25,14 +26,16 @@ console.info('\n  Starting Nexa Games daemon...\n')
  * Handle Queue
  *
  * Process the pending queue of open transactions.
+ *
+ * NOTE: We handle payment processing in a SINGLE thread,
+ *       to mitigate the possibility of a "double send".
  */
 const handleQueue = async (_pending) => {
-    const payment = queue[_pending]
-    console.log('PAYMENT (pending):', payment)
+    for (let i = 0; i < _pending.length; i++) {
+        const payment = _pending[i]
+        console.log('PAYMENT (pending):', payment, MNEMONIC)
 
-    const mnemonic = process.env.MNEMONIC
-    console.log('MNEMONIC', mnemonic)
-
+    }
 }
 
 /**
