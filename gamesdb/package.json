@@ -1,6 +1,6 @@
 {
   "name": "gamesdb",
-  "version": "23.5.15",
+  "version": "23.5.16",
   "description": "Manages data storage, indexing and broadcast functions for the Games database.",
   "main": "index.js",
   "type": "module",
@@ -8,6 +8,8 @@
   "author": "Ava's DAO developers",
   "license": "MIT",
   "dependencies": {
+    "@nexajs/address": "23.5.15",
+    "@nexajs/purse": "23.5.15",
     "@nexajs/wallet": "23.5.15",
     "moment": "2.29.4",
     "numeral": "2.0.6",
