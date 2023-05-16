@@ -28,12 +28,18 @@ const handleWalletQueue = async () => {
     console.info('\n  Checking wallet queue...\n')
 
     let queue
+    let response
 
-    queue = await walletDb.query('api/isPending', {
+    response = await walletDb.query('api/isPending', {
         include_docs: true,
     })
     .catch(err => console.error(err))
-    console.log('QUEUE', queue)
+    console.log('RESPONSE', response)
+
+    if (response?.rows > 0) {
+        queue = response.rows
+        console.log('QUEUE', queue)
+    })
 
 }
 
