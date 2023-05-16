@@ -12,12 +12,25 @@ import { Wallet } from '@nexajs/wallet'
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
 
+/* Set constants. */
+const QUEUE_INTERVAL = 5000
+
 /* Initialize locals. */
 const queue = {}
 let response
 
 console.info('\n  Starting Nexa Games daemon...\n')
 
+/**
+ * Handle Queue
+ *
+ * Process the pending queue of open transactions.
+ */
+const handleQueue = async (_pending) => {
+    const payment = queue[_pending]
+    console.log('PAYMENT (pending):', payment);
+
+}
 
 /**
  * Wallet Queue
@@ -41,14 +54,14 @@ const handleWalletQueue = async () => {
     /* Validate response. */
     if (response?.rows?.length > 0) {
         rows = response.rows
-        console.log('QUEUE', rows)
+        // console.log('ROWS', rows)
     }
 
     /* Validate rows. */
     if (rows) {
         rows.forEach(_item => {
             const payment = _item.doc
-            console.log('PAYMENT', payment)
+            // console.log('PAYMENT', payment)
 
             if (!queue[payment._id]) {
                 queue[payment._id] = {
@@ -60,7 +73,7 @@ const handleWalletQueue = async () => {
             }
         })
     }
-    console.log('QUEUE', queue)
+    // console.log('QUEUE', queue)
 
     const pending = Object.keys(queue).filter(_paymentid => {
         /* Set payment. */
@@ -69,20 +82,17 @@ const handleWalletQueue = async () => {
         /* Return unprocessed .*/
         return payment.txid === null
     })
-    console.log('PENDING', pending)
+    // console.log('PENDING', pending)
 
+    /* Handle queue. */
+    handleQueue(pending)
 }
 
-const handleQueue = async () => {
-
-}
 
 ;(async () => {
     setInterval(() => {
         console.log('Managing queue...')
         handleWalletQueue()
-    }, 5000)
+    }, QUEUE_INTERVAL)
 
 })()
-
-// handleWalletQueue()
