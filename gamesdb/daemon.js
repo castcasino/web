@@ -125,7 +125,7 @@ const handleQueue = async (_pending) => {
         //     address: address,
         //     satoshis: -1, // alias for send MAX
         // })
-        // console.log('\n  Receivers:', receivers)
+        console.log('\n  Receivers:', receivers)
 break
 
         /* Set automatic fee (handling) flag. */
