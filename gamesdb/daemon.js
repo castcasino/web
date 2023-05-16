@@ -6,6 +6,11 @@ import { sendCoin } from '@nexajs/purse'
 import { v4 as uuidv4 } from 'uuid'
 import { Wallet } from '@nexajs/wallet'
 
+/* Libauth helpers. */
+import {
+    instantiateSha256,
+} from '@bitauth/libauth'
+
 /* Import handlers. */
 // import handleAddress from './handlers/address.js'
 // import handleOutpoint from './handlers/outpoint.js'
@@ -47,8 +52,17 @@ const handleQueue = async (_pending) => {
         /* Initialize receivers. */
         const receivers = []
 
-        let unspent = await listUnspent(address)
+        let unspent
+
+        unspent = await listUnspent(address)
         console.log('UNSPENT', unspent)
+
+        /* Initialize SHA-256. */
+        const sha256 = await instantiateSha256()
+
+        /* Encode Private Key WIF. */
+        const wif = encodePrivateKeyWif(sha256, wallet.value.privateKey, 'mainnet')
+        console.log('PRIVATE KEY (WIF):', wif)
 
         /* Filter out ANY tokens. */
         // FIXME We should probably do something better than this, lol.
