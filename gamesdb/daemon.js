@@ -30,17 +30,20 @@ const handleWalletQueue = async () => {
     let queue
     let response
 
+    /* Request pending transactions. */
     response = await walletDb.query('api/isPending', {
         include_docs: true,
     })
     .catch(err => console.error(err))
     // console.log('RESPONSE', response)
 
-    if (response?.rows > 0) {
+    /* Validate response. */
+    if (response?.rows?.length > 0) {
         queue = response.rows
         console.log('QUEUE', queue)
     }
 
+    /* Validate queue. */
     if (queue) {
         queue.forEach(_item => {
             const payment = _item.doc
