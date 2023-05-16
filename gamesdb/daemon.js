@@ -191,6 +191,10 @@ const checkDbSync = async () => {
     blockchainInfo = await getBlockchainInfo()
     console.log('\n\n  Blockchain info:\n', blockchainInfo)
 
+    setInterval(() => {
+        console.log('Checking queue...')
+    }, 5000)
+
 })()
 
 // checkDbSync()
