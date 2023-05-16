@@ -34,11 +34,18 @@ const handleWalletQueue = async () => {
         include_docs: true,
     })
     .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    // console.log('RESPONSE', response)
 
     if (response?.rows > 0) {
         queue = response.rows
         console.log('QUEUE', queue)
+    }
+
+    if (queue) {
+        queue.forEach(_item => {
+            const payment = _item.doc
+            console.log('PAYMENT', payment)
+        })
     }
 
 }
