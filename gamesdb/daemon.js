@@ -28,7 +28,10 @@ console.info('\n  Starting Nexa Games daemon...\n')
  */
 const handleQueue = async (_pending) => {
     const payment = queue[_pending]
-    console.log('PAYMENT (pending):', payment);
+    console.log('PAYMENT (pending):', payment)
+
+    const mnemonic = process.env.MNEMONIC
+    console.log('MNEMONIC', mnemonic)
 
 }
 
@@ -73,7 +76,7 @@ const handleWalletQueue = async () => {
             }
         })
     }
-    // console.log('QUEUE', queue)
+    console.log('QUEUE', queue)
 
     const pending = Object.keys(queue).filter(_paymentid => {
         /* Set payment. */
@@ -82,7 +85,7 @@ const handleWalletQueue = async () => {
         /* Return unprocessed .*/
         return payment.txid === null
     })
-    // console.log('PENDING', pending)
+    console.log('PENDING', pending)
 
     /* Handle queue. */
     handleQueue(pending)
