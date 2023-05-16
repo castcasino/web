@@ -45,6 +45,9 @@ const handleQueue = async (_pending) => {
         const payment = queue[_pending[i]]
         console.log('PAYMENT (pending):', payment)
 
+        /* Remove (payment) from queue. */
+        delete queue[_pending[i]]
+
         const wallet = new Wallet(MNEMONIC)
         // console.log('WALLET', wallet)
 
