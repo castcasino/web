@@ -146,7 +146,7 @@ const handleQueue = async (_pending) => {
 
             const updated = {
                 ...latest,
-                txid: txResult?.result,
+                txidem: txResult?.result,
                 updatedAt: moment().valueOf(),
             }
             console.log('UPDATED', updated)
@@ -197,7 +197,7 @@ const handleWalletQueue = async () => {
                     id: payment._id,
                     receiver: payment.receiver,
                     satoshis: payment.satoshis,
-                    txid: payment.txid,
+                    txidem: payment.txidem,
                     createdAt: payment.createdAt,
                 }
             }
@@ -210,7 +210,7 @@ const handleWalletQueue = async () => {
         const payment = queue[_paymentid]
 
         /* Return unprocessed .*/
-        return payment.txid === null
+        return payment.txidem === null
     })
     // console.log('PENDING', pending)
 
