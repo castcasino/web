@@ -62,7 +62,7 @@ const handleQueue = async (_pending) => {
         const sha256 = await instantiateSha256()
 
         /* Encode Private Key WIF. */
-        const wif = encodePrivateKeyWif(sha256, wallet.value.privateKey, 'mainnet')
+        const wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
         console.log('PRIVATE KEY (WIF):', wif)
 
         /* Filter out ANY tokens. */
