@@ -1,4 +1,5 @@
 /* Import modules. */
+import { encodePrivateKeyWif } from '@nexajs/hdnode'
 import { listUnspent } from '@nexajs/address'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
