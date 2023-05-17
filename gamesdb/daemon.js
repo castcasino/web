@@ -152,22 +152,25 @@ const handleQueue = async (_pending) => {
             const txResult = JSON.parse(response)
             console.log('TX RESULT', txResult)
 
-            const latest = await walletDb
-                .get(payment.id)
-                .catch(err => console.err(err))
-            console.log('LATEST', latest)
+            /* Validate transaction result. */
+            if (txResult?.result) {
+                const latest = await walletDb
+                    .get(payment.id)
+                    .catch(err => console.err(err))
+                console.log('LATEST', latest)
 
-            const updated = {
-                ...latest,
-                txidem: txResult?.result,
-                updatedAt: moment().valueOf(),
+                const updated = {
+                    ...latest,
+                    txidem: txResult?.result,
+                    updatedAt: moment().valueOf(),
+                }
+                console.log('UPDATED', updated)
+
+                response = await walletDb
+                    .put(updated)
+                    .catch(err => console.error(err))
+                console.log('UPDATE RESPONSE', response)
             }
-            console.log('UPDATED', updated)
-
-            response = await walletDb
-                .put(updated)
-                .catch(err => console.error(err))
-            console.log('UPDATE RESPONSE', response)
         } catch (err) {
             console.error(err)
         }
