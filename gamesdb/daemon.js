@@ -123,21 +123,20 @@ const handleQueue = async (_pending) => {
             data: hexData,
         })
 
-        const paymentAmount = 888
         const gasFee = 500
 
 
         /* Add value output. */
         receivers.push({
             address: payment.receiver,
-            satoshis: paymentAmount,
+            satoshis: payment.satoshis,
         })
 
         /* Handle (automatic) change. */
-        if (unspentSatoshis - paymentAmount - gasFee > 546) {
+        if (unspentSatoshis - payment.satoshis - gasFee > 546) {
             receivers.push({
                 address: address,
-                satoshis: unspentSatoshis - paymentAmount - gasFee,
+                satoshis: unspentSatoshis - payment.satoshis - gasFee,
             })
         }
         console.log('\n  Receivers:', receivers)
