@@ -93,7 +93,12 @@ const handleQueue = async (_pending) => {
         })
         console.log('\n  Coins:', coins)
 
-
+        /* Calculate the total balance of the unspent outputs. */
+        const unspentSatoshis = unspent
+            .reduce(
+                (totalValue, unspentOutput) => (totalValue + unspentOutput.value), 0
+            )
+        console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
         const userData = 'GAMES~~WALLY DICE~~abc123'
         console.log('USER DATA', userData)
@@ -118,21 +123,27 @@ const handleQueue = async (_pending) => {
             data: hexData,
         })
 
+        const paymentAmount = 888
+        const gasFee = 500
+
+
         /* Add value output. */
         receivers.push({
             address: payment.receiver,
-            satoshis: -1, // alias for send MAX
+            satoshis: paymentAmount,
         })
 
-        /* Add (change) value output. */
-        // receivers.push({
-        //     address: address,
-        //     satoshis: -1, // alias for send MAX
-        // })
+        /* Handle (automatic) change. */
+        if (unspentSatoshis - paymentAmount - gasFee > 546) {
+            receivers.push({
+                address: address,
+                satoshis: unspentSatoshis - paymentAmount - gasFee,
+            })
+        }
         console.log('\n  Receivers:', receivers)
 
         /* Set automatic fee (handling) flag. */
-        const autoFee = true
+        const autoFee = false
 
         /* Send UTXO request. */
         response = await sendCoin(coins, receivers, autoFee)
