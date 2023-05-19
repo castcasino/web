@@ -1,51 +1,80 @@
 /* Import modules. */
+import { binToHex } from '@nexajs/utils'
+import { entropyToMnemonic } from '@nexajs/hdnode'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
+import { randomBytes } from '@nexajs/crypto'
+import { sha512 } from '@nexajs/crypto'
+import { subscribeAddress } from '@nexajs/rostrum'
 import { v4 as uuidv4 } from 'uuid'
 import { Wallet } from '@nexajs/wallet'
+
+import playHandler from './play/handler.ts'
 
 /* Initialize databases. */
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
-// const BOOTSTRAP_PLAYID = '475b4cfc-ae95-419d-9681-cf378c083963'
-
 export default defineEventHandler(async (event) => {
     /* Set (request) body. */
     const body = await readBody(event)
 
-    const mnemonic = process.env.MNEMONIC
-    console.log('MNEMONIC', mnemonic)
+    const treasuryMnemonic = process.env.MNEMONIC
+    console.log('TREASURY MNEMONIC', treasuryMnemonic)
+
+    /* Initialize wallet. */
+    const treasuryWallet = new Wallet(treasuryMnemonic)
+
+    /* Request (receiving) address. */
+    const treasuryAddress = treasuryWallet.address
+    console.log('TREASURY ADDRESS', treasuryAddress)
+
+    // -------------------------------------------------------------------------
+
+    const _id = uuidv4()
+
+    const entropy = binToHex(randomBytes(32))
+    console.log('ENTROPY', entropy)
+
+    const mnemonic = entropyToMnemonic(entropy)
+
+    const serverHash = sha512(entropy)
+
+    const createdAt = moment().valueOf()
 
     /* Initialize wallet. */
     const wallet = new Wallet(mnemonic)
 
     /* Request (receiving) address. */
     const address = wallet.address
-    console.log('ADDRESS', address)
+    console.log('PLAY ADDRESS', address)
 
-    const _id = uuidv4()
+    /* Start monitoring address. */
+    const cleanup = await subscribeAddress(address, playHandler)
+    console.log('CLEANUP', cleanup)
 
-    const gameid = null
-
-    const playerid = null
-
-    const createdAt = moment().valueOf()
-
-    const play = {
+    const dbPlay = {
         _id,
         address,
+        entropy,
+        mnemonic,
+        serverHash,
         ...body,
-        gameid,
-        playerid,
         createdAt,
     }
-    console.log('API SAVE PLAY', play)
+    console.log('DATABASE PLAY', dbPlay)
 
     const response = await playsDb
-        .put(play)
+        .put(dbPlay)
         .catch(err => console.error(err))
     console.log('PLAY (api):', response)
+
+    const play = {
+        playid: _id,
+        address,
+        serverHash,
+        createdAt,
+    }
 
     /* Return response. */
     return play
