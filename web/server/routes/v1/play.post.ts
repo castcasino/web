@@ -19,6 +19,10 @@ export default defineEventHandler(async (event) => {
     /* Set (request) body. */
     const body = await readBody(event)
 
+    const playerSeed = body?.seed
+
+    // TODO Perform data validation for seed
+
     const treasuryMnemonic = process.env.MNEMONIC
     console.log('TREASURY MNEMONIC', treasuryMnemonic)
 
@@ -38,7 +42,7 @@ export default defineEventHandler(async (event) => {
 
     const mnemonic = entropyToMnemonic(entropy)
 
-    const serverHash = sha512(entropy)
+    const serverHash = sha512(sha512(entropy))
 
     const createdAt = moment().valueOf()
 
@@ -50,7 +54,7 @@ export default defineEventHandler(async (event) => {
     console.log('PLAY ADDRESS', address)
 
     /* Start monitoring address. */
-    const cleanup = await subscribeAddress(address, playHandler)
+    const cleanup = await subscribeAddress(address, playHandler.bind(playerSeed))
     console.log('CLEANUP', cleanup)
 
     const dbPlay = {

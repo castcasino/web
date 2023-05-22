@@ -4,6 +4,7 @@ import { getAddressBalance } from '@nexajs/rostrum'
 import { listUnspent } from '@nexajs/address'
 import PouchDB from 'pouchdb'
 import { sha256 } from '@nexajs/crypto'
+import { sha512 } from '@nexajs/crypto'
 import { Wallet } from '@nexajs/wallet'
 
 /* Initialize databases. */
@@ -11,11 +12,14 @@ const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.CO
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
 export default async (_updatedInfo) => {
-    console.log('PLAY HANDLER', _updatedInfo)
+    // console.log('PLAY HANDLER', _updatedInfo)
 
+    /* Initialize locals. */
     let playAddress
     let playData
+    let playHash
     let playSatoshis
+    let playSource
     let response
     let treasuryAddress
     let unspent
@@ -51,12 +55,31 @@ export default async (_updatedInfo) => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    // console.log('RESPONSE', response)
 
     if (response?.rows.length > 0) {
         playData = response.rows[0].doc
         console.log('PLAY DATA', playData)
     }
+
+    playSource = playData.entropy + ':' + playData.seed
+    console.log('PLAY SOURCE', playSource)
+
+    playHash = sha512(sha512(playSource))
+    console.log('PLAY HASH', playHash)
+
+    const playValueHex = playHash.slice(0, 4)
+    console.log('PLAY VALUE (hex):', playValueHex)
+
+    const playValueNum = parseInt(playValueHex, 16)
+    console.log('PLAY VALUE (number):', playValueNum)
+
+    const MAX_PLAY_VALUE = parseInt('ffff', 16)
+    console.log('MAX_PLAY_VALUE', MAX_PLAY_VALUE)
+
+    const playValue = (playValueNum / MAX_PLAY_VALUE) * 100.0
+    console.log('PLAY VALUE', playValue)
+    console.log('PLAY VALUE (formatted):', playValue.toFixed(2))
 
 
 return

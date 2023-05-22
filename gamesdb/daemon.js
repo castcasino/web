@@ -23,6 +23,7 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 
 /* Set constants. */
 const DUST_LIMIT = 546
+const FIXED_GAS_FEE = 1000 // TODO Calculate gas fee dynamically based on tx size
 const QUEUE_INTERVAL = 5000
 const MNEMONIC = process.env.MNEMONIC
 
@@ -52,7 +53,7 @@ const handleQueue = async (_pending) => {
         // console.log('WALLET', wallet)
 
         const address = wallet.address
-        console.log('TREASURY ADDRESS', address)
+        // console.log('TREASURY ADDRESS', address)
 
         /* Initialize receivers. */
         const receivers = []
@@ -60,14 +61,14 @@ const handleQueue = async (_pending) => {
         let unspent
 
         unspent = await listUnspent(address)
-        console.log('UNSPENT', unspent)
+        // console.log('UNSPENT', unspent)
 
         /* Initialize SHA-256. */
         const sha256 = await instantiateSha256()
 
         /* Encode Private Key WIF. */
         const wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
-        console.log('PRIVATE KEY (WIF):', wif)
+        // console.log('PRIVATE KEY (WIF):', wif)
 
         /* Filter out ANY tokens. */
         // FIXME We should probably do something better than this, lol.
@@ -91,17 +92,17 @@ const handleQueue = async (_pending) => {
                 wif,
             }
         })
-        console.log('\n  Coins:', coins)
+        // console.log('\n  Coins:', coins)
 
         /* Calculate the total balance of the unspent outputs. */
         const unspentSatoshis = unspent
             .reduce(
                 (totalValue, unspentOutput) => (totalValue + unspentOutput.value), 0
             )
-        console.log('UNSPENT SATOSHIS', unspentSatoshis)
+        // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
-        const userData = 'GAMES~~WALLY DICE~~abc123'
-        console.log('USER DATA', userData)
+        const userData = 'Nexa.games~WALLY_DICE~abc123'
+        // console.log('USER DATA', userData)
 
         /* Initialize hex data. */
         let hexData = ''
@@ -110,6 +111,10 @@ const handleQueue = async (_pending) => {
         for (let i = 0; i < userData.length; i++) {
             /* Convert to hex code. */
             let code = userData.charCodeAt(i).toString(16)
+
+            if (userData[i] === '~') {
+                code = '09'
+            }
 
             /* Add hex code to string. */
             hexData += code
@@ -123,9 +128,6 @@ const handleQueue = async (_pending) => {
             data: hexData,
         })
 
-        const gasFee = 500
-
-
         /* Add value output. */
         receivers.push({
             address: payment.receiver,
@@ -133,10 +135,10 @@ const handleQueue = async (_pending) => {
         })
 
         /* Handle (automatic) change. */
-        if (unspentSatoshis - payment.satoshis - gasFee > 546) {
+        if (unspentSatoshis - payment.satoshis - FIXED_GAS_FEE > 546) {
             receivers.push({
                 address: address,
-                satoshis: unspentSatoshis - payment.satoshis - gasFee,
+                satoshis: unspentSatoshis - payment.satoshis - FIXED_GAS_FEE,
             })
         }
         console.log('\n  Receivers:', receivers)
