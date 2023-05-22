@@ -1,13 +1,8 @@
 <script setup lang="ts">
-useHead({
-    title: 'Fairplay — Nexa Games',
-    meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
-    ],
-})
+/* Import modules. */
+import moment from 'moment'
 
 const route = useRoute()
-
 
 const game = ref(null)
 const gameid = ref(null)
@@ -91,8 +86,18 @@ loadPlay(playid)
             />
 
             <FairplayItem
-                title="Return To Player"
+                title="Average Return To Player (RTP)"
                 value="97%"
+            />
+
+            <FairplayItem
+                title="Play Created"
+                :value="play?.createdAt ? moment(play.createdAt).fromNow() : 'n/a'"
+            />
+
+            <FairplayItem
+                title="Play Completed"
+                :value="play?.updatedAt ? moment(play.updatedAt).fromNow() : 'n/a'"
             />
 
         </div>

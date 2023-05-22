@@ -32,7 +32,7 @@ export default defineEventHandler(async (_event) => {
         gameid: response.gameid,
         playerid: response.playerid,
         address: response.address,
-        edge: response.edge,
+        rtp: response.rtp,
         entropy: response.entropy,
         mnemonic: response.mnemonic,
         payout: response.payout,
@@ -40,6 +40,7 @@ export default defineEventHandler(async (_event) => {
         seed: response.seed,
         serverHash: response.serverHash,
         createdAt: response.createdAt,
+        updatedAt: response.updatedAt,
     }
 
     /* Return (filtered) results. */
