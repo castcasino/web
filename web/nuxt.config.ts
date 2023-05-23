@@ -25,4 +25,13 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
     ],
+
+    /* Route Rules */
+    routeRules: {
+        /* Disable server-side rendering for Admin area. */
+        '/admin/**': { ssr: false },
+
+        /* Add CORS headers to API. */
+        '/v1/**': { cors: true },
+    },
 })
