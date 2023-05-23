@@ -9,7 +9,10 @@ services:
     network_mode: 'host'
     # ports:
     #   - '127.0.0.1:3000:3000'   # use with proxy server (eg. Nginx)
-      # - '0.0.0.0:80:3000'     # use without proxy server
+    environment:
+      - COUCHDB_USER=${COUCHDB_USER} # change this to match your system's ENV
+      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD} # change this to match your system's ENV
+      - MNEMONIC=${MNEMONIC} # change this to match your system's ENV
     logging: # apply better controls to Docker overlay folder
       driver: 'json-file'
       options:
