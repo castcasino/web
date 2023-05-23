@@ -1,6 +1,6 @@
 {
   "name": "nexa-games-web",
-  "version": "23.5.22",
+  "version": "23.5.23",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -21,6 +21,7 @@
     "numeral": "2.0.6",
     "nuxt": "3.0.0",
     "pinia": "2.0.32",
+    "pouchdb": "8.0.1",
     "uuid": "9.0.0"
   },
   "devDependencies": {
