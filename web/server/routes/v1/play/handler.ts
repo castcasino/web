@@ -66,10 +66,32 @@ export default async (_updatedInfo) => {
     console.log('PLAY VALUE', playValue)
     console.log('PLAY VALUE (formatted):', playValue.toFixed(2))
 
+    let playerJoy
+    let houseJoy
+
+    if (playValue < 48.5 && playData.position === 0) {
+        playerJoy = true
+        houseJoy = false
+    } else if (playValue > 51.5 && playData.position === 1) {
+        playerJoy = true
+        houseJoy = false
+    } else {
+        playerJoy = false
+        houseJoy = true
+    }
+
+    /* Initialize paid flag (used by Wallet daemon). */
+    const isPaid = false
+
     /* Build database update. */
     const updated = {
         ...playData,
-        result: playValue,
+        unspent: unspent[0],
+        satoshis: playSatoshis.confirmed + playSatoshis.unconfirmed,
+        outcome: playValue,
+        playerJoy,
+        houseJoy,
+        isPaid,
         updatedAt: moment().valueOf()
     }
     console.log('UPDATED', updated)

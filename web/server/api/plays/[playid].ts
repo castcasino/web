@@ -26,6 +26,10 @@ export default defineEventHandler(async (_event) => {
         }
     }
 
+    const entropy = response.updatedAt ? response.entropy : '[hidden]'
+
+    const mnemonic = response.updatedAt ? response.mnemonic : '[hidden]'
+
     /* Build (filtered) response. */
     const filtered = {
         id: response._id,
@@ -33,12 +37,17 @@ export default defineEventHandler(async (_event) => {
         playerid: response.playerid,
         address: response.address,
         rtp: response.rtp,
-        entropy: response.entropy,
-        mnemonic: response.mnemonic,
+        entropy,
+        mnemonic,
         payout: response.payout,
         position: response.position,
         seed: response.seed,
         serverHash: response.serverHash,
+        unpent: response.unpent,
+        satoshis: response.satoshis,
+        outcome: response.outcome,
+        playerJoy: response.playerJoy,
+        houseJoy: response.houseJoy,
         createdAt: response.createdAt,
         updatedAt: response.updatedAt,
     }
