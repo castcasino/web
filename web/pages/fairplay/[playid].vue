@@ -14,9 +14,14 @@ const title = ref(null)
 const summary = ref(null)
 const url    = ref(null)
 
+const outcome = ref(null)
 const payout = ref(null)
-const rtp = ref(null)
+const playerJoy = ref(null)
 const position = ref(null)
+const rtp = ref(null)
+
+const satoshis = ref(null)
+const wagerNEX = ref(null)
 
 playid.value = route.params.playid
 console.log('PLAY ID', playid.value)
@@ -32,6 +37,20 @@ const loadPlay = async () => {
     gameid.value = play.value?.gameid
 
     payout.value = play.value?.payout + '%'
+
+    if (typeof play.value?.playerJoy !== 'undefined') {
+        playerJoy.value = play.value.playerJoy
+    }
+
+    if (typeof play.value?.outcome !== 'undefined') {
+        outcome.value = play.value.outcome
+    }
+
+    if (typeof play.value?.satoshis !== 'undefined') {
+        satoshis.value = play.value.satoshis
+
+        wagerNEX.value = (play.value.satoshis / 100.0)
+    }
 
     rtp.value = play.value?.rtp + '%'
 
@@ -91,18 +110,21 @@ loadPlay(playid)
 
         <div class="flex flex-col gap-4">
             <FairplayItem
+                v-if="playerJoy !== null"
                 title="Player Joy"
-                :value="play?.playerJoy ? 'WIN' : 'LOSS'"
+                :value="playerJoy ? 'WIN' : 'LOSS'"
             />
 
             <FairplayItem
+                v-if="outcome !== null"
                 title="Play Outcome"
-                :value="play?.outcome || 'n/a'"
+                :value="outcome || 'n/a'"
             />
 
             <FairplayItem
-                title="Wager"
-                :value="play?.satoshis || 'n/a'"
+                v-if="wagerNEX !== null"
+                title="Wager ( in NEXA )"
+                :value="wagerNEX || 'n/a'"
             />
 
             <FairplayItem
@@ -116,18 +138,18 @@ loadPlay(playid)
             />
 
             <FairplayItem
-                title="Average Return To Player (RTP)"
+                title="Average Return To Player ( RTP )"
                 :value="rtp || 'n/a'"
             />
 
             <FairplayItem
                 title="Play Created"
-                :value="play?.createdAt ? moment(play.createdAt).fromNow() : 'n/a'"
+                :value="play?.createdAt ? moment(play.createdAt).fromNow() : 'loading...'"
             />
 
             <FairplayItem
                 title="Play Completed"
-                :value="play?.updatedAt ? moment(play.updatedAt).fromNow() : 'n/a'"
+                :value="play?.updatedAt ? moment(play.updatedAt).fromNow() : 'waiting for play...'"
             />
 
             <hr class="my-5" />
@@ -166,14 +188,6 @@ loadPlay(playid)
 
         </div>
 
-
-        <pre class="font-mono">
-{{play}}
-        </pre>
-        <hr />
-        <pre class="font-mono">
-{{game}}
-        </pre>
     </main>
 
     <Footer />

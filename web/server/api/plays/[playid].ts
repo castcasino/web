@@ -26,9 +26,9 @@ export default defineEventHandler(async (_event) => {
         }
     }
 
-    const entropy = response.updatedAt ? response.entropy : '[hidden]'
+    const entropy = response.updatedAt ? response.entropy : '[ hidden ]'
 
-    const mnemonic = response.updatedAt ? response.mnemonic : '[hidden]'
+    const mnemonic = response.updatedAt ? response.mnemonic : '[ hidden ]'
 
     /* Build (filtered) response. */
     const filtered = {
