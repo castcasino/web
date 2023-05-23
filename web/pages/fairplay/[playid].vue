@@ -91,6 +91,11 @@ loadPlay(playid)
 
         <div class="flex flex-col gap-4">
             <FairplayItem
+                title="Player Joy"
+                :value="play?.playerJoy ? 'WIN' : 'LOSS'"
+            />
+
+            <FairplayItem
                 title="Play Outcome"
                 :value="play?.outcome || 'n/a'"
             />
@@ -98,11 +103,6 @@ loadPlay(playid)
             <FairplayItem
                 title="Wager"
                 :value="play?.satoshis || 'n/a'"
-            />
-
-            <FairplayItem
-                title="Player Joy"
-                :value="play?.playerJoy ? 'WIN' : 'LOSS'"
             />
 
             <FairplayItem
@@ -130,9 +130,28 @@ loadPlay(playid)
                 :value="play?.updatedAt ? moment(play.updatedAt).fromNow() : 'n/a'"
             />
 
+            <hr class="my-5" />
+
             <FairplayItem
-                title="Address"
+                title="Player ID / Wallet"
+                :value="play?.playerid || 'n/a'"
+            />
+
+            <FairplayItem
+                title="Player Seed"
+                :value="play?.seed"
+            />
+
+            <hr class="my-5" />
+
+            <FairplayItem
+                title="Gameplay Address"
                 :value="play?.address || 'n/a'"
+            />
+
+            <FairplayItem
+                title="Server Hash"
+                :value="play?.serverHash"
             />
 
             <FairplayItem

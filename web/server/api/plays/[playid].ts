@@ -10,15 +10,15 @@ export default defineEventHandler(async (_event) => {
     let response
 
     const params = _event.context.params
-    console.log('PARAMS', params)
+    // console.log('PARAMS', params)
 
     const playid = params?.playid
-    console.log('PLAY ID', playid)
+    // console.log('PLAY ID', playid)
 
     response = await playsDb
         .get(playid)
         .catch(err => console.error(err))
-    console.log('DB RESPONSE', response)
+    // console.log('DB RESPONSE', response)
 
     if (response.error === 'not_found') {
         return {
@@ -49,6 +49,7 @@ export default defineEventHandler(async (_event) => {
         playerJoy: response.playerJoy,
         houseJoy: response.houseJoy,
         createdAt: response.createdAt,
+        expiresAt: response.expiresAt,
         updatedAt: response.updatedAt,
     }
 

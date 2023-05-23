@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
     const _id = uuidv4()
 
     const entropy = binToHex(randomBytes(32))
-    console.log('ENTROPY', entropy)
+    // console.log('ENTROPY', entropy)
 
     const mnemonic = entropyToMnemonic(entropy)
 
@@ -46,12 +46,14 @@ export default defineEventHandler(async (event) => {
 
     const createdAt = moment().valueOf()
 
+    const expiresAt = moment().add(15, 'minutes').valueOf()
+
     /* Initialize wallet. */
     const wallet = new Wallet(mnemonic)
 
     /* Request (receiving) address. */
     const address = wallet.address
-    console.log('PLAY ADDRESS', address)
+    // console.log('PLAY ADDRESS', address)
 
     /* Start monitoring address. */
     const cleanup = await subscribeAddress(address, playHandler.bind(playerSeed))
@@ -65,19 +67,21 @@ export default defineEventHandler(async (event) => {
         serverHash,
         ...body,
         createdAt,
+        expiresAt,
     }
-    console.log('DATABASE PLAY', dbPlay)
+    // console.log('DATABASE PLAY', dbPlay)
 
     const response = await playsDb
         .put(dbPlay)
         .catch(err => console.error(err))
-    console.log('PLAY (api):', response)
+    // console.log('PLAY (api):', response)
 
     const play = {
         playid: _id,
         address,
         serverHash,
         createdAt,
+        expiresAt,
     }
 
     /* Return response. */

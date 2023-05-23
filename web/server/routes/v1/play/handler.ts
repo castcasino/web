@@ -28,7 +28,7 @@ export default async (_updatedInfo) => {
 
     /* Set play address. */
     playAddress = _updatedInfo[0]
-    console.log('PLAY ADDRESS', playAddress)
+    console.log('GAMEPLAY ADDRESS', playAddress)
 
     // Fetch all unspent transaction outputs for the temporary in-browser wallet.
     unspent = await listUnspent(playAddress)
@@ -47,24 +47,24 @@ export default async (_updatedInfo) => {
 
     if (response?.rows.length > 0) {
         playData = response.rows[0].doc
-        console.log('PLAY DATA', playData)
+        // console.log('PLAY DATA', playData)
     }
 
     playHash = getHmac(playData.entropy, playData.seed)
-    console.log('PLAY HASH', playHash)
+    // console.log('PLAY HASH', playHash)
 
     const playValueHex = playHash.slice(0, 8) // 32-bit value
-    console.log('PLAY VALUE (hex):', playValueHex)
+    // console.log('PLAY VALUE (hex):', playValueHex)
 
     const playValueNum = parseInt(playValueHex, 16)
-    console.log('PLAY VALUE (number):', playValueNum)
+    // console.log('PLAY VALUE (number):', playValueNum)
 
     const MAX_PLAY_VALUE = parseInt('ffffffff', 16) // MAX 32-bit integer value
-    console.log('MAX_PLAY_VALUE', MAX_PLAY_VALUE)
+    // console.log('MAX_PLAY_VALUE', MAX_PLAY_VALUE)
 
     const playValue = (playValueNum / MAX_PLAY_VALUE) * 100.0
-    console.log('PLAY VALUE', playValue)
-    console.log('PLAY VALUE (formatted):', playValue.toFixed(2))
+    // console.log('PLAY VALUE', playValue)
+    // console.log('PLAY VALUE (formatted):', playValue.toFixed(2))
 
     let playerJoy
     let houseJoy
@@ -94,11 +94,11 @@ export default async (_updatedInfo) => {
         isPaid,
         updatedAt: moment().valueOf()
     }
-    console.log('UPDATED', updated)
+    // console.log('UPDATED', updated)
 
     response = await playsDb
         .put(updated)
         .catch(err => console.error(err))
-    console.log('UPDATED RESPONSE', response)
+    // console.log('UPDATED RESPONSE', response)
 
 }
