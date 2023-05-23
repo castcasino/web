@@ -17,8 +17,11 @@
     "@nexajs/utils": "23.5.15",
     "@nexajs/wallet": "23.5.17",
     "@pinia/nuxt": "0.4.7",
+    "moment": "2.29.4",
+    "numeral": "2.0.6",
     "nuxt": "3.0.0",
-    "pinia": "2.0.32"
+    "pinia": "2.0.32",
+    "uuid": "9.0.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.4.1",
