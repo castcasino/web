@@ -9,7 +9,7 @@ import { subscribeAddress } from '@nexajs/rostrum'
 import { v4 as uuidv4 } from 'uuid'
 import { Wallet } from '@nexajs/wallet'
 
-import playHandler from './play/handler.ts'
+import playHandler from './_play/handler.ts'
 
 /* Initialize databases. */
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)

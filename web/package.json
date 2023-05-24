@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nexajs/address": "23.5.18",
+    "@nexajs/address": "23.5.22",
     "@nexajs/crypto": "23.5.22",
     "@nexajs/hdnode": "23.5.15",
     "@nexajs/rostrum": "23.5.19",

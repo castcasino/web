@@ -756,10 +756,10 @@
     graphql-ws "5.12.0"
     ws "8.13.0"
 
-"@nexajs/address@23.5.18":
-  version "23.5.18"
-  resolved "https://registry.yarnpkg.com/@nexajs/address/-/address-23.5.18.tgz#74123c5319240d560982619cd95b89efa0bbaa20"
-  integrity sha512-LA7rcdSmi8nvwskSYTvRlEOZpxBazwbrL9qdI43JXHm109zRADCs1SXSzF/Mh/AdU0il+Okhc5N8cLD7+g+A/w==
+"@nexajs/address@23.5.22":
+  version "23.5.22"
+  resolved "https://registry.yarnpkg.com/@nexajs/address/-/address-23.5.22.tgz#2dc6aa09e171d6604610a60f01624f37797ade33"
+  integrity sha512-Y9gdgHsdQM/5PL7Yx6iwYFhaxbfo+gwE1tKY9t90CxZu+wjnF77iHz/aEz+FKjYDazuwoRGTMDPbsfwgoSN7+Q==
   dependencies:
     "@nexajs/rostrum" "23.5.19"
     big-integer "1.6.51"
@@ -4829,7 +4829,7 @@ postcss@^8.1.10, postcss@^8.2.15, postcss@^8.4.18, postcss@^8.4.19, postcss@^8.4
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
-pouchdb@^8.0.1:
+pouchdb@8.0.1:
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/pouchdb/-/pouchdb-8.0.1.tgz#78aef57b0d58abe5e4a4581a3332c0c220e20dbd"
   integrity sha512-xp5S83JOQn2NAL0ZQ5CU+DI26V9/YrYuVtkXnbGEIDrYiFfj5A8gAcfbxefXb/9O+Qn4n5RaT/19+8UBSZ42sw==

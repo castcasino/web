@@ -5,7 +5,7 @@ export default defineEventHandler((event) => {
 
     /* Set # of CashFusion transactions. */
     // FIXME FOR DEV PURPOSES ONLY
-    const campaigns = {
+    const players = {
         last_24h: 0,
         last_30d: 0,
         total: 0,
@@ -17,7 +17,7 @@ export default defineEventHandler((event) => {
 
     /* Set # of CashShuffle transactions. */
     // FIXME FOR DEV PURPOSES ONLY
-    const pledges = {
+    const plays = {
         last_24h: 1337,
         last_30d: 30000,
         total: 1000000,
@@ -26,9 +26,9 @@ export default defineEventHandler((event) => {
     /* Build statistics. */
     const stats = {
         dau,
-        campaigns,
+        players,
         mau,
-        pledges,
+        plays,
     }
 
     /* Return statistics. */
