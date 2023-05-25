@@ -1,13 +1,18 @@
 /* Import modules. */
 import { binToHex } from '@nexajs/utils'
+import { decodeAddress } from '@nexajs/address'
 import { entropyToMnemonic } from '@nexajs/hdnode'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { randomBytes } from '@nexajs/crypto'
+import { sha256 } from '@nexajs/crypto'
 import { sha512 } from '@nexajs/crypto'
 import { subscribeAddress } from '@nexajs/rostrum'
 import { v4 as uuidv4 } from 'uuid'
 import { Wallet } from '@nexajs/wallet'
+
+/* Libauth helpers. */
+import { instantiateRipemd160 } from '@bitauth/libauth'
 
 import diceHandler from './play/dice.ts'
 
@@ -51,8 +56,15 @@ export default defineEventHandler(async (event) => {
     const address = wallet.address
     // console.log('PLAY ADDRESS', address)
 
+    const decoded = decodeAddress(address)
+    console.log('DECODED', decoded)
+
+    const pubKeyHash = binToHex(decoded.hash).slice(8)
+    console.log('PUBLIC KEY HASH', pubKeyHash)
+
     /* Create play id. */
-    const _id = address
+    const _id = pubKeyHash
+    console.log('PLAY ID', _id)
 
     /* Start monitoring address. */
     const cleanup = await subscribeAddress(address, diceHandler.bind(playerSeed))
@@ -84,8 +96,19 @@ export default defineEventHandler(async (event) => {
     /* Calculate (server) key hash (for client). */
     const keyHash = sha512(sha512(entropy))
 
+    const auth = {
+        id: _id,
+        //
+        //
+        //
+        playerSeed,
+        keyHash,
+    }
+
+    const ripemd160 = await instantiateRipemd160()
+
     // TODO Calculate "authorization" hash
-    const authHash = null
+    const authHash = binToHex(ripemd160.hash(sha256(JSON.stringify(auth)), 'binary'))
 
     /* Build play package. */
     const playPkg = {

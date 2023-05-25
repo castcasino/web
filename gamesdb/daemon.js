@@ -14,170 +14,84 @@ import {
 } from '@bitauth/libauth'
 
 /* Import handlers. */
-// import handleAddress from './handlers/address.js'
-// import handleOutpoint from './handlers/outpoint.js'
+import handlePlays from './handlers/plays.js'
+import handleWallet from './handlers/wallet.js'
 
 /* Initialize databases. */
+const errorsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/errors`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
+const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
 
 /* Set constants. */
 const DUST_LIMIT = 546
 const FIXED_GAS_FEE = 1000 // TODO Calculate gas fee dynamically based on tx size
-const QUEUE_INTERVAL = 5000
+const PLAYS_INTERVAL = 5000
+const WALLET_INTERVAL = 15000
 const MNEMONIC = process.env.MNEMONIC
 
 /* Initialize locals. */
-const queue = {}
-let response
+const playQueue = {}
+const walletQueue = {}
+
+let playResponse
+let walletResponse
 
 console.info('\n  Starting Nexa Games daemon...\n')
 
+
 /**
- * Handle Queue
+ * Plays Queue
  *
- * Process the pending queue of open transactions.
- *
- * NOTE: We handle payment processing in a SINGLE thread,
- *       to mitigate the possibility of a "double send".
+ * Performs a check to validate ALL (unpaid) plays and
+ * calculate payouts for entry to the Wallet.
  */
-const handleQueue = async (_pending) => {
-    for (let i = 0; i < _pending.length; i++) {
-        const payment = queue[_pending[i]]
-        console.log('PAYMENT (pending):', payment)
+const handlePlaysQueue = async () => {
+    console.info('\n  Checking Plays queue...\n')
 
-        /* Remove (payment) from queue. */
-        delete queue[_pending[i]]
+    let response
+    let rows
 
-        const wallet = new Wallet(MNEMONIC)
-        // console.log('WALLET', wallet)
-
-        const address = wallet.address
-        // console.log('TREASURY ADDRESS', address)
-
-        /* Initialize receivers. */
-        const receivers = []
-
-        let unspent
-
-        unspent = await listUnspent(address)
-        // console.log('UNSPENT', unspent)
-
-        /* Initialize SHA-256. */
-        const sha256 = await instantiateSha256()
-
-        /* Encode Private Key WIF. */
-        const wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
-        // console.log('PRIVATE KEY (WIF):', wif)
-
-        /* Filter out ANY tokens. */
-        // FIXME We should probably do something better than this, lol.
-        unspent = unspent.filter(_unspent => {
-            return _unspent.value > DUST_LIMIT
+    /* Request pending transactions. */
+    response = await playsDb
+        .query('api/isUnpaid', {
+            include_docs: true,
         })
+        .catch(err => console.error(err))
+    // console.log('RESPONSE', response)
 
-        /* Validate unspent outputs. */
-        if (unspent.length === 0) {
-            return console.error('There are NO unspent outputs available.')
-        }
-
-        /* Build parameters. */
-        const coins = unspent.map(_unspent => {
-            const outpoint = reverseHex(_unspent.outpointHash)
-            const satoshis = _unspent.value
-
-            return {
-                outpoint,
-                satoshis,
-                wif,
-            }
-        })
-        // console.log('\n  Coins:', coins)
-
-        /* Calculate the total balance of the unspent outputs. */
-        const unspentSatoshis = unspent
-            .reduce(
-                (totalValue, unspentOutput) => (totalValue + unspentOutput.value), 0
-            )
-        // console.log('UNSPENT SATOSHIS', unspentSatoshis)
-
-        const userData = 'NEXA.games~WALLY_DICE~abc123'
-        // console.log('USER DATA', userData)
-
-        /* Initialize hex data. */
-        let hexData = ''
-
-        /* Convert user data (string) to hex. */
-        for (let i = 0; i < userData.length; i++) {
-            /* Convert to hex code. */
-            let code = userData.charCodeAt(i).toString(16)
-
-            if (userData[i] === '~') {
-                code = '09'
-            }
-
-            /* Add hex code to string. */
-            hexData += code
-        }
-        console.log('HEX DATA', hexData)
-
-        // TODO Validate data length is less than OP_RETURN max (220).
-
-        /* Add OP_RETURN data. */
-        receivers.push({
-            data: hexData,
-        })
-
-        /* Add value output. */
-        receivers.push({
-            address: payment.receiver,
-            satoshis: payment.satoshis,
-        })
-
-        /* Handle (automatic) change. */
-        if (unspentSatoshis - payment.satoshis - FIXED_GAS_FEE > 546) {
-            receivers.push({
-                address: address,
-                satoshis: unspentSatoshis - payment.satoshis - FIXED_GAS_FEE,
-            })
-        }
-        console.log('\n  Receivers:', receivers)
-
-        /* Set automatic fee (handling) flag. */
-        const autoFee = false
-
-        /* Send UTXO request. */
-        response = await sendCoin(coins, receivers, autoFee)
-        console.log('Send UTXO (response):', response)
-
-        try {
-            const txResult = JSON.parse(response)
-            console.log('TX RESULT', txResult)
-
-            /* Validate transaction result. */
-            if (txResult?.result) {
-                const latest = await walletDb
-                    .get(payment.id)
-                    .catch(err => console.err(err))
-                console.log('LATEST', latest)
-
-                const updated = {
-                    ...latest,
-                    txidem: txResult?.result,
-                    updatedAt: moment().valueOf(),
-                }
-                console.log('UPDATED', updated)
-
-                response = await walletDb
-                    .put(updated)
-                    .catch(err => console.error(err))
-                console.log('UPDATE RESPONSE', response)
-            }
-        } catch (err) {
-            console.error(err)
-        }
+    /* Validate response. */
+    if (response?.rows?.length > 0) {
+        rows = response.rows
+        // console.log('ROWS', rows)
     }
+
+    /* Validate rows. */
+    if (rows) {
+        rows.forEach(_item => {
+            const play = _item.doc
+            console.log('PLAY', play)
+
+            if (!playQueue[play._id]) {
+                playQueue[play._id] = play
+            }
+        })
+    }
+    // console.log('PLAY QUEUE', playQueue)
+
+    const pending = Object.keys(playQueue).filter(_playid => {
+        /* Set play. */
+        const play = playQueue[_playid]
+
+        /* Return unprocessed .*/
+        return play.txidem === null
+    })
+    // console.log('PENDING', pending)
+
+    /* Handle queue. */
+    handlePlays(playQueue, pending)
 }
+
 
 /**
  * Wallet Queue
@@ -186,7 +100,7 @@ const handleQueue = async (_pending) => {
  * transactions queued in the wallet.
  */
 const handleWalletQueue = async () => {
-    console.info('\n  Checking wallet queue...\n')
+    console.info('\n  Checking Wallet queue...\n')
 
     let response
     let rows
@@ -211,8 +125,8 @@ const handleWalletQueue = async () => {
             const payment = _item.doc
             // console.log('PAYMENT', payment)
 
-            if (!queue[payment._id]) {
-                queue[payment._id] = {
+            if (!walletQueue[payment._id]) {
+                walletQueue[payment._id] = {
                     id: payment._id,
                     receiver: payment.receiver,
                     satoshis: payment.satoshis,
@@ -222,11 +136,11 @@ const handleWalletQueue = async () => {
             }
         })
     }
-    console.log('QUEUE', queue)
+    console.log('WALLET QUEUE', walletQueue)
 
-    const pending = Object.keys(queue).filter(_paymentid => {
+    const pending = Object.keys(walletQueue).filter(_paymentid => {
         /* Set payment. */
-        const payment = queue[_paymentid]
+        const payment = walletQueue[_paymentid]
 
         /* Return unprocessed .*/
         return payment.txidem === null
@@ -234,14 +148,20 @@ const handleWalletQueue = async () => {
     console.log('PENDING', pending)
 
     /* Handle queue. */
-    handleQueue(pending)
+    handleWallet(walletQueue, pending)
 }
 
 
 ;(async () => {
+return handlePlaysQueue()
     setInterval(() => {
-        console.log('Managing queue...')
+        console.log('Managing Plays queue...')
+        handlePlaysQueue()
+    }, PLAYS_INTERVAL)
+
+    setInterval(() => {
+        console.log('Managing Wallet queue...')
         handleWalletQueue()
-    }, QUEUE_INTERVAL)
+    }, WALLET_INTERVAL)
 
 })()

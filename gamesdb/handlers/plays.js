@@ -1,11 +1,14 @@
 /* Import modules. */
+import moment from 'moment'
 import PouchDB from 'pouchdb'
 
 /* Initialize databases. */
-const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
+const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
+
+const MIN_PLAY_SATOSHIS = 10000 // 100.00 NEX (~$0.001 as of 2023.5.25)
 
 /**
- * Handle (Wallet) Queue
+ * Handle (Plays) Queue
  *
  * Process the pending queue of open transactions.
  *
@@ -14,78 +17,42 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
  */
 export default async (_queue, _pending) => {
     let response
-    
+
     for (let i = 0; i < _pending.length; i++) {
-        const payment = _queue[_pending[i]]
-        console.log('PAYMENT (pending):', payment)
+        const play = _queue[_pending[i]]
+        console.log('PLAY (pending):', play)
 
         /* Remove (payment) from queue. */
         delete _queue[_pending[i]]
 
-        const wallet = new Wallet(MNEMONIC)
-        // console.log('WALLET', wallet)
+        const satoshis = play.satoshis
+        console.log('SATOSHIS', satoshis)
 
-        const address = wallet.address
-        // console.log('TREASURY ADDRESS', address)
+        if (satoshis < MIN_PLAY_SATOSHIS) {
+            play.txidem = 'DUST'
+            play.updatedAt = moment().valueOf()
 
-        /* Initialize receivers. */
-        const receivers = []
+            response = await playsDb
+                .put(play)
+                .catch(err => console.error(err))
+            console.log('RESPONSE', response);
 
-        let unspent
-
-        unspent = await listUnspent(address)
-        // console.log('UNSPENT', unspent)
-
-        /* Initialize SHA-256. */
-        const sha256 = await instantiateSha256()
-
-        /* Encode Private Key WIF. */
-        const wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
-        // console.log('PRIVATE KEY (WIF):', wif)
-
-        /* Filter out ANY tokens. */
-        // FIXME We should probably do something better than this, lol.
-        unspent = unspent.filter(_unspent => {
-            return _unspent.value > DUST_LIMIT
-        })
-
-        /* Validate unspent outputs. */
-        if (unspent.length === 0) {
-            return console.error('There are NO unspent outputs available.')
+            continue
         }
 
-        /* Build parameters. */
-        const coins = unspent.map(_unspent => {
-            const outpoint = reverseHex(_unspent.outpointHash)
-            const satoshis = _unspent.value
-
-            return {
-                outpoint,
-                satoshis,
-                wif,
-            }
-        })
-        // console.log('\n  Coins:', coins)
-
-        /* Calculate the total balance of the unspent outputs. */
-        const unspentSatoshis = unspent
-            .reduce(
-                (totalValue, unspentOutput) => (totalValue + unspentOutput.value), 0
-            )
-        // console.log('UNSPENT SATOSHIS', unspentSatoshis)
-
-        const chainData = `NEXA.games~${payment.playid}`
-        // console.log('BLOCKCHAIN DATA', chainData)
+        /* Create network data. */
+        const engineData = `NEXA.games~${play._id}`
+        // console.log('USER DATA', engineData)
 
         /* Initialize hex data. */
         let hexData = ''
 
         /* Convert user data (string) to hex. */
-        for (let j = 0; j < chainData.length; j++) {
+        for (let j = 0; j < engineData.length; j++) {
             /* Convert to hex code. */
-            let code = chainData.charCodeAt(j).toString(16)
+            let code = engineData.charCodeAt(j).toString(16)
 
-            if (chainData[j] === '~') {
+            if (engineData[j] === '~') {
                 code = '09'
             }
 
