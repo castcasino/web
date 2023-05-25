@@ -101,7 +101,7 @@ const handleQueue = async (_pending) => {
             )
         // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
-        const userData = 'Nexa.games~WALLY_DICE~abc123'
+        const userData = 'NEXA.games~WALLY_DICE~abc123'
         // console.log('USER DATA', userData)
 
         /* Initialize hex data. */
