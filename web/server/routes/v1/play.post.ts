@@ -9,7 +9,7 @@ import { subscribeAddress } from '@nexajs/rostrum'
 import { v4 as uuidv4 } from 'uuid'
 import { Wallet } from '@nexajs/wallet'
 
-import playHandler from './_play/handler.ts'
+import diceHandler from './play/dice.ts'
 
 /* Initialize databases. */
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
@@ -19,6 +19,8 @@ export default defineEventHandler(async (event) => {
     /* Set (request) body. */
     const body = await readBody(event)
 
+    /* Set player seed. */
+    // FIXME WE MUST PERFORM PROPER DATA SANITIZATION!!!
     const playerSeed = body?.seed
 
     // TODO Perform data validation for seed
@@ -35,55 +37,66 @@ export default defineEventHandler(async (event) => {
 
     // -------------------------------------------------------------------------
 
-    const _id = uuidv4()
-
     const entropy = binToHex(randomBytes(32))
     // console.log('ENTROPY', entropy)
 
+    /* Calculate mnemonic. */
     const mnemonic = entropyToMnemonic(entropy)
-
-    const serverHash = sha512(sha512(entropy))
-
-    const createdAt = moment().valueOf()
-
-    const expiresAt = moment().add(15, 'minutes').valueOf()
 
     /* Initialize wallet. */
     const wallet = new Wallet(mnemonic)
+    // console.log('WALLET', wallet)
 
     /* Request (receiving) address. */
     const address = wallet.address
     // console.log('PLAY ADDRESS', address)
 
+    /* Create play id. */
+    const _id = address
+
     /* Start monitoring address. */
-    const cleanup = await subscribeAddress(address, playHandler.bind(playerSeed))
+    const cleanup = await subscribeAddress(address, diceHandler.bind(playerSeed))
     console.log('CLEANUP', cleanup)
 
+    /* Set creation date. */
+    const createdAt = moment().valueOf()
+
+    /* Set expiration date. */
+    const expiresAt = moment().add(15, 'minutes').valueOf()
+
+    /* Calculate db play. */
     const dbPlay = {
         _id,
         address,
         entropy,
-        mnemonic,
-        serverHash,
         ...body,
         createdAt,
         expiresAt,
     }
     // console.log('DATABASE PLAY', dbPlay)
 
+    /* Update plays db. */
     const response = await playsDb
         .put(dbPlay)
         .catch(err => console.error(err))
     // console.log('PLAY (api):', response)
 
-    const play = {
+    /* Calculate (server) key hash (for client). */
+    const keyHash = sha512(sha512(entropy))
+
+    // TODO Calculate "authorization" hash
+    const authHash = null
+
+    /* Build play package. */
+    const playPkg = {
         playid: _id,
         address,
-        serverHash,
+        keyHash,
+        authHash,
         createdAt,
         expiresAt,
     }
 
-    /* Return response. */
-    return play
+    /* Return package. */
+    return playPkg
 })

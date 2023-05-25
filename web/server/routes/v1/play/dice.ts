@@ -21,9 +21,11 @@ export default async (_updatedInfo) => {
     let playData
     let playHash
     let playSatoshis
-    // let playSource
+
+    let playerJoy
+    let houseJoy
+
     let response
-    let treasuryAddress
     let unspent
 
     /* Set play address. */
@@ -66,9 +68,10 @@ export default async (_updatedInfo) => {
     // console.log('PLAY VALUE', playValue)
     // console.log('PLAY VALUE (formatted):', playValue.toFixed(2))
 
-    let playerJoy
-    let houseJoy
 
+    /**
+     * Calculate Play Outcome
+     */
     if (playValue < 48.5 && playData.position === 0) {
         playerJoy = true
         houseJoy = false
@@ -81,7 +84,7 @@ export default async (_updatedInfo) => {
     }
 
     /* Initialize paid flag (used by Wallet daemon). */
-    const isPaid = false
+    const txidem = null
 
     /* Build database update. */
     const updated = {
@@ -91,7 +94,7 @@ export default async (_updatedInfo) => {
         outcome: playValue,
         playerJoy,
         houseJoy,
-        isPaid,
+        txidem,
         updatedAt: moment().valueOf()
     }
     // console.log('UPDATED', updated)

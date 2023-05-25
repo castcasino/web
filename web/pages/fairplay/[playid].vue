@@ -172,8 +172,8 @@ loadPlay(playid)
             />
 
             <FairplayItem
-                title="Server Hash"
-                :value="play?.serverHash"
+                title="Server (Private) Key Hash"
+                :value="play?.keyHash"
             />
 
             <FairplayItem

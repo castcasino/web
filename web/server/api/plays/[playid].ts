@@ -1,4 +1,5 @@
 /* Import modules. */
+import { entropyToMnemonic } from '@nexajs/hdnode'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
@@ -28,7 +29,7 @@ export default defineEventHandler(async (_event) => {
 
     const entropy = response.updatedAt ? response.entropy : '[ hidden ]'
 
-    const mnemonic = response.updatedAt ? response.mnemonic : '[ hidden ]'
+    const mnemonic = response.updatedAt ? entropyToMnemonic(entropy) : '[ hidden ]'
 
     /* Build (filtered) response. */
     const filtered = {
@@ -42,7 +43,7 @@ export default defineEventHandler(async (_event) => {
         payout: response.payout,
         position: response.position,
         seed: response.seed,
-        serverHash: response.serverHash,
+        keyHash: response.keyHash,
         unpent: response.unpent,
         satoshis: response.satoshis,
         outcome: response.outcome,
