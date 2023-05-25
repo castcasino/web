@@ -2,6 +2,7 @@
 /* Import modules. */
 import moment from 'moment'
 import formatPosition from './_formatPosition.js'
+import { sha512 } from '@nexajs/crypto'
 
 const route = useRoute()
 
@@ -9,6 +10,7 @@ const game = ref(null)
 const gameid = ref(null)
 const play = ref(null)
 const playid = ref(null)
+const entropy = ref(null)
 
 const title = ref(null)
 const summary = ref(null)
@@ -26,6 +28,14 @@ const wagerNEX = ref(null)
 playid.value = route.params.playid
 console.log('PLAY ID', playid.value)
 
+const keyHash = computed(() => {
+    if (entropy.value) {
+        return sha512(sha512(entropy.value))
+    } else {
+        return null
+    }
+})
+
 /**
  * Load Play
  */
@@ -35,6 +45,7 @@ const loadPlay = async () => {
     console.log('PLAY', play.value)
 
     gameid.value = play.value?.gameid
+    entropy.value = play.value?.entropy
 
     payout.value = play.value?.payout + '%'
 
@@ -173,12 +184,12 @@ loadPlay(playid)
 
             <FairplayItem
                 title="Server (Private) Key Hash"
-                :value="play?.keyHash"
+                :value="keyHash || 'n/a'"
             />
 
             <FairplayItem
                 title="Entropy"
-                :value="play?.entropy || 'n/a'"
+                :value="entropy || 'n/a'"
             />
 
             <FairplayItem
