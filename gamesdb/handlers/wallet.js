@@ -9,11 +9,12 @@ import { sha256 } from '@nexajs/crypto'
 import { Wallet } from '@nexajs/wallet'
 
 /* Initialize databases. */
+const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
 
 /* Set constants. */
 const DUST_LIMIT = 546
-const FIXED_GAS_FEE = 1000 // TODO Calculate gas fee dynamically based on tx size
+const FIXED_GAS_FEE = 3000 // TODO Calculate gas fee dynamically based on tx size
 
 /**
  * Handle (Wallet) Queue

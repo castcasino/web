@@ -47,6 +47,7 @@ export default defineEventHandler(async (_event) => {
         unpent: response.unpent,
         satoshis: response.satoshis,
         outcome: response.outcome,
+        txidem: response.txidem,
         playerJoy: response.playerJoy,
         houseJoy: response.houseJoy,
         createdAt: response.createdAt,

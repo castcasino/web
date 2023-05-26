@@ -59,7 +59,7 @@ const loadPlay = async () => {
     gameid.value = play.value?.gameid
     entropy.value = play.value?.entropy
 
-    payout.value = play.value?.payout + '%'
+    payout.value = play.value?.payout + 'X'
 
     if (typeof play.value?.playerJoy !== 'undefined') {
         playerJoy.value = play.value.playerJoy
@@ -174,6 +174,17 @@ loadPlay(playid)
                 title="Play Completed"
                 :value="play?.updatedAt ? moment(play.updatedAt).fromNow() : 'waiting for play...'"
             />
+
+            <NuxtLink
+                v-if="play?.txidem"
+                :to="'https://explorer.nexa.org/tx/' + play.txidem" target="_blank"
+            >
+                <FairplayItem
+
+                    title="Transaction IDem"
+                    :value="play.txidem || 'n/a'"
+                />
+            </NuxtLink>
 
             <hr class="my-5" />
 

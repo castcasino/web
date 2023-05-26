@@ -49,8 +49,9 @@ export default async (_game, _play, _sender) => {
     } else {
 
         /* Send player (DUST). */
+        // NOTE: Blocking DUST transactions to prevent accidental "token" sends.
         address = _sender.address
-        satoshis = 546
+        satoshis = 1053 // LOSE
         receivers.push({
             address,
             satoshis,
@@ -75,7 +76,7 @@ export default async (_game, _play, _sender) => {
         console.log('HOUSE RATE', rate)
         take = (_play.satoshis * rate)
         console.log('HOUSE TAKE', take)
-        satoshis = parseInt(take * (1.0 / share))
+        satoshis = parseInt(take * (share * 0.01))
         console.log('GAMEMAKERS SATS', satoshis)
         receivers.push({
             address,
@@ -90,7 +91,7 @@ export default async (_game, _play, _sender) => {
         console.log('HOUSE RATE', rate)
         take = (_play.satoshis * rate)
         console.log('HOUSE TAKE', take)
-        satoshis = parseInt(take * (1.0 / share))
+        satoshis = parseInt(take * (share * 0.01))
         console.log('PROMOTERS SATS', satoshis)
         receivers.push({
             address,

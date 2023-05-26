@@ -9,7 +9,8 @@ import getSender from './_getSender.js'
 const gamesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/games`)
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 
-const MIN_PLAY_SATOSHIS = 10000 // 100.00 NEX (~$0.001 as of 2023.5.25)
+const MIN_PLAY_SATOSHIS = 1000000 // 10,000.00 NEX (~$0.10 as of 2023.5.25)
+const MAX_PLAY_SATOSHIS = 100000000 // 1,000,000.00 NEX (~$10.00 as of 2023.5.25)
 
 
 /**
@@ -42,6 +43,19 @@ export default async (_queue, _pending) => {
         /* Validate satoshis. */
         if (satoshis < MIN_PLAY_SATOSHIS) {
             play.txidem = 'DUST'
+            play.updatedAt = moment().valueOf()
+
+            response = await playsDb
+                .put(play)
+                .catch(err => console.error(err))
+            console.log('RESPONSE', response);
+
+            continue
+        }
+
+        /* Validate satoshis. */
+        if (satoshis > MAX_PLAY_SATOSHIS) {
+            play.txidem = 'OVER_LIMIT'
             play.updatedAt = moment().valueOf()
 
             response = await playsDb
