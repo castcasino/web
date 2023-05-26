@@ -1,5 +1,7 @@
 <script setup lang="ts">
 /* Import modules. */
+import { binToHex } from '@nexajs/utils'
+import { decodeAddress } from '@nexajs/address'
 import moment from 'moment'
 import formatPosition from './_formatPosition.js'
 import { sha512 } from '@nexajs/crypto'
@@ -43,6 +45,16 @@ const loadPlay = async () => {
     play.value = await $fetch(`/api/plays/${playid.value}`)
         .catch(err => console.error(err))
     console.log('PLAY', play.value)
+
+    if (typeof play.value === 'undefined') {
+        const decoded = decodeAddress(playid.value)
+        const hash = binToHex(decoded.hash)
+        const pubKeyHash = hash.slice(8)
+
+        play.value = await $fetch(`/api/plays/${pubKeyHash}`)
+            .catch(err => console.error(err))
+        console.log('(re-)PLAY', play.value)
+    }
 
     gameid.value = play.value?.gameid
     entropy.value = play.value?.entropy
