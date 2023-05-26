@@ -13,6 +13,7 @@ services:
       - COUCHDB_USER=${COUCHDB_USER} # change this to match your system's ENV
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD} # change this to match your system's ENV
       - MNEMONIC=${MNEMONIC} # change this to match your system's ENV
+      - TREASURY_ADDRESS=${TREASURY_ADDRESS}
     logging: # apply better controls to Docker overlay folder
       driver: 'json-file'
       options:
