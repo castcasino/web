@@ -1,8 +1,19 @@
 /* Import modules. */
+import { encodePrivateKeyWif } from '@nexajs/hdnode'
+import { hexToBin } from '@nexajs/utils'
+import { listUnspent } from '@nexajs/address'
+import moment from 'moment'
 import PouchDB from 'pouchdb'
+import { sendCoin } from '@nexajs/purse'
+import { sha256 } from '@nexajs/crypto'
+import { Wallet } from '@nexajs/wallet'
 
 /* Initialize databases. */
 const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
+
+/* Set constants. */
+const DUST_LIMIT = 546
+const FIXED_GAS_FEE = 1000 // TODO Calculate gas fee dynamically based on tx size
 
 /**
  * Handle (Wallet) Queue
@@ -14,7 +25,9 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
  */
 export default async (_queue, _pending) => {
     let response
-    
+    let unspent
+    let wif
+
     for (let i = 0; i < _pending.length; i++) {
         const payment = _queue[_pending[i]]
         console.log('PAYMENT (pending):', payment)
@@ -22,7 +35,13 @@ export default async (_queue, _pending) => {
         /* Remove (payment) from queue. */
         delete _queue[_pending[i]]
 
-        const wallet = new Wallet(MNEMONIC)
+        const paymentSatoshis = payment.receivers
+            .reduce(
+                (totalValue, receiver) => (totalValue + receiver.satoshis), 0
+            )
+        console.log('PAYMENT SATOSHIS', paymentSatoshis)
+
+        const wallet = new Wallet(process.env.MNEMONIC)
         // console.log('WALLET', wallet)
 
         const address = wallet.address
@@ -31,16 +50,11 @@ export default async (_queue, _pending) => {
         /* Initialize receivers. */
         const receivers = []
 
-        let unspent
-
         unspent = await listUnspent(address)
         // console.log('UNSPENT', unspent)
 
-        /* Initialize SHA-256. */
-        const sha256 = await instantiateSha256()
-
         /* Encode Private Key WIF. */
-        const wif = encodePrivateKeyWif(sha256, wallet.privateKey, 'mainnet')
+        wif = encodePrivateKeyWif({ hash: sha256 }, wallet.privateKey, 'mainnet')
         // console.log('PRIVATE KEY (WIF):', wif)
 
         /* Filter out ANY tokens. */
@@ -56,7 +70,7 @@ export default async (_queue, _pending) => {
 
         /* Build parameters. */
         const coins = unspent.map(_unspent => {
-            const outpoint = reverseHex(_unspent.outpointHash)
+            const outpoint = _unspent.outpointHash
             const satoshis = _unspent.value
 
             return {
@@ -65,16 +79,24 @@ export default async (_queue, _pending) => {
                 wif,
             }
         })
-        // console.log('\n  Coins:', coins)
+        console.log('\n  Coins-1:', coins)
+
+        const playerCoin = {
+            outpoint: payment.unspent.outpointHash,
+            satoshis: payment.unspent.value,
+            wif: encodePrivateKeyWif({ hash: sha256 }, hexToBin(payment.entropy), 'mainnet'),
+        }
+        coins.unshift(playerCoin)
+        console.log('\n  Coins-2:', coins)
 
         /* Calculate the total balance of the unspent outputs. */
-        const unspentSatoshis = unspent
+        const unspentSatoshis = coins
             .reduce(
-                (totalValue, unspentOutput) => (totalValue + unspentOutput.value), 0
+                (totalValue, coin) => (totalValue + coin.satoshis), 0
             )
-        // console.log('UNSPENT SATOSHIS', unspentSatoshis)
+        console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
-        const chainData = `NEXA.games~${payment.playid}`
+        const chainData = `NEXA.games~${payment.id}`
         // console.log('BLOCKCHAIN DATA', chainData)
 
         /* Initialize hex data. */
@@ -103,18 +125,26 @@ export default async (_queue, _pending) => {
 
         /* Add value output. */
         for (let j = 0; j < payment.receivers.length; j++) {
-            receivers.push({
-                address: payment.receivers[j],
-                satoshis: payment.satoshis[j],
-            })
+            if (payment.receivers[j].satoshis > DUST_LIMIT) {
+                receivers.push({
+                    address: payment.receivers[j].address,
+                    satoshis: payment.receivers[j].satoshis,
+                })
+            }
         }
 
+        const changePayment = payment.receivers.find(_receiver => {
+            return _receiver.satoshis === 0
+        })
+
         /* Handle (automatic) change. */
-        if (unspentSatoshis - payment.satoshis - FIXED_GAS_FEE > 546) {
-            receivers.push({
-                address: address,
-                satoshis: unspentSatoshis - payment.satoshis - FIXED_GAS_FEE,
-            })
+        if (unspentSatoshis - paymentSatoshis - FIXED_GAS_FEE > DUST_LIMIT) {
+            if (changePayment) {
+                receivers.push({
+                    address: changePayment.address,
+                    satoshis: unspentSatoshis - paymentSatoshis - FIXED_GAS_FEE,
+                })
+            }
         }
         console.log('\n  Receivers:', receivers)
 

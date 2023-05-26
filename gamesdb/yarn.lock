@@ -243,10 +243,10 @@
     graphql-ws "5.12.0"
     ws "8.13.0"
 
-"@nexajs/address@^23.5.18":
-  version "23.5.18"
-  resolved "https://registry.yarnpkg.com/@nexajs/address/-/address-23.5.18.tgz#74123c5319240d560982619cd95b89efa0bbaa20"
-  integrity sha512-LA7rcdSmi8nvwskSYTvRlEOZpxBazwbrL9qdI43JXHm109zRADCs1SXSzF/Mh/AdU0il+Okhc5N8cLD7+g+A/w==
+"@nexajs/address@23.5.22":
+  version "23.5.22"
+  resolved "https://registry.yarnpkg.com/@nexajs/address/-/address-23.5.22.tgz#2dc6aa09e171d6604610a60f01624f37797ade33"
+  integrity sha512-Y9gdgHsdQM/5PL7Yx6iwYFhaxbfo+gwE1tKY9t90CxZu+wjnF77iHz/aEz+FKjYDazuwoRGTMDPbsfwgoSN7+Q==
   dependencies:
     "@nexajs/rostrum" "23.5.19"
     big-integer "1.6.51"
@@ -277,7 +277,20 @@
     scrypt-js "3.0.1"
     secure-ls "1.2.6"
 
-"@nexajs/hdnode@23.5.15", "@nexajs/hdnode@^23.5.15":
+"@nexajs/crypto@^23.5.22":
+  version "23.5.22"
+  resolved "https://registry.yarnpkg.com/@nexajs/crypto/-/crypto-23.5.22.tgz#1ca8e76cc18e159d18ef59f08368135dfcafee88"
+  integrity sha512-2rKBRYsWKbtD7trTa25sOAN0TuAuz7RGU7eLMDLBtgLoIbIrQ6Q8amA4BlPyLNpjc4Og/KWbncSqRrXIvpm5Lw==
+  dependencies:
+    "@ethersproject/random" "5.7.0"
+    "@nexajs/utils" "23.5.15"
+    crypto-js "4.1.1"
+    debug "4.3.4"
+    events "3.3.0"
+    scrypt-js "3.0.1"
+    secure-ls "1.2.6"
+
+"@nexajs/hdnode@23.5.15":
   version "23.5.15"
   resolved "https://registry.yarnpkg.com/@nexajs/hdnode/-/hdnode-23.5.15.tgz#78dec2cc947d1f8a6095c162bbb70c1851182a00"
   integrity sha512-nAmUvj51ACSKrBdMOtU4UJyCPB0eztpQyrCAk/KePWFOKSDwrwoBCUNBFRV/bqeuPyGJ53hL2Z2ziaW7fKIjlg==
@@ -288,7 +301,7 @@
     "@nexajs/utils" "23.5.15"
     debug "4.3.4"
 
-"@nexajs/purse@23.5.17", "@nexajs/purse@^23.5.17":
+"@nexajs/purse@23.5.17":
   version "23.5.17"
   resolved "https://registry.yarnpkg.com/@nexajs/purse/-/purse-23.5.17.tgz#6d899db77bc01327031f55c3201866035bffeb24"
   integrity sha512-mM76CidkZP/94zWGF7HVG6I7OMPw6xMIcLOGxZElOtbkKM/u5TJPCiP0kKE2JPtL73jQKqmwAw79BPb14pyWkg==
@@ -349,7 +362,7 @@
   dependencies:
     debug "4.3.4"
 
-"@nexajs/wallet@^23.5.17":
+"@nexajs/wallet@23.5.17":
   version "23.5.17"
   resolved "https://registry.yarnpkg.com/@nexajs/wallet/-/wallet-23.5.17.tgz#6ce0c4c84a11392249a970a0e5394fb1313ceebb"
   integrity sha512-eQEZvOb32z/7TJCTD4Ql8Vb6dltJVWKwyKDdKeR/nfqZSyEhXVr6tLifbVTZuEvDMz3D0zOvRBKwc1SWpjG78Q==

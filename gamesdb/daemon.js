@@ -1,12 +1,7 @@
 /* Import modules. */
-import { encodePrivateKeyWif } from '@nexajs/hdnode'
-import { listUnspent } from '@nexajs/address'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
-import { reverseHex } from '@nexajs/utils'
-import { sendCoin } from '@nexajs/purse'
 import { v4 as uuidv4 } from 'uuid'
-import { Wallet } from '@nexajs/wallet'
 
 /* Libauth helpers. */
 import {
@@ -24,11 +19,8 @@ const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.CO
 const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
 
 /* Set constants. */
-const DUST_LIMIT = 546
-const FIXED_GAS_FEE = 1000 // TODO Calculate gas fee dynamically based on tx size
 const PLAYS_INTERVAL = 5000
 const WALLET_INTERVAL = 15000
-const MNEMONIC = process.env.MNEMONIC
 
 /* Initialize locals. */
 const playQueue = {}
@@ -70,7 +62,7 @@ const handlePlaysQueue = async () => {
     if (rows) {
         rows.forEach(_item => {
             const play = _item.doc
-            console.log('PLAY', play)
+            // console.log('PLAY', play)
 
             if (!playQueue[play._id]) {
                 playQueue[play._id] = play
@@ -111,25 +103,26 @@ const handleWalletQueue = async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    // console.log('RESPONSE', response)
 
     /* Validate response. */
     if (response?.rows?.length > 0) {
         rows = response.rows
-        console.log('ROWS', rows)
+        // console.log('ROWS', rows)
     }
 
     /* Validate rows. */
     if (rows) {
         rows.forEach(_item => {
             const payment = _item.doc
-            // console.log('PAYMENT', payment)
+            console.log('PAYMENT', payment)
 
             if (!walletQueue[payment._id]) {
                 walletQueue[payment._id] = {
                     id: payment._id,
-                    receiver: payment.receiver,
-                    satoshis: payment.satoshis,
+                    entropy: payment.entropy,
+                    unspent: payment.unspent,
+                    receivers: payment.receivers,
                     txidem: payment.txidem,
                     createdAt: payment.createdAt,
                 }
@@ -153,7 +146,7 @@ const handleWalletQueue = async () => {
 
 
 ;(async () => {
-return handlePlaysQueue()
+return handleWalletQueue()
     setInterval(() => {
         console.log('Managing Plays queue...')
         handlePlaysQueue()
