@@ -30,15 +30,18 @@ export default defineEventHandler(async (event) => {
 
     // TODO Perform data validation for seed
 
-    const treasuryMnemonic = process.env.MNEMONIC
-    console.log('TREASURY MNEMONIC', treasuryMnemonic)
+    const treasuryAddress = process.env.TREASURY_ADDRESS
+    console.log('TREASURY ADDRESS', treasuryAddress)
+
+    const vaultMnemonic = process.env.MNEMONIC
+    console.log('VAULT MNEMONIC', vaultMnemonic)
 
     /* Initialize wallet. */
-    const treasuryWallet = new Wallet(treasuryMnemonic)
+    const vaultWallet = new Wallet(vaultMnemonic)
 
     /* Request (receiving) address. */
-    const treasuryAddress = treasuryWallet.address
-    console.log('TREASURY ADDRESS', treasuryAddress)
+    const vaultAddress = vaultWallet.address
+    console.log('VAULT ADDRESS', vaultAddress)
 
     // -------------------------------------------------------------------------
 

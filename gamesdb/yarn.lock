@@ -277,7 +277,7 @@
     scrypt-js "3.0.1"
     secure-ls "1.2.6"
 
-"@nexajs/crypto@^23.5.22":
+"@nexajs/crypto@23.5.22":
   version "23.5.22"
   resolved "https://registry.yarnpkg.com/@nexajs/crypto/-/crypto-23.5.22.tgz#1ca8e76cc18e159d18ef59f08368135dfcafee88"
   integrity sha512-2rKBRYsWKbtD7trTa25sOAN0TuAuz7RGU7eLMDLBtgLoIbIrQ6Q8amA4BlPyLNpjc4Og/KWbncSqRrXIvpm5Lw==
@@ -310,6 +310,17 @@
     "@nexajs/address" "23.5.15"
     "@nexajs/blockchain" "23.5.15"
     "@nexajs/transaction" "23.5.17"
+    debug "4.3.4"
+    events "3.3.0"
+    uuid "9.0.0"
+
+"@nexajs/purse@23.5.25":
+  version "23.5.25"
+  resolved "https://registry.yarnpkg.com/@nexajs/purse/-/purse-23.5.25.tgz#c96d5b111ebc6aa48495b47b5b860e9c32e10d3c"
+  integrity sha512-yWPqmZ8X3WZyRl7cRwvjDZMz+7lrI/9jXCUDhzuCAg8QOfqoORaQ2x6XBT1B/5i/67jAoXY2fQQtflbmuKM8Ng==
+  dependencies:
+    "@nexajs/blockchain" "23.5.15"
+    "@nexajs/transaction" "23.5.25"
     debug "4.3.4"
     events "3.3.0"
     uuid "9.0.0"
@@ -350,6 +361,18 @@
   dependencies:
     "@bitauth/libauth" "1.19.1"
     "@nexajs/address" "23.5.15"
+    "@nexajs/hdnode" "23.5.15"
+    "@nexajs/script" "23.5.15"
+    "@nexajs/utils" "23.5.15"
+    debug "4.3.4"
+
+"@nexajs/transaction@23.5.25":
+  version "23.5.25"
+  resolved "https://registry.yarnpkg.com/@nexajs/transaction/-/transaction-23.5.25.tgz#37f52b2d5138f3ab543a40b5ed2de9fbc60062bd"
+  integrity sha512-qPE7grUuTk1FL2caRxHpgBnNsKySwhEiNztY0ev6EG/ev5wOsq9eKOE3jyiRMuHHJ7JkAoghqb5/zIlrMDwv3g==
+  dependencies:
+    "@bitauth/libauth" "1.19.1"
+    "@nexajs/address" "23.5.22"
     "@nexajs/hdnode" "23.5.15"
     "@nexajs/script" "23.5.15"
     "@nexajs/utils" "23.5.15"

@@ -17,7 +17,7 @@ useHead({
 
         <section>
             <h2 class="text-3xl font-medium">
-                Directors
+                Governors
             </h2>
 
             <p>
@@ -27,7 +27,7 @@ useHead({
 
         <section>
             <h2 class="text-3xl font-medium">
-                Associates
+                Treasurers
             </h2>
 
             <p>

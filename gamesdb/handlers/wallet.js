@@ -24,7 +24,10 @@ const FIXED_GAS_FEE = 1000 // TODO Calculate gas fee dynamically based on tx siz
  *       to mitigate the possibility of a "double send".
  */
 export default async (_queue, _pending) => {
+    let latestDb
     let response
+    let txResult
+    let updatedDb
     let unspent
     let wif
 
@@ -81,10 +84,19 @@ export default async (_queue, _pending) => {
         })
         console.log('\n  Coins-1:', coins)
 
+        const wallet2 = new Wallet(payment.entropy)
+        console.log('WALLET-2', wallet2)
+
+        const address2 = wallet2.address
+        console.log('TREASURY ADDRESS-2', address2)
+
+        const pk2 = wallet2.privateKey
+        console.log('PRIVATE KEY-2', pk2)
+
         const playerCoin = {
             outpoint: payment.unspent.outpointHash,
             satoshis: payment.unspent.value,
-            wif: encodePrivateKeyWif({ hash: sha256 }, hexToBin(payment.entropy), 'mainnet'),
+            wif: encodePrivateKeyWif({ hash: sha256 }, pk2, 'mainnet'),
         }
         coins.unshift(playerCoin)
         console.log('\n  Coins-2:', coins)
@@ -156,27 +168,44 @@ export default async (_queue, _pending) => {
         console.log('Send UTXO (response):', response)
 
         try {
-            const txResult = JSON.parse(response)
+            txResult = JSON.parse(response)
             console.log('TX RESULT', txResult)
 
             /* Validate transaction result. */
             if (txResult?.result) {
-                const latest = await walletDb
+                latestDb = await walletDb
                     .get(payment.id)
                     .catch(err => console.err(err))
-                console.log('LATEST', latest)
+                console.log('LATEST (wallet)', latestDb)
 
-                const updated = {
-                    ...latest,
+                updatedDb = {
+                    ...latestDb,
                     txidem: txResult?.result,
                     updatedAt: moment().valueOf(),
                 }
-                console.log('UPDATED', updated)
+                console.log('UPDATED (wallet)', updatedDb)
 
                 response = await walletDb
-                    .put(updated)
+                    .put(updatedDb)
                     .catch(err => console.error(err))
-                console.log('UPDATE RESPONSE', response)
+                console.log('UPDATE (wallet) RESPONSE', response)
+
+                latestDb = await playsDb
+                    .get(payment.id)
+                    .catch(err => console.err(err))
+                console.log('LATEST (plays)', latestDb)
+
+                updatedDb = {
+                    ...latestDb,
+                    txidem: txResult?.result,
+                    updatedAt: moment().valueOf(),
+                }
+                console.log('UPDATED (plays)', updatedDb)
+
+                response = await playsDb
+                    .put(updatedDb)
+                    .catch(err => console.error(err))
+                console.log('UPDATE (plays) RESPONSE', response)
             }
         } catch (err) {
             console.error(err)

@@ -12,7 +12,7 @@
     "@nexajs/address": "23.5.22",
     "@nexajs/crypto": "23.5.22",
     "@nexajs/hdnode": "23.5.15",
-    "@nexajs/purse": "23.5.17",
+    "@nexajs/purse": "23.5.25",
     "@nexajs/wallet": "23.5.17",
     "moment": "2.29.4",
     "numeral": "2.0.6",
