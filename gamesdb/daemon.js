@@ -22,13 +22,6 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 const PLAYS_INTERVAL = 5000
 const WALLET_INTERVAL = 15000
 
-/* Initialize locals. */
-const playQueue = {}
-const walletQueue = {}
-
-let playResponse
-let walletResponse
-
 console.info('\n  Starting Nexa Games daemon...\n')
 
 
@@ -40,6 +33,8 @@ console.info('\n  Starting Nexa Games daemon...\n')
  */
 const handlePlaysQueue = async () => {
     console.info('\n  Checking Plays queue...\n')
+
+    const playQueue = {}
 
     let response
     let rows
@@ -93,6 +88,8 @@ const handlePlaysQueue = async () => {
  */
 const handleWalletQueue = async () => {
     console.info('\n  Checking Wallet queue...\n')
+
+    const walletQueue = {}
 
     let response
     let rows
