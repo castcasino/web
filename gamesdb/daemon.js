@@ -146,7 +146,9 @@ const handleWalletQueue = async () => {
 
 
 ;(async () => {
-// return handleWalletQueue()
+// handlePlaysQueue()
+// handleWalletQueue()
+return
     setInterval(() => {
         console.log('Managing Plays queue...')
         handlePlaysQueue()
