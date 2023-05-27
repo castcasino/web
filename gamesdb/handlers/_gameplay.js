@@ -1,4 +1,4 @@
-/* Import modules. */
+    /* Import modules. */
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { Wallet } from '@nexajs/wallet'
@@ -40,7 +40,7 @@ export default async (_game, _play, _sender) => {
     }
     console.log('UPDATED (play)', updatedDb)
 
-    response = await playDb
+    response = await playsDb
         .put(updatedDb)
         .catch(err => console.error(err))
     console.log('UPDATE (play) RESPONSE', response)
