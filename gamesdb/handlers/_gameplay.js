@@ -67,7 +67,7 @@ export default async (_game, _play, _sender) => {
         /* Send player (DUST). */
         // NOTE: Blocking DUST transactions to prevent accidental "token" sends.
         address = _sender.address
-        satoshis = 1053 // LOSE
+        satoshis = 888 // GOOD LUCK!
         receivers.push({
             address,
             satoshis,
