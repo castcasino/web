@@ -14,7 +14,7 @@ import { Wallet } from '@nexajs/wallet'
 /* Libauth helpers. */
 import { instantiateRipemd160 } from '@bitauth/libauth'
 
-import diceHandler from './play/dice.ts'
+import hiLoHandler from './play/hi_lo.ts'
 
 /* Initialize databases. */
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
@@ -70,7 +70,7 @@ export default defineEventHandler(async (event) => {
     console.log('PLAY ID', _id)
 
     /* Start monitoring address. */
-    const cleanup = await subscribeAddress(address, diceHandler.bind(playerSeed))
+    const cleanup = await subscribeAddress(address, hiLoHandler.bind(playerSeed))
     console.log('CLEANUP', cleanup)
 
     /* Set creation date. */
