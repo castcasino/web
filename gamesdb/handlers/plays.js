@@ -41,6 +41,9 @@ export default async (_queue, _pending) => {
         const satoshis = play.satoshis
         console.log('SATOSHIS', satoshis)
 
+        // FIXME ERROR IN QUEUE LOGIC CAUSING BAD DB
+        if (satoshis === 0) continue
+
         /* Validate satoshis. */
         if (satoshis < MIN_PLAY_SATOSHIS) {
             play.txidem = 'DUST'
