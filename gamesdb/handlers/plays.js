@@ -29,6 +29,7 @@ export default async (_queue, _pending) => {
         console.log('PLAY (pending):', (i + 1), 'of', (_pending.length + 1), play)
 
         /* Remove (payment) from queue. */
+        // FIXME DON'T DELETE! MARK AS USED, THEN CHECK!
         delete _queue[_pending[i]]
 
         const game = await gamesDb

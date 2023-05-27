@@ -9,14 +9,11 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 
 const GAME_ENGINE_FEE = 0.5 // as a percentage (eg. 1/2%)
 const TREASURY_ADDRESS = process.env.TREASURY_ADDRESS
-// console.log('TREASURY ADDRESS', TREASURY_ADDRESS)
 
 const VAULT_MNEMONIC = process.env.MNEMONIC
-// console.log('VAULT MNEMONIC', VAULT_MNEMONIC)
 
 /* Initialize wallet. */
 const vaultWallet = new Wallet(VAULT_MNEMONIC)
-// console.log('VAULT WALLET', vaultWallet)
 
 export default async (_game, _play, _sender) => {
 
@@ -25,9 +22,28 @@ export default async (_game, _play, _sender) => {
     let address
     let take
     let rate
+    let latestDb
+    let updatedDb
     let response
     let satoshis
     let share
+
+    latestDb = await playsDb
+        .get(_play._id)
+        .catch(err => console.err(err))
+    console.log('LATEST (play)', latestDb)
+
+    updatedDb = {
+        ...latestDb,
+        txidem: 'INQUEUE',
+        updatedAt: moment().valueOf(),
+    }
+    console.log('UPDATED (play)', updatedDb)
+
+    response = await playDb
+        .put(updatedDb)
+        .catch(err => console.error(err))
+    console.log('UPDATE (play) RESPONSE', response)
 
     if (_play.playerJoy === true) {
 
@@ -119,7 +135,7 @@ export default async (_game, _play, _sender) => {
     response = await walletDb
         .put(walletPkg)
         .catch(err => console.error(err))
-    console.log('RESPONSE', response)
+    console.log('RESPONSE (wallet):', response)
 
     return response
 }

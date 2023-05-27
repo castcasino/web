@@ -33,8 +33,8 @@ export default defineEventHandler(async (event) => {
     const treasuryAddress = process.env.TREASURY_ADDRESS
     console.log('TREASURY ADDRESS', treasuryAddress)
 
+    /* Set vault mnemonic (from env). */
     const vaultMnemonic = process.env.MNEMONIC
-    console.log('VAULT MNEMONIC', vaultMnemonic)
 
     /* Initialize wallet. */
     const vaultWallet = new Wallet(vaultMnemonic)
