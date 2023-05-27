@@ -36,8 +36,18 @@ export default async (_updatedInfo) => {
     unspent = await listUnspent(playAddress)
     console.log('\n  Unspent outputs:\n', unspent)
 
+    if (unspent.length === 0) {
+        // NOTE: Prevent replay.
+        return
+    }
+
     playSatoshis = await getAddressBalance(playAddress)
     console.log('\n  Play balance:\n', playSatoshis)
+
+    if (playSatoshis === 0) {
+        // NOTE: Prevent replay.
+        return
+    }
 
     response = await playsDb
         .query('api/byAddress', {
