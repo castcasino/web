@@ -73,8 +73,8 @@ const config = {
             label: 'For Promoters',
           },
           {
-            href: 'https://repo.hos.im/nyusternie/nexa-games',
-            label: 'GitHub',
+            href: 'https://nexa.games/gallery',
+            label: 'Browse the Gallery',
             position: 'right',
           },
         ],
