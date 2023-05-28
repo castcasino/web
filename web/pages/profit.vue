@@ -1,6 +1,12 @@
 <script setup lang="ts">
+/* Initialize stores. */
+import { useSystemStore } from '@/stores/system'
+
+/* Initialize System. */
+const System = useSystemStore()
+
 useHead({
-    title: 'Gamemakers — Nexa Games',
+    title: 'Profit Calculators — Nexa Games',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
@@ -10,7 +16,7 @@ useHead({
 <template>
     <main class="max-w-5xl mx-auto my-10">
         <h1 class="text-5xl font-medium">
-            Gamemakers
+            Profit Calculators
         </h1>
 
         <p>

@@ -42,9 +42,9 @@ useHead({
 
                             <div class="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
                                 <div class="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
-                                    <a href="javascript://" class="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-2xl font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8">
+                                    <NuxtLink to="/gallery" class="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-2xl font-medium text-indigo-700 shadow-sm hover:bg-indigo-50 sm:px-8">
                                         Browse the Games
-                                    </a>
+                                    </NuxtLink>
 
                                     <a href="javascript://" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-500 bg-opacity-60 px-4 py-3 text-2xl font-medium text-white shadow-sm hover:bg-opacity-70 sm:px-8">
                                         Watch a demo
@@ -272,13 +272,13 @@ useHead({
 
                     <div class="mt-6 space-y-4 sm:flex sm:space-y-0 sm:space-x-5">
                         <NuxtLink
-                            to="/games"
+                            to="/gallery"
                             class="flex items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-2xl font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                         >
                             Browse the games
                         </NuxtLink>
 
-                        <NuxtLink to="/about" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-50 px-4 py-3 text-2xl font-medium text-indigo-800 shadow-sm hover:bg-indigo-100">
+                        <NuxtLink to="https://docs.nexa.games" target="_blank" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-50 px-4 py-3 text-2xl font-medium text-indigo-800 shadow-sm hover:bg-indigo-100">
                             Learn more
                         </NuxtLink>
                     </div>

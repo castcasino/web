@@ -5,6 +5,7 @@
 <template>
     <footer class="bg-gray-50" aria-labelledby="footer-heading">
         <h2 id="footer-heading" class="sr-only">Footer</h2>
+
         <div class="mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 lg:px-8 lg:pt-24">
             <div class="xl:grid xl:grid-cols-3 xl:gap-8">
                 <div class="grid grid-cols-2 gap-8 xl:col-span-2">
@@ -17,21 +18,27 @@
 
                             <ul role="list" class="mt-4 space-y-4">
                                 <li>
-                                    <NuxtLink to="/fairplay" class="text-base text-gray-500 hover:text-gray-900">
-                                        Fairplay
+                                    <NuxtLink to="/manager" class="text-base text-gray-500 hover:text-gray-900">
+                                        Profile Manager
                                     </NuxtLink>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Analytics</a>
+                                    <NuxtLink to="/fairplay" class="text-base text-gray-500 hover:text-gray-900">
+                                        Fairplay 101
+                                    </NuxtLink>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Commerce</a>
+                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">
+                                        Promotions
+                                    </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Insights</a>
+                                    <NuxtLink to="https://docs.nexa.games/backup" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
+                                        Wallet Backup
+                                    </NuxtLink>
                                 </li>
                             </ul>
                         </div>
@@ -43,19 +50,27 @@
 
                             <ul role="list" class="mt-4 space-y-4">
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Pricing</a>
+                                    <NuxtLink to="/manager" class="text-base text-gray-500 hover:text-gray-900">
+                                        Banking Manager
+                                    </NuxtLink>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Documentation</a>
+                                    <NuxtLink to="/profit" class="text-base text-gray-500 hover:text-gray-900">
+                                        Profit Calculators
+                                    </NuxtLink>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Guides</a>
+                                    <NuxtLink to="/market" class="text-base text-gray-500 hover:text-gray-900">
+                                        Marketplace
+                                    </NuxtLink>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">API Status</a>
+                                    <NuxtLink to="https://docs.nexa.games" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
+                                        Documentation
+                                    </NuxtLink>
                                 </li>
                             </ul>
                         </div>
@@ -64,26 +79,32 @@
                     <div class="md:grid md:grid-cols-2 md:gap-8">
                         <div>
                             <h3 class="text-base font-medium text-gray-900">
-                                For Gamemasters
+                                For Gamemakers
                             </h3>
 
                             <ul role="list" class="mt-4 space-y-4">
                                 <li>
+                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">
+                                        Build a Game
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">
+                                        Monetize Your Game
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">
+                                        Financing 101
+                                    </a>
+                                </li>
+
+                                <li>
                                     <NuxtLink to="https://repo.hos.im/nyusternie/nexa-games" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
                                         View the source
                                     </NuxtLink>
-                                </li>
-
-                                <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Jobs</a>
-                                </li>
-
-                                <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Press</a>
-                                </li>
-
-                                <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Partners</a>
                                 </li>
                             </ul>
                         </div>
@@ -135,6 +156,7 @@
                     <form class="mt-4 sm:flex sm:max-w-md">
                         <label for="email-address" class="sr-only">Email address</label>
 
+<NuxtLink to="https://twitter.com/NEXAdotgames" target="_blank" class="flex">
                         <input
                             type="email"
                             name="email-address"
@@ -145,14 +167,14 @@
                             placeholder="Enter your email"
                             disabled
                         />
+</NuxtLink>
                         <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                            <button
-                                type="submit"
+                            <NuxtLink to="https://twitter.com/NEXAdotgames" target="_blank"
                                 class="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                                 disabled
                             >
                                 Subscribe
-                            </button>
+                            </NuxtLink>
                         </div>
                     </form>
                 </div>
