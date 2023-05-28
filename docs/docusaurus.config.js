@@ -64,7 +64,6 @@ const config = {
             position: 'left',
             label: 'Tutorial',
           },
-          // {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://repo.hos.im/nyusternie/nexa-games',
             label: 'GitHub',
@@ -105,8 +104,8 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'Games Gallery',
+                to: 'https://nexa.games/gallery',
               },
               {
                 label: 'GitHub',
