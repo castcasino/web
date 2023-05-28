@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Nexa Games',
+  title: 'Nexa Games Docs',
   tagline: 'Fairplay for ALL',
   url: 'https://docs.nexa.games',
   baseUrl: '/',
@@ -29,17 +29,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://repo.hos.im/nyusternie/nexa-games',
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://repo.hos.im/nyusternie/nexa-games',
+          routeBasePath: '/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -52,7 +42,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Nexa Games',
+        title: 'Docs Home',
         logo: {
           alt: 'Fairplay for ALL',
           src: 'img/logo.svg',
@@ -60,9 +50,9 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'welcome',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Tutorials',
           },
           {
             href: 'https://repo.hos.im/nyusternie/nexa-games',
@@ -78,8 +68,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Tutorials',
+                to: '/welcome',
               },
             ],
           },

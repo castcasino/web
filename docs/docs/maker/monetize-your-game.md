@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# Translate your site
+# Monetize Your (Existing) Game
 
-Let's translate `docs/intro.md` to French.
+Let's translate `/welcome.md` to French.
 
 ## Configure i18n
 
@@ -21,12 +21,12 @@ module.exports = {
 
 ## Translate a doc
 
-Copy the `docs/intro.md` file to the `i18n/fr` folder:
+Copy the `/welcome.md` file to the `i18n/fr` folder:
 
 ```bash
 mkdir -p i18n/fr/docusaurus-plugin-content-docs/current/
 
-cp docs/intro.md i18n/fr/docusaurus-plugin-content-docs/current/intro.md
+cp /welcome.md i18n/fr/docusaurus-plugin-content-docs/current/intro.md
 ```
 
 Translate `i18n/fr/docusaurus-plugin-content-docs/current/intro.md` in French.
