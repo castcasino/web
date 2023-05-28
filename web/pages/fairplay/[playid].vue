@@ -105,8 +105,6 @@ loadPlay(playid)
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10 px-3">
 
         <section class="px-2 py-1 bg-yellow-200 border-2 border-yellow-400 rounded-lg shadow">
@@ -223,6 +221,4 @@ loadPlay(playid)
         </div>
 
     </main>
-
-    <Footer />
 </template>

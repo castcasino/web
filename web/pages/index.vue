@@ -9,8 +9,6 @@ useHead({
 
 <template>
     <main class="bg-white">
-        <Header />
-
         <div>
             <!-- Hero section -->
             <div class="relative lg:mt-10">
@@ -288,6 +286,4 @@ useHead({
             </div>
         </div>
     </main>
-
-    <Footer />
 </template>

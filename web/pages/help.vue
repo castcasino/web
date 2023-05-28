@@ -33,8 +33,6 @@ getBalance()
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10">
         <h1 class="text-5xl font-medium">
             Help &amp; Support
@@ -56,6 +54,4 @@ getBalance()
             nexa:nqtsq5g5avzufcrcw00jnpwyq9m5fe6rmwgty5fzaaqlngh5
         </NuxtLink>
     </main>
-
-    <Footer />
 </template>

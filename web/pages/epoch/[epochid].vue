@@ -20,8 +20,6 @@ console.log('EPOCH ID', epochid)
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10">
         <h1 class="text-3xl font-medium">
             Epoch #{{epochid}} Attestation
@@ -70,6 +68,4 @@ a359601231f93af0b35be9ddd2abe8daedd890577ffb7d36e34aba81dc9777134d788ff360c2b2ca
             </NuxtLink>
         </section>
     </main>
-
-    <Footer />
 </template>

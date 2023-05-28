@@ -14,8 +14,6 @@ useHead({
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10">
         <h1 class="text-5xl font-medium">
             Launchpad
@@ -29,6 +27,4 @@ useHead({
             Nexa Gaming Engine (NGE) is a permissionless and provably fair wagering system, powered by the Nexa blockchain.
         </p>
     </main>
-
-    <Footer />
 </template>

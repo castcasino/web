@@ -26,8 +26,6 @@ const load = async () => {
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10 px-3">
         <h1 class="text-5xl font-medium">
             Fairplay
@@ -138,6 +136,4 @@ const load = async () => {
             </div>
         </div>
     </main>
-
-    <Footer />
 </template>

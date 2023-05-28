@@ -14,8 +14,6 @@ useHead({
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10">
         <h1 class="text-5xl font-medium">
             Blank
@@ -25,6 +23,4 @@ useHead({
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id eius voluptatem minus natus at eveniet dolorum eos mollitia, maxime animi excepturi harum omnis illum odit recusandae pariatur! Unde, explicabo molestias.
         </p>
     </main>
-
-    <Footer />
 </template>

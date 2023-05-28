@@ -14,8 +14,6 @@ useHead({
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10">
         <h1 class="text-5xl font-medium">
             Strategy
@@ -30,6 +28,4 @@ useHead({
             </ul>
         </p>
     </main>
-
-    <Footer />
 </template>

@@ -33,8 +33,6 @@ const signout = () => {
 </script>
 
 <template>
-    <Header />
-
     <main class="max-w-5xl mx-auto my-10 flex flex-col gap-8">
         <header class="mx-3">
             <h1 class="text-5xl font-medium">
@@ -75,8 +73,5 @@ const signout = () => {
             </button>
         </section>
 
-
     </main>
-
-    <Footer />
 </template>
