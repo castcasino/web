@@ -2,13 +2,13 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Nexa Games Intro
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Let's discover **Nexa Games in less than 5 minutes**.
 
 ## Getting Started
 
-Get started by **creating a new site**.
+Get started by **creating a new game**.
 
 Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
 
