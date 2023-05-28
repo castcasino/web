@@ -101,15 +101,21 @@
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Claim</a>
+                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">
+                                        Cookies
+                                    </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Privacy</a>
+                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">
+                                        Privacy
+                                    </a>
                                 </li>
 
                                 <li>
-                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">Terms</a>
+                                    <a href="javascript://" class="text-base text-gray-500 hover:text-gray-900">
+                                        Terms
+                                    </a>
                                 </li>
                             </ul>
                         </div>

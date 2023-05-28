@@ -74,7 +74,7 @@ const config = {
           },
           {
             href: 'https://nexa.games/gallery',
-            label: 'Browse the Gallery',
+            label: 'Browse the Games',
             position: 'right',
           },
         ],
