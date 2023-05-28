@@ -12,3 +12,9 @@ Here is what you'll need to know in this lesson:
 - hash
 - pre-image
 - hmac-512
+
+:::danger Take care
+
+This action is dangerous
+
+:::

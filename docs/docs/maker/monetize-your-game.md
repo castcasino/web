@@ -2,84 +2,41 @@
 sidebar_position: 2
 ---
 
-# Monetize Your (Existing) Game
+# Monetize Your Game
 
-Let's translate `/welcome.md` to French.
+Let's learn how you can quickly integrate monetization strategies into your existing game.
 
-## Configure i18n
+## Upgrade Your Existing Project
 
-Modify `docusaurus.config.js` to add support for the `fr` locale:
-
-```js title="docusaurus.config.js"
-module.exports = {
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'fr'],
-  },
-};
-```
-
-## Translate a doc
-
-Copy the `/welcome.md` file to the `i18n/fr` folder:
+Use the Nexa Builder Studio to upgrade your project folder:
 
 ```bash
-mkdir -p i18n/fr/docusaurus-plugin-content-docs/current/
-
-cp /welcome.md i18n/fr/docusaurus-plugin-content-docs/current/intro.md
+npm create nexa upgrade
 ```
 
-Translate `i18n/fr/docusaurus-plugin-content-docs/current/intro.md` in French.
+Or you can manage the upgrade changes manually.
 
-## Start your localized site
+## Add a Configuration file
 
-Start your site on the French locale:
+Your application must provide specific settings in order to properly communicate with the __Provable Fairplay Gaming (PFG)__ Engine.
 
-```bash
-npm run start -- --locale fr
+Customize your own `fairplay.yml` file:
+
+```yaml title="fairplay.yml"
+themeConfig
+  navbar
+    items
+      // highlight-start
+      - localeDropdown
+      // highlight-end
+      - anotherDropdown
 ```
-
-Your localized site is accessible at [http://localhost:3000/fr/](http://localhost:3000/fr/) and the `Getting Started` page is translated.
 
 :::caution
 
-In development, you can only use one locale at a same time.
+Specifications are still __IN ACTIVE DEVELOPMENT__ and are subject to change.
 
 :::
-
-## Add a Locale Dropdown
-
-To navigate seamlessly across languages, add a locale dropdown.
-
-Modify the `docusaurus.config.js` file:
-
-```js title="docusaurus.config.js"
-module.exports = {
-  themeConfig: {
-    navbar: {
-      items: [
-        // highlight-start
-        {
-          type: 'localeDropdown',
-        },
-        // highlight-end
-      ],
-    },
-  },
-};
-```
-
-The locale dropdown now appears in your navbar:
-
-![Locale Dropdown](./img/localeDropdown.png)
-
-## Build your localized site
-
-Build your site for a specific locale:
-
-```bash
-npm run build -- --locale fr
-```
 
 Or build your site to include all the locales at once:
 

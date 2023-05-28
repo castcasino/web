@@ -50,9 +50,27 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'welcome',
+            docId: 'play/welcome',
             position: 'left',
-            label: 'Tutorials',
+            label: 'For Players',
+          },
+          {
+            type: 'doc',
+            docId: 'maker/welcome',
+            position: 'left',
+            label: 'For Gamemakers',
+          },
+          {
+            type: 'doc',
+            docId: 'bank/welcome',
+            position: 'left',
+            label: 'For Bankers',
+          },
+          {
+            type: 'doc',
+            docId: 'promo/welcome',
+            position: 'left',
+            label: 'For Promoters',
           },
           {
             href: 'https://repo.hos.im/nyusternie/nexa-games',
@@ -68,7 +86,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorials',
+                label: 'Welcome',
                 to: '/welcome',
               },
             ],
@@ -77,16 +95,12 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
                 label: 'Twitter',
                 href: 'https://twitter.com/NEXAdotgames',
+              },
+              {
+                label: 'Reddit',
+                href: 'https://www.reddit.com/r/NexaGames/',
               },
             ],
           },
@@ -104,7 +118,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Nexa Games DAO. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Nexa Games DAO.`,
       },
       prism: {
         theme: lightCodeTheme,
