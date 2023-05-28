@@ -27,9 +27,11 @@ export default defineEventHandler(async (_event) => {
         }
     }
 
-    const entropy = response.updatedAt ? response.entropy : '[ hidden ]'
+    // NOTE: Wait until tx idem before exposing secrets.
+    const entropy = response?.txidem?.length === 64 ? response.entropy : '[ hidden ]'
 
-    const mnemonic = response.updatedAt ? entropyToMnemonic(entropy) : '[ hidden ]'
+    // NOTE: Wait until tx idem before exposing secrets.
+    const mnemonic = response?.txidem?.length === 64 ? entropyToMnemonic(entropy) : '[ hidden ]'
 
     /* Build (filtered) response. */
     const filtered = {
