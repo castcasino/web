@@ -17,8 +17,8 @@ function HomepageHeader() {
                 <div className={styles.buttons}>
                     <Link
                         className="button button--secondary button--lg"
-                        to="/welcome">
-                        Nexa Gaming Engine (NGE) Intro - 5min ⏱️
+                        to="/fairplay">
+                        Provably Fair Gameplay 101 - 5min ⏱️
                     </Link>
                 </div>
             </div>

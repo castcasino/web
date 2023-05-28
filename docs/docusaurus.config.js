@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Nexa Games Docs',
-  tagline: 'Fairplay for ALL',
+  title: 'Discover Nexa Gaming',
+  tagline: 'Fairplay Is Guaranteed!',
   url: 'https://docs.nexa.games',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -42,9 +42,9 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Docs Home',
+        title: 'Start Here',
         logo: {
-          alt: 'Fairplay for ALL',
+          alt: 'Fairplay Is Guaranteed!',
           src: 'img/logo.svg',
         },
         items: [
