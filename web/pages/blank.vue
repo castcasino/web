@@ -1,16 +1,27 @@
 <script setup lang="ts">
-/* Initialize stores. */
-import { useSystemStore } from '@/stores/system'
-
-/* Initialize System. */
-const System = useSystemStore()
-
 useHead({
     title: 'Blank — Nexa Games',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
 })
+
+/* Initialize stores. */
+import { useSystemStore } from '@/stores/system'
+
+/* Initialize System. */
+const System = useSystemStore()
+
+// onMounted(() => {
+//     console.log('Mounted!')
+//     // Now it's safe to perform setup operations.
+// })
+
+// onBeforeUnmount(() => {
+//     console.log('Before Unmount!')
+//     // Now is the time to perform all cleanup operations.
+// })
+
 </script>
 
 <template>
