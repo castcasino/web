@@ -24,6 +24,9 @@ export default defineNuxtConfig({
         /* Pinia */
         '@pinia/nuxt',
         '@pinia-plugin-persistedstate/nuxt',
+
+        /* Plausible */
+        '@nuxtjs/plausible',
     ],
 
     /* Route Rules */
