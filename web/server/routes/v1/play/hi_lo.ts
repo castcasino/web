@@ -1,13 +1,9 @@
 /* Import modules. */
-// import { encodePrivateKeyWif } from '@nexajs/hdnode'
 import { getAddressBalance } from '@nexajs/rostrum'
 import { listUnspent } from '@nexajs/address'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { getHmac } from '@nexajs/crypto'
-// import { sha256 } from '@nexajs/crypto'
-// import { sha512 } from '@nexajs/crypto'
-// import { Wallet } from '@nexajs/wallet'
 
 /* Initialize databases. */
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
@@ -30,11 +26,11 @@ export default async (_updatedInfo) => {
 
     /* Set play address. */
     playAddress = _updatedInfo[0]
-    console.log('GAMEPLAY ADDRESS', playAddress)
+    // console.log('GAMEPLAY ADDRESS', playAddress)
 
     // Fetch all unspent transaction outputs for the temporary in-browser wallet.
     unspent = await listUnspent(playAddress)
-    console.log('\n  Unspent outputs:\n', unspent)
+    // console.log('\n  Unspent outputs:\n', unspent)
 
     if (unspent.length === 0) {
         // NOTE: Prevent replay.
@@ -42,7 +38,7 @@ export default async (_updatedInfo) => {
     }
 
     playSatoshis = await getAddressBalance(playAddress)
-    console.log('\n  Play balance:\n', playSatoshis)
+    // console.log('\n  Play balance:\n', playSatoshis)
 
     if (playSatoshis === 0) {
         // NOTE: Prevent replay.
@@ -80,17 +76,51 @@ export default async (_updatedInfo) => {
 
 
     /**
-     * Calculate Play Outcome
+     * Calculate (1.2x) Play Outcome
      */
-    if (playValue < 48.5 && playData.position === 0) {
-        playerJoy = true
-        houseJoy = false
-    } else if (playValue > 51.5 && playData.position === 1) {
-        playerJoy = true
-        houseJoy = false
-    } else {
-        playerJoy = false
-        houseJoy = true
+    if (playData.payout === 1.2) {
+        if (playValue < 80.8 && playData.position === 0) {
+            playerJoy = true
+            houseJoy = false
+        } else if (playValue > 19.2 && playData.position === 1) {
+            playerJoy = true
+            houseJoy = false
+        } else {
+            playerJoy = false
+            houseJoy = true
+        }
+    }
+
+    /**
+     * Calculate (2x) Play Outcome
+     */
+    if (playData.payout === 2) {
+        if (playValue < 48.5 && playData.position === 0) {
+            playerJoy = true
+            houseJoy = false
+        } else if (playValue > 51.5 && playData.position === 1) {
+            playerJoy = true
+            houseJoy = false
+        } else {
+            playerJoy = false
+            houseJoy = true
+        }
+    }
+
+    /**
+     * Calculate (5x) Play Outcome
+     */
+    if (playData.payout === 5) {
+        if (playValue < 17.6 && playData.position === 0) {
+            playerJoy = true
+            houseJoy = false
+        } else if (playValue > 82.4 && playData.position === 1) {
+            playerJoy = true
+            houseJoy = false
+        } else {
+            playerJoy = false
+            houseJoy = true
+        }
     }
 
     /* Initialize paid flag (used by Wallet daemon). */

@@ -60,18 +60,18 @@ export default defineEventHandler(async (event) => {
     // console.log('PLAY ADDRESS', address)
 
     const decoded = decodeAddress(address)
-    console.log('DECODED', decoded)
+    // console.log('DECODED', decoded)
 
     const pubKeyHash = binToHex(decoded.hash).slice(8)
-    console.log('PUBLIC KEY HASH', pubKeyHash)
+    // console.log('PUBLIC KEY HASH', pubKeyHash)
 
     /* Create play id. */
     const _id = pubKeyHash
-    console.log('PLAY ID', _id)
+    // console.log('PLAY ID', _id)
 
     /* Start monitoring address. */
     const cleanup = await subscribeAddress(address, hiLoHandler.bind(playerSeed))
-    console.log('CLEANUP', cleanup)
+    // console.log('CLEANUP', cleanup)
 
     /* Set creation date. */
     const createdAt = moment().valueOf()

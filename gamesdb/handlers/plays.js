@@ -26,7 +26,7 @@ export default async (_queue, _pending) => {
 
     for (let i = 0; i < _pending.length; i++) {
         const play = _queue[_pending[i]]
-        console.log('PLAY (pending):', (i + 1), 'of', (_pending.length + 1), play)
+        // console.log('PLAY (pending):', (i + 1), 'of', (_pending.length + 1), play)
 
         /* Remove (payment) from queue. */
         // FIXME DON'T DELETE! MARK AS USED, THEN CHECK!
@@ -35,11 +35,11 @@ export default async (_queue, _pending) => {
         const game = await gamesDb
             .get(play.gameid)
             .catch(err => console.error(err))
-        console.log('GAME', game)
+        // console.log('GAME', game)
 
         /* Set satoshis. */
         const satoshis = play.satoshis
-        console.log('SATOSHIS', satoshis)
+        // console.log('SATOSHIS', satoshis)
 
         // FIXME ERROR IN QUEUE LOGIC CAUSING BAD DB
         if (satoshis === 0) continue
@@ -52,7 +52,7 @@ export default async (_queue, _pending) => {
             response = await playsDb
                 .put(play)
                 .catch(err => console.error(err))
-            console.log('RESPONSE', response);
+            // console.log('RESPONSE', response)
 
             continue
         }
@@ -65,14 +65,14 @@ export default async (_queue, _pending) => {
             response = await playsDb
                 .put(play)
                 .catch(err => console.error(err))
-            console.log('RESPONSE', response);
+            // console.log('RESPONSE', response)
 
             continue
         }
 
         /* Request player. */
         const sender = await getSender(play.unspent)
-        console.log('SENDER', sender)
+        // console.log('SENDER', sender)
 
         /* Handle gameplay. */
         await gameplay(game, play, sender)
