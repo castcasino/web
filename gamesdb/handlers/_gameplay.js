@@ -31,25 +31,25 @@ export default async (_game, _play, _sender) => {
     latestDb = await playsDb
         .get(_play._id)
         .catch(err => console.err(err))
-    console.log('LATEST (play)', latestDb)
+    // console.log('LATEST (play)', latestDb)
 
     updatedDb = {
         ...latestDb,
         txidem: 'INQUEUE',
         updatedAt: moment().valueOf(),
     }
-    console.log('UPDATED (play)', updatedDb)
+    // console.log('UPDATED (play)', updatedDb)
 
     response = await playsDb
         .put(updatedDb)
         .catch(err => console.error(err))
-    console.log('UPDATE (play) RESPONSE', response)
+    // console.log('UPDATE (play) RESPONSE', response)
 
     if (_play.playerJoy === true) {
 
         /* Send Sender (total) winnings. */
         address = _sender.address
-        satoshis = _play.satoshis * 2
+        satoshis = _play.satoshis * _play.payout
         receivers.push({
             address,
             satoshis,
@@ -76,9 +76,9 @@ export default async (_game, _play, _sender) => {
         /* Send gamemakers (share) winnings. */
         address = TREASURY_ADDRESS
         rate = GAME_ENGINE_FEE / 100.0
-        console.log('GAME ENGINE RATE', rate)
+        // console.log('GAME ENGINE RATE', rate)
         satoshis = parseInt(_play.satoshis * rate)
-        console.log('GAME ENGINE SATS', satoshis)
+        // console.log('GAME ENGINE SATS', satoshis)
         receivers.push({
             address,
             satoshis,
@@ -87,13 +87,13 @@ export default async (_game, _play, _sender) => {
         /* Send gamemakers (share) winnings. */
         address = _game.gamemakers.members[0]
         share = _game.gamemakers.share
-        console.log('GAMEMAKERS SHARE', share)
+        // console.log('GAMEMAKERS SHARE', share)
         rate = (100 - _game.rtp - GAME_ENGINE_FEE) / 100.0
-        console.log('HOUSE RATE', rate)
+        // console.log('HOUSE RATE', rate)
         take = (_play.satoshis * rate)
-        console.log('HOUSE TAKE', take)
+        // console.log('HOUSE TAKE', take)
         satoshis = parseInt(take * (share * 0.01))
-        console.log('GAMEMAKERS SATS', satoshis)
+        // console.log('GAMEMAKERS SATS', satoshis)
         receivers.push({
             address,
             satoshis,
@@ -102,13 +102,13 @@ export default async (_game, _play, _sender) => {
         /* Send promoters (share) winnings. */
         address = _game.promoters.members[0]
         share = _game.promoters.share
-        console.log('PROMOTERS SHARE', share)
+        // console.log('PROMOTERS SHARE', share)
         rate = (100 - _game.rtp - GAME_ENGINE_FEE) / 100.0
-        console.log('HOUSE RATE', rate)
+        // console.log('HOUSE RATE', rate)
         take = (_play.satoshis * rate)
-        console.log('HOUSE TAKE', take)
+        // console.log('HOUSE TAKE', take)
         satoshis = parseInt(take * (share * 0.01))
-        console.log('PROMOTERS SATS', satoshis)
+        // console.log('PROMOTERS SATS', satoshis)
         receivers.push({
             address,
             satoshis,
@@ -135,7 +135,7 @@ export default async (_game, _play, _sender) => {
     response = await walletDb
         .put(walletPkg)
         .catch(err => console.error(err))
-    console.log('RESPONSE (wallet):', response)
+    // console.log('RESPONSE (wallet):', response)
 
     return response
 }
