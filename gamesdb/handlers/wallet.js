@@ -14,6 +14,7 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 
 /* Set constants. */
 const DUST_LIMIT = 546
+const ESTIMATED_NUM_OUTPUTS = 5
 
 /**
  * Handle (Wallet) Queue
@@ -113,7 +114,7 @@ export default async (_queue, _pending) => {
 
         // NOTE: 150b (per input), 35b (per output), 10b (misc)
         // NOTE: Double the estimate (for safety).
-        const feeEstimate = ((coins.length * 150) + (35 * 5) + 10 + (chainData.length / 2)) * 2
+        const feeEstimate = ((coins.length * 150) + (35 * ESTIMATED_NUM_OUTPUTS) + 10 + (chainData.length / 2)) * 2
         console.log('FEE ESTIMATE', feeEstimate)
 
         /* Initialize hex data. */
