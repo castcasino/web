@@ -14,7 +14,6 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 
 /* Set constants. */
 const DUST_LIMIT = 546
-const FIXED_GAS_FEE = 3000 // TODO Calculate gas fee dynamically based on tx size
 
 /**
  * Handle (Wallet) Queue
@@ -34,7 +33,7 @@ export default async (_queue, _pending) => {
 
     for (let i = 0; i < _pending.length; i++) {
         const payment = _queue[_pending[i]]
-        console.log('PAYMENT (pending):', payment)
+        // console.log('PAYMENT (pending):', payment)
 
         /* Remove (payment) from queue. */
         delete _queue[_pending[i]]
@@ -43,7 +42,7 @@ export default async (_queue, _pending) => {
             .reduce(
                 (totalValue, receiver) => (totalValue + receiver.satoshis), 0
             )
-        console.log('PAYMENT SATOSHIS', paymentSatoshis)
+        // console.log('PAYMENT SATOSHIS', paymentSatoshis)
 
         const wallet = new Wallet(process.env.MNEMONIC)
         // console.log('WALLET', wallet)
@@ -83,16 +82,16 @@ export default async (_queue, _pending) => {
                 wif,
             }
         })
-        console.log('\n  Coins-1:', coins)
+        // console.log('\n  Coins-1:', coins)
 
         const wallet2 = new Wallet(payment.entropy)
-        console.log('WALLET-2', wallet2)
+        // console.log('WALLET-2', wallet2)
 
         const address2 = wallet2.address
-        console.log('TREASURY ADDRESS-2', address2)
+        // console.log('TREASURY ADDRESS-2', address2)
 
         const pk2 = wallet2.privateKey
-        console.log('PRIVATE KEY-2', pk2)
+        // console.log('PRIVATE KEY-2', pk2)
 
         const playerCoin = {
             outpoint: payment.unspent.outpointHash,
@@ -100,17 +99,22 @@ export default async (_queue, _pending) => {
             wif: encodePrivateKeyWif({ hash: sha256 }, pk2, 'mainnet'),
         }
         coins.unshift(playerCoin)
-        console.log('\n  Coins-2:', coins)
+        // console.log('\n  Coins-2:', coins)
 
         /* Calculate the total balance of the unspent outputs. */
         const unspentSatoshis = coins
             .reduce(
                 (totalValue, coin) => (totalValue + coin.satoshis), 0
             )
-        console.log('UNSPENT SATOSHIS', unspentSatoshis)
+        // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
         const chainData = `NEXA.games~${payment.id}`
         // console.log('BLOCKCHAIN DATA', chainData)
+
+        // NOTE: 150b (per input), 35b (per output), 10b (misc)
+        // NOTE: Double the estimate (for safety).
+        const feeEstimate = ((coins.length * 150) + 35 + 10 + (chainData.length / 2)) * 2
+        console.log('FEE ESTIMATE', feeEstimate)
 
         /* Initialize hex data. */
         let hexData = ''
@@ -127,7 +131,7 @@ export default async (_queue, _pending) => {
             /* Add hex code to string. */
             hexData += code
         }
-        console.log('HEX DATA', hexData)
+        // console.log('HEX DATA', hexData)
 
         // TODO Validate data length is less than OP_RETURN max (220).
 
@@ -147,15 +151,15 @@ export default async (_queue, _pending) => {
         }
 
         const changePayment = payment.receivers.find(_receiver => {
-            return _receiver.satoshis === 0
+            return (typeof _receiver.satoshis === 'undefined' || _receiver.satoshis === 0)
         })
 
         /* Handle (automatic) change. */
-        if (unspentSatoshis - paymentSatoshis - FIXED_GAS_FEE > DUST_LIMIT) {
+        if (unspentSatoshis - paymentSatoshis - feeEstimate > DUST_LIMIT) {
             if (changePayment) {
                 receivers.push({
                     address: changePayment.address,
-                    satoshis: unspentSatoshis - paymentSatoshis - FIXED_GAS_FEE,
+                    satoshis: unspentSatoshis - paymentSatoshis - feeEstimate,
                 })
             }
         }
@@ -177,36 +181,36 @@ export default async (_queue, _pending) => {
                 latestDb = await walletDb
                     .get(payment.id)
                     .catch(err => console.err(err))
-                console.log('LATEST (wallet)', latestDb)
+                // console.log('LATEST (wallet)', latestDb)
 
                 updatedDb = {
                     ...latestDb,
                     txidem: txResult?.result,
                     updatedAt: moment().valueOf(),
                 }
-                console.log('UPDATED (wallet)', updatedDb)
+                // console.log('UPDATED (wallet)', updatedDb)
 
                 response = await walletDb
                     .put(updatedDb)
                     .catch(err => console.error(err))
-                console.log('UPDATE (wallet) RESPONSE', response)
+                // console.log('UPDATE (wallet) RESPONSE', response)
 
                 latestDb = await playsDb
                     .get(payment.id)
                     .catch(err => console.err(err))
-                console.log('LATEST (plays)', latestDb)
+                // console.log('LATEST (plays)', latestDb)
 
                 updatedDb = {
                     ...latestDb,
                     txidem: txResult?.result,
                     updatedAt: moment().valueOf(),
                 }
-                console.log('UPDATED (plays)', updatedDb)
+                // console.log('UPDATED (plays)', updatedDb)
 
                 response = await playsDb
                     .put(updatedDb)
                     .catch(err => console.error(err))
-                console.log('UPDATE (plays) RESPONSE', response)
+                // console.log('UPDATE (plays) RESPONSE', response)
             }
         } catch (err) {
             console.error(err)
