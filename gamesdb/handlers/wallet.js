@@ -113,7 +113,7 @@ export default async (_queue, _pending) => {
 
         // NOTE: 150b (per input), 35b (per output), 10b (misc)
         // NOTE: Double the estimate (for safety).
-        const feeEstimate = ((coins.length * 150) + 35 + 10 + (chainData.length / 2)) * 2
+        const feeEstimate = ((coins.length * 150) + (35 * 5) + 10 + (chainData.length / 2)) * 2
         console.log('FEE ESTIMATE', feeEstimate)
 
         /* Initialize hex data. */
