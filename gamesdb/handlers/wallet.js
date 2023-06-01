@@ -72,6 +72,18 @@ export default async (_queue, _pending) => {
             return console.error('There are NO unspent outputs available.')
         }
 
+        // FIXME: This is a bug fix until we update Rostrum `address.listUnspent`.
+        /* Validate (pending) mempool transactions. */
+        const mempool = unspent.find(_unspent=> {
+            return _unspent.height === 0
+        })
+        console.log('MEMPOOL', mempool)
+        /* Validate mempool. */
+        if (mempool) {
+            /* Update unspent. */
+            unspent = [mempool]
+        }
+
         /* Build parameters. */
         const coins = unspent.map(_unspent => {
             const outpoint = _unspent.outpointHash
@@ -213,6 +225,10 @@ export default async (_queue, _pending) => {
                     .catch(err => console.error(err))
                 // console.log('UPDATE (plays) RESPONSE', response)
             }
+
+            // TODO SEND EMAIL ERROR
+            // txResult?.error
+            // txResult?.result
         } catch (err) {
             console.error(err)
         }
