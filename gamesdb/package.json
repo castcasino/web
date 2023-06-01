@@ -1,6 +1,6 @@
 {
   "name": "gamesdb",
-  "version": "23.5.26",
+  "version": "23.6.1",
   "description": "Manages data storage, indexing and broadcast functions for the Games database.",
   "main": "index.js",
   "type": "module",
@@ -15,6 +15,7 @@
     "@nexajs/purse": "23.5.25",
     "@nexajs/wallet": "23.5.17",
     "moment": "2.29.4",
+    "nodemailer": "6.9.3",
     "numeral": "2.0.6",
     "pouchdb": "8.0.1",
     "uuid": "9.0.0"

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/* Import modules. */
+import { binToHex } from '@nexajs/utils'
+import { decodeAddress } from '@nexajs/address'
+
 useHead({
     title: 'Fairplay — Nexa Games',
     meta: [
@@ -11,8 +15,20 @@ const router = useRouter()
 const playid = ref(null)
 
 const load = async () => {
-    const play = await $fetch(`/api/plays/${playid.value}`)
+    let play
+
+    play = await $fetch(`/api/plays/${playid.value}`)
         .catch(err => console.error(err))
+
+    if (typeof play === 'undefined') {
+        const decoded = decodeAddress(playid.value)
+        const hash = binToHex(decoded.hash)
+        const pubKeyHash = hash.slice(8)
+
+        play = await $fetch(`/api/plays/${pubKeyHash}`)
+            .catch(err => console.error(err))
+        console.log('(re-)PLAY', play)
+    }
     console.log('PLAY', play)
 
     if (play?.id) {
