@@ -47,10 +47,9 @@ export default async (_game, _play, _sender) => {
     // console.log('UPDATE (play) RESPONSE', response)
 
     if (_play.playerJoy === true) {
-
         /* Send Sender (total) winnings. */
         address = _sender.address
-        satoshis = _play.satoshis * _play.payout
+        satoshis = parseInt(_play.satoshis * _play.payout)
         receivers.push({
             address,
             satoshis,
@@ -62,9 +61,7 @@ export default async (_game, _play, _sender) => {
             address,
             satoshis,
         })
-
     } else {
-
         /* Send player (DUST). */
         // NOTE: Blocking DUST transactions to prevent accidental "token" sends.
         address = _sender.address
@@ -121,7 +118,6 @@ export default async (_game, _play, _sender) => {
             address,
             satoshis,
         })
-
     }
 
     const walletPkg = {
