@@ -16,6 +16,9 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 const DUST_LIMIT = 546
 const ESTIMATED_NUM_OUTPUTS = 5
 
+/* Initialize spent coins. */
+const spentCoins = []
+
 /**
  * Handle (Wallet) Queue
  *
@@ -63,25 +66,32 @@ export default async (_queue, _pending) => {
 
         /* Filter out ANY tokens. */
         // FIXME We should probably do something better than this, lol.
+        // unspent = unspent.filter(_unspent => {
+        //     return _unspent.value > DUST_LIMIT
+        // })
+        /* Filter out ANY tokens & spent. */
+        // FIXME We should probably do something better than this, lol.
         unspent = unspent.filter(_unspent => {
-            return _unspent.value > DUST_LIMIT
+            /* Initialize flag. */
+            let isValid = true
+
+            if (_unspent.value <= DUST_LIMIT) {
+                /* Set flag. */
+                isValid = false
+            }
+
+            if (spentCoins.includes(_unspent.outpointHash)) {
+                /* Set flag. */
+                isValid = false
+            }
+
+            /* Return flag. */
+            return isValid
         })
 
         /* Validate unspent outputs. */
         if (unspent.length === 0) {
             return console.error('There are NO unspent outputs available.')
-        }
-
-        // FIXME: This is a bug fix until we update Rostrum `address.listUnspent`.
-        /* Validate (pending) mempool transactions. */
-        const mempool = unspent.find(_unspent=> {
-            return _unspent.height === 0
-        })
-        console.log('MEMPOOL', mempool)
-        /* Validate mempool. */
-        if (mempool) {
-            /* Update unspent. */
-            unspent = [mempool]
         }
 
         /* Build parameters. */
@@ -191,6 +201,14 @@ export default async (_queue, _pending) => {
 
             /* Validate transaction result. */
             if (txResult?.result) {
+                /* Manage coins. */
+                coins.forEach(_coin => {
+                    /* Add hash to spent. */
+                    spentCoins.push(_coin.outpoint)
+
+                    // TODO Add check for MAX spent (eg. 100).
+                })
+
                 latestDb = await walletDb
                     .get(payment.id)
                     .catch(err => console.err(err))
