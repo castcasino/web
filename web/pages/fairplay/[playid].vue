@@ -215,7 +215,7 @@ loadPlay(playid)
             />
 
             <FairplayFeature
-                title="Server (Private) Key Hash"
+                title="Server Entropy (Private Key) Hash"
                 :value="keyHash || 'n/a'"
             />
 
