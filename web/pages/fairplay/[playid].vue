@@ -2,8 +2,9 @@
 /* Import modules. */
 import { binToHex } from '@nexajs/utils'
 import { decodeAddress } from '@nexajs/address'
-import moment from 'moment'
 import formatPosition from './_formatPosition.js'
+import moment from 'moment'
+import numeral from 'numeral'
 import { sha512 } from '@nexajs/crypto'
 
 const route = useRoute()
@@ -66,13 +67,13 @@ const loadPlay = async () => {
     }
 
     if (typeof play.value?.outcome !== 'undefined') {
-        outcome.value = play.value.outcome
+        outcome.value = (play.value.outcome).toFixed(2)
     }
 
     if (typeof play.value?.satoshis !== 'undefined') {
         satoshis.value = play.value.satoshis
 
-        wagerNEX.value = (play.value.satoshis / 100.0)
+        wagerNEX.value = numeral(play.value.satoshis / 100.0).format('0,0.00')
     }
 
     rtp.value = play.value?.rtp + '%'
