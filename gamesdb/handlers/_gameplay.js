@@ -37,6 +37,7 @@ export default async (_game, _play, _sender) => {
         ...latestDb,
         txidem: 'INQUEUE',
         updatedAt: moment().valueOf(),
+        updatedBy: 'GAMEPLAY',
     }
     // console.log('UPDATED (play)', updatedDb)
 

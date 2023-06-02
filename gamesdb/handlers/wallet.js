@@ -235,6 +235,7 @@ export default async (_queue, _pending) => {
                     ...latestDb,
                     txidem: txResult?.result,
                     updatedAt: moment().valueOf(),
+                    updatedBy: 'WALLET',
                 }
                 // console.log('UPDATED (plays)', updatedDb)
 
