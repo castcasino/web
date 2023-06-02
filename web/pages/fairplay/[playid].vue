@@ -178,9 +178,9 @@ loadPlay(playid)
                 v-if="play?.txidem"
                 :to="'https://explorer.nexa.org/tx/' + play.txidem" target="_blank"
             >
-                <FairplayItem
+                <FairplayFeature
 
-                    title="Transaction IDem"
+                    title="Transaction Idem"
                     :value="play.txidem || 'n/a'"
                 />
             </NuxtLink>
@@ -192,7 +192,7 @@ loadPlay(playid)
                 :value="play?.playerid || 'n/a'"
             />
 
-            <FairplayItem
+            <FairplayFeature
                 title="Player Seed"
                 :value="play?.seed"
             />
@@ -214,7 +214,7 @@ loadPlay(playid)
                 :value="play?.mnemonic || 'n/a'"
             />
 
-            <FairplayItem
+            <FairplayFeature
                 title="Server (Private) Key Hash"
                 :value="keyHash || 'n/a'"
             />
