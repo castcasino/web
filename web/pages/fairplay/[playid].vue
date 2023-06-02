@@ -205,11 +205,6 @@ loadPlay(playid)
             />
 
             <FairplayItem
-                title="Server (Private) Key Hash"
-                :value="keyHash || 'n/a'"
-            />
-
-            <FairplayItem
                 title="Entropy"
                 :value="entropy || 'n/a'"
             />
@@ -217,6 +212,11 @@ loadPlay(playid)
             <FairplayItem
                 title="Mnemonic"
                 :value="play?.mnemonic || 'n/a'"
+            />
+
+            <FairplayItem
+                title="Server (Private) Key Hash"
+                :value="keyHash || 'n/a'"
             />
 
         </div>
