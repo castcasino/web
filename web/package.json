@@ -1,6 +1,6 @@
 {
   "name": "nexa-games-web",
-  "version": "23.5.30",
+  "version": "23.6.16",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -13,7 +13,7 @@
     "@nexajs/address": "23.5.25",
     "@nexajs/crypto": "23.5.22",
     "@nexajs/hdnode": "23.5.15",
-    "@nexajs/rostrum": "23.5.25",
+    "@nexajs/rostrum": "23.6.13",
     "@nexajs/utils": "23.5.15",
     "@nexajs/wallet": "23.5.17",
     "@nuxtjs/plausible": "0.2.1",

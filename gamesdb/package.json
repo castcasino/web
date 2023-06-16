@@ -13,7 +13,6 @@
     "@nexajs/crypto": "23.5.22",
     "@nexajs/hdnode": "23.5.15",
     "@nexajs/purse": "23.5.25",
-    "@nexajs/rostrum": "23.6.13",
     "@nexajs/wallet": "23.5.17",
     "moment": "2.29.4",
     "nodemailer": "6.9.3",
