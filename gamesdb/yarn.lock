@@ -255,6 +255,18 @@
     graphql-ws "5.12.0"
     ws "8.13.0"
 
+"@nexajs/address@23.6.21":
+  version "23.6.21"
+  resolved "https://registry.yarnpkg.com/@nexajs/address/-/address-23.6.21.tgz#35247e6745bf53bf10db587e7ee440a066d578d5"
+  integrity sha512-liJZQAD9Rqth1gVapsNXHpz9EiAZblbVR3uE/foRZAWw6Y24kdF1x6n2y0iditpc/9kDNz13yqITs0oYwDp2rQ==
+  dependencies:
+    "@nexajs/rostrum" "23.6.21"
+    big-integer "1.6.51"
+    debug "4.3.4"
+    graphql "16.6.0"
+    graphql-ws "5.12.0"
+    ws "8.13.0"
+
 "@nexajs/blockchain@23.5.15":
   version "23.5.15"
   resolved "https://registry.yarnpkg.com/@nexajs/blockchain/-/blockchain-23.5.15.tgz#ea3078d2a7425e8a3f9154847872572105e99c7c"
@@ -301,6 +313,16 @@
     "@nexajs/utils" "23.5.15"
     debug "4.3.4"
 
+"@nexajs/provider@23.6.21":
+  version "23.6.21"
+  resolved "https://registry.yarnpkg.com/@nexajs/provider/-/provider-23.6.21.tgz#6f7e63b29d42ae0621d74e0dcf5a6a5301a8052b"
+  integrity sha512-qin/4nKNStmt/oq26zsXjofY6O8Y6D0TkgJn0Rp5mxY3Ri05tg+zEarkynurgxbmHXwf8S2M4f4YScN+BD4Eyw==
+  dependencies:
+    debug "4.3.4"
+    events "3.3.0"
+    isomorphic-ws "5.0.0"
+    ws "8.13.0"
+
 "@nexajs/purse@23.5.17":
   version "23.5.17"
   resolved "https://registry.yarnpkg.com/@nexajs/purse/-/purse-23.5.17.tgz#6d899db77bc01327031f55c3201866035bffeb24"
@@ -314,12 +336,12 @@
     events "3.3.0"
     uuid "9.0.0"
 
-"@nexajs/purse@23.5.25":
-  version "23.5.25"
-  resolved "https://registry.yarnpkg.com/@nexajs/purse/-/purse-23.5.25.tgz#c96d5b111ebc6aa48495b47b5b860e9c32e10d3c"
-  integrity sha512-yWPqmZ8X3WZyRl7cRwvjDZMz+7lrI/9jXCUDhzuCAg8QOfqoORaQ2x6XBT1B/5i/67jAoXY2fQQtflbmuKM8Ng==
+"@nexajs/purse@23.6.21":
+  version "23.6.21"
+  resolved "https://registry.yarnpkg.com/@nexajs/purse/-/purse-23.6.21.tgz#c3cacf06b0949126bf0876d73d1afe0cb9a06973"
+  integrity sha512-Yq8n457Rtd0sa/XEQJZ6MuF3ycGauv9bUa7esIiDXChFZNpChgRk0sCH18jjRifu75SqYVPwVgGy1Nk4YwTjAw==
   dependencies:
-    "@nexajs/blockchain" "23.5.15"
+    "@nexajs/provider" "23.6.21"
     "@nexajs/transaction" "23.5.25"
     debug "4.3.4"
     events "3.3.0"
@@ -340,6 +362,17 @@
   version "23.5.19"
   resolved "https://registry.yarnpkg.com/@nexajs/rostrum/-/rostrum-23.5.19.tgz#f652f3cb01145469e534b7e134a29086d533ddb0"
   integrity sha512-Ep/KLlmVa1JxkfDpi5qty5eipMgAxj66ka9em7WHwZxch8UCmBpm8JEpFmDpxoeRneGTkfpkBgf2OOucQyDdqg==
+  dependencies:
+    debug "4.3.4"
+    events "3.3.0"
+    isomorphic-ws "5.0.0"
+    uuid "9.0.0"
+    ws "8.12.1"
+
+"@nexajs/rostrum@23.6.21":
+  version "23.6.21"
+  resolved "https://registry.yarnpkg.com/@nexajs/rostrum/-/rostrum-23.6.21.tgz#a87a45d79644b844d053affd6b825d6b20fce108"
+  integrity sha512-czMS3o1gVXLS5VOk0Izr1KBZnputiAp3F+LxJKTdIczxhn7cGXwxKFgKxjqIIbXBTuzBevj3eiWUfUnTEphLlw==
   dependencies:
     debug "4.3.4"
     events "3.3.0"

@@ -756,12 +756,12 @@
     graphql-ws "5.12.0"
     ws "8.13.0"
 
-"@nexajs/address@23.5.25":
-  version "23.5.25"
-  resolved "https://registry.yarnpkg.com/@nexajs/address/-/address-23.5.25.tgz#09098fcce0921bbbf4cd48f19538892029effa51"
-  integrity sha512-CEfDcwhMn+qck9pAQEYT4cXn3Hq0NNlNSTk9khKFHK8GuXs1j+weWXIFAaIVm5Uep0lf8PkkUJF65vfJSZExFQ==
+"@nexajs/address@23.6.21":
+  version "23.6.21"
+  resolved "https://registry.yarnpkg.com/@nexajs/address/-/address-23.6.21.tgz#35247e6745bf53bf10db587e7ee440a066d578d5"
+  integrity sha512-liJZQAD9Rqth1gVapsNXHpz9EiAZblbVR3uE/foRZAWw6Y24kdF1x6n2y0iditpc/9kDNz13yqITs0oYwDp2rQ==
   dependencies:
-    "@nexajs/rostrum" "23.5.25"
+    "@nexajs/rostrum" "23.6.21"
     big-integer "1.6.51"
     debug "4.3.4"
     graphql "16.6.0"
@@ -838,21 +838,10 @@
     uuid "9.0.0"
     ws "8.12.1"
 
-"@nexajs/rostrum@23.5.25":
-  version "23.5.25"
-  resolved "https://registry.yarnpkg.com/@nexajs/rostrum/-/rostrum-23.5.25.tgz#68751599f6cedad10e358f493992e1f74f7af48d"
-  integrity sha512-PvX+Z1ZCkA6e2Dsht8fRFieOs9SbKKwT5VrZgeOQ5IiysgYSqYNjK2ac0FMWBBe84hZxf29UBpsUvpiadUooXw==
-  dependencies:
-    debug "4.3.4"
-    events "3.3.0"
-    isomorphic-ws "5.0.0"
-    uuid "9.0.0"
-    ws "8.12.1"
-
-"@nexajs/rostrum@23.6.14":
-  version "23.6.14"
-  resolved "https://registry.yarnpkg.com/@nexajs/rostrum/-/rostrum-23.6.14.tgz#0c5372068c55487412a66d1b9ea9060bd738344a"
-  integrity sha512-4ZwmL/UszrM5ZVoLRrZ8ksUK6gmqY6m/cJ6qZTX8gNGQ+/mO8u/Xv65hFEv2zL75VpRM6HGZ1uPC0wUltNHDJA==
+"@nexajs/rostrum@23.6.21":
+  version "23.6.21"
+  resolved "https://registry.yarnpkg.com/@nexajs/rostrum/-/rostrum-23.6.21.tgz#a87a45d79644b844d053affd6b825d6b20fce108"
+  integrity sha512-czMS3o1gVXLS5VOk0Izr1KBZnputiAp3F+LxJKTdIczxhn7cGXwxKFgKxjqIIbXBTuzBevj3eiWUfUnTEphLlw==
   dependencies:
     debug "4.3.4"
     events "3.3.0"

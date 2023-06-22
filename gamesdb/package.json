@@ -1,6 +1,6 @@
 {
   "name": "gamesdb",
-  "version": "23.6.16",
+  "version": "23.6.22",
   "description": "Manages data storage, indexing and broadcast functions for the Games database.",
   "main": "index.js",
   "type": "module",
@@ -9,10 +9,10 @@
   "license": "MIT",
   "dependencies": {
     "@bitauth/libauth": "1.19.1",
-    "@nexajs/address": "23.5.22",
+    "@nexajs/address": "23.6.21",
     "@nexajs/crypto": "23.5.22",
     "@nexajs/hdnode": "23.5.15",
-    "@nexajs/purse": "23.5.25",
+    "@nexajs/purse": "23.6.21",
     "@nexajs/wallet": "23.5.17",
     "moment": "2.29.4",
     "nodemailer": "6.9.3",
