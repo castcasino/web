@@ -1,6 +1,6 @@
 {
   "name": "nexa-games-web",
-  "version": "23.6.22",
+  "version": "23.6.29",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nexajs/address": "23.6.21",
+    "@nexajs/address": "23.6.23",
     "@nexajs/crypto": "23.5.22",
     "@nexajs/hdnode": "23.5.15",
     "@nexajs/rostrum": "23.6.21",
