@@ -67,7 +67,7 @@ export default async (_queue, _pending) => {
         /* Filter out ANY tokens. */
         // FIXME We should probably do something better than this, lol.
         // unspent = unspent.filter(_unspent => {
-        //     return _unspent.value > DUST_LIMIT
+        //     return _unspent.satoshis > DUST_LIMIT
         // })
         /* Filter out ANY tokens & spent. */
         // FIXME We should probably do something better than this, lol.
@@ -75,12 +75,12 @@ export default async (_queue, _pending) => {
             /* Initialize flag. */
             let isValid = true
 
-            if (_unspent.value <= DUST_LIMIT) {
+            if (_unspent.satoshis <= DUST_LIMIT) {
                 /* Set flag. */
                 isValid = false
             }
 
-            if (spentCoins.includes(_unspent.outpointHash)) {
+            if (spentCoins.includes(_unspent.outpoint)) {
                 /* Set flag. */
                 isValid = false
             }
@@ -96,8 +96,8 @@ export default async (_queue, _pending) => {
 
         /* Build parameters. */
         const coins = unspent.map(_unspent => {
-            const outpoint = _unspent.outpointHash
-            const satoshis = _unspent.value
+            const outpoint = _unspent.outpoint
+            const satoshis = _unspent.satoshis
 
             return {
                 outpoint,
@@ -117,8 +117,8 @@ export default async (_queue, _pending) => {
         // console.log('PRIVATE KEY-2', pk2)
 
         const playerCoin = {
-            outpoint: payment.unspent.outpointHash,
-            satoshis: payment.unspent.value,
+            outpoint: payment.unspent.outpoint,
+            satoshis: payment.unspent.satoshis,
             wif: encodePrivateKeyWif({ hash: sha256 }, pk2, 'mainnet'),
         }
         coins.unshift(playerCoin)
