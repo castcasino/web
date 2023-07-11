@@ -10,7 +10,8 @@ const gamesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.CO
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 
 const MIN_PLAY_SATOSHIS = 1000000 // 10,000.00 NEX (~$0.10 as of 2023.5.25)
-const MAX_PLAY_SATOSHIS = 100000000 // 1,000,000.00 NEX (~$10.00 as of 2023.5.25)
+// NOTE: We add 5% to account for variance in spot price calculation.
+const MAX_PLAY_SATOSHIS = 105000000 // 1,050,000.00 NEX (~$10.50 as of 2023.5.25)
 
 
 /**
