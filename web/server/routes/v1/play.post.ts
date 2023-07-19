@@ -35,9 +35,11 @@ export default defineEventHandler(async (event) => {
 
     /* Set vault mnemonic (from env). */
     const vaultMnemonic = process.env.MNEMONIC
+    console.log('VAULT MNEMONIC', vaultMnemonic)
 
     /* Initialize wallet. */
     const vaultWallet = new Wallet(vaultMnemonic)
+    console.log('VAULT WALLET', vaultWallet)
 
     /* Request (receiving) address. */
     const vaultAddress = vaultWallet.address
