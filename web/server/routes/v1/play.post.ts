@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
     const vaultWallet = new Wallet(vaultMnemonic)
     console.log('VAULT WALLET', vaultWallet)
 
-    await sleep(1000)
+    await sleep(100)
 
     /* Request (receiving) address. */
     const vaultAddress = vaultWallet.address
