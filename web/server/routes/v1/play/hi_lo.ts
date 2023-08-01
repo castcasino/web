@@ -137,11 +137,11 @@ export default async (_updatedInfo) => {
         txidem,
         updatedAt: moment().valueOf()
     }
-    // console.log('UPDATED', updated)
+    console.log('UPDATED', updated)
 
     response = await playsDb
         .put(updated)
         .catch(err => console.error(err))
-    // console.log('UPDATED RESPONSE', response)
+    console.log('UPDATED RESPONSE', response)
 
 }
