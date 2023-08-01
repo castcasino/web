@@ -20,6 +20,8 @@ import hiLoHandler from './play/hi_lo.ts'
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
+const sleep = ms => new Promise(r => setTimeout(r, ms))
+
 export default defineEventHandler(async (event) => {
     /* Set (request) body. */
     const body = await readBody(event)
@@ -40,6 +42,8 @@ export default defineEventHandler(async (event) => {
     /* Initialize wallet. */
     const vaultWallet = new Wallet(vaultMnemonic)
     console.log('VAULT WALLET', vaultWallet)
+
+    await sleep(1000)
 
     /* Request (receiving) address. */
     const vaultAddress = vaultWallet.address
