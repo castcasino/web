@@ -135,7 +135,7 @@ const handleWalletQueue = async () => {
     /* Validate rows. */
     if (rows) {
         rows.forEach(_item => {
-            const payment = jsonParse(_item.doc, false)
+            const payment = jsonParse(_item.doc, true)
             console.log('PAYMENT', payment)
 
             if (!walletQueue[payment._id]) {
