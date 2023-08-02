@@ -10,9 +10,17 @@ const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.CO
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
 // TODO Replace with @nexajs/utils
-const jsonParse = (_data) => {
+const jsonParse = (_data, _transform = false) => {
+    let data
+
+    if (!_transform) {
+        data = _data
+    } else {
+        data = JSON.stringify(_data)
+    }
+
     try {
-        return JSON.parse(_data, (key, value) => {
+        return JSON.parse(data, (key, value) => {
             if (typeof value === 'string' && /^\d+n$/.test(value)) {
                 return BigInt(value.slice(0, value.length - 1))
             }
@@ -25,10 +33,18 @@ const jsonParse = (_data) => {
 }
 
 // TODO Replace with @nexajs/utils
-const jsonStringify = (_data) => {
-    return JSON.stringify(_data, (key, value) =>
+const jsonStringify = (_data, _transform = true) => {
+    let data
+
+    data = JSON.stringify(_data, (key, value) =>
         typeof value === 'bigint' ? value.toString() + 'n' : value
     )
+
+    if (!_transform) {
+        data = JSON.parse(data)
+    }
+
+    return data
 }
 
 export default async (_updatedInfo) => {
@@ -151,7 +167,7 @@ export default async (_updatedInfo) => {
     /* Build database update. */
     const updated = {
         ...playData,
-        unspent: jsonStringify(unspent[0]),
+        unspent: jsonStringify(unspent[0], false),
         satoshis: playSatoshis.confirmed + playSatoshis.unconfirmed,
         outcome: playValue,
         playerJoy,
