@@ -13,7 +13,7 @@ const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.CO
 const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
 
 /* Set constants. */
-const DUST_LIMIT = 546
+const DUST_LIMIT = BigInt(546)
 const ESTIMATED_NUM_OUTPUTS = 5
 
 /* Initialize spent coins. */
@@ -44,7 +44,7 @@ export default async (_queue, _pending) => {
 
         const paymentSatoshis = payment.receivers
             .reduce(
-                (totalValue, receiver) => (totalValue + receiver.satoshis), 0
+                (totalValue, receiver) => (totalValue + receiver.satoshis), BigInt(0)
             )
         // console.log('PAYMENT SATOSHIS', paymentSatoshis)
 
@@ -71,23 +71,23 @@ export default async (_queue, _pending) => {
         // })
         /* Filter out ANY tokens & spent. */
         // FIXME We should probably do something better than this, lol.
-        unspent = unspent.filter(_unspent => {
-            /* Initialize flag. */
-            let isValid = true
-
-            if (_unspent.satoshis <= DUST_LIMIT) {
-                /* Set flag. */
-                isValid = false
-            }
-
-            if (spentCoins.includes(_unspent.outpoint)) {
-                /* Set flag. */
-                isValid = false
-            }
-
-            /* Return flag. */
-            return isValid
-        })
+        // unspent = unspent.filter(_unspent => {
+        //     /* Initialize flag. */
+        //     let isValid = true
+        //
+        //     if (_unspent.satoshis <= DUST_LIMIT) {
+        //         /* Set flag. */
+        //         isValid = false
+        //     }
+        //
+        //     if (spentCoins.includes(_unspent.outpoint)) {
+        //         /* Set flag. */
+        //         isValid = false
+        //     }
+        //
+        //     /* Return flag. */
+        //     return isValid
+        // })
 
         /* Validate unspent outputs. */
         if (unspent.length === 0) {
@@ -127,7 +127,7 @@ export default async (_queue, _pending) => {
         /* Calculate the total balance of the unspent outputs. */
         const unspentSatoshis = coins
             .reduce(
-                (totalValue, coin) => (totalValue + coin.satoshis), 0
+                (totalValue, coin) => (totalValue + coin.satoshis), BigInt(0)
             )
         // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
@@ -136,7 +136,7 @@ export default async (_queue, _pending) => {
 
         // NOTE: 150b (per input), 35b (per output), 10b (misc)
         // NOTE: Double the estimate (for safety).
-        const feeEstimate = ((coins.length * 150) + (35 * ESTIMATED_NUM_OUTPUTS) + 10 + (chainData.length / 2)) * 2
+        // const feeEstimate = ((coins.length * 150) + (35 * ESTIMATED_NUM_OUTPUTS) + 10 + (chainData.length / 2)) * 2
         // console.log('FEE ESTIMATE', feeEstimate)
 
         /* Initialize hex data. */
@@ -185,12 +185,12 @@ export default async (_queue, _pending) => {
             /* Validate transaction result. */
             if (txResult?.result) {
                 /* Manage coins. */
-                coins.forEach(_coin => {
-                    /* Add hash to spent. */
-                    spentCoins.push(_coin.outpoint)
-
-                    // TODO Add check for MAX spent (eg. 100).
-                })
+                // coins.forEach(_coin => {
+                //     /* Add hash to spent. */
+                //     spentCoins.push(_coin.outpoint)
+                //
+                //     // TODO Add check for MAX spent (eg. 100).
+                // })
 
                 latestDb = await walletDb
                     .get(payment.id)

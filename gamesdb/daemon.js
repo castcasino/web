@@ -23,12 +23,13 @@ const PLAYS_INTERVAL = 5000
 const WALLET_INTERVAL = 15000
 
 // TODO Replace with @nexajs/utils
-const jsonParse = (_data, _transform = false) => {
+const jsonParse = (_data, _transform = true) => {
     let data
 
-    if (!_transform) {
+    if (_transform) {
         data = _data
     } else {
+        // NOTE: We actually (de-)transform before decoding.
         data = JSON.stringify(_data)
     }
 
@@ -91,7 +92,7 @@ const handlePlaysQueue = async () => {
 
     const pending = Object.keys(playQueue).filter(_playid => {
         /* Set play. */
-        const play = jsonParse(playQueue[_playid], true)
+        const play = jsonParse(playQueue[_playid], false)
         console.log('PLAY', play);
 
         /* Return unprocessed .*/
@@ -135,7 +136,7 @@ const handleWalletQueue = async () => {
     /* Validate rows. */
     if (rows) {
         rows.forEach(_item => {
-            const payment = jsonParse(_item.doc, true)
+            const payment = jsonParse(_item.doc, false)
             console.log('PAYMENT', payment)
 
             if (!walletQueue[payment._id]) {
