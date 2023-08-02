@@ -9,6 +9,21 @@ import { getHmac } from '@nexajs/crypto'
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
+const jsonParse = (_data) => {
+    return JSON.parse(_data, (key, value) => {
+        if (typeof value === 'string' && /^\d+n$/.test(value)) {
+            return BigInt(value.slice(0, value.length - 1))
+        }
+        return value
+    })
+}
+
+const jsonStringify = (_data) => {
+    return JSON.stringify(_data, (key, value) =>
+        typeof value === 'bigint' ? value.toString() + 'n' : value
+    )
+}
+
 export default async (_updatedInfo) => {
     // console.log('PLAY HANDLER', _updatedInfo)
 
@@ -129,7 +144,7 @@ export default async (_updatedInfo) => {
     /* Build database update. */
     const updated = {
         ...playData,
-        unspent: unspent[0],
+        unspent: jsonParse(unspent[0]),
         satoshis: playSatoshis.confirmed + playSatoshis.unconfirmed,
         outcome: playValue,
         playerJoy,

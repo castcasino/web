@@ -33,47 +33,40 @@ export default defineEventHandler(async (event) => {
     // TODO Perform data validation for seed
 
     const treasuryAddress = process.env.TREASURY_ADDRESS
-    console.log('TREASURY ADDRESS', treasuryAddress)
 
     /* Set vault mnemonic (from env). */
     const vaultMnemonic = process.env.MNEMONIC
-    console.log('VAULT MNEMONIC', vaultMnemonic)
 
     /* Initialize wallet. */
     const vaultWallet = new Wallet(vaultMnemonic)
-    console.log('VAULT WALLET', vaultWallet)
 
+    /* Wait for wallet to initialize. */
     await sleep(100)
 
     /* Request (receiving) address. */
     const vaultAddress = vaultWallet.address
-    console.log('VAULT ADDRESS', vaultAddress)
 
     // -------------------------------------------------------------------------
 
     const entropy = binToHex(randomBytes(32))
-    // console.log('ENTROPY', entropy)
 
     /* Calculate mnemonic. */
     const mnemonic = entropyToMnemonic(entropy)
 
     /* Initialize wallet. */
     const wallet = new Wallet(mnemonic)
-    // console.log('WALLET', wallet)
 
     /* Request (receiving) address. */
     const address = wallet.address
-    // console.log('PLAY ADDRESS', address)
 
+    /* Decode address. */
     const decoded = decodeAddress(address)
-    // console.log('DECODED', decoded)
 
+    /* Parse public key hash. */
     const pubKeyHash = binToHex(decoded.hash).slice(8)
-    // console.log('PUBLIC KEY HASH', pubKeyHash)
 
     /* Create play id. */
     const _id = pubKeyHash
-    // console.log('PLAY ID', _id)
 
     /* Start monitoring address. */
     const cleanup = await subscribeAddress(address, hiLoHandler.bind(playerSeed))
