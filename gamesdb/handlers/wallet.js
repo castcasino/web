@@ -183,7 +183,7 @@ export default async (_queue, _pending) => {
         receivers.push({
             address: vaultWallet.address
         })
-        return console.log('\n  Receivers:', receivers)
+        console.log('\n  Receivers:', receivers)
 
         /* Send UTXO request. */
         response = await sendCoin(coins, receivers)
