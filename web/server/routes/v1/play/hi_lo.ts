@@ -151,7 +151,7 @@ export default async (_updatedInfo) => {
     /* Build database update. */
     const updated = {
         ...playData,
-        unspent: jsonParse(unspent[0]),
+        unspent: jsonStringify(unspent[0]),
         satoshis: playSatoshis.confirmed + playSatoshis.unconfirmed,
         outcome: playValue,
         playerJoy,
@@ -159,7 +159,7 @@ export default async (_updatedInfo) => {
         txidem,
         updatedAt: moment().valueOf()
     }
-    console.log('UPDATED', updated)
+    return console.log('UPDATED', updated)
 
     response = await playsDb
         .put(updated)
