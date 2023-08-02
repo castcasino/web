@@ -37,7 +37,8 @@ export default async (_queue, _pending) => {
 
     for (let i = 0; i < _pending.length; i++) {
         const payment = _queue[_pending[i]]
-        // console.log('PAYMENT (pending):', payment)
+        console.log('PAYMENT (pending):', payment)
+        console.log('PAYMENT (pending) receivers:', payment.receivers)
 
         /* Remove (payment) from queue. */
         delete _queue[_pending[i]]

@@ -130,7 +130,10 @@ export default async (_game, _play, _sender) => {
             satoshis,
         })
 
+        /* Set change address. */
         address = vaultWallet.address
+
+        /* Set change receiver. */
         receivers.push({
             address,
         })
