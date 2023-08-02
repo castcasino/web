@@ -175,7 +175,7 @@ export default async (_updatedInfo) => {
         txidem,
         updatedAt: moment().valueOf()
     }
-    return console.log('UPDATED', updated)
+    console.log('UPDATED', updated)
 
     response = await playsDb
         .put(updated)
