@@ -10,29 +10,6 @@ const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.CO
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
 // TODO Replace with @nexajs/utils
-const jsonParse = (_data, _transform = false) => {
-    let data
-
-    if (!_transform) {
-        data = _data
-    } else {
-        data = JSON.stringify(_data)
-    }
-
-    try {
-        return JSON.parse(data, (key, value) => {
-            if (typeof value === 'string' && /^\d+n$/.test(value)) {
-                return BigInt(value.slice(0, value.length - 1))
-            }
-            return value
-        })
-    } catch (err) {
-        console.log('JSON PARSE ERROR!');
-        console.log('ERROR', err)
-    }
-}
-
-// TODO Replace with @nexajs/utils
 const jsonStringify = (_data, _transform = true) => {
     let data
 

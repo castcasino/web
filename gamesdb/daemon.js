@@ -22,6 +22,29 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 const PLAYS_INTERVAL = 5000
 const WALLET_INTERVAL = 15000
 
+// TODO Replace with @nexajs/utils
+const jsonParse = (_data, _transform = false) => {
+    let data
+
+    if (!_transform) {
+        data = _data
+    } else {
+        data = JSON.stringify(_data)
+    }
+
+    try {
+        return JSON.parse(data, (key, value) => {
+            if (typeof value === 'string' && /^\d+n$/.test(value)) {
+                return BigInt(value.slice(0, value.length - 1))
+            }
+            return value
+        })
+    } catch (err) {
+        console.log('JSON PARSE ERROR!');
+        console.log('ERROR', err)
+    }
+}
+
 console.info('\n  Starting Nexa Games daemon...\n')
 
 
@@ -69,6 +92,7 @@ const handlePlaysQueue = async () => {
     const pending = Object.keys(playQueue).filter(_playid => {
         /* Set play. */
         const play = playQueue[_playid]
+        console.log('PLAY', play);
 
         /* Return unprocessed .*/
         return play.txidem === null
