@@ -44,7 +44,7 @@ export default async (_queue, _pending) => {
         delete _queue[_pending[i]]
 
         const paymentSatoshis = payment.receivers
-            .filter(_r => return typeof _r.satoshis === 'bigint')
+            .filter(_r => typeof _r.satoshis === 'bigint')
             .reduce(
                 (totalValue, receiver) => (totalValue + receiver.satoshis), BigInt(0)
             )
