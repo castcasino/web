@@ -16,6 +16,11 @@ const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 const DUST_LIMIT = BigInt(546)
 const ESTIMATED_NUM_OUTPUTS = 5
 
+const VAULT_MNEMONIC = process.env.MNEMONIC
+
+/* Initialize wallet. */
+const vaultWallet = new Wallet(VAULT_MNEMONIC)
+
 /* Initialize spent coins. */
 const spentCoins = []
 
@@ -44,7 +49,6 @@ export default async (_queue, _pending) => {
         delete _queue[_pending[i]]
 
         const paymentSatoshis = payment.receivers
-            .filter(_r => typeof _r.satoshis === 'bigint')
             .reduce(
                 (totalValue, receiver) => (totalValue + receiver.satoshis), BigInt(0)
             )
@@ -174,6 +178,11 @@ export default async (_queue, _pending) => {
                 })
             }
         }
+
+        /* Set change receiver. */
+        receivers.push({
+            address: vaultWallet.address
+        })
         return console.log('\n  Receivers:', receivers)
 
         /* Send UTXO request. */

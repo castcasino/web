@@ -71,14 +71,6 @@ export default async (_game, _play, _sender) => {
             address,
             satoshis,
         })
-
-        /* Set change address. */
-        address = vaultWallet.address
-
-        /* Set change receiver. */
-        receivers.push({
-            address,
-        })
     } else {
         /* Send player (DUST). */
         // NOTE: Blocking DUST transactions to prevent accidental "token" sends.
@@ -128,14 +120,6 @@ export default async (_game, _play, _sender) => {
         receivers.push({
             address,
             satoshis,
-        })
-
-        /* Set change address. */
-        address = vaultWallet.address
-
-        /* Set change receiver. */
-        receivers.push({
-            address,
         })
     }
 
