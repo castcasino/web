@@ -9,15 +9,22 @@ import { getHmac } from '@nexajs/crypto'
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
+// TODO Replace with @nexajs/utils
 const jsonParse = (_data) => {
-    return JSON.parse(_data, (key, value) => {
-        if (typeof value === 'string' && /^\d+n$/.test(value)) {
-            return BigInt(value.slice(0, value.length - 1))
-        }
-        return value
-    })
+    try {
+        return JSON.parse(_data, (key, value) => {
+            if (typeof value === 'string' && /^\d+n$/.test(value)) {
+                return BigInt(value.slice(0, value.length - 1))
+            }
+            return value
+        })
+    } catch (err) {
+        console.log('JSON PARSE ERROR!');
+        console.log('ERROR', err)
+    }
 }
 
+// TODO Replace with @nexajs/utils
 const jsonStringify = (_data) => {
     return JSON.stringify(_data, (key, value) =>
         typeof value === 'bigint' ? value.toString() + 'n' : value
