@@ -91,7 +91,7 @@ const handlePlaysQueue = async () => {
 
     const pending = Object.keys(playQueue).filter(_playid => {
         /* Set play. */
-        const play = playQueue[_playid]
+        const play = jsonParse(playQueue[_playid], true)
         console.log('PLAY', play);
 
         /* Return unprocessed .*/
@@ -135,7 +135,7 @@ const handleWalletQueue = async () => {
     /* Validate rows. */
     if (rows) {
         rows.forEach(_item => {
-            const payment = _item.doc
+            const payment = jsonParse(_item.doc, false)
             console.log('PAYMENT', payment)
 
             if (!walletQueue[payment._id]) {

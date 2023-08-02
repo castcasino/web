@@ -172,27 +172,10 @@ export default async (_queue, _pending) => {
                 })
             }
         }
-
-        const changePayment = payment.receivers.find(_receiver => {
-            return (typeof _receiver.satoshis === 'undefined' || _receiver.satoshis === 0)
-        })
-
-        /* Handle (automatic) change. */
-        if (unspentSatoshis - paymentSatoshis - feeEstimate > DUST_LIMIT) {
-            if (changePayment) {
-                receivers.push({
-                    address: changePayment.address,
-                    satoshis: unspentSatoshis - paymentSatoshis - feeEstimate,
-                })
-            }
-        }
-        console.log('\n  Receivers:', receivers)
-
-        /* Set automatic fee (handling) flag. */
-        const autoFee = false
+        return console.log('\n  Receivers:', receivers)
 
         /* Send UTXO request. */
-        response = await sendCoin(coins, receivers, autoFee)
+        response = await sendCoin(coins, receivers)
         console.log('Send UTXO (response):', response)
 
         try {

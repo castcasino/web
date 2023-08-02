@@ -15,6 +15,21 @@ const VAULT_MNEMONIC = process.env.MNEMONIC
 /* Initialize wallet. */
 const vaultWallet = new Wallet(VAULT_MNEMONIC)
 
+// TODO Replace with @nexajs/utils
+const jsonStringify = (_data, _transform = true) => {
+    let data
+
+    data = JSON.stringify(_data, (key, value) =>
+        typeof value === 'bigint' ? value.toString() + 'n' : value
+    )
+
+    if (!_transform) {
+        data = JSON.parse(data)
+    }
+
+    return data
+}
+
 export default async (_game, _play, _sender) => {
 
     const receivers = []
@@ -49,23 +64,26 @@ export default async (_game, _play, _sender) => {
     if (_play.playerJoy === true) {
         /* Send Sender (total) winnings. */
         address = _sender.address
-        satoshis = parseInt(_play.satoshis * _play.payout)
+
+        satoshis = BigInt(parseInt(_play.satoshis * _play.payout))
+
         receivers.push({
             address,
             satoshis,
         })
 
+        /* Set change address. */
         address = vaultWallet.address
-        satoshis = 0 // change
+
+        /* Set change receiver. */
         receivers.push({
             address,
-            satoshis,
         })
     } else {
         /* Send player (DUST). */
         // NOTE: Blocking DUST transactions to prevent accidental "token" sends.
         address = _sender.address
-        satoshis = 888 // GOOD LUCK!
+        satoshis = BigInt(888) // GOOD LUCK!
         receivers.push({
             address,
             satoshis,
@@ -75,7 +93,7 @@ export default async (_game, _play, _sender) => {
         address = TREASURY_ADDRESS
         rate = GAME_ENGINE_FEE / 100.0
         // console.log('GAME ENGINE RATE', rate)
-        satoshis = parseInt(_play.satoshis * rate)
+        satoshis = BigInt(parseInt(_play.satoshis * rate))
         // console.log('GAME ENGINE SATS', satoshis)
         receivers.push({
             address,
@@ -90,7 +108,7 @@ export default async (_game, _play, _sender) => {
         // console.log('HOUSE RATE', rate)
         take = (_play.satoshis * rate)
         // console.log('HOUSE TAKE', take)
-        satoshis = parseInt(take * (share * 0.01))
+        satoshis = BigInt(parseInt(take * (share * 0.01)))
         // console.log('GAMEMAKERS SATS', satoshis)
         receivers.push({
             address,
@@ -105,7 +123,7 @@ export default async (_game, _play, _sender) => {
         // console.log('HOUSE RATE', rate)
         take = (_play.satoshis * rate)
         // console.log('HOUSE TAKE', take)
-        satoshis = parseInt(take * (share * 0.01))
+        satoshis = BigInt(parseInt(take * (share * 0.01)))
         // console.log('PROMOTERS SATS', satoshis)
         receivers.push({
             address,
@@ -113,10 +131,8 @@ export default async (_game, _play, _sender) => {
         })
 
         address = vaultWallet.address
-        satoshis = 0 // change
         receivers.push({
             address,
-            satoshis,
         })
     }
 
@@ -124,7 +140,7 @@ export default async (_game, _play, _sender) => {
         _id: _play._id,
         entropy: _play.entropy,
         unspent: _play.unspent,
-        receivers,
+        receivers: jsonStringify(receivers, false),
         txidem: null,
         createdAt: moment().valueOf(),
     }
