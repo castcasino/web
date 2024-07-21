@@ -1,18 +1,29 @@
 /* Import modules. */
-import { binToHex } from '@nexajs/utils'
-import { decodeAddress } from '@nexajs/address'
-import { entropyToMnemonic } from '@nexajs/hdnode'
-import moment from 'moment'
-import PouchDB from 'pouchdb'
-import { randomBytes } from '@nexajs/crypto'
-import { sha256 } from '@nexajs/crypto'
-import { sha512 } from '@nexajs/crypto'
-import { subscribeAddress } from '@nexajs/rostrum'
-import { v4 as uuidv4 } from 'uuid'
-import { Wallet } from '@nexajs/wallet'
+import {
+    randomBytes,
+    ripemd160,
+} from '@nexajs/crypto'
 
-/* Libauth helpers. */
-import { instantiateRipemd160 } from '@bitauth/libauth'
+import { decodeAddress } from '@nexajs/address'
+
+import {
+    sha256,
+    sha512,
+} from '@nexajs/crypto'
+
+import { entropyToMnemonic } from '@nexajs/hdnode'
+
+import moment from 'moment'
+
+import PouchDB from 'pouchdb'
+
+import { subscribeAddress } from '@nexajs/rostrum'
+
+import { v4 as uuidv4 } from 'uuid'
+
+import { binToHex } from '@nexajs/utils'
+
+import { Wallet } from '@nexajs/wallet'
 
 import hiLoHandler from './play/hi_lo.ts'
 
@@ -31,22 +42,18 @@ export default defineEventHandler(async (event) => {
     const playerSeed = body?.seed
     console.log('PLAYER SEED', playerSeed)
 
-
     // TODO Perform data validation for seed
 
     const treasuryAddress = process.env.TREASURY_ADDRESS
     console.log('TREASURY ADDRESS', treasuryAddress)
 
-
     /* Set vault mnemonic (from env). */
     const vaultMnemonic = process.env.MNEMONIC
     console.log('MNEMONIC', vaultMnemonic)
 
-
     /* Initialize wallet. */
     const vaultWallet = new Wallet(vaultMnemonic)
     console.log('WALLET', vaultWallet)
-
 
     /* Wait for wallet to initialize. */
     await sleep(100)
@@ -115,10 +122,8 @@ export default defineEventHandler(async (event) => {
         keyHash,
     }
 
-    const ripemd160 = await instantiateRipemd160()
-
     // TODO Calculate "authorization" hash
-    const authHash = binToHex(ripemd160.hash(sha256(JSON.stringify(auth)), 'binary'))
+    const authHash = binToHex(ripemd160(sha256(JSON.stringify(auth)), 'binary'))
 
     /* Build play package. */
     const playPkg = {

@@ -1,8 +1,14 @@
 /* Import modules. */
-import { binToHex, hexToBin, instantiateSha256 } from '@bitauth/libauth' // TODO Replace with NexaJS.
+import {
+    binToHex,
+    hexToBin,
+    randomBytes,
+    sha256,
+} from '@nexajs/crypto'
+
 import { entropyToMnemonic } from '@nexajs/hdnode'
+
 import { defineStore } from 'pinia'
-import { randomBytes } from '@ethersproject/random' // TODO Replace with NexaJS.
 
 /* Set constants. */
 const ENTROPY_BYTES_LENGTH = 32
@@ -99,7 +105,7 @@ export const useProfileStore = defineStore('profile', {
             console.log('FINAL ENTROPY', entropy)
 
             const sha256 = await instantiateSha256()
-            const hashed = sha256.hash(hexToBin(entropy))
+            const hashed = sha256(hexToBin(entropy))
             console.log('HASHED ENTROPY', binToHex(hashed))
 
             /* Set entropy. */

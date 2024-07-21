@@ -3,11 +3,6 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
-/* Libauth helpers. */
-import {
-    instantiateSha256,
-} from '@bitauth/libauth'
-
 /* Import handlers. */
 import handlePlays from './handlers/plays.js'
 import handleWallet from './handlers/wallet.js'

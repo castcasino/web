@@ -1,19 +1,19 @@
 /* Import modules. */
 import { encodeAddress } from '@nexajs/address'
-import { getTransaction } from '@nexajs/rostrum'
-import { binToHex } from '@nexajs/utils'
-import { hexToBin } from '@nexajs/utils'
-import { sha256 } from '@nexajs/crypto'
 
-/* Libauth helpers. */
-import { instantiateRipemd160 } from '@bitauth/libauth'
-const ripemd160 = await instantiateRipemd160()
-
-
-/* Libauth helpers. */
 import {
-    encodeDataPush,
-} from '@bitauth/libauth'
+    ripemd160,
+    sha256,
+} from '@nexajs/crypto'
+
+import { getTransaction } from '@nexajs/rostrum'
+import { encodeDataPush } from '@nexajs/script'
+
+import {
+    binToHex,
+    hexToBin,
+} from '@nexajs/utils'
+
 
 export default async (_unspent) => {
     // const pos = _unspent.pos
@@ -35,14 +35,17 @@ export default async (_unspent) => {
     const scriptPushPubKey = encodeDataPush(publicKey)
     // console.log('SCRIPT PUSH PUBLIC KEY', scriptPushPubKey);
 
-    const publicKeyHash = ripemd160.hash(sha256(scriptPushPubKey))
+    const publicKeyHash = ripemd160(sha256(scriptPushPubKey))
     // console.log('PUBLIC KEY HASH (hex)', binToHex(publicKeyHash))
 
     const pkhScript = hexToBin('17005114' + binToHex(publicKeyHash))
     // console.info('  Public key hash Script:', binToHex(pkhScript))
 
     const address = encodeAddress(
-        'nexa', 'TEMPLATE', pkhScript)
+        'nexa',
+        'TEMPLATE',
+        pkhScript,
+    )
     // console.info('ADDRESS', address)
 
     /* Set sender. */
