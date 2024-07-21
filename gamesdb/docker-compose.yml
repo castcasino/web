@@ -1,24 +1,4 @@
-version: '3.7'
-
 services:
-  gamesdb:
-    build: .
-    image: gamesdb
-    container_name: gamesdb
-    restart: always
-    network_mode: 'host'
-    # ports:
-    #   - '127.0.0.1:3000:3000'
-    environment:
-      - COUCHDB_USER=${COUCHDB_USER}
-      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
-      - MNEMONIC=${MNEMONIC}
-      - TREASURY_ADDRESS=${TREASURY_ADDRESS}
-    logging: # apply better controls to Docker overlay folder
-      driver: 'json-file'
-      options:
-        max-file: '5'
-        max-size: '10m'
   couchdb:
     image: couchdb
     container_name: couchdb
@@ -32,6 +12,26 @@ services:
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
     volumes:
       - ./data:/opt/couchdb/data
+    logging: # apply better controls to Docker overlay folder
+      driver: 'json-file'
+      options:
+        max-file: '5'
+        max-size: '10m'
+  gamesdb:
+    depends_on:
+      - couchdb
+    build: .
+    image: gamesdb
+    container_name: gamesdb
+    restart: unless-stopped
+    network_mode: 'host'
+    # ports:
+    #   - '127.0.0.1:3000:3000'
+    environment:
+      - COUCHDB_USER=${COUCHDB_USER}
+      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
+      - MNEMONIC=${MNEMONIC}
+      - TREASURY_ADDRESS=${TREASURY_ADDRESS}
     logging: # apply better controls to Docker overlay folder
       driver: 'json-file'
       options:

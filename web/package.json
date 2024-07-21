@@ -1,6 +1,6 @@
 {
   "name": "nexa-games-web",
-  "version": "23.8.1",
+  "version": "24.7.21",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -10,23 +10,19 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nexajs/address": "23.7.22",
-    "@nexajs/crypto": "23.5.22",
-    "@nexajs/hdnode": "23.7.26",
-    "@nexajs/rostrum": "23.7.20",
-    "@nexajs/utils": "23.7.22",
-    "@nexajs/wallet": "23.7.30",
     "@nuxtjs/plausible": "0.2.1",
     "@pinia/nuxt": "0.4.7",
     "moment": "2.29.4",
     "numeral": "2.0.6",
-    "nuxt": "3.0.0",
+    "nexajs": "24.7.20",
+    "nuxt": "3.7.4",
     "pinia": "2.0.32",
     "pouchdb": "8.0.1",
     "uuid": "9.0.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.4.1",
-    "@pinia-plugin-persistedstate/nuxt": "1.0.0"
+    "@pinia-plugin-persistedstate/nuxt": "1.0.0",
+    "postcss-custom-properties": "13.3.10"
   }
 }
