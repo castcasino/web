@@ -107,7 +107,6 @@ export const useProfileStore = defineStore('profile', {
             const entropy = myBytes.slice(0, 32) + svrBytes.slice(-32)
             console.log('FINAL ENTROPY', entropy)
 
-            const sha256 = await instantiateSha256()
             const hashed = sha256(hexToBin(entropy))
             console.log('HASHED ENTROPY', binToHex(hashed))
 
