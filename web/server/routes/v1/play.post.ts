@@ -29,16 +29,24 @@ export default defineEventHandler(async (event) => {
     /* Set player seed. */
     // FIXME WE MUST PERFORM PROPER DATA SANITIZATION!!!
     const playerSeed = body?.seed
+    console.log('PLAYER SEED', playerSeed)
+
 
     // TODO Perform data validation for seed
 
     const treasuryAddress = process.env.TREASURY_ADDRESS
+    console.log('TREASURY ADDRESS', treasuryAddress)
+
 
     /* Set vault mnemonic (from env). */
     const vaultMnemonic = process.env.MNEMONIC
+    console.log('MNEMONIC', vaultMnemonic)
+
 
     /* Initialize wallet. */
     const vaultWallet = new Wallet(vaultMnemonic)
+    console.log('WALLET', vaultWallet)
+
 
     /* Wait for wallet to initialize. */
     await sleep(100)
