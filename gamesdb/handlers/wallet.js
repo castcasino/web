@@ -144,10 +144,7 @@ export default async (_queue, _pending) => {
             )
         // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
-        const userData = [
-            `NEXA.games`,
-            payment.id,
-        ]
+        const userData = `NEXA.games~${payment.id}`
         console.log('USER DATA', userData)
 
         /* Initialize hex data. */
