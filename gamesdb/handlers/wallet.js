@@ -5,7 +5,12 @@ import PouchDB from 'pouchdb'
 import { listUnspent } from '@nexajs/address'
 import { sha256 } from '@nexajs/crypto'
 import { encodePrivateKeyWif } from '@nexajs/hdnode'
-import { sendCoin } from '@nexajs/purse'
+
+import {
+    buildCoins,
+    sendCoins,
+} from '@nexajs/purse'
+
 import { encodeNullData } from '@nexajs/script'
 import { hexToBin } from '@nexajs/utils'
 import { Wallet } from '@nexajs/wallet'
@@ -178,7 +183,7 @@ export default async (_queue, _pending) => {
         console.log('\n  Receivers:', receivers)
 
         /* Send UTXO request. */
-        // response = await sendCoin(coins, receivers)
+        // response = await sendCoins(coins, receivers)
         response = await buildCoins(coins, receivers)
         console.log('Send UTXO (response):', response)
 
