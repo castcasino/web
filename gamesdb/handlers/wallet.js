@@ -130,7 +130,7 @@ export default async (_queue, _pending) => {
             wif: encodePrivateKeyWif(pk2, 'mainnet'),
         }
         coins.unshift(playerCoin)
-        // console.log('\n  Coins-2:', coins)
+        console.log('\n  Coins-2:', coins)
 
         /* Calculate the total balance of the unspent outputs. */
         const unspentSatoshis = coins
@@ -178,7 +178,8 @@ export default async (_queue, _pending) => {
         console.log('\n  Receivers:', receivers)
 
         /* Send UTXO request. */
-        response = await sendCoin(coins, receivers)
+        // response = await sendCoin(coins, receivers)
+        response = await buildCoins(coins, receivers)
         console.log('Send UTXO (response):', response)
 
         try {
