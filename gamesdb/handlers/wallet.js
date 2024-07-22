@@ -5,8 +5,9 @@ import PouchDB from 'pouchdb'
 import { listUnspent } from '@nexajs/address'
 import { sha256 } from '@nexajs/crypto'
 import { encodePrivateKeyWif } from '@nexajs/hdnode'
-import { hexToBin } from '@nexajs/utils'
 import { sendCoin } from '@nexajs/purse'
+import { encodeNullData } from '@nexajs/script'
+import { hexToBin } from '@nexajs/utils'
 import { Wallet } from '@nexajs/wallet'
 
 /* Initialize databases. */
