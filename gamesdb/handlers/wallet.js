@@ -148,11 +148,11 @@ export default async (_queue, _pending) => {
             `NEXA.games`,
             payment.id,
         ]
-        // console.log('BLOCKCHAIN DATA', chainData)
+        console.log('USER DATA', userData)
 
         /* Initialize hex data. */
         const nullData = encodeNullData(userData)
-        // console.log('HEX DATA', nullData)
+        console.log('HEX DATA', nullData)
 
         // NOTE: 150b (per input), 35b (per output), 10b (misc)
         // NOTE: Double the estimate (for safety).
@@ -186,7 +186,7 @@ export default async (_queue, _pending) => {
         // response = await sendCoins(coins, receivers)
         response = await buildCoins(coins, receivers)
         // console.log('Send UTXO (response):', response)
-        console.log('BUILD UTXO (raw):', response.raw)
+        return console.log('BUILD UTXO (raw):', response.raw)
 
         try {
             txResult = JSON.parse(response)
