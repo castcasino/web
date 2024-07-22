@@ -167,8 +167,7 @@ export default async (_queue, _pending) => {
         for (let j = 0; j < payment.receivers.length; j++) {
             if (payment.receivers[j].satoshis > DUST_LIMIT) {
                 receivers.push({
-                    // address: payment.receivers[j].address,
-                    address: vaultWallet.address,
+                    address: payment.receivers[j].address,
                     satoshis: payment.receivers[j].satoshis,
                 })
             }
