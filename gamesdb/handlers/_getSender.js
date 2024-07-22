@@ -7,7 +7,11 @@ import {
 } from '@nexajs/crypto'
 
 import { getTransaction } from '@nexajs/rostrum'
-import { encodeDataPush } from '@nexajs/script'
+
+import { 
+    encodeDataPush,
+    OP,
+} from '@nexajs/script'
 
 import {
     binToHex,
@@ -38,13 +42,17 @@ export default async (_unspent) => {
     const publicKeyHash = ripemd160(sha256(scriptPushPubKey))
     // console.log('PUBLIC KEY HASH (hex)', binToHex(publicKeyHash))
 
-    const pkhScript = hexToBin('17005114' + binToHex(publicKeyHash))
-    // console.info('  Public key hash Script:', binToHex(pkhScript))
+    const scriptPubKey = new Uint8Array([
+        OP.ZERO,
+        OP.ONE,
+        ...encodeDataPush(publicKeyHash),
+    ])
+    // console.info('\n  Script Public Key:', binToHex(scriptPubKey))
 
     const address = encodeAddress(
         'nexa',
         'TEMPLATE',
-        pkhScript,
+        scriptPubKey,
     )
     // console.info('ADDRESS', address)
 

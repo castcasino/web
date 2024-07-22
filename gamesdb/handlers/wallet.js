@@ -5,12 +5,7 @@ import PouchDB from 'pouchdb'
 import { listUnspent } from '@nexajs/address'
 import { sha256 } from '@nexajs/crypto'
 import { encodePrivateKeyWif } from '@nexajs/hdnode'
-
-import {
-    buildCoins,
-    sendCoins,
-} from '@nexajs/purse'
-
+import { sendCoin } from '@nexajs/purse'
 import { encodeNullData } from '@nexajs/script'
 import { hexToBin } from '@nexajs/utils'
 import { Wallet } from '@nexajs/wallet'
@@ -135,7 +130,7 @@ export default async (_queue, _pending) => {
             wif: encodePrivateKeyWif(pk2, 'mainnet'),
         }
         coins.unshift(playerCoin)
-        console.log('\n  Coins-2:', coins)
+        // console.log('\n  Coins-2:', coins)
 
         /* Calculate the total balance of the unspent outputs. */
         const unspentSatoshis = coins
@@ -145,11 +140,11 @@ export default async (_queue, _pending) => {
         // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
         const userData = `NEXA.games~${payment.id}`
-        console.log('USER DATA', userData)
+        // console.log('BLOCKCHAIN DATA', chainData)
 
         /* Initialize hex data. */
         const nullData = encodeNullData(userData)
-        console.log('HEX DATA', nullData)
+        // console.log('HEX DATA', nullData)
 
         // NOTE: 150b (per input), 35b (per output), 10b (misc)
         // NOTE: Double the estimate (for safety).
@@ -180,10 +175,8 @@ export default async (_queue, _pending) => {
         console.log('\n  Receivers:', receivers)
 
         /* Send UTXO request. */
-        // response = await sendCoins(coins, receivers)
-        response = await buildCoins(coins, receivers)
-        // console.log('Send UTXO (response):', response)
-        return console.log('BUILD UTXO (raw):', response.raw)
+        response = await sendCoin(coins, receivers)
+        console.log('Send UTXO (response):', response)
 
         try {
             txResult = JSON.parse(response)
