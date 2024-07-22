@@ -185,7 +185,7 @@ export default async (_queue, _pending) => {
         /* Send UTXO request. */
         // response = await sendCoins(coins, receivers)
         response = await buildCoins(coins, receivers)
-        console.log('Send UTXO (response):', response)
+        console.log('BUILD UTXO (response):', response)
 
         try {
             txResult = JSON.parse(response)
