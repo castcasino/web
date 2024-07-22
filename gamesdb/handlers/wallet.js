@@ -1,11 +1,12 @@
 /* Import modules. */
-import { encodePrivateKeyWif } from '@nexajs/hdnode'
-import { hexToBin } from '@nexajs/utils'
-import { listUnspent } from '@nexajs/address'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
-import { sendCoin } from '@nexajs/purse'
+
+import { listUnspent } from '@nexajs/address'
 import { sha256 } from '@nexajs/crypto'
+import { encodePrivateKeyWif } from '@nexajs/hdnode'
+import { hexToBin } from '@nexajs/utils'
+import { sendCoin } from '@nexajs/purse'
 import { Wallet } from '@nexajs/wallet'
 
 /* Initialize databases. */
@@ -67,7 +68,7 @@ export default async (_queue, _pending) => {
         // console.log('UNSPENT', unspent)
 
         /* Encode Private Key WIF. */
-        wif = encodePrivateKeyWif({ hash: sha256 }, wallet.privateKey, 'mainnet')
+        wif = encodePrivateKeyWif(wallet.privateKey, 'mainnet')
         // console.log('PRIVATE KEY (WIF):', wif)
 
         /* Filter out ANY tokens. */
@@ -125,7 +126,7 @@ export default async (_queue, _pending) => {
         const playerCoin = {
             outpoint: payment.unspent.outpoint,
             satoshis: payment.unspent.satoshis,
-            wif: encodePrivateKeyWif({ hash: sha256 }, pk2, 'mainnet'),
+            wif: encodePrivateKeyWif(pk2, 'mainnet'),
         }
         coins.unshift(playerCoin)
         // console.log('\n  Coins-2:', coins)
@@ -137,36 +138,26 @@ export default async (_queue, _pending) => {
             )
         // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
-        const chainData = `NEXA.games~${payment.id}`
+        const userData = [
+            `NEXA.games`,
+            payment.id,
+        ]
         // console.log('BLOCKCHAIN DATA', chainData)
+
+        /* Initialize hex data. */
+        const nullData = encodeNullData(userData)
+        // console.log('HEX DATA', nullData)
 
         // NOTE: 150b (per input), 35b (per output), 10b (misc)
         // NOTE: Double the estimate (for safety).
         // const feeEstimate = ((coins.length * 150) + (35 * ESTIMATED_NUM_OUTPUTS) + 10 + (chainData.length / 2)) * 2
         // console.log('FEE ESTIMATE', feeEstimate)
 
-        /* Initialize hex data. */
-        let hexData = ''
-
-        /* Convert user data (string) to hex. */
-        for (let j = 0; j < chainData.length; j++) {
-            /* Convert to hex code. */
-            let code = chainData.charCodeAt(j).toString(16)
-
-            if (chainData[j] === '~') {
-                code = '09'
-            }
-
-            /* Add hex code to string. */
-            hexData += code
-        }
-        // console.log('HEX DATA', hexData)
-
         // TODO Validate data length is less than OP_RETURN max (220).
 
         /* Add OP_RETURN data. */
         receivers.push({
-            data: hexData,
+            data: nullData,
         })
 
         /* Add value output. */
