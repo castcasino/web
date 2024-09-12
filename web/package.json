@@ -11,18 +11,17 @@
   },
   "dependencies": {
     "@nuxtjs/plausible": "0.2.1",
-    "@pinia/nuxt": "0.4.7",
+    "@pinia/nuxt": "0.5.4",
     "moment": "2.29.4",
     "numeral": "2.0.6",
-    "nexajs": "24.7.20",
-    "nuxt": "3.7.4",
-    "pinia": "2.0.32",
-    "pouchdb": "8.0.1",
-    "uuid": "9.0.0"
+    "nexajs": "24.9.11",
+    "nuxt": "3.12.4",
+    "pinia": "2.2.2",
+    "pouchdb": "9.0.0",
+    "uuid": "10.0.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "6.4.1",
-    "@pinia-plugin-persistedstate/nuxt": "1.0.0",
-    "postcss-custom-properties": "13.3.10"
+    "@pinia-plugin-persistedstate/nuxt": "1.0.0"
   }
 }

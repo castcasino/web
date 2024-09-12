@@ -19,13 +19,13 @@ useHead({
             Strategy
         </h1>
 
-        <p>
+        <div>
             <ul>
                 <li>Martingale</li>
                 <li>Delayed Martingale</li>
                 <li>Paroli</li>
                 <li>D 'Alembert</li>
             </ul>
-        </p>
+        </div>
     </main>
 </template>
