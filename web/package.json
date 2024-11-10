@@ -1,6 +1,6 @@
 {
-  "name": "nexa-games-web",
-  "version": "24.7.21",
+  "name": "cast-casino-web",
+  "version": "24.11.8",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
