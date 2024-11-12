@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /* Import modules. */
-import { binToHex } from '@nexajs/utils'
-import { decodeAddress } from '@nexajs/address'
+// import { binToHex } from '@nexajs/utils'
+// import { decodeAddress } from '@nexajs/address'
 
 useHead({
     title: 'Fairplay — Cast Casino',
