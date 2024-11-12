@@ -8,6 +8,7 @@
   "author": "Ava's DAO developers",
   "license": "MIT",
   "dependencies": {
+    "@neynar/nodejs-sdk": "1.70.0",
     "moment": "2.30.1",
     "nexajs": "24.9.11",
     "nodemailer": "6.9.15",

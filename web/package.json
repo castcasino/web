@@ -15,6 +15,7 @@
     "@nexajs/hdnode": "24.10.1",
     "@nexajs/provider": "24.9.30",
     "@nexajs/utils": "24.7.15",
+    "@neynar/nodejs-sdk": "1.70.0",
     "@nuxtjs/plausible": "0.2.1",
     "@pinia/nuxt": "0.5.4",
     "moment": "2.29.4",
