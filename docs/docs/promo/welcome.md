@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Marketing 101
 
-Let's discover **promoting Nexa Games in less than 5 minutes**.
+Let's discover **promoting Cast Casino in less than 5 minutes**.
 
 ## Getting Started
 

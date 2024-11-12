@@ -139,7 +139,7 @@ export default async (_queue, _pending) => {
             )
         // console.log('UNSPENT SATOSHIS', unspentSatoshis)
 
-        const userData = `NEXA.games~${payment.id}`
+        const userData = `cast.casino~${payment.id}`
         // console.log('BLOCKCHAIN DATA', chainData)
 
         /* Initialize hex data. */

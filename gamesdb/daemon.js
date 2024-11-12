@@ -41,7 +41,7 @@ const jsonParse = (_data, _transform = true) => {
     }
 }
 
-console.info('\n  Starting Nexa Games daemon...\n')
+console.info('\n  Starting Cast Casino daemon...\n')
 
 
 /**

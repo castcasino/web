@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'Players — Nexa Games',
+    title: 'Players — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
@@ -39,7 +39,7 @@ useHead({
             </h2>
 
             <p>
-                Most Nexa Games are HTML5-compatible and can be played from EVERY device, including:
+                Most Cast Casino are HTML5-compatible and can be played from EVERY device, including:
             </p>
 
             <ol class="list-decimal pl-10">

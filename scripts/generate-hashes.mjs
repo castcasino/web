@@ -25,7 +25,7 @@ const numHashes = 100
 
 const timestamp = moment().utc().format('LLLL') + ' UTC'
 
-const header = `Nexa Games Hashes
+const header = `Cast Casino Hashes
 Generated: ${timestamp}
 Hash count: ${numeral(numHashes).format('0,0')}
 Epoch: ${epoch}

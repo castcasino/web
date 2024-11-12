@@ -8,7 +8,7 @@
             <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-12">
                 <div class="flex justify-start lg:w-0 lg:flex-1">
                     <NuxtLink to="/">
-                        <span class="sr-only">Nexa Games</span>
+                        <span class="sr-only">Cast Casino</span>
                         <img class="h-12 w-auto sm:h-14" src="~/assets/icon.png" alt="" />
                     </NuxtLink>
                 </div>

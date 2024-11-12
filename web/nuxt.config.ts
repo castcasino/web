@@ -6,7 +6,7 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
-            title: 'Nexa Games — 100% Provably Fair Gaming',
+            title: 'Cast Casino — 100% Provably Fair Gaming',
             meta: [
                 { name: 'description', content: 'The first fairplay, permissionless real-money gaming network.' },
             ],
@@ -23,7 +23,6 @@ export default defineNuxtConfig({
 
         /* Pinia */
         '@pinia/nuxt',
-        '@pinia-plugin-persistedstate/nuxt',
 
         /* Plausible */
         '@nuxtjs/plausible',
@@ -39,5 +38,5 @@ export default defineNuxtConfig({
     },
 
     /* Set compatibility date. */
-    compatibilityDate: '2024-09-11',
+    compatibilityDate: '2024-11-12',
 })

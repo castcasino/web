@@ -12,7 +12,7 @@ const Profile = useProfileStore()
 const System = useSystemStore()
 
 useHead({
-    title: 'Manager Login — Nexa Games',
+    title: 'Manager Login — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],

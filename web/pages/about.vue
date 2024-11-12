@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'About — Nexa Games',
+    title: 'About — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
@@ -10,7 +10,7 @@ useHead({
 <template>
     <main class="max-w-5xl mx-auto my-10">
         <h1 class="text-5xl font-medium">
-            About Nexa Games
+            About Cast Casino
         </h1>
 
         <p>

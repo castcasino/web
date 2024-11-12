@@ -1,7 +1,7 @@
 {
   "name": "nexa-games-graphql",
   "version": "24.7.21",
-  "description": "Manages GraphQL requests for Nexa Games.",
+  "description": "Manages GraphQL requests for Cast Casino.",
   "main": "index.js",
   "type": "module",
   "repository": "https://repo.hos.im/nyusternie/nexa-games",

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'Bankers — Nexa Games',
+    title: 'Bankers — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
@@ -24,7 +24,7 @@ useHead({
                 </h2>
 
                 <p>
-                    The top class of NFT offered in the Banking sector of Nexa Games.
+                    The top class of NFT offered in the Banking sector of Cast Casino.
                 </p>
 
                 <ol class="pl-10 list-disc">
@@ -40,7 +40,7 @@ useHead({
                 </h2>
 
                 <p>
-                    The standard class of NFT offered in the Banking sector of Nexa Games.
+                    The standard class of NFT offered in the Banking sector of Cast Casino.
                 </p>
 
                 <ol class="pl-10 list-disc">

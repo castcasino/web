@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useHead({
-    title: 'Nexa Games — Casual Blockchain Gaming',
+    title: 'Cast Casino — Casual Blockchain Gaming',
     meta: [
-        { name: 'description', content: 'Nexa Games offers a premium blockchain gaming experience for Players over 18+.' }
+        { name: 'description', content: 'Cast Casino offers a premium blockchain gaming experience for Players over 18+.' }
     ],
 })
 </script>
@@ -28,7 +28,7 @@ useHead({
                         <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
                             <h1 class="text-center font-bold tracking-tight">
                                 <span class="block text-white text-5xl lg:text-8xl">
-                                    Nexa Games
+                                    Cast Casino
                                 </span>
 
                                 <span class="block text-indigo-200 text-4xl sm:text-5xl lg:text-6xl">
@@ -160,7 +160,7 @@ useHead({
                                     </p>
 
                                     <p class="mt-4 text-lg text-gray-500">
-                                        The <span class="font-medium text-indigo-500">Nexa Games Peer-review Network (NGPN)</span> allows our Players to receive the MOST up-to-date and accurate safety &amp; security assurances from the MOST trusted names in Crypto gaming.
+                                        The <span class="font-medium text-indigo-500">Cast Casino Peer-review Network (NGPN)</span> allows our Players to receive the MOST up-to-date and accurate safety &amp; security assurances from the MOST trusted names in Crypto gaming.
                                     </p>
 
                                     <div class="mt-6">
@@ -230,7 +230,7 @@ useHead({
                         </p>
 
                         <p class="mt-5 text-lg text-gray-300">
-                            We want you to continue building your wildest dreams; and that's why Nexa Games offers a comprehensive suite of monetization tools &amp; services to best suit your individual/team's needs.
+                            We want you to continue building your wildest dreams; and that's why Cast Casino offers a comprehensive suite of monetization tools &amp; services to best suit your individual/team's needs.
                         </p>
                         <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
                             <p>
@@ -278,7 +278,7 @@ useHead({
                             Browse the games
                         </NuxtLink>
 
-                        <NuxtLink to="https://docs.nexa.games" target="_blank" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-50 px-4 py-3 text-2xl font-medium text-indigo-800 shadow-sm hover:bg-indigo-100">
+                        <NuxtLink to="https://docs.cast.casino" target="_blank" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-50 px-4 py-3 text-2xl font-medium text-indigo-800 shadow-sm hover:bg-indigo-100">
                             Learn more
                         </NuxtLink>
                     </div>

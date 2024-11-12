@@ -1,6 +1,6 @@
-# Nexa Games
+# Cast Casino
 
-### https://nexa.games
+### https://cast.casino
 
 Premier community and game engine for monetizing all levels of gamemakers and their projects/teams using provably fair micro-wagers.
 
@@ -11,12 +11,12 @@ https://repo.hos.im/nyusternie/nexa-games
 
 ## Mini Games
 
-The easiest way to integrate an existing game with Nexa Games is through our library of mini games. These are "drop-in" widgets that come with everything pre-packaged for your players.
+The easiest way to integrate an existing game with Cast Casino is through our library of mini games. These are "drop-in" widgets that come with everything pre-packaged for your players.
 
 
 ## Virtual Machine
 
-The Nexa Games Engine (NGE) is a cross-app-chain, high-throughput virtual machine run by the Validators that power & secure the network.
+The Cast Casino Engine (NGE) is a cross-app-chain, high-throughput virtual machine run by the Validators that power & secure the network.
 
 ### Supported Appchain Networks
 

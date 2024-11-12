@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Banking 101
 
-Let's discover **Nexa Games in less than 5 minutes**.
+Let's discover **Cast Casino in less than 5 minutes**.
 
 ## Getting Started
 

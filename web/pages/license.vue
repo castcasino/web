@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'License — Nexa Games',
+    title: 'License — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
@@ -14,7 +14,7 @@ useHead({
         </h1>
 
         <p>
-            Nexa Games (formerly Coincun) is licensed for real-money gaming by the Costa Rica Gaming Commission.
+            Cast Casino (formerly Coincun) is licensed for real-money gaming by the Costa Rica Gaming Commission.
         </p>
     </main>
 </template>

@@ -4,7 +4,7 @@ import { binToHex } from '@nexajs/utils'
 import { decodeAddress } from '@nexajs/address'
 
 useHead({
-    title: 'Fairplay — Nexa Games',
+    title: 'Fairplay — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],

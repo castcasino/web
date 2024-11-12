@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'Gamemakers — Nexa Games',
+    title: 'Gamemakers — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
@@ -24,8 +24,8 @@ useHead({
 
             <pre class="my-3 w-fit px-10 py-5 text-lg font-mono font-medium bg-gray-200 border-2 border-gray-400 rounded-lg shadow">dev@workspace: <span class="font-bold">npm create nexa</span></pre>
 
-            <NuxtLink to="https://docs.nexa.games/maker/build-a-game-from-scratch" target="_blank" class="text-blue-500 font-medium hover:underline">
-                https://docs.nexa.games/maker/build-a-game-from-scratch
+            <NuxtLink to="https://docs.cast.casino/maker/build-a-game-from-scratch" target="_blank" class="text-blue-500 font-medium hover:underline">
+                https://docs.cast.casino/maker/build-a-game-from-scratch
             </NuxtLink>
         </section>
     </main>

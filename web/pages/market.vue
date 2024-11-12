@@ -6,7 +6,7 @@ import { useSystemStore } from '@/stores/system'
 const System = useSystemStore()
 
 useHead({
-    title: 'Marketplace — Nexa Games',
+    title: 'Marketplace — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],

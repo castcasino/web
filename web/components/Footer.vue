@@ -36,7 +36,7 @@
                                 </li>
 
                                 <li>
-                                    <NuxtLink to="https://docs.nexa.games/backup" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
+                                    <NuxtLink to="https://docs.cast.casino/backup" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
                                         Wallet Backup
                                     </NuxtLink>
                                 </li>
@@ -68,7 +68,7 @@
                                 </li>
 
                                 <li>
-                                    <NuxtLink to="https://docs.nexa.games" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
+                                    <NuxtLink to="https://docs.cast.casino" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
                                         Documentation
                                     </NuxtLink>
                                 </li>
@@ -215,7 +215,7 @@
                 </div>
 
                 <p class="mt-8 text-sm text-center sm:text-base sm:text-left text-gray-400 md:order-1 md:mt-0">
-                    &copy; 2023 Nexa Games DAO. All rights reserved.
+                    &copy; 2023 Cast Casino DAO. All rights reserved.
                 </p>
             </div>
         </div>

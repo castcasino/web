@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Discover Nexa Gaming',
   tagline: 'Fairplay Is Guaranteed!',
-  url: 'https://docs.nexa.games',
+  url: 'https://docs.cast.casino',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -73,7 +73,7 @@ const config = {
             label: 'For Promoters',
           },
           {
-            href: 'https://nexa.games/gallery',
+            href: 'https://cast.casino/gallery',
             label: 'Browse the Games',
             position: 'right',
           },
@@ -109,7 +109,7 @@ const config = {
             items: [
               {
                 label: 'Games Gallery',
-                to: 'https://nexa.games/gallery',
+                to: 'https://cast.casino/gallery',
               },
               {
                 label: 'GitHub',
@@ -118,7 +118,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Nexa Games DAO.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Cast Casino DAO.`,
       },
       prism: {
         theme: lightCodeTheme,

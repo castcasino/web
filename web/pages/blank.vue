@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'Blank — Nexa Games',
+    title: 'Blank — Cast Casino',
     meta: [
         { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
     ],
