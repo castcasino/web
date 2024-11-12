@@ -4,9 +4,9 @@ services:
     image: app
     container_name: app
     restart: unless-stopped
-    network_mode: 'host'
-    # ports:
-    #   - '127.0.0.1:3000:3000'   # use with proxy server (eg. Nginx)
+    # network_mode: 'host'
+    ports:
+      - '127.0.0.1:3000:3000'   # use with proxy server (eg. Nginx)
     environment:
       - COUCHDB_USER=${COUCHDB_USER} # change this to match your system's ENV
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD} # change this to match your system's ENV

@@ -14,7 +14,7 @@
     "@pinia/nuxt": "0.5.4",
     "moment": "2.29.4",
     "numeral": "2.0.6",
-    "nexajs": "24.9.11",
+    "nexajs": "24.10.4",
     "nuxt": "3.12.4",
     "pinia": "2.2.2",
     "pouchdb": "9.0.0",
