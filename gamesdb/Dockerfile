@@ -1,17 +1,17 @@
-FROM node:20-slim
+FROM node:22-alpine
 
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+# Set the working directory to /app
+WORKDIR /app
 
-RUN apt update -y
-RUN apt upgrade -y
-RUN apt install clang cmake build-essential -y
+ENV PATH /app/node_modules/.bin:$PATH
 
-COPY package.json /usr/src/app/package.json
+# Install packages
+#RUN apk add --no-cache <package_name>
+
+COPY package.json /app/package.json
 RUN yarn install --silent
 
-COPY . /usr/src/app
+COPY . /app
 #RUN yarn run build
 
 #EXPOSE 3000

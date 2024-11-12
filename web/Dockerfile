@@ -1,13 +1,17 @@
-FROM node:22-slim
+FROM node:22-alpine
 
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
-ENV PATH /usr/src/app/node_modules/.bin:$PATH
+# Set the working directory to /app
+WORKDIR /app
 
-COPY package.json /usr/src/app/package.json
+ENV PATH /app/node_modules/.bin:$PATH
+
+# Install packages
+#RUN apk add --no-cache <package_name>
+
+COPY package.json /app/package.json
 RUN yarn install --silent
 
-COPY . /usr/src/app
+COPY . /app
 RUN yarn run build
 
 EXPOSE 3000
