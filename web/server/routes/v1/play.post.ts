@@ -17,13 +17,13 @@ import moment from 'moment'
 
 import PouchDB from 'pouchdb'
 
-import { subscribeAddress } from '@nexajs/rostrum'
+import { subscribeAddress } from '@nexajs/provider'
 
 import { v4 as uuidv4 } from 'uuid'
 
 import { binToHex } from '@nexajs/utils'
 
-import { Wallet } from '@nexajs/wallet'
+// import { Wallet } from '@nexajs/wallet'
 
 import hiLoHandler from './play/hi_lo.ts'
 

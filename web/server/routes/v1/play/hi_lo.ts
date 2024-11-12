@@ -1,5 +1,5 @@
 /* Import modules. */
-import { getAddressBalance } from '@nexajs/rostrum'
+import { getAddressBalance } from '@nexajs/provider'
 import { listUnspent } from '@nexajs/address'
 import moment from 'moment'
 import PouchDB from 'pouchdb'

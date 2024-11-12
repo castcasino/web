@@ -10,18 +10,22 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nexajs/address": "24.10.1",
+    "@nexajs/crypto": "24.9.5",
+    "@nexajs/hdnode": "24.10.1",
+    "@nexajs/provider": "24.9.30",
+    "@nexajs/utils": "24.7.15",
     "@nuxtjs/plausible": "0.2.1",
     "@pinia/nuxt": "0.5.4",
     "moment": "2.29.4",
     "numeral": "2.0.6",
-    "nexajs": "24.10.4",
     "nuxt": "3.12.4",
     "pinia": "2.2.2",
     "pouchdb": "9.0.0",
     "uuid": "10.0.0"
   },
   "devDependencies": {
-      "@nuxtjs/i18n": "8.3.3",
-      "@nuxtjs/tailwindcss": "6.12.1"
+    "@nuxtjs/i18n": "8.3.3",
+    "@nuxtjs/tailwindcss": "6.12.1"
   }
 }

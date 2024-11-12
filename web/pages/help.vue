@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getAddressBalance } from '@nexajs/rostrum'
+import { getAddressBalance } from '@nexajs/provider'
 import { ref } from 'vue'
 
 /* Initialize stores. */
