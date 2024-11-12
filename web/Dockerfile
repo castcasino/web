@@ -8,7 +8,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 # Install packages
 #RUN apk add --no-cache <package_name>
 
-COPY package.json /app/package.json
+COPY package.json yarn.lock /app/
 RUN yarn install --silent
 
 COPY . /app
