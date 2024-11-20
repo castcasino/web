@@ -16,6 +16,36 @@ import { useSystemStore } from '@/stores/system'
 /* Initialize System. */
 const System = useSystemStore()
 
+const updateParent = async () => {
+    // TODO
+    return
+
+    /* Initialize locals. */
+    let cast
+    let data
+    let embeds
+    let text
+    let type
+
+    /* Set (cast) type. */
+    type = 'createCast'
+
+    /* Set (cast) text. */
+    text = `NYC pizza enjoyers, we need your input on last night's tasting:`
+
+    /* Set (cast) embeds. */
+    embeds = [ 'https://polls.example.com/frame/1' ]
+
+    /* Build cast. */
+    cast = { text, embeds }
+
+    /* Build (message) data. */
+    data = { cast }
+
+    /* Send message to parent (window). */
+    window.parent.postMessage({ type, data }, '*')
+}
+
 // onMounted(() => {
 //     console.log('Mounted!')
 //     // Now it's safe to perform setup operations.

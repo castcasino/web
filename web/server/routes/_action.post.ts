@@ -1,5 +1,6 @@
 export default defineEventHandler((event) => {
     /* Initialize locals. */
+    let action
     let form
 
     /* Build form. */
