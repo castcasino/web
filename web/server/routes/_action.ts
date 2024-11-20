@@ -9,6 +9,6 @@ export default defineEventHandler((event) => {
         url: 'https://cast.casino/app/creator',
     }
 
-    /* Return statistics. */
-    return stats
+    /* Return form. */
+    return form
 })
