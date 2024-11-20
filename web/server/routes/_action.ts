@@ -6,7 +6,7 @@ export default defineEventHandler((event) => {
     form = {
         type: 'form',
         title: 'Game Creator',
-        url: 'https://cast.casino/creator',
+        url: 'https://cast.casino/app/creator',
     }
 
     /* Return statistics. */
