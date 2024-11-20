@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+    layout: 'app',
+})
+
 useHead({
     title: 'Game Creator — Cast Casino',
     meta: [
