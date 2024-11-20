@@ -24,6 +24,7 @@ export default defineEventHandler((event) => {
         imageUrl: 'https://cast.casino/favicon.png',
         action: {
             type: 'post',
+            postUrl: 'https://cast.casino/_action',
         }
     }
 
