@@ -21,7 +21,7 @@ export default defineEventHandler((event) => {
         icon: 'ruby', // https://docs.farcaster.xyz/reference/actions/spec#valid-icons
         description: `Casual (Real-money) Gaming`,
         aboutUrl: 'https://cast.casino/about',
-        imageUrl: 'https://cast.casino/icon.png',
+        imageUrl: 'https://cast.casino/favicon.png',
         action: {
             type: 'post',
         }
