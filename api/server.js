@@ -10,7 +10,7 @@ import routesSession from './routes/session.js'
 
 /* Set constants. */
 const HOST = process.env.HOST || '127.0.0.1'
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 
 /* Initialize application. */
 const app = express()

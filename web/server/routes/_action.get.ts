@@ -4,9 +4,9 @@ export default defineEventHandler((event) => {
 
     /* Build action. */
     action = {
-        name: `Cast Casino`,
-        icon: 'ruby', // https://docs.farcaster.xyz/reference/actions/spec#valid-icons
-        description: `Casual (Real-money) Gaming`,
+        name: `Cast 🎰 Casino`,
+        icon: 'organization', // https://docs.farcaster.xyz/reference/actions/spec#valid-icons
+        description: `Create Casual (Real-money) Games`,
         aboutUrl: 'https://cast.casino/about',
         action: {
             type: 'post',
@@ -17,9 +17,9 @@ export default defineEventHandler((event) => {
     /* Build (composer) action. */
     composerAction = {
         type: 'composer',
-        name: `Cast Casino`,
-        icon: 'ruby', // https://docs.farcaster.xyz/reference/actions/spec#valid-icons
-        description: `Casual (Real-money) Gaming`,
+        name: `Cast 🎰 Casino`,
+        icon: 'organization', // https://docs.farcaster.xyz/reference/actions/spec#valid-icons
+        description: `Create Casual (Real-money) Games`,
         aboutUrl: 'https://cast.casino/about',
         imageUrl: 'https://cast.casino/favicon.png',
         action: {
