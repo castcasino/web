@@ -32,7 +32,7 @@ useHead({
                                 </span>
 
                                 <span class="block text-indigo-200 text-4xl sm:text-5xl lg:text-6xl">
-                                    Real-money Blockchain Gaming
+                                    Casual &amp; Provably Fair Gaming
                                 </span>
                             </h1>
 

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
-            title: 'Cast Casino — 100% Provably Fair Gaming',
+            title: 'Cast Casino — Casual & Provably Fair Gaming',
             meta: [
                 { name: 'description', content: 'The first fairplay, permissionless real-money gaming network.' },
             ],
@@ -38,5 +38,5 @@ export default defineNuxtConfig({
     },
 
     /* Set compatibility date. */
-    compatibilityDate: '2024-11-12',
+    compatibilityDate: '2024-12-5',
 })
