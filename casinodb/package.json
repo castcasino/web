@@ -1,5 +1,5 @@
 {
-  "name": "gamesdb",
+  "name": "casinodb",
   "version": "24.9.12",
   "description": "Manages data storage, indexing and broadcast functions for the Games database.",
   "main": "index.js",
