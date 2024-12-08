@@ -1,13 +1,28 @@
-# Sample Hardhat Project
+# Cast Casino Contracts
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+Official repository for ALL Cast Casino EVM-compatible contracts.
 
-Try running some of the following tasks:
+__Our supporting networks include:__
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
-```
+1. Avalanche | AVAX
+2. Base | BASE
+2. Binance Smart Chain | BSC
+3. Degen | DEGEN
+3. Ethereum | ETH
+4. Fantom | FTM
+5. Polygon | MATIC
+
+## CastCasinoDb
+
+This is an __[Eternal Database](https://blog.colony.io/writing-upgradeable-contracts-in-solidity-6743f0eecc88)__ that provides a sustainable storage solution for use throughout the upgrade lifecycle of managing contracts.
+
+_NOTE: We've deployed these databases to ALL of our supporting networks._
+
+__Base | BASE__
+
+- Mainnet - __[0x4fD22578B85dC2bd70532D6C63be9F7925b4167f](https://basescan.org/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f#code)__
+- Sepolia - __[0x4fD22578B85dC2bd70532D6C63be9F7925b4167f](https://sepolia.basescan.org/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f#code)__
+
+__Degen | DEGEN__
+
+- Mainnet - __[0x4fD22578B85dC2bd70532D6C63be9F7925b4167f](https://explorer.degen.tips/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f?tab=contract)__
