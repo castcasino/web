@@ -1,8 +1,8 @@
 <script setup lang="ts">
 useHead({
-    title: 'Gallery — Nexa Gallery',
+    title: 'Gallery — Casino Gallery',
     meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
+        { name: 'description', content: 'Casino Gaming offers a revolutionary blockchain experience.' }
     ],
 })
 </script>
@@ -14,8 +14,8 @@ useHead({
         </h1>
 
         <section class="p-5 bg-gray-100">
-            <NuxtLink to="https://wallydice.com" target="_blank" class="">
-                <h2 class="text-xl font-medium hover:underline">Wally Dice</h2>
+            <NuxtLink to="https://cast.poker" target="_blank" class="">
+                <h2 class="text-xl font-medium hover:underline">Cast Poker</h2>
             </NuxtLink>
 
         </section>
