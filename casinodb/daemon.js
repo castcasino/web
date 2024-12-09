@@ -179,7 +179,7 @@ const _handleBaseBlock = async (_block) => {
         numTxs: _block.transactions.length,
         createdAt: moment().unix(),
     }
-// console.log('DB PACKAGE', pkg)
+console.log('DB PACKAGE', pkg)
 
     blocksBaseDb
         .put(pkg)
@@ -191,6 +191,7 @@ const _handleBaseBlock = async (_block) => {
 
     idx.height = _block.number.toString()
     idx.updateAt = moment().unix()
+console.log('NEW IDX', idx)
 
     systemDb
         .put(idx)
