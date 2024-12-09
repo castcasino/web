@@ -170,21 +170,26 @@ const handleWalletQueue = async () => {
 }
 
 const _handleBaseBlock = async (_block) => {
-    console.log('NEW BASE BLOCK', _block)
+// console.log('NEW BASE BLOCK', _block)
 
-    blocksBaseDb.put({
+    const pkg = {
         _id: _block.number.toString(),
         hash: _block.hash,
         timestamp: _block.timestamp,
         numTxs: _block.transactions.length,
         createdAt: moment().unix(),
-    })
+    }
+// console.log('DB PACKAGE', pkg)
+
+    blocksBaseDb
+        .put(pkg)
+        .catch(err => console.error(err))
 
     const idx = await systemDb.get('idx_base')
         .catch(err => console.error(err))
-    console.log('IDX', idx)
+// console.log('IDX', idx)
 
-    idx.height = _block.number
+    idx.height = _block.number.toString()
     idx.updateAt = moment().unix()
 
     systemDb
