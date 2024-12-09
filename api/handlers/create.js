@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 const TODAY = moment().format('YYYYMMDD')
 
 /* Initialize databases. */
-const tablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/tables`)
+const tablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
 
 export default async (_req, _res) => {
     /* Initialize locals. */
@@ -33,8 +33,8 @@ console.log('SESSION ID', sessionid)
         /* Generate new ID. */
         id = uuidv4()
 
-        /* Set (pending) status. */
-        status = 'pending'
+        /* Set (waiting) status. */
+        status = 'waiting'
 
         /* Generate timestamp (in milliseconds). */
         createdAt = moment().unix()
