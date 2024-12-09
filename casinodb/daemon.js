@@ -10,8 +10,8 @@ import handleWallet from './handlers/wallet.js'
 /* Initialize databases. */
 const errorsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/errors`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
-const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
-const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
+// const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
+// const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
 
 /* Set constants. */
 const PLAYS_INTERVAL = 5000
@@ -165,7 +165,7 @@ const handleWalletQueue = async () => {
 ;(async () => {
 // handlePlaysQueue()
 // handleWalletQueue()
-// return
+return
     setInterval(() => {
         console.log('Managing Plays queue...')
         handlePlaysQueue()
