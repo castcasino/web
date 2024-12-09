@@ -34,7 +34,7 @@ console.log('SESSION ID', sessionid)
         id = uuidv4()
 
         /* Set (waiting) status. */
-        status = 'waiting'
+        status = 'seating'
 
         /* Generate timestamp (in milliseconds). */
         createdAt = moment().unix()
