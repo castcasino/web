@@ -70,7 +70,7 @@ console.log('BODY', body)
         }
     }
 
-return res.json({ we: 'done!' })
+return _res.json({ we: 'done!' })
 
     /* Validate headers. */
     if (headers) {
