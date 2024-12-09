@@ -191,7 +191,7 @@ const _handleBaseBlock = async (_block) => {
 
     idx.height = _block.number.toString()
     idx.updatedAt = moment().unix()
-console.log('NEW IDX', idx)
+// console.log('NEW IDX', idx)
 
     systemDb
         .put(idx)
