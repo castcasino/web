@@ -7,8 +7,10 @@ import { v4 as uuidv4 } from 'uuid'
 import handlePlays from './handlers/plays.js'
 import handleWallet from './handlers/wallet.js'
 
-/* Import blockchain client. */
-import { publicClient } from './client.js'
+/* Import blockchain clients. */
+import { baseClient } from './client/base.js'
+import { degenClient } from './client/degen.js'
+import { ethClient } from './client/eth.js'
 
 /* Initialize databases. */
 const errorsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/errors`)
@@ -172,12 +174,12 @@ const _handleBlock = async (_block) => {
 // handlePlaysQueue()
 // handleWalletQueue()
 
-const unwatch = publicClient
+const unwatchBase = baseClient
     .watchBlocks({ onBlock: _handleBlock })
 console.log('UNWATCH', unwatch)
 
 setTimeout(() => {
-    unwatch()
+    unwatchBase()
     console.log('STOPPED WATCHING!')
 }, 60000)
 
