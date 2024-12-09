@@ -176,7 +176,7 @@ const _handleBlock = async (_block) => {
 
 const unwatchBase = baseClient
     .watchBlocks({ onBlock: _handleBlock })
-console.log('UNWATCH', unwatch)
+console.log('UNWATCH', unwatchBase)
 
 setTimeout(() => {
     unwatchBase()
