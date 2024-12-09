@@ -8,9 +8,9 @@ import handlePlays from './handlers/plays.js'
 import handleWallet from './handlers/wallet.js'
 
 /* Import blockchain clients. */
-import { baseClient } from './client/base.js'
-import { degenClient } from './client/degen.js'
-import { ethClient } from './client/eth.js'
+import { baseClient } from './clients/base.js'
+import { degenClient } from './clients/degen.js'
+import { ethClient } from './clients/eth.js'
 
 /* Initialize databases. */
 const errorsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/errors`)
