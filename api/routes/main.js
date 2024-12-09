@@ -6,8 +6,7 @@ import PouchDB from 'pouchdb'
 import util from 'util'
 import { v4 as uuidv4 } from 'uuid'
 
-/* Set today. */
-const TODAY = moment().format('YYYYMMDD')
+import _handleCreate from '../handlers/create.js'
 
 /* Initialize databases. */
 // const activityDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/nodes_activity_20241128`)
@@ -18,7 +17,7 @@ const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env
 /**
  * Users Module
  */
-export default async (req, res) => {
+export default async (_req, _res) => {
     /* Initialize locals. */
     let action
     let activity
@@ -35,12 +34,40 @@ export default async (req, res) => {
     let updatedAt
 
     /* Set headers. */
-    headers = req.headers
-console.log('HEADERS', headers)
+    headers = _req.headers
+// console.log('HEADERS', headers)
 
     /* Set body. */
-    body = req.body
+    body = _req.body
 console.log('BODY', body)
+
+    /* Validate body. */
+    if (typeof body === 'undefined' || body === null) {
+        /* Set status. */
+        _res.status(400)
+
+        /* Return error. */
+        return _res.json({
+            error: 'Oops! You MUST provide a body.'
+        })
+    }
+
+    method = body.method
+// console.log('METHOD', method)
+
+    /* Validate method. */
+    if (method) {
+        switch(method) {
+        case 'reg':
+            return _handleRegister(_req, _res)
+        case 'create':
+            return _handleCreate(_req, _res)
+        case 'res':
+            return _handleResponse(_req, _res)
+        default:
+            // NO ACTION SPECIFIED
+        }
+    }
 
 return res.json({ we: 'done!' })
 
@@ -123,7 +150,7 @@ console.log('AUTHORIZATION', authorization)
     }
 
     /* Set body. */
-    body = req.body
+    body = _req.body
 console.log('BODY-2', body)
 
     nodeid = body.nodeid

@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 const TODAY = moment().format('YYYYMMDD')
 
 /* Initialize databases. */
-const requestsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions_${TODAY}_req`)
+const tablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/tables`)
 
 export default async (_req, _res) => {
     /* Initialize locals. */
@@ -30,6 +30,7 @@ console.log('SESSION ID', sessionid)
     /* Set execution statement. */
     exec = body.exec
 console.log('EXECUTE', exec)
+return _res.json({ done: 'again!' })
 
     /* Validate body params. */
     if (sessionid && exec) {
