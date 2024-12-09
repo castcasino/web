@@ -195,26 +195,106 @@ const _handleBaseBlock = async (_block) => {
 
     systemDb
         .put(idx)
+        .catch(err => {
+            if (err.message !== 'Document update conflict.') {
+                console.error(err)
+            }
+        })
+}
+
+const _handleDegenBlock = async (_block) => {
+// console.log('NEW BASE BLOCK', _block)
+
+    const pkg = {
+        _id: _block.number.toString(),
+        hash: _block.hash,
+        timestamp: Number(_block.timestamp),
+        numTxs: _block.transactions.length,
+        createdAt: moment().unix(),
+    }
+// console.log('DB PACKAGE', pkg)
+
+    blocksDegenDb
+        .put(pkg)
         .catch(err => console.error(err))
+
+    const idx = await systemDb.get('idx_degen')
+        .catch(err => console.error(err))
+// console.log('IDX', idx)
+
+    idx.height = _block.number.toString()
+    idx.updatedAt = moment().unix()
+// console.log('NEW IDX', idx)
+
+    systemDb
+        .put(idx)
+        .catch(err => {
+            if (err.message !== 'Document update conflict.') {
+                console.error(err)
+            }
+        })
+}
+
+const _handleEthBlock = async (_block) => {
+// console.log('NEW BASE BLOCK', _block)
+
+    const pkg = {
+        _id: _block.number.toString(),
+        hash: _block.hash,
+        timestamp: Number(_block.timestamp),
+        numTxs: _block.transactions.length,
+        createdAt: moment().unix(),
+    }
+// console.log('DB PACKAGE', pkg)
+
+    blocksEthDb
+        .put(pkg)
+        .catch(err => console.error(err))
+
+    const idx = await systemDb.get('idx_eth')
+        .catch(err => console.error(err))
+// console.log('IDX', idx)
+
+    idx.height = _block.number.toString()
+    idx.updatedAt = moment().unix()
+// console.log('NEW IDX', idx)
+
+    systemDb
+        .put(idx)
+        .catch(err => {
+            if (err.message !== 'Document update conflict.') {
+                console.error(err)
+            }
+        })
 }
 
 ;(async () => {
 // handlePlaysQueue()
 // handleWalletQueue()
 
-const unwatchBase = baseClient
+baseClient
     .watchBlocks({
         emitMissed: true,
         emitOnBegin: true,
         includeTransactions: false,
         onBlock: _handleBaseBlock,
     })
-console.log('UNWATCH', unwatchBase)
 
-setTimeout(() => {
-    unwatchBase()
-    console.log('STOPPED WATCHING!')
-}, 60000)
+degenClient
+    .watchBlocks({
+        emitMissed: true,
+        emitOnBegin: true,
+        includeTransactions: false,
+        onBlock: _handleDegenBlock,
+    })
+
+ethClient
+    .watchBlocks({
+        emitMissed: true,
+        emitOnBegin: true,
+        includeTransactions: false,
+        onBlock: _handleEthBlock,
+    })
 
 return
     setInterval(() => {
