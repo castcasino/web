@@ -181,17 +181,17 @@ const _handleBaseBlock = async (_block) => {
     }
 // console.log('DB PACKAGE', pkg)
 
-    blocksBaseDb
-        .put(pkg)
-        .catch(err => console.error(err))
+    // blocksBaseDb
+    //     .put(pkg)
+    //     .catch(err => console.error(err))
 
     const idx = await systemDb.get('idx_base')
         .catch(err => console.error(err))
 // console.log('IDX', idx)
 
     idx.height = _block.number.toString()
-    idx.updateAt = moment().unix()
-// console.log('NEW IDX', idx)
+    idx.updatedAt = moment().unix()
+console.log('NEW IDX', idx)
 
     systemDb
         .put(idx)
