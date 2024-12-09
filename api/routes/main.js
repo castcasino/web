@@ -27,6 +27,7 @@ export default async (_req, _res) => {
     let createdAt
     let email
     let headers
+    let method
     let node
     let nodeid
     let pkg
