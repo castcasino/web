@@ -19,6 +19,7 @@ export default async (_req, _res) => {
     let request
     let response
     let sessionid
+    let status
 
     /* Set body. */
     body = _req.body
@@ -32,6 +33,9 @@ console.log('SESSION ID', sessionid)
         /* Generate new ID. */
         id = uuidv4()
 
+        /* Set (pending) status. */
+        status = 'pending'
+
         /* Generate timestamp (in milliseconds). */
         createdAt = moment().unix()
 
@@ -40,6 +44,7 @@ console.log('SESSION ID', sessionid)
             .put({
                 _id: id,
                 ...body,
+                status,
                 createdAt,
             }).catch(err => {
                 console.error(err)
