@@ -175,11 +175,11 @@ const _handleBaseBlock = async (_block) => {
     const pkg = {
         _id: _block.number.toString(),
         hash: _block.hash,
-        timestamp: _block.timestamp,
+        timestamp: Number(_block.timestamp),
         numTxs: _block.transactions.length,
         createdAt: moment().unix(),
     }
-console.log('DB PACKAGE', pkg)
+// console.log('DB PACKAGE', pkg)
 
     blocksBaseDb
         .put(pkg)
@@ -191,7 +191,7 @@ console.log('DB PACKAGE', pkg)
 
     idx.height = _block.number.toString()
     idx.updateAt = moment().unix()
-console.log('NEW IDX', idx)
+// console.log('NEW IDX', idx)
 
     systemDb
         .put(idx)
