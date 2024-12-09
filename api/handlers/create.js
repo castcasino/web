@@ -27,25 +27,19 @@ export default async (_req, _res) => {
     sessionid = body.sessionid
 console.log('SESSION ID', sessionid)
 
-    /* Set execution statement. */
-    exec = body.exec
-console.log('EXECUTE', exec)
-return _res.json({ done: 'again!' })
-
     /* Validate body params. */
-    if (sessionid && exec) {
+    if (body) {
         /* Generate new ID. */
         id = uuidv4()
 
         /* Generate timestamp (in milliseconds). */
-        createdAt = moment().valueOf()
+        createdAt = moment().unix()
 
         /* Add request to db. */
-        response = await requestsDb
+        response = await tablesDb
             .put({
                 _id: id,
-                sessionid,
-                exec,
+                ...body,
                 createdAt,
             }).catch(err => {
                 console.error(err)
