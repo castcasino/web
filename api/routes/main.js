@@ -10,8 +10,8 @@ import { v4 as uuidv4 } from 'uuid'
 const TODAY = moment().format('YYYYMMDD')
 
 /* Initialize databases. */
-const activityDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/nodes_activity_20241128`)
-const nodesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/nodes`)
+// const activityDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/nodes_activity_20241128`)
+// const nodesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/nodes`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions_20241128`)
 
@@ -36,6 +36,13 @@ export default async (req, res) => {
 
     /* Set headers. */
     headers = req.headers
+console.log('HEADERS', headers)
+
+    /* Set body. */
+    body = req.body
+console.log('BODY', body)
+
+return res.json({ we: 'done!' })
 
     /* Validate headers. */
     if (headers) {

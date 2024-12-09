@@ -4,7 +4,7 @@ import express from 'express'
 
 /* Import handlers. */
 import routesAdmin from './routes/admin.js'
-import routesNode from './routes/node.js'
+import routesMain from './routes/main.js'
 import routesNotif from './routes/notif.js'
 import routesSession from './routes/session.js'
 
@@ -41,11 +41,11 @@ app.get('/v1', (req, res) => {
     res.end(welcome)
 })
 
+/* Initialize General route. */
+app.post('/v1', routesMain)
+
 /* Initialize Administration route. */
 app.post('/v1/admin', routesAdmin)
-
-/* Initialize Session route. */
-app.post('/v1/node', routesNode)
 
 /* Initialize Notification route. */
 app.post('/v1/notif', routesNotif)
