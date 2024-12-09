@@ -181,9 +181,9 @@ const _handleBaseBlock = async (_block) => {
     }
 // console.log('DB PACKAGE', pkg)
 
-    // blocksBaseDb
-    //     .put(pkg)
-    //     .catch(err => console.error(err))
+    blocksBaseDb
+        .put(pkg)
+        .catch(err => console.error(err))
 
     const idx = await systemDb.get('idx_base')
         .catch(err => console.error(err))
