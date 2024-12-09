@@ -199,6 +199,8 @@ const _handleBaseBlock = async (_block) => {
 const unwatchBase = baseClient
     .watchBlocks({
         emitMissed: true,
+        emitOnBegin: true,
+        includeTransactions: false,
         onBlock: _handleBaseBlock,
     })
 console.log('UNWATCH', unwatchBase)
