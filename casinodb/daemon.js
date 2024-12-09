@@ -173,7 +173,7 @@ const _handleBaseBlock = async (_block) => {
     console.log('NEW BASE BLOCK', _block)
 
     blocksBaseDb.put({
-        _id: _block.number,
+        _id: _block.number.toString(),
         hash: _block.hash,
         timestamp: _block.timestamp,
         numTxs: _block.transactions.length,
@@ -197,7 +197,10 @@ const _handleBaseBlock = async (_block) => {
 // handleWalletQueue()
 
 const unwatchBase = baseClient
-    .watchBlocks({ onBlock: _handleBaseBlock })
+    .watchBlocks({
+        emitMissed: true,
+        onBlock: _handleBaseBlock,
+    })
 console.log('UNWATCH', unwatchBase)
 
 setTimeout(() => {
