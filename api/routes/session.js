@@ -21,7 +21,7 @@ const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env
 
 /* Initialize design document. */
 import initSessions from '../ddoc/initSessions.js'
-initSessions()
+// initSessions()
 
 /**
  * Sessions Module
