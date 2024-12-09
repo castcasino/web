@@ -15,8 +15,11 @@ import { ethClient } from './clients/eth.js'
 /* Initialize databases. */
 const errorsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/errors`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
-// const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
-// const walletDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/wallet`)
+const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
+
+const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_base`)
+const blocksDegenDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_degen`)
+const blocksEthDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_eth`)
 
 /* Set constants. */
 const PLAYS_INTERVAL = 5000
@@ -166,8 +169,27 @@ const handleWalletQueue = async () => {
     handleWallet(walletQueue, pending)
 }
 
-const _handleBlock = async (_block) => {
-    console.log('NEW BLOCK', _block)
+const _handleBaseBlock = async (_block) => {
+    console.log('NEW BASE BLOCK', _block)
+
+    blocksBaseDb.put({
+        _id: _block.number,
+        hash: _block.hash,
+        timestamp: _block.timestamp,
+        numTxs: _block.transactions.length,
+        createdAt: moment().unix(),
+    })
+
+    const idx = await systemDb.get('idx_base')
+        .catch(err => console.error(err))
+    console.log('IDX', idx)
+
+    idx.height = _block.number
+    idx.updateAt = moment().unix()
+
+    systemDb
+        .put(idx)
+        .catch(err => console.error(err))
 }
 
 ;(async () => {
@@ -175,7 +197,7 @@ const _handleBlock = async (_block) => {
 // handleWalletQueue()
 
 const unwatchBase = baseClient
-    .watchBlocks({ onBlock: _handleBlock })
+    .watchBlocks({ onBlock: _handleBaseBlock })
 console.log('UNWATCH', unwatchBase)
 
 setTimeout(() => {
