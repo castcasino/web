@@ -25,7 +25,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 // import { Wallet } from '@nexajs/wallet'
 
-import hiLoHandler from './play/hi_lo.ts'
+import hiLoHandler from './hi_lo.ts'
 
 /* Initialize databases. */
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
