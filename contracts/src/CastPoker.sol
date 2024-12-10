@@ -72,7 +72,7 @@ contract CastPoker is Ownable {
     /* Gameplay (Round) State */
     enum GameplayState {
         Community,  // community cards have been dealt
-        Completed,  // all player cards have been dealt and the hand has ended
+        Closed,     // all player cards have been dealt and the table is closed
         Set,        // created and waiting for community cards
         Showdown    // players cards are dealt
     }
@@ -82,7 +82,7 @@ contract CastPoker is Ownable {
     //       e.g. $BASE, $DEGEN, $ETH, $OP
     struct Table {
         GameplayState state;
-        address token;              // token used for participating in the hand
+        address token;              // token used for participating at the table
         address host;               // table/game creator
         uint seed;                  // a random number, provided by the host, used to deal community cards
         uint buyin;                 // buy-in amount for the table
@@ -101,7 +101,7 @@ contract CastPoker is Ownable {
     //       e.g. $BASE, $DEGEN, $ETH, $OP
     struct Bench {
         GameplayState state;
-        address token;              // token used for participating in the hand
+        address token;              // token used for participating at the table
     }
 
     /* Initialize (player) cards schema. */
@@ -226,7 +226,7 @@ contract CastPoker is Ownable {
         uint8 _seats,
         uint8 _fomo,
         uint8 _theme
-    ) external returns (bool){
+    ) external returns (uint) {
         require(_tts <= MAX_TIME_TO_SIT,
             "Oops! Your maximum seating time is OVER the casino limit.");
 
@@ -250,7 +250,7 @@ contract CastPoker is Ownable {
         /* Retrieve value from Cast Casino database. */
         uint totalTables = _castCasinoDb.getUint(hash);
 
-        /* Initialize the hand. */
+        /* Initialize the table. */
         tables[totalTables] = Table({
             state: GameplayState.Set,
             token: _token,
@@ -273,7 +273,7 @@ contract CastPoker is Ownable {
         /* Update (increment) table count. */
         _castCasinoDb.setUint(hash, totalTables + 1);
 
-        return true;
+        return totalTables;
     }
 
     /**
@@ -294,7 +294,7 @@ contract CastPoker is Ownable {
         /* Retrieve value from Cast Casino database. */
         uint totalBenches = _castCasinoDb.getUint(hash);
 
-        /* Initialize the hand. */
+        /* Initialize the bench. */
         benches[totalBenches] = Bench({
             state: GameplayState.Set,
             token: _token
@@ -326,7 +326,7 @@ contract CastPoker is Ownable {
         /* Set table. */
         Table storage table = tables[_tableid];
 
-        /* Validate hand status. */
+        /* Validate table status. */
         require(table.state == GameplayState.Set,
             "Oops! This table is NOT ready for (community) dealing.");
 
@@ -354,7 +354,7 @@ contract CastPoker is Ownable {
     /**
      * Buy-In
      *
-     * Allows a player to join the hand.
+     * Allows a player to join the table.
      *
      * A single player may buy-in (i.e. be seated) more than once.
      *
@@ -363,7 +363,7 @@ contract CastPoker is Ownable {
      *       will then automatically deliver payouts after the
      *       completion of each hand.
      *
-     * @param _tableid the unique id of the hand.
+     * @param _tableid the unique id of the table.
      */
     function buyIn(
         uint _tableid,
@@ -379,6 +379,10 @@ contract CastPoker is Ownable {
 
         /* Set table. */
         Table storage table = tables[_tableid];
+
+        /* Validate table status. */
+        require(table.state == GameplayState.Community,
+            "Oops! This table is NOT ready for buy-ins.");
 
         require(table.seated.length < MAX_SEATS_PER_TABLE,
             "Oops! This table is already full!");
@@ -398,6 +402,9 @@ contract CastPoker is Ownable {
                 "Oops! You DO NOT have a sufficient balance to buy-in with that asset.");
         }
 
+        /* Add buy-in to pot. */
+        table.pot = table.pot + table.buyin;
+
         /* Assign player (id/address) to the next seat. */
         table.seated.push(msg.sender);
 
@@ -407,6 +414,9 @@ contract CastPoker is Ownable {
             _seed,
             PlayerCards(-1, -1) // NOTE: 0 is reserved for Ace-of-Spades
         );
+
+        /* Add to players. */
+        players[_tableid][msg.sender] = player;
 
         /* Broadcast (player) buy-in. */
         emit BuyIn(_tableid, player);
@@ -429,13 +439,16 @@ contract CastPoker is Ownable {
         /* Set table. */
         Table storage table = tables[_tableid];
 
-        /* Validate hand status. */
+        /* Validate table status. */
         require(table.state == GameplayState.Community,
             "Oops! This table is NOT ready for a showdown.");
 
-        /* Update table state to SHOWDOWN. */
-        // NOTE: This function (and status update) is called for each player.
-        table.state = GameplayState.Showdown;
+        /* Validate hole cards. */
+        require(
+            players[_tableid][_player].cards.hole1 == -1 &&
+            players[_tableid][_player].cards.hole2 == -1,
+            "Oops! Cards have already been dealt to that player."
+        );
 
         /* Set player (hole) cards. */
         players[_tableid][_player].cards.hole1 = _hole1;
@@ -448,6 +461,24 @@ contract CastPoker is Ownable {
             _hole1,
             _hole2
         );
+    }
+
+    /**
+     * Showdown
+     *
+     * Compare all player cards and determine the winner of the hand.
+     */
+    function showdown(
+        uint _tableid
+    ) external onlyAuthByCastCasino returns (bool) {
+        /* Set table. */
+        Table storage table = tables[_tableid];
+
+        /* Update table state to SHOWDOWN. */
+        // NOTE: This function (and status update) is called for each player.
+        table.state = GameplayState.Showdown;
+
+        return true;
     }
 
     /**
@@ -515,9 +546,22 @@ contract CastPoker is Ownable {
         /* Update new total chips. */
         _castCasinoDb.setUint(hash, totalChips + _amount);
 
+        return true;
+    }
+
+    /**
+     * Close Table
+     *
+     * Everyone has been paid and the table is now closed.
+     */
+    function close(
+        uint _tableid
+    ) external onlyAuthByCastCasino returns (bool) {
+        /* Set table. */
+        Table storage table = tables[_tableid];
+
         /* Update table state to COMPLETED. */
-// FIXME Should this be in a separate function??
-        table.state = GameplayState.Completed;
+        table.state = GameplayState.Closed;
 
         return true;
     }
