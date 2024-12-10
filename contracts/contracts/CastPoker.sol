@@ -38,10 +38,10 @@ contract CastPoker is Ownable {
 
     /* Table State */
     enum TableState {
-        Active,     // players can buy-in
-        Completed,  // all cards have been dealt and play has ended
-        Dealing,    // cards are being dealt for the han
-        Set         // created and waiting for community cards
+        Community,  // community cards have been dealt
+        Completed,  // all player cards have been dealt and the hand has ended
+        Set,        // created and waiting for community cards
+        Showdown    // players cards are dealt
     }
 
     /* Initialize table schema. */
@@ -49,15 +49,15 @@ contract CastPoker is Ownable {
     //       e.g. $BASE, $DEGEN, $ETH, $OP
     struct Table {
         TableState state;
-        IERC20 token;               // token used for participating in the hand
+        address token;              // token used for participating in the hand
         address host;               //
         // string theme;               // set artwork (or suit) display on "special" cards [default is Hearts]
         string banner;              // a banner to be displayed at the table
-        uint seed;               // a random number, provided by the host, used to deal community cards
+        uint seed;                  // a random number, provided by the host, used to deal community cards
         uint buyin;                 // buy-in amount for the table
         uint tts;                   // a.k.a time-to-sit - duration of seating time before cards are dealt
         uint8 seats;                // maximum number of players allowed at the table
-        uint8 fomo;                 //
+        uint8 fomo;                 // an inflation mechanism, triggered after each buy-in (default is 0)
         uint pot;                   // total pot size
         CommunityCards community;   // community cards for the table
         address[] seated;           // seated players (w/ buy-in) at the table
@@ -66,7 +66,7 @@ contract CastPoker is Ownable {
     /* Initialize (player) cards schema. */
     struct Player {
         address id;
-        string seed;
+        uint seed;
         PlayerCards cards;
     }
 
@@ -85,6 +85,13 @@ contract CastPoker is Ownable {
         uint8 river;
     }
 
+    /* Initialize chain id. */
+    // NOTE: THIS VALUE MUST BE UPDATED FOR EACH NETWORK
+    // Base = 8453
+    // Base (Sepolia) = 84532
+    // Degen = 666666666
+    uint CHAIN_ID = 8453;
+
     /* Initialize maximum seats per table. */
     // NOTE: This will be REMOVED after WAGMI is enabled.
     uint8 MAX_SEATS_PER_TABLE = 23;
@@ -95,14 +102,14 @@ contract CastPoker is Ownable {
 
     /* Initialize maximum time-to-sit. */
     // 86400 seconds == 24 hours
-    uint MAX_TIME_TO_SIT = 86_400;
+    uint MAX_TIME_TO_SIT = 86400;
 
     /* Initialize tables handler. */
     // tableid => Table
     mapping(uint => Table) public tables;
 
     /* Initialize players. */
-    // tableid => player address => Player
+    // tableid => (player) address => Player
     mapping(uint => mapping(address => Player)) public players;
 
     /* Initialize (emit) events. */
@@ -132,14 +139,6 @@ contract CastPoker is Ownable {
         uint indexed tableid,
         uint pot,
         uint amount
-    );
-    event Cashout(
-        uint indexed tableid,
-        address player,
-        uint amount
-    );
-    event TableManagement(
-        uint indexed tableid
     );
 
     /* Constructor */
@@ -175,16 +174,15 @@ contract CastPoker is Ownable {
     }
 
     /**
-     * @dev Only allow access to an authorized Cast Casino administrator.
+     * @dev Only allow access to an authorized Cast Casino provider.
      */
     modifier onlyAuthByCastCasino() {
-        /* Verify write access is only permitted to authorized accounts. */
+        /* Verify write access is only permitted to authorized providers. */
         require(_castCasinoDb.getBool(keccak256(
             abi.encodePacked(msg.sender, ".has.auth.for.", _namespace))) == true);
 
         _;      // function code is inserted here
     }
-
 
     /***************************************************************************
      *
@@ -207,7 +205,6 @@ contract CastPoker is Ownable {
      * @param _seats Maximum number of players allowed at this table.
      */
     function setTable(
-        uint _tableid,
         address _token,
         // string calldata _theme,
         string calldata _banner,
@@ -216,7 +213,7 @@ contract CastPoker is Ownable {
         uint _tts,
         uint8 _seats,
         uint8 _fomo
-    ) external {
+    ) external returns (bool){
         require(_tts <= MAX_TIME_TO_SIT,
             "Oops! Your maximum player seats is OVER the platform limit.");
 
@@ -237,10 +234,13 @@ contract CastPoker is Ownable {
             _namespace, ".total.tables"
         ));
 
+        /* Retrieve value from Cast Casino database. */
+        uint totalTables = _castCasinoDb.getUint(hash);
+
         /* Initialize the hand. */
-        tables[_tableid] = Table({
+        tables[totalTables] = Table({
             state: TableState.Set,
-            token: IERC20(_token),
+            token: _token,
             host: msg.sender,
             // theme: _theme,
             banner: _banner,
@@ -254,14 +254,13 @@ contract CastPoker is Ownable {
             seated: seated
         });
 
-        /* Retrieve value from Cast Casino database. */
-        uint totalTables = _castCasinoDb.getUint(hash);
+        /* Broadcast event. */
+        emit TableCreated(totalTables, tables[totalTables]);
 
         /* Update (increment) table count. */
         _castCasinoDb.setUint(hash, totalTables + 1);
 
-        /* Broadcast event. */
-        // emit TableCreated(_tableid, tables[_tableid]);
+        return true;
     }
 
     /**
@@ -269,14 +268,16 @@ contract CastPoker is Ownable {
      *
      * Provides a venue for (one-on-one) heads-up games.
      */
-    function setBench() external {
+    function setBench() external pure returns (bool) {
         // TODO
+
+        return true;
     }
 
     /**
      * Deal Community Cards
      *
-     * A hosts MUST begin each hand by dealing a flop.
+     * The platorm begins each hand by dealing a flop + turn + river.
      *
      * NOTE: A flop is three (3) "random" cards provided for all participating
      *       players to utilize in forming their final hand.
@@ -294,6 +295,10 @@ contract CastPoker is Ownable {
         /* Set table. */
         Table storage table = tables[_tableid];
 
+        /* Validate hand status. */
+        require(table.state == TableState.Set,
+            "Oops! This table is NOT ready for (community) dealing.");
+
         /* Set community cards. */
         table.community.flop1 = _flop1;
         table.community.flop2 = _flop2;
@@ -302,14 +307,17 @@ contract CastPoker is Ownable {
         table.community.river = _river;
 
         /* Emit community cards. */
-        // emit CommunityCardsDealt(
-        //     _tableid,
-        //     _flop1,
-        //     _flop2,
-        //     _flop3,
-        //     _turn,
-        //     _river
-        // );
+        emit CommunityCardsDealt(
+            _tableid,
+            _flop1,
+            _flop2,
+            _flop3,
+            _turn,
+            _river
+        );
+
+        /* Update table state to COMMUNITY. */
+        table.state = TableState.Community;
     }
 
     /**
@@ -328,11 +336,15 @@ contract CastPoker is Ownable {
      */
     function buyIn(
         uint _tableid,
-        string calldata _seed
+        uint _seed
     ) external payable {
         /* Validate sender (is NOT a contract). */
         require(_isContract(msg.sender) == false,
             "Oops! You CANNOT buy-in using a smart wallet. Please use a standard EOA wallet.");
+
+        /* Validate player is unique (to this table). */
+        require(players[_tableid][msg.sender].id == address(0),
+            "Oops! You CANNOT sit more than once at the same table.");
 
         /* Set table. */
         Table storage table = tables[_tableid];
@@ -343,7 +355,7 @@ contract CastPoker is Ownable {
         /* Validate deposit method. */
         // NOTE: Support is available for either the network's
         //       native coin OR an ERC-20 token.
-        if (table.token == IERC20(address(0))) {
+        if (table.token == address(0)) {
             require(msg.value == table.buyin,
                 "Oops! That's NOT the buy-in amount to join this table.");
         } else {
@@ -351,20 +363,21 @@ contract CastPoker is Ownable {
             //       from the player's wallet.
 
             /* Transfer buy-in amount from player to table/contract. */
-            require(table.token.transferFrom(msg.sender, address(this), table.buyin),
+            require(IERC20(table.token).transferFrom(msg.sender, address(this), table.buyin),
                 "Oops! You DO NOT have a sufficient balance to buy-in with that asset.");
         }
 
+        /* Assign player (id/address) to the next seat. */
+        table.seated.push(msg.sender);
+
+        /* Create player (object). */
         Player memory player = Player(
             msg.sender,
             _seed,
             PlayerCards(-1, -1) // NOTE: 0 is reserved for Ace-of-Spades
         );
 
-        /* Add player. */
-        table.seated.push(msg.sender);
-
-        /* Broadcast buy-in. */
+        /* Broadcast (player) buy-in. */
         emit BuyIn(_tableid, player);
     }
 
@@ -385,15 +398,13 @@ contract CastPoker is Ownable {
         /* Set table. */
         Table storage table = tables[_tableid];
 
-        /* Set # of players. */
-        // uint n = hand.players.length;
-
         /* Validate hand status. */
-        require(table.state == TableState.Set,
-            "Oops! This table is NOT ready for dealing.");
+        require(table.state == TableState.Community,
+            "Oops! This table is NOT ready for a showdown.");
 
-        /* Update table state to DEALING. */
-        table.state = TableState.Dealing;
+        /* Update table state to SHOWDOWN. */
+        // NOTE: This function (and status update) is called for each player.
+        table.state = TableState.Showdown;
 
         /* Set player (hole) cards. */
         players[_tableid][_player].cards.hole1 = _hole1;
@@ -409,24 +420,38 @@ contract CastPoker is Ownable {
     }
 
     /**
-     * Make Payout
+     * Payout
      *
-     * Allows the Platform to distribute winnings the respective participants.
+     * Allows the Platform to distribute winnings to the respective players.
      *
      * NOTE: Chip totals are stored in the Cast Casino database.
      */
-    function makePayout(
+    function payout(
         uint _tableid,
         address _player,
-        string calldata _assetid,
         uint _amount
     ) external returns (bool) {
         /* Set table. */
         Table storage table = tables[_tableid];
 
+        /* Validate table status. */
+        require(table.state == TableState.Showdown,
+            "Oops! This table is NOT ready for payouts and completion.");
+
+        /* Initialize asset id. */
+        uint assetid;
+
+        /* Set the table asset id. */
+        // NOTE: Used during payout for chips disbursements.
+        if (table.token == address(0)) {
+            assetid = CHAIN_ID;
+        } else {
+            assetid = uint160(table.token);
+        }
+
         /* Set hash. */
         bytes32 hash = keccak256(abi.encodePacked(
-            _namespace, ".total.", _assetid, ".chips.for", _player
+            _namespace, ".total.", assetid, ".chips.for", _player
         ));
 
         /* Retrieve value from Cast Casino database. */
@@ -438,19 +463,21 @@ contract CastPoker is Ownable {
         /* Validate deposit method. */
         // NOTE: Support is available for either the network's
         //       native coin OR an ERC-20 token.
-        if (table.token == IERC20(address(0))) {
+        if (table.token == address(0)) {
             (bool success, ) = msg.sender.call{ value: _amount}("");
             require(success, "Oops! Asset transfer has failed!");
         } else {
             /* Transfer bet amount from player to contract. */
-            table.token.transferFrom(address(this), msg.sender, _amount);
+            IERC20(table.token).transferFrom(address(this), msg.sender, _amount);
             require(IERC20(table.token).transfer(_player, _amount),
                 "Oops! Token transfer has failed!");
         }
 
+        /* Update table state to COMPLETED. */
+        table.state = TableState.Completed;
+
         return true;
     }
-
 
     /***************************************************************************
      *
@@ -479,7 +506,6 @@ contract CastPoker is Ownable {
         return _successor;
     }
 
-
     /***************************************************************************
      *
      * SETTERS
@@ -500,7 +526,6 @@ contract CastPoker is Ownable {
         /* Return success. */
         return true;
     }
-
 
     /***************************************************************************
      *
