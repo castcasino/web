@@ -68,9 +68,8 @@ contract CastPoker is Ownable {
         uint8 seats;                // maximum number of players allowed at the table
         uint8 fomo;                 //
         uint pot;                   // total pot size
-        uint8 seated;               // Allow UP TO 255 seated players (w/ duplicates)  per table
         CommunityCards community;   // community cards for the table
-        // Player[] players;           // players (w/ buy-in) at the table
+        address[] seated;           // seated players (w/ buy-in) at the table
     }
 
     /* Initialize (player) cards schema. */
@@ -82,8 +81,8 @@ contract CastPoker is Ownable {
 
     /* Initialize (player) cards schema. */
     struct PlayerCards {
-        uint8 hole1;
-        uint8 hole2;
+        int8 hole1;
+        int8 hole2;
     }
 
     /* Initialize (community) cards schema. */
@@ -109,23 +108,19 @@ contract CastPoker is Ownable {
 
     /* Initialize tables handler. */
     // tableid => Table
-    mapping(string => Table) public tables;
-
-    /* Initialize community cards. */
-    // tableid => community cards array
-    // mapping(uint => CommunityCards[]) public communityCards;
+    mapping(uint => Table) public tables;
 
     /* Initialize players. */
     // tableid => player address => Player
-    mapping(string => mapping(address => Player)) public players;
+    mapping(uint => mapping(address => Player)) public players;
 
     /* Initialize (emit) events. */
     event TableCreated(
-        string indexed tableid,
+        uint indexed tableid,
         Table table
     );
     event CommunityCardsDealt(
-        string indexed tableid,
+        uint indexed tableid,
         uint8 flop1,
         uint8 flop2,
         uint8 flop3,
@@ -133,27 +128,27 @@ contract CastPoker is Ownable {
         uint8 river
     );
     event BuyIn(
-        string indexed tableid,
+        uint indexed tableid,
         Player player
     );
     event PlayerCardsDealt(
-        string indexed tableid,
+        uint indexed tableid,
         address player,
-        uint8 hole1,
-        uint8 hole2
+        int8 hole1,
+        int8 hole2
     );
     event Payout(
-        string indexed tableid,
+        uint indexed tableid,
         uint pot,
         uint amount
     );
     event Cashout(
-        string indexed tableid,
+        uint indexed tableid,
         address player,
         uint amount
     );
     event TableManagement(
-        string indexed tableid
+        uint indexed tableid
     );
 
     /* Constructor */
@@ -221,7 +216,7 @@ contract CastPoker is Ownable {
      * @param _seats Maximum number of players allowed at this table.
      */
     function setTable(
-        string calldata _tableid,
+        uint _tableid,
         address _token,
         // string calldata _theme,
         string calldata _banner,
@@ -243,8 +238,8 @@ contract CastPoker is Ownable {
         /* Initialize community cards. */
         CommunityCards memory community;
 
-        /* Initialize (empty) players handler. */
-        // Player[] memory players;
+        /* Initialize (seated player) address handler. */
+        address[] memory seated;
 
         /* Set hash. */
         bytes32 hash = keccak256(abi.encodePacked(
@@ -264,8 +259,8 @@ contract CastPoker is Ownable {
             seats: _seats,
             fomo: _fomo,
             pot: 0,
-            seated: 0,
-            community: community
+            community: community,
+            seated: seated
         });
 
         /* Retrieve value from Cast Casino database. */
@@ -298,7 +293,7 @@ contract CastPoker is Ownable {
      * NOTE: A host MUST "set the table" BEFORE dealing the flop.
      */
     function dealCommunityCards(
-        string calldata _tableid,
+        uint _tableid,
         uint8 _flop1,
         uint8 _flop2,
         uint8 _flop3,
@@ -341,7 +336,7 @@ contract CastPoker is Ownable {
      * @param _tableid the unique id of the hand.
      */
     function buyIn(
-        string calldata _tableid,
+        uint _tableid,
         string calldata _seed
     ) external payable {
         /* Validate sender (is NOT a contract). */
@@ -351,7 +346,7 @@ contract CastPoker is Ownable {
         /* Set table. */
         Table storage table = tables[_tableid];
 
-        require(table.seated < MAX_SEATS_PER_TABLE,
+        require(table.seated.length < MAX_SEATS_PER_TABLE,
             "Oops! This table is already full!");
 
         /* Validate deposit method. */
@@ -372,11 +367,11 @@ contract CastPoker is Ownable {
         Player memory player = Player(
             msg.sender,
             _seed,
-            PlayerCards(255, 255)
+            PlayerCards(-1, -1) // NOTE: 0 is reserved for Ace-of-Spades
         );
 
-        /* Increment seated players. */
-        table.seated++;
+        /* Add player. */
+        table.seated.push(msg.sender);
 
         /* Broadcast buy-in. */
         emit BuyIn(_tableid, player);
@@ -391,10 +386,10 @@ contract CastPoker is Ownable {
      *       that there was no cheating.
      */
     function dealCards(
-        string calldata _tableid,
+        uint _tableid,
         address _player,
-        uint8 _hole1,
-        uint8 _hole2
+        int8 _hole1,
+        int8 _hole2
     ) external onlyOwner {
         /* Set table. */
         Table storage table = tables[_tableid];
@@ -430,7 +425,7 @@ contract CastPoker is Ownable {
      * NOTE: Chip totals are stored in the Cast Casino database.
      */
     function makePayout(
-        string calldata _tableid,
+        uint _tableid,
         address _player,
         string calldata _assetid,
         uint _amount
