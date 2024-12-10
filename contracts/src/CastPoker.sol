@@ -502,8 +502,11 @@ contract CastPoker is Ownable {
         Table storage table = tables[_tableid];
 
         /* Validate table status. */
-        require(table.state == GameplayState.Showdown,
-            "Oops! This table is NOT ready for payouts and completion.");
+        require(
+            table.state == GameplayState.Showdown ||
+            table.state == GameplayState.Closed,
+            "Oops! This table is NOT ready for payouts and completion."
+        );
 
         /* Validate payout amount. */
         require(table.pot >= (table.paid + _amount),
