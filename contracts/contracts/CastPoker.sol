@@ -5,16 +5,7 @@
  *
  * CastPoker - Play a hand of poker in a Farcaster frame.
  *
- * NOTES
- *   - TRANSPARENCY IS THE KEY
- *   - Track the game start time
- *   - Track the order of players??
- *   ✔ Track the player seeds
- *   ✔ DO NOT enable WAGMI (unlimited) mode at launch
- *   ✔ DO NOT enable FOMO (inflation) mode at launch
- *
  * Version 1 (alpha)
- * Revision 0
  * Released 24.12.10
  *
  * https://cast.poker
@@ -43,7 +34,7 @@ contract CastPoker is Ownable {
     // NOTE: Use of `namespace` is REQUIRED when generating ANY & ALL
     //       Cast Casino database keys; in order to prevent ANY accidental or
     //       malicious SQL-injection vulnerabilities / attacks.
-    string private _namespace = 'cast.poker';
+    string private _namespace = "cast.poker";
 
     /* Table State */
     enum TableState {
@@ -158,7 +149,7 @@ contract CastPoker is Ownable {
         _castCasinoDb = ICastCasinoDb(0x4fD22578B85dC2bd70532D6C63be9F7925b4167f);
 
         /* Initialize (aname) hash. */
-        bytes32 hash = keccak256(abi.encodePacked('aname.', _namespace));
+        bytes32 hash = keccak256(abi.encodePacked("aname.", _namespace));
 
         /* Set predecessor address. */
         _predecessor = payable(_castCasinoDb.getAddress(hash));
@@ -175,12 +166,12 @@ contract CastPoker is Ownable {
 
     fallback() external payable {
         /* Cancel this transaction. */
-        revert('Oops! Direct payments are NOT permitted here.');
+        revert("Oops! Direct payments are NOT permitted here.");
     }
 
     receive() external payable {
         /* Cancel this transaction. */
-        revert('Oops! Direct payments are NOT permitted here.');
+        revert("Oops! Direct payments are NOT permitted here.");
     }
 
     /**
@@ -189,7 +180,7 @@ contract CastPoker is Ownable {
     modifier onlyAuthByCastCasino() {
         /* Verify write access is only permitted to authorized accounts. */
         require(_castCasinoDb.getBool(keccak256(
-            abi.encodePacked(msg.sender, '.has.auth.for.', _namespace))) == true);
+            abi.encodePacked(msg.sender, ".has.auth.for.", _namespace))) == true);
 
         _;      // function code is inserted here
     }
@@ -243,7 +234,7 @@ contract CastPoker is Ownable {
 
         /* Set hash. */
         bytes32 hash = keccak256(abi.encodePacked(
-            _namespace, '.total.tables'
+            _namespace, ".total.tables"
         ));
 
         /* Initialize the hand. */
@@ -435,7 +426,7 @@ contract CastPoker is Ownable {
 
         /* Set hash. */
         bytes32 hash = keccak256(abi.encodePacked(
-            _namespace, '.total.', _assetid, '.chips.for', _player
+            _namespace, ".total.", _assetid, ".chips.for", _player
         ));
 
         /* Retrieve value from Cast Casino database. */
