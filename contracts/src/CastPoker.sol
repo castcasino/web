@@ -71,10 +71,11 @@ contract CastPoker is Ownable {
 
     /* Gameplay (Round) State */
     enum GameplayState {
+        Unset,      // unused venue
+        Set,        // venue created and waiting for community cards
         Community,  // community cards have been dealt
-        Closed,     // all player cards have been dealt and the table is closed
-        Set,        // created and waiting for community cards
-        Showdown    // players cards are dealt
+        Showdown,   // players cards have been dealt
+        Closed      // all payouts sent and the table is closed
     }
 
     /* Initialize table schema. */
@@ -441,7 +442,7 @@ contract CastPoker is Ownable {
 
         /* Validate table status. */
         require(table.state == GameplayState.Community,
-            "Oops! This table is NOT ready for a showdown.");
+            "Oops! This table DOES NOT have a community yet.");
 
         /* Validate hole cards. */
         require(
@@ -474,6 +475,10 @@ contract CastPoker is Ownable {
         /* Set table. */
         Table storage table = tables[_tableid];
 
+        /* Validate table status. */
+        require(table.state == GameplayState.Community,
+            "Oops! This table is NOT ready for a showdown.");
+
         /* Update table state to SHOWDOWN. */
         // NOTE: This function (and status update) is called for each player.
         table.state = GameplayState.Showdown;
@@ -501,7 +506,7 @@ contract CastPoker is Ownable {
             "Oops! This table is NOT ready for payouts and completion.");
 
         /* Validate payout amount. */
-        require(table.pot <= (table.paid + _amount),
+        require(table.pot >= (table.paid + _amount),
             "Oops! You CANNOT payout more than the pot size.");
 
         /* Update paid amount. */
@@ -559,6 +564,10 @@ contract CastPoker is Ownable {
     ) external onlyAuthByCastCasino returns (bool) {
         /* Set table. */
         Table storage table = tables[_tableid];
+
+        /* Validate table status. */
+        require(table.state == GameplayState.Showdown,
+            "Oops! This table CANNOT be closed yet.");
 
         /* Update table state to COMPLETED. */
         table.state = GameplayState.Closed;
