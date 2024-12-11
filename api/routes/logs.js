@@ -17,9 +17,10 @@ export default async (req, res) => {
     let logs
 
     logs = await baseClient.getLogs({
-        address: [
-            '0x04a3736810D878AED77f5A7aC30B323BAe5b8105', // CastPoker_00
-        ],
+        address: '0x04a3736810D878AED77f5A7aC30B323BAe5b8105',
+        // address: [
+        //     '0x04a3736810D878AED77f5A7aC30B323BAe5b8105', // CastPoker_00
+        // ],
         // event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
         // args: {
         //     from: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
