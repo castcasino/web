@@ -814,4 +814,4 @@ export const castPokerAbi = [
 		"stateMutability": "payable",
 		"type": "receive"
 	}
-] as const
+]
