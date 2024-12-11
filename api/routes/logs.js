@@ -40,11 +40,11 @@ console.log('DATA', data)
     logs = await baseClient.getContractEvents({
         abi: castPokerAbi,
         address: CAST_POKER_ADDRESS,
-        // address: [
-        //     CAST_POKER_ADDRESS,
-        // ],
+        address: [
+            CAST_POKER_ADDRESS,
+        ],
         // event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
-        // event: 'TableCreated',
+        event: 'TableCreated',
         // args: {
         //     from: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
         //     to: '0xa5cc3c03994db5b0d9a5eedd10cabab0813678ac'
