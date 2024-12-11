@@ -21,18 +21,20 @@ _NOTE: We've deployed these databases to ALL of our supporting networks._
 
 __Base | BASE__
 
-- Mainnet - __[0x4fD22578B85dC2bd70532D6C63be9F7925b4167f](https://basescan.org/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f#code)__
-- Sepolia - __[0x4fD22578B85dC2bd70532D6C63be9F7925b4167f](https://sepolia.basescan.org/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f#code)__
+- Mainnet - [__0x4fD22578B85dC2bd70532D6C63be9F7925b4167f__](https://basescan.org/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f#code)
+- Sepolia - [__0x4fD22578B85dC2bd70532D6C63be9F7925b4167f__](https://sepolia.basescan.org/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f#code)
 
 __Degen | DEGEN__
 
-- Mainnet - __[0x4fD22578B85dC2bd70532D6C63be9F7925b4167f](https://explorer.degen.tips/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f?tab=contract)__
+- Mainnet - [__0x4fD22578B85dC2bd70532D6C63be9F7925b4167f__](https://explorer.degen.tips/address/0x4fD22578B85dC2bd70532D6C63be9F7925b4167f?tab=contract)
 
 
 ## Cast Casino
 
 __Base | BASE__
 
-- Mainnet - __[0x6a529bE3545ED46fF4eEAD60eA32105D8300a564](https://basescan.org/address/0x6a529bE3545ED46fF4eEAD60eA32105D8300a564#code)
+- Mainnet - [__0x6a529bE3545ED46fF4eEAD60eA32105D8300a564 ( rev0 )__](https://basescan.org/address/0x6a529bE3545ED46fF4eEAD60eA32105D8300a564#code)
 
-- Sepolia - __[0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8](https://sepolia.basescan.org/address/0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8#code)
+- ~0x04a3736810D878AED77f5A7aC30B323BAe5b8105 ( calculation bug )~
+
+- Sepolia - [__0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8__](https://sepolia.basescan.org/address/0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8#code)
