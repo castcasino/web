@@ -16,12 +16,14 @@ export default async (req, res) => {
     /* Initialize locals. */
     let logs
 
-    logs = await baseClient.getLogs({
+    // logs = await baseClient.getLogs({
+    logs = await baseClient.getContractEvents({
         address: '0x04a3736810D878AED77f5A7aC30B323BAe5b8105',
         // address: [
         //     '0x04a3736810D878AED77f5A7aC30B323BAe5b8105', // CastPoker_00
         // ],
         // event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
+        // event: 'TableCreated',
         // args: {
         //     from: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
         //     to: '0xa5cc3c03994db5b0d9a5eedd10cabab0813678ac'
