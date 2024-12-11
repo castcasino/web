@@ -324,7 +324,7 @@ contract CastPoker is Ownable {
         uint8 _turn,
         uint8 _river
     ) external onlyAuthByCastCasino {
-        /* Set table. */
+        /* Initialize table. */
         Table storage table = tables[_tableid];
 
         /* Validate table status. */
@@ -378,7 +378,7 @@ contract CastPoker is Ownable {
         require(players[_tableid][msg.sender].id == address(0),
             "Oops! You CANNOT sit more than once at the same table.");
 
-        /* Set table. */
+        /* Initialize table. */
         Table storage table = tables[_tableid];
 
         /* Validate table status. */
@@ -437,7 +437,7 @@ contract CastPoker is Ownable {
         int8 _hole1,
         int8 _hole2
     ) external onlyAuthByCastCasino {
-        /* Set table. */
+        /* Initialize table. */
         Table storage table = tables[_tableid];
 
         /* Validate table status. */
@@ -472,7 +472,7 @@ contract CastPoker is Ownable {
     function showdown(
         uint _tableid
     ) external onlyAuthByCastCasino returns (bool) {
-        /* Set table. */
+        /* Initialize table. */
         Table storage table = tables[_tableid];
 
         /* Validate table status. */
@@ -498,7 +498,7 @@ contract CastPoker is Ownable {
         address _player,
         uint _amount
     ) external onlyAuthByCastCasino returns (bool) {
-        /* Set table. */
+        /* Initialize table. */
         Table storage table = tables[_tableid];
 
         /* Validate table status. */
@@ -565,7 +565,7 @@ contract CastPoker is Ownable {
     function close(
         uint _tableid
     ) external onlyAuthByCastCasino returns (bool) {
-        /* Set table. */
+        /* Initialize table. */
         Table storage table = tables[_tableid];
 
         /* Validate table status. */
@@ -583,6 +583,55 @@ contract CastPoker is Ownable {
      * GETTERS
      *
      */
+
+    /**
+     * Get Total Tables
+     *
+     * Total number of tables created by hosts.
+     */
+    function getTotalTables() public view returns (uint) {
+        /* Set hash. */
+        bytes32 hash = keccak256(abi.encodePacked(
+            _namespace, ".total.tables"
+        ));
+
+        /* Retrieve value from Cast Casino database. */
+        uint totalTables = _castCasinoDb.getUint(hash);
+
+        // NOTE: Adjust value for zero-index.
+        return totalTables + 1;
+    }
+
+    /**
+     * Get Chips
+     *
+     * Retrieve the total number of chips a player has earned
+     * for a specific asset.
+     */
+    function getChips(
+        uint _chainid,
+        address _player,
+        address _assetid
+    ) public view returns (uint) {
+        /* Initialize asset id. */
+        uint assetid;
+
+        if (_assetid == address(0)) {
+            assetid = _chainid;
+        } else {
+            assetid = uint160(_assetid);
+        }
+
+        /* Set hash. */
+        bytes32 hash = keccak256(abi.encodePacked(
+            _namespace, ".total.", assetid, ".chips.for", _player
+        ));
+
+        /* Retrieve value from Cast Casino database. */
+        uint totalChips = _castCasinoDb.getUint(hash);
+
+        return totalChips;
+    }
 
     /**
      * Get Revision (Number)

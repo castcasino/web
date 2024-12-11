@@ -1,23 +1,5 @@
 [
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tableid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_seed",
-				"type": "uint256"
-			}
-		],
-		"name": "buyIn",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -71,25 +53,6 @@
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tableid",
-				"type": "uint256"
-			}
-		],
-		"name": "close",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -133,72 +96,6 @@
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tableid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			},
-			{
-				"internalType": "int8",
-				"name": "_hole1",
-				"type": "int8"
-			},
-			{
-				"internalType": "int8",
-				"name": "_hole2",
-				"type": "int8"
-			}
-		],
-		"name": "dealCards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tableid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_flop1",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_flop2",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_flop3",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_turn",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_river",
-				"type": "uint8"
-			}
-		],
-		"name": "dealCommunityCards",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -216,35 +113,6 @@
 		],
 		"name": "OwnershipTransferred",
 		"type": "event"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tableid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_amount",
-				"type": "uint256"
-			}
-		],
-		"name": "payout",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -301,119 +169,6 @@
 		],
 		"name": "PlayerCardsDealt",
 		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			}
-		],
-		"name": "setBench",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address payable",
-				"name": "_newSuccessor",
-				"type": "address"
-			}
-		],
-		"name": "setSuccessor",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "success",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_seed",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_buyin",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_tts",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_seats",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_fomo",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "_theme",
-				"type": "uint8"
-			}
-		],
-		"name": "setTable",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_tableid",
-				"type": "uint256"
-			}
-		],
-		"name": "showdown",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"anonymous": false,
@@ -529,25 +284,8 @@
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "newOwner",
-				"type": "address"
-			}
-		],
-		"name": "transferOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
 		"stateMutability": "payable",
 		"type": "fallback"
-	},
-	{
-		"stateMutability": "payable",
-		"type": "receive"
 	},
 	{
 		"inputs": [
@@ -568,6 +306,138 @@
 				"internalType": "address",
 				"name": "token",
 				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_seed",
+				"type": "uint256"
+			}
+		],
+		"name": "buyIn",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			}
+		],
+		"name": "close",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			},
+			{
+				"internalType": "int8",
+				"name": "_hole1",
+				"type": "int8"
+			},
+			{
+				"internalType": "int8",
+				"name": "_hole2",
+				"type": "int8"
+			}
+		],
+		"name": "dealCards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_flop1",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_flop2",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_flop3",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_turn",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_river",
+				"type": "uint8"
+			}
+		],
+		"name": "dealCommunityCards",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_chainid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_assetid",
+				"type": "address"
+			}
+		],
+		"name": "getChips",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -614,6 +484,19 @@
 	},
 	{
 		"inputs": [],
+		"name": "getTotalTables",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "owner",
 		"outputs": [
 			{
@@ -623,6 +506,35 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_player",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "payout",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -669,6 +581,119 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_token",
+				"type": "address"
+			}
+		],
+		"name": "setBench",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address payable",
+				"name": "_newSuccessor",
+				"type": "address"
+			}
+		],
+		"name": "setSuccessor",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "success",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_seed",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_buyin",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_tts",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_seats",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_fomo",
+				"type": "uint8"
+			},
+			{
+				"internalType": "uint8",
+				"name": "_theme",
+				"type": "uint8"
+			}
+		],
+		"name": "setTable",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			}
+		],
+		"name": "showdown",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -771,5 +796,22 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	}
 ]
