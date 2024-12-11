@@ -9,7 +9,6 @@ import { ethClient } from '../clients/eth.js'
 
 /* Import contract ABI. */
 import { castPokerAbi } from '../abi/CastPoker.js'
-console.log('ABI', castPokerAbi)
 
 const CAST_POKER_ADDRESS = '0x04a3736810D878AED77f5A7aC30B323BAe5b8105'
 
@@ -21,18 +20,21 @@ export default async (req, res) => {
 
     /* Initialize locals. */
     let bytecode
+    let data
     let filter
     let logs
-
-    bytecode = await baseClient.getCode({
-        address: CAST_POKER_ADDRESS,
-    })
-console.log('BYTECODE', bytecode)
 
     filter = await baseClient.createContractEventFilter({
         abi: castPokerAbi,
     })
-console.log('FILTER', filter)
+// console.log('FILTER', filter)
+
+    data = await baseClient.readContract({
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        functionName: 'getTotalTables',
+    })
+console.log('DATA', data)
 
     // logs = await baseClient.getLogs({
     logs = await baseClient.getContractEvents({
