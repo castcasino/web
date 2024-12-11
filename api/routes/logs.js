@@ -7,6 +7,12 @@ import { baseClient } from '../clients/base.js'
 import { degenClient } from '../clients/degen.js'
 import { ethClient } from '../clients/eth.js'
 
+/* Import contract ABI. */
+import { castPokerAbi } from '../abi/CastPoker.json'
+console.log('ABI', castPokerAbi)
+
+const CAST_POKER_ADDRESS = '0x04a3736810D878AED77f5A7aC30B323BAe5b8105'
+
 /**
  * Logs Module
  */
@@ -14,13 +20,26 @@ export default async (req, res) => {
     console.log('BODY', req.body)
 
     /* Initialize locals. */
+    let bytecode
+    let filter
     let logs
+
+    bytecode = await baseClient.getCode({
+        address: CAST_POKER_ADDRESS,
+    })
+console.log('BYTECODE', bytecode)
+
+    filter = await baseClient.createContractEventFilter({
+        abi: castPokerAbi,
+    })
+console.log('FILTER', filter)
 
     // logs = await baseClient.getLogs({
     logs = await baseClient.getContractEvents({
-        address: '0x04a3736810D878AED77f5A7aC30B323BAe5b8105',
+        abi: castPokerAbi,
+        address: CAST_POKER_ADDRESS,
         // address: [
-        //     '0x04a3736810D878AED77f5A7aC30B323BAe5b8105', // CastPoker_00
+        //     CAST_POKER_ADDRESS,
         // ],
         // event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
         // event: 'TableCreated',
