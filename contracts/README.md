@@ -33,6 +33,6 @@ __Degen | DEGEN__
 
 __Base | BASE__
 
-- Mainnet - __[0x04a3736810D878AED77f5A7aC30B323BAe5b8105](https://basescan.org/address/0x04a3736810D878AED77f5A7aC30B323BAe5b8105#code)
+- Mainnet - __[0x6a529bE3545ED46fF4eEAD60eA32105D8300a564](https://basescan.org/address/0x6a529bE3545ED46fF4eEAD60eA32105D8300a564#code)
 
 - Sepolia - __[0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8](https://sepolia.basescan.org/address/0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8#code)
