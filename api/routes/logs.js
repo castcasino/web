@@ -20,7 +20,7 @@ export default async (req, res) => {
         address: [
             '0x04a3736810D878AED77f5A7aC30B323BAe5b8105', // CastPoker_00
         ],
-        event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
+        // event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
         // args: {
         //     from: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
         //     to: '0xa5cc3c03994db5b0d9a5eedd10cabab0813678ac'
