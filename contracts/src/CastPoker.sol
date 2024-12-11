@@ -598,8 +598,7 @@ contract CastPoker is Ownable {
         /* Retrieve value from Cast Casino database. */
         uint totalTables = _castCasinoDb.getUint(hash);
 
-        // NOTE: Adjust value for zero-index.
-        return totalTables + 1;
+        return totalTables;
     }
 
     /**
