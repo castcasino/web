@@ -28,17 +28,16 @@ export default async (req, res) => {
     let totalTables
     let unwatch
 
-    body = req.body
+    /* Validate body. */
+    if (req.body) {
+        body = req.body
+    }
 
-    if (body.tableid) {
+    /* Validate table id. */
+    if (typeof body.tableid !== 'undefined') {
         tableid = body.tableid
     }
 console.log('TABLE ID', tableid)
-
-    filter = await baseClient.createContractEventFilter({
-        abi: castPokerAbi,
-    })
-// console.log('FILTER', filter)
 
     totalTables = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,
