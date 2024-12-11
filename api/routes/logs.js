@@ -35,7 +35,7 @@ export default async (req, res) => {
         abi: castPokerAbi,
         functionName: 'getTotalTables',
     })
-console.log('DATA', data)
+console.log('DATA-1', data)
 
     unwatch = publicClient.watchContractEvent({
         address: CAST_POKER_ADDRESS,
@@ -43,6 +43,14 @@ console.log('DATA', data)
         onLogs: logs => console.log('WATCHED', logs),
         fromBlock: 1n
     })
+
+    data = await baseClient.readContract({
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        functionName: 'tables',
+        args: [1]
+    })
+console.log('DATA-2', data)
 
     // logs = await baseClient.getLogs({
     logs = await baseClient.getContractEvents({
