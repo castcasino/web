@@ -19,59 +19,51 @@ export default async (req, res) => {
     console.log('BODY', req.body)
 
     /* Initialize locals. */
+    let body
     let bytecode
-    let data
     let filter
     let logs
+    let tableid
+    let tableInfo
+    let totalTables
     let unwatch
+
+    body = req.body
+
+    if (body.tableid) {
+        tableid = body.tableid
+    }
+console.log('TABLE ID', tableid)
 
     filter = await baseClient.createContractEventFilter({
         abi: castPokerAbi,
     })
 // console.log('FILTER', filter)
 
-    data = await baseClient.readContract({
+    totalTables = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'getTotalTables',
     })
-console.log('DATA-1', data)
+console.log('TOTAL TABLES', totalTables)
 
-    unwatch = baseClient.watchContractEvent({
-        address: CAST_POKER_ADDRESS,
-        abi: castPokerAbi,
-        onLogs: logs => console.log('WATCHED', logs),
-        fromBlock: 1n
-    })
+    // unwatch = baseClient.watchContractEvent({
+    //     address: CAST_POKER_ADDRESS,
+    //     abi: castPokerAbi,
+    //     onLogs: logs => console.log('WATCHED', logs),
+    //     fromBlock: 1n
+    // })
 
-    data = await baseClient.readContract({
+    tableInfo = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'tables',
-        args: [2]
+        args: [tableid]
     })
-console.log('DATA-2', data)
-
-    // logs = await baseClient.getLogs({
-    logs = await baseClient.getContractEvents({
-        abi: castPokerAbi,
-        address: CAST_POKER_ADDRESS,
-        address: [
-            CAST_POKER_ADDRESS,
-        ],
-        // event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
-        event: 'TableCreated',
-        // args: {
-        //     from: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
-        //     to: '0xa5cc3c03994db5b0d9a5eedd10cabab0813678ac'
-        // },
-        // fromBlock: 16330000n,
-        // toBlock: 16330050n
-    }).catch(err => console.error(err))
-console.log('LOGS', logs)
+console.log('TABLE INFO', tableInfo)
 
     if (logs) {
-        return res.json(logs)
+        return res.json(tableInfo)
     } else {
         return res.json([])
     }
