@@ -23,6 +23,7 @@ export default async (req, res) => {
     let data
     let filter
     let logs
+    let unwatch
 
     filter = await baseClient.createContractEventFilter({
         abi: castPokerAbi,
@@ -35,6 +36,13 @@ export default async (req, res) => {
         functionName: 'getTotalTables',
     })
 console.log('DATA', data)
+
+    unwatch = publicClient.watchContractEvent({
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        onLogs: logs => console.log('WATCHED', logs),
+        fromBlock: 1n
+    })
 
     // logs = await baseClient.getLogs({
     logs = await baseClient.getContractEvents({
