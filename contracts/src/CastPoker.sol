@@ -589,7 +589,7 @@ contract CastPoker is Ownable {
      *
      * Total number of tables created by hosts.
      */
-    function getTotalTables() public view returns (uint) {
+    function getTotalTables() external view returns (uint) {
         /* Set hash. */
         bytes32 hash = keccak256(abi.encodePacked(
             _namespace, ".total.tables"
@@ -602,6 +602,20 @@ contract CastPoker is Ownable {
     }
 
     /**
+     * Get Seated
+     *
+     * Return the addresses of all players currently seated.
+     */
+    function getSeated(
+        uint _tableid
+    ) external view returns (address[] memory) {
+        /* Initialize table. */
+        Table storage table = tables[_tableid];
+
+        return table.seated;
+    }
+
+    /**
      * Get Chips
      *
      * Retrieve the total number of chips a player has earned
@@ -611,7 +625,7 @@ contract CastPoker is Ownable {
         uint _chainid,
         address _player,
         address _assetid
-    ) public view returns (uint) {
+    ) external view returns (uint) {
         /* Initialize asset id. */
         uint assetid;
 
@@ -635,21 +649,21 @@ contract CastPoker is Ownable {
     /**
      * Get Revision (Number)
      */
-    function getRevision() public view returns (uint) {
+    function getRevision() external view returns (uint) {
         return _revision;
     }
 
     /**
      * Get Predecessor (Address)
      */
-    function getPredecessor() public view returns (address) {
+    function getPredecessor() external view returns (address) {
         return _predecessor;
     }
 
     /**
      * Get Successor (Address)
      */
-    function getSuccessor() public view returns (address) {
+    function getSuccessor() external view returns (address) {
         return _successor;
     }
 
