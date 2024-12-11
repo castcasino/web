@@ -62,6 +62,11 @@ console.log('TOTAL TABLES', totalTables)
     })
 console.log('TABLE INFO', tableInfo)
 
+    tableInfo = JSON.stringify(tableInfo, (key, value) =>
+        typeof value === 'bigint' ? value.toString() + 'n' : value
+    )
+console.log('TABLE INFO (sanitized)', tableInfo)
+
     if (logs) {
         return res.json(tableInfo)
     } else {
