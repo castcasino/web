@@ -35,4 +35,4 @@ __Base | BASE__
 
 - Mainnet - __[0x04a3736810D878AED77f5A7aC30B323BAe5b8105](https://basescan.org/address/0x04a3736810D878AED77f5A7aC30B323BAe5b8105#code)
 
-- Sepolia - __[](https://basescan.org/address/#code)
+- Sepolia - __[0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8](https://sepolia.basescan.org/address/0xd439Dcea397EB32A40C8c46e7BF7000E523e2cB8#code)

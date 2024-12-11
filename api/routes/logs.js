@@ -16,16 +16,17 @@ export default async (req, res) => {
     /* Initialize locals. */
     let logs
 
-    logs = await ethClient.getLogs({
-        address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-        event: parseAbiItem('event Transfer(address indexed from, address indexed to, uint256)'),
-        // event: 'Transfer',
-        args: {
-            from: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
-            to: '0xa5cc3c03994db5b0d9a5eedd10cabab0813678ac'
-        },
-        fromBlock: 16330000n,
-        toBlock: 16330050n
+    logs = await baseClient.getLogs({
+        address: [
+            '0x04a3736810D878AED77f5A7aC30B323BAe5b8105', // CastPoker_00
+        ],
+        event: parseAbiItem('event TableCreated(uint indexed tableid, Table table)'),
+        // args: {
+        //     from: '0xd8da6bf26964af9d7eed9e03e53415d37aa96045',
+        //     to: '0xa5cc3c03994db5b0d9a5eedd10cabab0813678ac'
+        // },
+        // fromBlock: 16330000n,
+        // toBlock: 16330050n
     }).catch(err => console.error(err))
 console.log('LOGS', logs)
 
