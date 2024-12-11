@@ -37,7 +37,7 @@ export default async (req, res) => {
     })
 console.log('DATA-1', data)
 
-    unwatch = publicClient.watchContractEvent({
+    unwatch = baseClient.watchContractEvent({
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         onLogs: logs => console.log('WATCHED', logs),
