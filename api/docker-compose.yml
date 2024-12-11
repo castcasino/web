@@ -1,8 +1,8 @@
 services:
-  layer1api:
+  api:
     build: .
-    image: layer1api
-    container_name: layer1api
+    image: api
+    container_name: api
     restart: unless-stopped
     network_mode: 'host'
     # ports:
