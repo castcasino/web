@@ -4,6 +4,7 @@ import express from 'express'
 
 /* Import handlers. */
 import routesAdmin from './routes/admin.js'
+import routesLogs from './routes/logs.js'
 import routesMain from './routes/main.js'
 import routesNotif from './routes/notif.js'
 import routesSession from './routes/session.js'
@@ -46,6 +47,9 @@ app.post('/v1', routesMain)
 
 /* Initialize Administration route. */
 app.post('/v1/admin', routesAdmin)
+
+/* Initialize Notification route. */
+app.post('/v1/logs', routesLogs)
 
 /* Initialize Notification route. */
 app.post('/v1/notif', routesNotif)
