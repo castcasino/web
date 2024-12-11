@@ -21,7 +21,7 @@ export default async (req, res) => {
         },
         fromBlock: 16330000n,
         toBlock: 16330050n
-    })
+    }).catch(err => console.error(err))
 console.log('LOGS', logs)
 
     return res.json(logs)
