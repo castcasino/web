@@ -48,7 +48,7 @@ console.log('DATA-1', data)
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'tables',
-        args: [1]
+        args: [2]
     })
 console.log('DATA-2', data)
 
