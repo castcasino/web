@@ -66,7 +66,7 @@ console.log('TABLE INFO', tableInfo)
     )
 console.log('TABLE INFO (sanitized)', tableInfo)
 
-    if (logs) {
+    if (tableInfo) {
         return res.json(tableInfo)
     } else {
         return res.json([])
