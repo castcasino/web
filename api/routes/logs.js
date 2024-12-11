@@ -8,7 +8,7 @@ import { degenClient } from '../clients/degen.js'
 import { ethClient } from '../clients/eth.js'
 
 /* Import contract ABI. */
-import { castPokerAbi } from '../abi/CastPoker.json'
+import { castPokerAbi } from '../abi/CastPoker.js'
 console.log('ABI', castPokerAbi)
 
 const CAST_POKER_ADDRESS = '0x04a3736810D878AED77f5A7aC30B323BAe5b8105'

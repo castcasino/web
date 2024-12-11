@@ -1,4 +1,4 @@
-[
+export const castPokerAbi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -814,4 +814,4 @@
 		"stateMutability": "payable",
 		"type": "receive"
 	}
-]
+] as const
