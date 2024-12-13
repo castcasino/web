@@ -4,7 +4,7 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 // import superagent from 'superagent'
 import util from 'util'
-import { v4 as uuidv4 } from 'uuid-table'
+import { v4 as uuidv4 } from 'uuid'
 
 import _createTable from '../handlers/createTable.js'
 import _manageSession from '../handlers/manageSession.js'
