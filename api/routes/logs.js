@@ -23,6 +23,7 @@ export default async (req, res) => {
     let bytecode
     let filter
     let logs
+    let seated
     let tableid
     let tableInfo
     let totalTables
@@ -45,6 +46,13 @@ console.log('TABLE ID', tableid)
         functionName: 'getTotalTables',
     })
 console.log('TOTAL TABLES', totalTables)
+
+    seated = await baseClient.readContract({
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        functionName: 'getSeated',
+    })
+console.log('SEATED', seated)
 
     // unwatch = baseClient.watchContractEvent({
     //     address: CAST_POKER_ADDRESS,
