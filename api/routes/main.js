@@ -4,9 +4,10 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 // import superagent from 'superagent'
 import util from 'util'
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid-table'
 
-import _handleCreate from '../handlers/create.js'
+import _createTable from '../handlers/createTable.js'
+import _manageSession from '../handlers/manageSession.js'
 
 /* Initialize databases. */
 // const activityDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/nodes_activity_20241128`)
@@ -61,8 +62,10 @@ console.log('BODY', body)
         switch(method) {
         case 'reg':
             return _handleRegister(_req, _res)
-        case 'create':
-            return _handleCreate(_req, _res)
+        case 'create-table':
+            return _createTable(_req, _res)
+        case 'manage-session':
+            return _manageSession(_req, _res)
         case 'res':
             return _handleResponse(_req, _res)
         default:

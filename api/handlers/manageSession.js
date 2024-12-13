@@ -1,0 +1,86 @@
+/* Import modules. */
+import moment from 'moment'
+import PouchDB from 'pouchdb'
+import { v4 as uuidv4 } from 'uuid'
+
+/* Set today. */
+const TODAY = moment().format('YYYYMMDD')
+
+/* Initialize databases. */
+const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
+const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions`)
+
+export default async (_req, _res) => {
+    /* Initialize locals. */
+    let body
+    let error
+    let exec
+    let id
+    let createdAt
+    let request
+    let response
+    let sessionid
+    let status
+
+    /* Set body. */
+    body = _req.body
+
+    /* Set session id. */
+    sessionid = body.sessionid
+console.log('SESSION ID', sessionid)
+
+    /* Validate body params. */
+    if (typeof body !== 'undefined' && body !== null) {
+        /* Generate new ID. */
+        id = uuidv4()
+
+        /* Generate timestamp (in milliseconds). */
+        createdAt = moment().unix()
+
+        /* Add to logs db. */
+        logsDb.put({
+            _id: id,
+            body,
+            createdAt,
+        }).catch(err => console.error(err))
+
+        if (typeof body === 'string') {
+            try {
+                body = JSON.parse(body)
+            } catch (err) {
+                console.error(err)
+                return _res.json(err)
+            }
+        }
+
+        /* Add to sessions db. */
+        response = await sessionsDb
+            .put({
+                _id: id,
+                ...body,
+                createdAt,
+            }).catch(err => {
+                console.error(err)
+                error = JSON.stringify(err)
+            })
+console.log('RESPONSE (request)', response)
+
+        /* Validate response. */
+        if (response.ok === true) {
+            /* Return (request) response. */
+            return _res.json({
+                id,
+                success: true,
+                createdAt,
+            })
+        }
+    }
+
+    /* Return (request) error. */
+    _res.json({
+        id,
+        success: false,
+        error,
+        createdAt,
+    })
+}
