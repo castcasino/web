@@ -13,10 +13,11 @@ const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env
 export default async (_req, _res) => {
     /* Initialize locals. */
     let body
+    let createdAt
     let error
     let exec
     let id
-    let createdAt
+    let pkg
     let request
     let response
     let sessionid
@@ -44,9 +45,17 @@ console.log('SESSION ID', sessionid)
             createdAt,
         }).catch(err => console.error(err))
 
-        if (typeof body === 'string') {
+        pkg = body.pkg
+
+        if (typeof pkg === 'undefined' || pkg === null) {
+            return _res.json({
+                error: 'Oops! No pkg found!'
+            })
+        }
+
+        if (typeof pkg === 'string') {
             try {
-                body = JSON.parse(body)
+                pkg = JSON.parse(pkg)
             } catch (err) {
                 console.error(err)
                 return _res.json(err)
@@ -57,7 +66,7 @@ console.log('SESSION ID', sessionid)
         response = await sessionsDb
             .put({
                 _id: id,
-                ...body,
+                ...pkg,
                 createdAt,
             }).catch(err => {
                 console.error(err)
