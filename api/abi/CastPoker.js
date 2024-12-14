@@ -470,6 +470,25 @@ export const castPokerAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			}
+		],
+		"name": "getSeated",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getSuccessor",
 		"outputs": [
