@@ -1,7 +1,6 @@
 /* Import modules. */
 import moment from 'moment'
 import PouchDB from 'pouchdb'
-import { parseAbiItem } from 'viem'
 
 /* Import blockchain clients. */
 import { baseClient } from '../clients/base.js'
@@ -74,6 +73,6 @@ console.log('INDEX COMMUNITY (db)', idxCommunity)
 
     /* Check community. */
     if (idxCommunity.height < idxTables.height) {
-        _addNewTable(idxCommunity.height)
+        _addNewTable(idxCommunity)
     }
 }
