@@ -11,6 +11,8 @@ import { ethClient } from '../clients/eth.js'
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
 
+import _addNewTable from './addNewTable.js'
+
 /* Initialize databases. */
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
 const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
@@ -32,7 +34,8 @@ const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
  */
 export default async () => {
     /* Initialize locals. */
-    let idx
+    let idxCommunity
+    let idxTables
     let response
     let totalTables
 
@@ -44,24 +47,33 @@ export default async () => {
     })
 // console.log('TOTAL TABLES (contract)', totalTables)
 
-    idx = await systemDb.get('idx_tables')
+    idxTables = await systemDb.get('idx_tables')
         .catch(err => console.error(err))
-// console.log('TOTAL TABLES (db)', idx)
+// console.log('INDEX TABLES (db)', idxTables)
 
     /* Validate height. */
-    if (idx.height === Number(totalTables)) {
+    if (idxTables.height === Number(totalTables)) {
         return console.log('  Tables index is already up-to-date.')
+    } else {
+        idxTables.height = Number(totalTables) // cast from BigInt
+        idxTables.updatedAt = moment().unix()
+        // console.log('NEW IDX', idxTables)
+
+        await systemDb
+            .put(idxTables)
+            .catch(err => {
+                if (err.message !== 'Document update conflict.') {
+                    console.error(err)
+                }
+            })
     }
 
-    idx.height = Number(totalTables) // cast from BigInt
-    idx.updatedAt = moment().unix()
-    // console.log('NEW IDX', idx)
+    idxCommunity = await systemDb.get('idx_community')
+        .catch(err => console.error(err))
+console.log('INDEX COMMUNITY (db)', idxCommunity)
 
-    systemDb
-        .put(idx)
-        .catch(err => {
-            if (err.message !== 'Document update conflict.') {
-                console.error(err)
-            }
-        })
+    /* Check community. */
+    if (idxCommunity < idxTables) {
+        _addNewTable(idxCommunity)
+    }
 }
