@@ -20,9 +20,14 @@ export default async (_block) => {
 
     blocksBaseDb
         .put(pkg)
-        .catch(err => console.error(err))
+        .catch(err => {
+            if (err.message !== 'Document update conflict.') {
+                console.error(err)
+            }
+        })
 
-    const idx = await systemDb.get('idx_base')
+    const idx = await systemDb
+        .get('idx_base')
         .catch(err => console.error(err))
 // console.log('IDX', idx)
 
