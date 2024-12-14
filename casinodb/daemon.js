@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from 'uuid'
 import handleBlocksBase from './handlers/blocksBase.js'
 import handleBlocksDegen from './handlers/blocksDegen.js'
 import handleBlocksEth from './handlers/blocksEth.js'
+
+import handleCommunity from './handlers/community.js'
 import handleTables from './handlers/tables.js'
 
 /* Import blockchain clients. */
@@ -16,7 +18,7 @@ import { ethClient } from './clients/eth.js'
 
 /* Set constants. */
 const TABLES_INTERVAL = 5000
-const WALLET_INTERVAL = 15000
+const COMMUNITY_INTERVAL = 15000
 
 // TODO Replace with @nexajs/utils
 const jsonParse = (_data, _transform = true) => {
@@ -75,10 +77,9 @@ console.info('\n  Starting Cast Casino daemon...\n')
         // console.log('Managing Tables...')
         handleTables()
     }, TABLES_INTERVAL)
-return
 
     setInterval(() => {
-        console.log('Managing Community Cards...')
-        handleCommunityCards()
-    }, WALLET_INTERVAL)
+        console.log('Managing Community...')
+        handleCommunity()
+    }, COMMUNITY_INTERVAL)
 })()
