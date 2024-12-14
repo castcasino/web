@@ -6,6 +6,7 @@
 
 export const selectCard = (_activeDeck, _hashIdx, _numCards = 1) => {
 console.log('ACTIVE DECK', _activeDeck)
+console.log('HASH INDEX', _hashIdx[0], _hashIdx)
     /* Initialize locals. */
     // let activeDeck
     let numRemaining
@@ -19,7 +20,7 @@ console.log('ACTIVE DECK', _activeDeck)
 console.log('NUM REMAINING', numRemaining)
 
     /* Calculate selected index. */
-    selectedIdx = numRemaining % _hashIdx
+    selectedIdx = numRemaining % _hashIdx[0]
 console.log('SELECTED INDEX', selectedIdx)
 
     selected = _activeDeck[selectedIdx]
