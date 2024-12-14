@@ -48,7 +48,7 @@ console.log('TOTAL TABLES (contract)', totalTables)
         .catch(err => console.error(err))
 console.log('TOTAL TABLES (db)', idx)
 
-    idx.height = totalTables
+    idx.height = Numeric(totalTables) // cast from BigInt
     idx.updatedAt = moment().unix()
     // console.log('NEW IDX', idx)
 
