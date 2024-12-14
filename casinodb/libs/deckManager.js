@@ -22,7 +22,7 @@ console.log('HASH INDEX', _hashIdx)
     hashByte1 = _hashIdx.slice(0, 2)
 console.log('HASH BYTE-1', hashByte1)
 
-    hashVal1 = parseInt(hashByte1), 16)
+    hashVal1 = parseInt((hashByte1), 16)
 console.log('HASH VALUE-1', hashVal1)
 
     /* Calculate remaining cards. */
