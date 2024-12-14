@@ -42,11 +42,16 @@ export default async () => {
         abi: castPokerAbi,
         functionName: 'getTotalTables',
     })
-console.log('TOTAL TABLES (contract)', totalTables)
+// console.log('TOTAL TABLES (contract)', totalTables)
 
     idx = await systemDb.get('idx_tables')
         .catch(err => console.error(err))
-console.log('TOTAL TABLES (db)', idx)
+// console.log('TOTAL TABLES (db)', idx)
+
+    /* Validate height. */
+    if (idx.height === Number(totalTables)) {
+        return console.log('  Tables index is already up-to-date.')
+    }
 
     idx.height = Number(totalTables) // cast from BigInt
     idx.updatedAt = moment().unix()
@@ -59,5 +64,4 @@ console.log('TOTAL TABLES (db)', idx)
                 console.error(err)
             }
         })
-
 }
