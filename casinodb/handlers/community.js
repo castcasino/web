@@ -50,11 +50,11 @@ console.log('UNSET', unset)
 
     /* Validate unset. */
     if (unset) {
-        const fullDeck = fullDeck()
-console.log('FULL DECK', fullDeck)
+        const activeDeck = fullDeck()
+console.log('(FULL) DECK', activeDeck)
 
         const selected = selectCard(
-            fullDeck,
+            activeDeck,
             '0x13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
             1,
         )
