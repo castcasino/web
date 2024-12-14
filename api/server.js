@@ -8,6 +8,7 @@ import routesLogs from './routes/logs.js'
 import routesMain from './routes/main.js'
 import routesNotif from './routes/notif.js'
 import routesSession from './routes/session.js'
+import routesTables from './routes/tables.js'
 
 /* Set constants. */
 const HOST = process.env.HOST || '127.0.0.1'
@@ -41,6 +42,9 @@ const welcome = `
 app.get('/v1', (req, res) => {
     res.end(welcome)
 })
+
+/* Initialize Getters. */
+app.post('/v1/tables/active', routesTables)
 
 /* Initialize General route. */
 app.post('/v1', routesMain)
