@@ -21,8 +21,8 @@ export default async () => {
 // console.log('MANAGING COMMUNITY')
 
     /* Initialize locals. */
-    let community
     let response
+    let unset
 
     response = await pokerTablesDb
         .query('api/unsetTables', {
@@ -31,11 +31,19 @@ export default async () => {
         .catch(err => console.error(err))
 console.log('RESPONSE (unset tables)', response)
 
-    /* Set community. */
-    community = response.community
+    /* Validate response. */
+    if (!response || response.total_rows === 0) {
+        return console.log('  All tables are set!')
+    }
 
-    /* Validate table. */
-    if (community) {
+    /* Set unset. */
+    unset = response.rows.map((_unset) => {
+        return _unset.doc
+    })
+console.log('UNSET', unset)
+
+    /* Validate unset. */
+    if (unset) {
 
     }
 }
