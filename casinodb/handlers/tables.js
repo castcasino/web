@@ -53,7 +53,7 @@ export default async () => {
 
     /* Validate height. */
     if (idxTables.height === Number(totalTables)) {
-        return console.log('  Tables index is already up-to-date.')
+        console.log('  Tables index is already up-to-date.')
     } else {
         idxTables.height = Number(totalTables) // cast from BigInt
         idxTables.updatedAt = moment().unix()
