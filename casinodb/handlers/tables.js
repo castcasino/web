@@ -69,7 +69,7 @@ export default async () => {
 
     idxCommunity = await systemDb.get('idx_community')
         .catch(err => console.error(err))
-console.log('INDEX COMMUNITY (db)', idxCommunity)
+// console.log('INDEX COMMUNITY (db)', idxCommunity)
 
     /* Check community. */
     if (idxCommunity.height < idxTables.height) {

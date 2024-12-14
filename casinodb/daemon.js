@@ -72,13 +72,13 @@ console.info('\n  Starting Cast Casino daemon...\n')
         })
 
     setInterval(() => {
-        console.log('Managing Tables...')
+        // console.log('Managing Tables...')
         handleTables()
     }, TABLES_INTERVAL)
 return
 
     setInterval(() => {
-        console.log('Managing Wallet queue...')
-        handleWalletQueue()
+        console.log('Managing Community Cards...')
+        handleCommunityCards()
     }, WALLET_INTERVAL)
 })()

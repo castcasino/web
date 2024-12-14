@@ -18,7 +18,7 @@ const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 
 export default async (_idxCommunity) => {
-console.log('ADDING NEW TABLE', _idxCommunity)
+// console.log('ADDING NEW TABLE', _idxCommunity)
 
     /* Initialize locals. */
     let seated
@@ -35,7 +35,7 @@ console.log('ADDING NEW TABLE', _idxCommunity)
         functionName: 'tables',
         args: [tableid]
     })
-console.log('TABLE INFO (raw)', tableInfo)
+// console.log('TABLE INFO (raw)', tableInfo)
 
     tableInfo = {
         state: tableInfo[0],
@@ -52,7 +52,7 @@ console.log('TABLE INFO (raw)', tableInfo)
         community: tableInfo[11],
         seated,
     }
-console.log('TABLE INFO (parsed)', tableInfo)
+// console.log('TABLE INFO (parsed)', tableInfo)
 
     pokerTablesDb.put({
         _id: tableid.toString(),
