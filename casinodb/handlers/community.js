@@ -10,6 +10,9 @@ import { ethClient } from '../clients/eth.js'
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
 
+/* Import deck manager (utils). */
+import { fullDeck } from '../libs/deckManager.js'
+
 /* Initialize databases. */
 const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_base`)
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
@@ -29,7 +32,7 @@ export default async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-console.log('RESPONSE (unset tables)', response)
+// console.log('RESPONSE (unset tables)', response)
 
     /* Validate response. */
     if (!response || response.total_rows === 0) {
@@ -44,6 +47,6 @@ console.log('UNSET', unset)
 
     /* Validate unset. */
     if (unset) {
-
+        console.log('FULL DECK', fullDeck())
     }
 }
