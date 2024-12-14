@@ -51,6 +51,7 @@ console.log('TOTAL TABLES', totalTables)
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'getSeated',
+        args: [BigInt(tableid)]
     })
 console.log('SEATED', seated)
 
