@@ -8,15 +8,12 @@ import { baseClient } from '../clients/base.js'
 import { degenClient } from '../clients/degen.js'
 import { ethClient } from '../clients/eth.js'
 
-// import gameplay from './_gameplay.js'
-// import getSender from './_getSender.js'
+/* Import contract ABI. */
+import castPokerAbi from '../abi/CastPoker.js'
 
 /* Initialize databases. */
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
 const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
-
-/* Import contract ABI. */
-import castPokerAbi from '../abi/CastPoker.js'
 
 /* Initialize constants. */
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
