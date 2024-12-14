@@ -30,7 +30,7 @@ console.log('HASH VALUE-1', hashVal1)
 console.log('NUM REMAINING', numRemaining)
 
     /* Calculate selected index. */
-    selectedIdx = numRemaining % hashVal1
+    selectedIdx = (numRemaining % hashVal1)
 console.log('SELECTED INDEX', selectedIdx)
 
     selected = _activeDeck[selectedIdx]
@@ -40,6 +40,7 @@ console.log('SELECTED', selected)
     updatedDeck = _activeDeck.splice(selectedIdx)
 console.log('UPDATED DECK', updatedDeck)
 
+    return selected
 }
 
 export const fullDeck = () => {
