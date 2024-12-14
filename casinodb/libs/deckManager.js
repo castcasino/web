@@ -4,7 +4,7 @@
  * Provides ALL functions for managing a deck of cards.
  */
 
-export const selectCard = (_activeDeck, _hashIdx) => {
+export const selectCard = (_activeDeck, _hashIdx, _numCards = 1) => {
 console.log('ACTIVE DECK', _activeDeck)
     /* Initialize locals. */
     // let activeDeck
@@ -12,6 +12,7 @@ console.log('ACTIVE DECK', _activeDeck)
     let selectedCard
     let selectedIdx
     let selected
+    let updatedDeck
 
     /* Calculate remaining cards. */
     numRemaining = _activeDeck.length
@@ -20,6 +21,13 @@ console.log('NUM REMAINING', numRemaining)
     /* Calculate selected index. */
     selectedIdx = numRemaining % _hashIdx
 console.log('SELECTED INDEX', selectedIdx)
+
+    selected = _activeDeck[selectedIdx]
+console.log('SELECTED', selected)
+
+    // updatedDeck = [ ..._activeDeck ].splice(selectedIdx)
+    updatedDeck = _activeDeck.splice(selectedIdx)
+console.log('UPDATED DECK', updatedDeck)
 
 }
 

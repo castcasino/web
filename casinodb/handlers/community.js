@@ -11,7 +11,10 @@ import { ethClient } from '../clients/eth.js'
 import castPokerAbi from '../abi/CastPoker.js'
 
 /* Import deck manager (utils). */
-import { fullDeck } from '../libs/deckManager.js'
+import {
+    fullDeck,
+    selectCard,
+} from '../libs/deckManager.js'
 
 /* Initialize databases. */
 const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_base`)
@@ -47,6 +50,14 @@ console.log('UNSET', unset)
 
     /* Validate unset. */
     if (unset) {
-        console.log('FULL DECK', fullDeck())
+        const fullDeck = fullDeck()
+console.log('FULL DECK', fullDeck)
+
+        const selected = selectCard(
+            fullDeck,
+            '0x13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
+            1,
+        )
+console.log('SELECTED CARD', selected)
     }
 }
