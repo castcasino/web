@@ -73,7 +73,7 @@ export default async () => {
 console.log('INDEX COMMUNITY (db)', idxCommunity)
 
     /* Check community. */
-    if (idxCommunity < idxTables) {
-        _addNewTable(idxCommunity)
+    if (idxCommunity.height < idxTables.height) {
+        _addNewTable(idxCommunity.height)
     }
 }
