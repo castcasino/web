@@ -10,6 +10,7 @@ import { ethClient } from '../clients/eth.js'
 /* Import contract ABI. */
 import { castPokerAbi } from '../abi/CastPoker.js'
 
+/* Initialize constants. */
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 
 /**

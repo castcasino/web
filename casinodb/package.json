@@ -1,6 +1,6 @@
 {
   "name": "casinodb",
-  "version": "24.9.12",
+  "version": "24.12.14",
   "description": "Manages data storage, indexing and broadcast functions for the Games database.",
   "main": "index.js",
   "type": "module",
@@ -14,6 +14,7 @@
     "nodemailer": "6.9.15",
     "numeral": "2.0.6",
     "pouchdb": "9.0.0",
-    "uuid": "10.0.0"
+    "uuid": "10.0.0",
+    "viem": "2.21.55"
   }
 }
