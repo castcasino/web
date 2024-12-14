@@ -1,6 +1,5 @@
 /* Import modules. */
 import moment from 'moment'
-import { parseAbiItem } from 'viem'
 
 /* Import blockchain clients. */
 import { baseClient } from '../clients/base.js'
