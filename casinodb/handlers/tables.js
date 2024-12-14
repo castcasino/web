@@ -44,11 +44,11 @@ export default async () => {
     })
 console.log('TOTAL TABLES (contract)', totalTables)
 
-    idx = await systemDb.get('total_tables')
+    idx = await systemDb.get('idx_tables')
         .catch(err => console.error(err))
 console.log('TOTAL TABLES (db)', idx)
 
-    idx.height = Numeric(totalTables) // cast from BigInt
+    idx.height = Number(totalTables) // cast from BigInt
     idx.updatedAt = moment().unix()
     // console.log('NEW IDX', idx)
 
