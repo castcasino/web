@@ -4,9 +4,9 @@ import PouchDB from 'pouchdb'
 import { parseAbiItem } from 'viem'
 
 /* Import blockchain clients. */
-import { baseClient } from './clients/base.js'
-import { degenClient } from './clients/degen.js'
-import { ethClient } from './clients/eth.js'
+import { baseClient } from '../clients/base.js'
+import { degenClient } from '../clients/degen.js'
+import { ethClient } from '../clients/eth.js'
 
 // import gameplay from './_gameplay.js'
 // import getSender from './_getSender.js'
