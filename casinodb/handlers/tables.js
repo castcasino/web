@@ -11,7 +11,7 @@ import { ethClient } from '../clients/eth.js'
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
 
-import _addNewTable from './addNewTable.js'
+import _addNewTable from './_addNewTable.js'
 
 /* Initialize databases. */
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
