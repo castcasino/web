@@ -32,6 +32,7 @@ export default async () => {
     /* Initialize locals. */
     let activeDeck
     let communityHashes
+    let communityPkg
     let dealer
     let response
     let selected
