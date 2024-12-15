@@ -7,6 +7,7 @@ import routesAdmin from './routes/admin.js'
 import routesLogs from './routes/logs.js'
 import routesMain from './routes/main.js'
 import routesNotif from './routes/notif.js'
+import routesQuotes from './routes/quotes.js'
 import routesSession from './routes/session.js'
 
 import routesPokerTables from './routes/poker/tables.js'
@@ -48,6 +49,7 @@ app.get('/v1', (req, res) => {
 app.get('/v1/poker/tables/active', routesPokerTables)
 app.get('/v1/poker/table/:tableid', routesPokerTables)
 app.get('/v1/poker/table/next/:nextid', routesPokerTables)
+app.get('/v1/quotes', routesQuotes)
 
 /* Initialize General route. */
 app.post('/v1', routesMain)
