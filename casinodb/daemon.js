@@ -13,8 +13,9 @@ import handleBlocksEth from './handlers/blocksEth.js'
 import baseWallet from './wallets/base.js'
 
 import handleCommunity from './handlers/community.js'
-import handleUnseated from './handlers/unseated.js'
+import handleQuotes from './handlers/quotes.js'
 import handleTables from './handlers/tables.js'
+import handleUnseated from './handlers/unseated.js'
 
 /* Import blockchain clients. */
 import { baseClient } from './clients/base.js'
@@ -24,8 +25,8 @@ import { ethClient } from './clients/eth.js'
 /* Set constants. */
 const COMMUNITY_INTERVAL = 15000
 const HASHES_INTERVAL = 15000
-const TABLES_INTERVAL = 5000
 const QUOTES_INTERVAL = 60000
+const TABLES_INTERVAL = 5000
 
 // TODO Replace with @nexajs/utils
 const jsonParse = (_data, _transform = true) => {
