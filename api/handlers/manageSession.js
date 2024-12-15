@@ -68,7 +68,7 @@ console.log('SESSION ID', sessionid)
 // FIXME WE MUST AUTHENTICATE THE DATA BEFORE STORING
         if (pkg && pkg.user) {
             response = await playersDb
-                .get(pkg.user.fid)
+                .get(pkg.user.fid.toString())
                 .catch(err => console.error(err))
 console.log('PLAYER RESPONSE', response)
 
