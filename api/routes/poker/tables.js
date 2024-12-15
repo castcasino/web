@@ -50,7 +50,11 @@ console.log('NEXT (TABLE) ID', nextid)
             .catch(err => console.error(err))
 console.log('RESPONSE (next table)', response)
 
-        /* Return table. */
+        /* Sanitize. */
+        delete response._id
+        delete response._rev
+
+        /* Return (next) table. */
         return res.json(response)
     }
 
