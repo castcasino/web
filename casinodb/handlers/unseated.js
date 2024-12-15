@@ -27,8 +27,8 @@ export default async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-console.log('RESPONSE (unseated tables)', response)
-return
+// console.log('RESPONSE (unseated tables)', response)
+
     /* Validate response. */
     if (!response || response.total_rows === 0) {
         return console.log('  All tables are seated!')
