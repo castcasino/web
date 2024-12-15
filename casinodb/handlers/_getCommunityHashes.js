@@ -21,7 +21,7 @@ const _requestBlocks = async () => {
     console.log('RESPONSE (blocks)', response)
 
 // FIXME ALL 5 BLOCKS MUST BE SEQUENTIAL -- OR ELSE TRY AGAIN!!
-    /* Validate response. */.
+    /* Validate response. */
     if (typeof response !== 'undefined' && response !== null) {
         // sleep(RETRY_DELAY)
         // return _requestBlocks()
