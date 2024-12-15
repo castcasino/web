@@ -15,7 +15,8 @@ export default async () => {
     quotes = {}
 
     response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,CNY,JPY,GBP')
-console.log('RESPONSE (quote)', response)
+        .catch(err => console.error(err))
+// console.log('RESPONSE (quote)', response)
 
     quotes.ETH = await response.json()
 console.log('QUOTES', quotes)
@@ -25,6 +26,22 @@ console.log('RESPONSE (quote)', response)
 
     quotes.DEGEN = await response.json()
 console.log('QUOTES', quotes)
+
+    response = await systemDb
+        .get('quotes')
+        .catch(err => console.error(err))
+
+    if (response) {
+        response = {
+            ...response,
+            ...quotes,
+            updatedAt: moment().unix()
+        }
+
+        await systemDb
+            .put(response)
+            .catch(err => console.error(err))
+    }
 
     /* Return quotes. */
     return quotes
