@@ -10,6 +10,8 @@ import { ethClient } from '../clients/eth.js'
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
 
+import _getCommunityHashes from './_getCommunityHashes.js'
+
 /* Import deck manager (utils). */
 import {
     fullDeck,
@@ -51,7 +53,13 @@ export default async () => {
 console.log('UNSET', unset)
 
     /* Validate unset. */
-    if (unset) {
+    if (unset && unset.length > 0) {
+        dealer = unset[0]
+console.log('DEALER', dealer)
+
+        communityHashes = await _getCommunityHashes()
+console.log('COMMUNITY HASHES', communityHashes)
+
         const activeDeck = fullDeck()
 // console.log('(FULL) DECK', activeDeck.length, activeDeck)
 
