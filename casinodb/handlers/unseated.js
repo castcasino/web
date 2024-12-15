@@ -21,6 +21,7 @@ export default async () => {
 
     /* Initialize locals. */
     let response
+    let unseated
 
     response = await pokerTablesDb
         .query('api/unseated', {
