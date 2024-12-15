@@ -47,6 +47,7 @@ const jsonParse = (_data, _transform = true) => {
 console.info('\n  Starting Cast Casino daemon...\n')
 ;(async () => {
     console.log('MNEMONIC', process.env.MNEMONIC)
+    console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
     // handlePlaysQueue()
     // handleWalletQueue()
 
