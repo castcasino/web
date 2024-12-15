@@ -30,6 +30,9 @@ export default async () => {
 // console.log('MANAGING COMMUNITY')
 
     /* Initialize locals. */
+    let activeDeck
+    let communityHashes
+    let dealer
     let response
     let selected
     let unset
@@ -60,7 +63,7 @@ console.log('DEALER', dealer)
         communityHashes = await _getCommunityHashes()
 console.log('COMMUNITY HASHES', communityHashes)
 
-        const activeDeck = fullDeck()
+        activeDeck = fullDeck()
 // console.log('(FULL) DECK', activeDeck.length, activeDeck)
 
         selected = selectCards(
