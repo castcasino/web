@@ -24,10 +24,10 @@ console.log('HASH INDEX', _hashIdx)
     cards = []
 
     hashByte1 = _hashIdx.slice(0, 2)
-console.log('HASH BYTE-1', hashByte1)
+console.log('HASH BYTE (card #1)', hashByte1)
 
     hashVal1 = parseInt((hashByte1), 16)
-console.log('HASH VALUE-1', hashVal1)
+console.log('HASH VALUE (card #1)', hashVal1)
 
     /* Calculate remaining cards. */
     numRemaining = _activeDeck.length
@@ -48,10 +48,10 @@ console.log('SELECTED', selected)
 
     if (_numCards === 2) {
         hashByte2 = _hashIdx.slice(-2)
-console.log('HASH BYTE-2', hashByte2)
+console.log('HASH BYTE (card #2)', hashByte2)
 
         hashVal2 = parseInt((hashByte2), 16)
-console.log('HASH VALUE-2', hashVal2)
+console.log('HASH VALUE (card #2)', hashVal2)
 
         /* Calculate remaining cards. */
         numRemaining = _activeDeck.length

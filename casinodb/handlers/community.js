@@ -28,6 +28,7 @@ export default async () => {
 
     /* Initialize locals. */
     let response
+    let selected
     let unset
 
     response = await pokerTablesDb
@@ -51,14 +52,22 @@ console.log('UNSET', unset)
     /* Validate unset. */
     if (unset) {
         const activeDeck = fullDeck()
-console.log('(FULL) DECK', activeDeck.length, activeDeck)
+// console.log('(FULL) DECK', activeDeck.length, activeDeck)
 
-        const selected = selectCards(
+        selected = selectCards(
             activeDeck,
             '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
             1,
         )
-console.log('SELECTED CARD', selected)
-console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
+console.log('SELECTED CARD-1', selected)
+console.log('ACTIVE DECK (original)-1', activeDeck.length, activeDeck)
+
+        selected = selectCards(
+            activeDeck,
+            '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
+            2,
+        )
+console.log('SELECTED CARD-2', selected)
+console.log('ACTIVE DECK (original)-2', activeDeck.length, activeDeck)
     }
 }
