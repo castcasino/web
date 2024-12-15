@@ -43,7 +43,7 @@ console.log('SELECTED INDEX', selectedIdx)
 console.log('SELECTED', selected)
 
     // updatedDeck = [ ..._activeDeck ].splice(selectedIdx)
-    updatedDeck = _activeDeck.splice(selectedIdx)
+    updatedDeck = _activeDeck.splice(selectedIdx, 1)
 console.log('UPDATED DECK', updatedDeck)
 console.log('ACTIVE DECK (spliced)', _activeDeck)
 
