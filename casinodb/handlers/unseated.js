@@ -31,40 +31,13 @@ console.log('RESPONSE (unseated tables)', response)
 return
     /* Validate response. */
     if (!response || response.total_rows === 0) {
-        return console.log('  All tables are set!')
+        return console.log('  All tables are seated!')
     }
 
-    /* Set unset. */
-    unset = response.rows.map((_unset) => {
+    /* Set unseated. */
+    unseated = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('UNSET', unset)
+console.log('UNSEATED', unseated)
 
-    /* Validate unset. */
-    if (unset && unset.length > 0) {
-        dealer = unset[0]
-console.log('DEALER', dealer)
-
-        communityHashes = await _getCommunityHashes()
-console.log('COMMUNITY HASHES', communityHashes)
-
-        activeDeck = fullDeck()
-// console.log('(FULL) DECK', activeDeck.length, activeDeck)
-
-        selected = selectCards(
-            activeDeck,
-            '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
-            1,
-        )
-console.log('SELECTED CARD-1', selected, indexLookup(selected[0]))
-// console.log('ACTIVE DECK (original)-1', activeDeck.length, activeDeck)
-
-        selected = selectCards(
-            activeDeck,
-            '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
-            2,
-        )
-console.log('SELECTED CARD-2', selected, indexLookup(selected[0]), indexLookup(selected[1]))
-// console.log('ACTIVE DECK (original)-2', activeDeck.length, activeDeck)
-    }
 }
