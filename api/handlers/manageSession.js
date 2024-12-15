@@ -66,7 +66,7 @@ console.log('SESSION ID', sessionid)
 
         /* Validate package. */
 // FIXME WE MUST AUTHENTICATE THE DATA BEFORE STORING
-        if (pkg && pkg.user && pkg.client) {
+        if (pkg && pkg.user) {
             response = await playersDb
                 .get(pkg.user.fid)
                 .catch(err => console.error(err))
@@ -75,7 +75,9 @@ console.log('SESSION ID', sessionid)
             if (typeof response === 'undefined' || response === null) {
                 await playersDb.put({
                     _id: pkg.user.fid.toString(),
+                    address: pkg.address,
                     ...pkg.user,
+                    ...pkg.client,
                     createdAt,
                 }).catch(err => console.error(err))
             }
