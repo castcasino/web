@@ -59,7 +59,7 @@ console.info('\n  Starting Cast Casino daemon...\n')
 console.log('BASE ACCOUNTS', accounts)
 
     const balance = await baseClient.getBalance({
-        address: accounts,
+        address: accounts[0],
         blockTag: 'safe'
     })
     const balanceAsEther = formatEther(balance)
