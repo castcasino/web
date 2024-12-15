@@ -47,6 +47,7 @@ app.get('/v1', (req, res) => {
 /* Initialize Getters. */
 app.get('/v1/poker/tables/active', routesPokerTables)
 app.get('/v1/poker/table/:tableid', routesPokerTables)
+app.get('/v1/poker/table/next/:nextid', routesPokerTables)
 
 /* Initialize General route. */
 app.post('/v1', routesMain)

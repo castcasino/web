@@ -4,6 +4,7 @@ import PouchDB from 'pouchdb'
 
 /* Initialize databases. */
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
+const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
 
 /**
  * Administration Module
@@ -12,6 +13,7 @@ export default async (req, res) => {
 // console.log('BODY', req.body)
 
     /* Initialize locals. */
+    let nextid
     let response
     let table
     let tableid
@@ -35,6 +37,21 @@ export default async (req, res) => {
 
         /* Return table. */
         return res.json(table)
+    }
+
+    /* Validate table id. */
+    if (req.params && req.params.nextid) {
+        /* Set table id. */
+        nextid = req.params.nextid
+console.log('NEXT (TABLE) ID', nextid)
+
+        response = await systemDb
+            .get('next_table')
+            .catch(err => console.error(err))
+console.log('RESPONSE (next table)', response)
+
+        /* Return table. */
+        return res.json(response)
     }
 
     response = await pokerTablesDb
