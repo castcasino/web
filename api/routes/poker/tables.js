@@ -9,7 +9,7 @@ const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.
  * Administration Module
  */
 export default async (req, res) => {
-    console.log('BODY', req.body)
+// console.log('BODY', req.body)
 
     /* Initialize locals. */
     let response
@@ -21,13 +21,13 @@ export default async (req, res) => {
     if (req.params && req.params.tableid) {
         /* Set table id. */
         tableid = req.params.tableid
-console.log('TABLE ID', tableid)
+// console.log('TABLE ID', tableid)
 
         /* Request table. */
         table = await pokerTablesDb
             .get(tableid)
             .catch(err => console.error(err))
-console.log('TABLE', table)
+// console.log('TABLE', table)
 
         /* Sanitize table. */
         delete table._id
@@ -42,7 +42,7 @@ console.log('TABLE', table)
             include_docs: true,
         })
         .catch(err => console.error(err))
-console.log('RESPONSE', response)
+// console.log('RESPONSE', response)
 
     /* Fitler tables. */
     tables = response.rows.filter(_table => {
