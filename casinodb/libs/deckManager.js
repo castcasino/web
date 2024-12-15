@@ -49,7 +49,7 @@ console.log('ACTIVE DECK (spliced)', _activeDeck.length, _activeDeck)
 
     return {
         cards: [selected],
-        deck:
+        deck: _activeDeck,
     }
 }
 
