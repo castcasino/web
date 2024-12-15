@@ -22,9 +22,10 @@ import { degenClient } from './clients/degen.js'
 import { ethClient } from './clients/eth.js'
 
 /* Set constants. */
-const TABLES_INTERVAL = 5000
 const COMMUNITY_INTERVAL = 15000
 const HASHES_INTERVAL = 15000
+const TABLES_INTERVAL = 5000
+const QUOTES_INTERVAL = 60000
 
 // TODO Replace with @nexajs/utils
 const jsonParse = (_data, _transform = true) => {
@@ -92,6 +93,11 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
             includeTransactions: false,
             onBlock: handleBlocksEth,
         })
+
+    setInterval(() => {
+        // console.log('Managing Tables...')
+        handleQuotes()
+    }, QUOTES_INTERVAL)
 
     setInterval(() => {
         // console.log('Managing Tables...')
