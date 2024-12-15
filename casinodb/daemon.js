@@ -13,7 +13,7 @@ import handleBlocksEth from './handlers/blocksEth.js'
 import baseWallet from './wallets/base.js'
 
 import handleCommunity from './handlers/community.js'
-import handleHashes from './handlers/hashes.js'
+import handleExecution from './handlers/execution.js'
 import handleTables from './handlers/tables.js'
 
 /* Import blockchain clients. */
@@ -99,12 +99,12 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
     }, TABLES_INTERVAL)
 
     setInterval(() => {
-        console.log('Managing Hashes...')
-        handleHashes()
-    }, HASHES_INTERVAL)
+        console.log('Managing Community...')
+        handleCommunity()
+    }, COMMUNITY_INTERVAL)
 
-    // setInterval(() => {
-    //     console.log('Managing Community...')
-    //     handleCommunity()
-    // }, COMMUNITY_INTERVAL)
+    setInterval(() => {
+        console.log('Managing Executions...')
+        handleExecution()
+    }, HASHES_INTERVAL)
 })()

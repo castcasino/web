@@ -27,8 +27,8 @@ const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 
 export default async () => {
-// console.log('MANAGING COMMUNITY')
-
+console.log('MANAGING EXECUTION')
+return
     /* Initialize locals. */
     let activeDeck
     let communityHashes
