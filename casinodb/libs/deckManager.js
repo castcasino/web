@@ -47,7 +47,10 @@ console.log('SELECTED', selected)
 console.log('UPDATED DECK', updatedDeck)
 console.log('ACTIVE DECK (spliced)', _activeDeck.length, _activeDeck)
 
-    return [selected]
+    return {
+        cards: [selected],
+        deck:
+    }
 }
 
 export const fullDeck = () => {

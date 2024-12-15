@@ -59,5 +59,6 @@ console.log('(FULL) DECK', activeDeck)
             1,
         )
 console.log('SELECTED CARD', selected)
+console.log('ACTIVE DECK (original)', activeDeck)
     }
 }
