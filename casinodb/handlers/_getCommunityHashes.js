@@ -8,7 +8,7 @@ const RETRY_DELAY = 5000
 
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 
-const _requestBlocks = await () => {
+const _requestBlocks = async () => {
     let blocks
     let response
 
