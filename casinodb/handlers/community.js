@@ -63,6 +63,36 @@ console.log('DEALER', dealer)
         communityHashes = await _getCommunityHashes()
 console.log('COMMUNITY HASHES', communityHashes)
 
+        communityPkg = {
+            flop1: {
+                cardIdx: 1,
+                blockIdx: 0,
+                blockHash: communityHashes[0].hash
+            },
+            flop2: {
+                cardIdx: 3,
+                blockIdx: 0,
+                blockHash: communityHashes[1].hash
+            },
+            flop3: {
+                cardIdx: 5,
+                blockIdx: 0,
+                blockHash: communityHashes[2].hash
+            },
+            turn: {
+                cardIdx: 7,
+                blockIdx: 0,
+                blockHash: communityHashes[3].hash
+            },
+            river: {
+                cardIdx: 9,
+                blockIdx: 0,
+                blockHash: communityHashes[4].hash
+            }
+        }
+console.log('COMMUNITY PACKAGE', communityPkg)
+
+
         activeDeck = fullDeck()
 // console.log('(FULL) DECK', activeDeck.length, activeDeck)
 
