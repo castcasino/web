@@ -11,7 +11,7 @@ const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.
 export default async (req, res) => {
     console.log('BODY', req.body)
 
-    const tables = pokerTablesDb
+    const tables = await pokerTablesDb
         .allDocs()
         .catch(err => console.error(err))
 console.log('TABLES', tables)
