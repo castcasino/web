@@ -47,7 +47,15 @@ console.log('RESPONSE', response)
 
     /* Map tables. */
     tables = tables.map(_table => {
-        return _table.doc
+        /* Set doc. */
+        const doc = _table.doc
+
+        /* Sanitize doc. */
+        delete doc._id
+        delete doc._rev
+
+        /* Return doc. */
+        return doc
     })
 
     /* Return tables. */
