@@ -10,16 +10,16 @@ const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 export default async (req, res) => {
     console.log('BODY', req.body)
 
-    let response
+    let quotes
 
-    response = await systemDb
+    quotes = await systemDb
         .get('quotes')
         .catch(err => console.error(err))
-console.log('RESPONSE (quotes)', quote)
+console.log('RESPONSE (quotes)', quotes)
 
     /* Sanitize. */
-    delete response._id
-    delete response._rev
+    delete quotes._id
+    delete quotes._rev
 
     /* Return quotes. */
     return res.json(quotes)
