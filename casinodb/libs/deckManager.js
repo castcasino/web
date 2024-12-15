@@ -58,7 +58,7 @@ console.log('HASH VALUE (card #2)', hashVal2)
 console.log('NUM REMAINING', numRemaining)
 
         /* Calculate selected index. */
-        selectedIdx = (hashVal1 % (numRemaining - 1))
+        selectedIdx = (hashVal2 % (numRemaining - 1))
 console.log('2ND SELECTED INDEX', selectedIdx)
 
         selected = _activeDeck[selectedIdx]
