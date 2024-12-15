@@ -11,10 +11,22 @@ const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.
 export default async (req, res) => {
     console.log('BODY', req.body)
 
-    const tables = await pokerTablesDb
-        .allDocs()
-        .catch(err => console.error(err))
-console.log('TABLES', tables)
+    /* Initialize locals. */
+    let response
+    let tables
 
+    response = await pokerTablesDb
+        .allDocs({
+            include_docs: true,
+        })
+        .catch(err => console.error(err))
+console.log('RESPONSE', response)
+
+    /* Fitler tables. */
+    tables = response.rows.filter(_table => {
+        return _table.id !== '_design/api'
+    })
+
+    /* Return tables. */
     return res.json(tables)
 }
