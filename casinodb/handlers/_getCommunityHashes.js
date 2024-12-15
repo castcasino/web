@@ -26,6 +26,18 @@ const _requestBlocks = async () => {
         // sleep(RETRY_DELAY)
         // return _requestBlocks()
 
+        /* Set blocks. */
+        blocks = response.rows
+
+        /* Validate blocks. */
+        if (typeof blocks !== 'undefined' && blocks !== null) {
+            blocks = blocks.map(_block => {
+                return _block.doc
+            })
+
+            return blocks
+        }
+
     } else {
         sleep(RETRY_DELAY)
         return _requestBlocks()
