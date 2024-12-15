@@ -27,6 +27,11 @@ console.log('RESPONSE', response)
         return _table.id !== '_design/api'
     })
 
+    /* Map tables. */
+    tables = tables.map(_table => {
+        return _table.doc
+    })
+
     /* Return tables. */
     return res.json(tables)
 }
