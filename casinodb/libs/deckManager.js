@@ -25,12 +25,18 @@ console.log('HASH BYTE-1', hashByte1)
     hashVal1 = parseInt((hashByte1), 16)
 console.log('HASH VALUE-1', hashVal1)
 
+    hashByte2 = _hashIdx.slice(-2)
+console.log('HASH BYTE-2', hashByte2)
+
+    hashVal2 = parseInt((hashByte2), 16)
+console.log('HASH VALUE-2', hashVal2)
+
     /* Calculate remaining cards. */
     numRemaining = _activeDeck.length
 console.log('NUM REMAINING', numRemaining)
 
     /* Calculate selected index. */
-    selectedIdx = (numRemaining % hashVal1)
+    selectedIdx = (hashVal1 % (numRemaining - 1))
 console.log('SELECTED INDEX', selectedIdx)
 
     selected = _activeDeck[selectedIdx]
