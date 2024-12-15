@@ -8,6 +8,9 @@ import handleBlocksBase from './handlers/blocksBase.js'
 import handleBlocksDegen from './handlers/blocksDegen.js'
 import handleBlocksEth from './handlers/blocksEth.js'
 
+/* Import wallets. */
+import baseWallet from './wallets/base.js'
+
 import handleCommunity from './handlers/community.js'
 import handleTables from './handlers/tables.js'
 
@@ -48,6 +51,9 @@ console.info('\n  Starting Cast Casino daemon...\n')
 ;(async () => {
     console.log('MNEMONIC', process.env.MNEMONIC)
     console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
+
+    const accounts = await baseWallet.getAddresses()
+console.log('BASE ACCOUNTS', accounts)
     // handlePlaysQueue()
     // handleWalletQueue()
 
