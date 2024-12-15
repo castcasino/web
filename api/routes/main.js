@@ -1,8 +1,6 @@
 /* Import modules. */
-// const { Magic } = require('@magic-sdk/admin')
 import moment from 'moment'
 import PouchDB from 'pouchdb'
-// import superagent from 'superagent'
 import util from 'util'
 import { v4 as uuidv4 } from 'uuid'
 
