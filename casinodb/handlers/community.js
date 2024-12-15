@@ -67,6 +67,9 @@ console.log('DEALER', dealer)
         /* Initialize selected handler. */
         selected = []
 
+        communityHashes = await _getCommunityHashes()
+console.log('COMMUNITY HASHES', communityHashes)
+
         selected.push(selectCards(
             activeDeck, communityHashes[0].hash.slice(2), 1))
         selected.push(selectCards(
@@ -77,9 +80,6 @@ console.log('DEALER', dealer)
             activeDeck, communityHashes[3].hash.slice(2), 1))
         selected.push(selectCards(
             activeDeck, communityHashes[4].hash.slice(2), 1))
-
-        communityHashes = await _getCommunityHashes()
-console.log('COMMUNITY HASHES', communityHashes)
 
         communityPkg = {
             flop1: {
