@@ -5,8 +5,8 @@
  */
 
 export const selectCards = (_activeDeck, _hashIdx, _numCards = 1) => {
-console.log('ACTIVE DECK', _activeDeck)
-console.log('HASH INDEX', _hashIdx)
+// console.log('ACTIVE DECK', _activeDeck)
+// console.log('HASH INDEX', _hashIdx)
     /* Initialize locals. */
     // let activeDeck
     let cards
@@ -24,21 +24,21 @@ console.log('HASH INDEX', _hashIdx)
     cards = []
 
     hashByte1 = _hashIdx.slice(0, 2)
-console.log('HASH BYTE (card #1)', hashByte1)
+// console.log('HASH BYTE (card #1)', hashByte1)
 
     hashVal1 = parseInt((hashByte1), 16)
-console.log('HASH VALUE (card #1)', hashVal1)
+// console.log('HASH VALUE (card #1)', hashVal1)
 
     /* Calculate remaining cards. */
     numRemaining = _activeDeck.length
-console.log('NUM REMAINING', numRemaining)
+// console.log('NUM REMAINING', numRemaining)
 
     /* Calculate selected index. */
     selectedIdx = (hashVal1 % (numRemaining - 1))
-console.log('SELECTED INDEX', selectedIdx)
+// console.log('SELECTED INDEX', selectedIdx)
 
     selected = _activeDeck[selectedIdx]
-console.log('SELECTED', selected)
+// console.log('SELECTED', selected)
 
     /* Add card. */
     cards.push(selected)
@@ -48,21 +48,21 @@ console.log('SELECTED', selected)
 
     if (_numCards === 2) {
         hashByte2 = _hashIdx.slice(-2)
-console.log('HASH BYTE (card #2)', hashByte2)
+// console.log('HASH BYTE (card #2)', hashByte2)
 
         hashVal2 = parseInt((hashByte2), 16)
-console.log('HASH VALUE (card #2)', hashVal2)
+// console.log('HASH VALUE (card #2)', hashVal2)
 
         /* Calculate remaining cards. */
         numRemaining = _activeDeck.length
-console.log('NUM REMAINING', numRemaining)
+// console.log('NUM REMAINING', numRemaining)
 
         /* Calculate selected index. */
         selectedIdx = (hashVal2 % (numRemaining - 1))
-console.log('2ND SELECTED INDEX', selectedIdx)
+// console.log('2ND SELECTED INDEX', selectedIdx)
 
         selected = _activeDeck[selectedIdx]
-console.log('2ND SELECTED', selected)
+// console.log('2ND SELECTED', selected)
 
         /* Add card. */
         cards.push(selected)
@@ -140,7 +140,7 @@ export const fullDeck = () => {
 
 export const indexLookup = (_code) => {
     const deck = fullDeck()
-console.log('INDEX LOOKUP DECK', deck.length, deck)
+// console.log('INDEX LOOKUP DECK', deck.length, deck)
 
     return deck.indexOf(_code)
 }
