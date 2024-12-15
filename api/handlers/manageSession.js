@@ -71,8 +71,9 @@ console.log('SESSION ID', sessionid)
                 .get(pkg.user.fid)
                 .catch(err => console.error(err))
 
+            /* Validate response. */
             if (typeof response === 'undefined' || response === null) {
-                await players.put({
+                await playersDb.put({
                     _id: pkg.user.fid,
                     ...pkg.user,
                     createdAt,
