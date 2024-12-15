@@ -4,7 +4,7 @@
  * Provides ALL functions for managing a deck of cards.
  */
 
-export const selectCard = (_activeDeck, _hashIdx, _numCards = 1) => {
+export const selectCards = (_activeDeck, _hashIdx, _numCards = 1) => {
 console.log('ACTIVE DECK', _activeDeck)
 console.log('HASH INDEX', _hashIdx)
     /* Initialize locals. */
@@ -45,9 +45,9 @@ console.log('SELECTED', selected)
     // updatedDeck = [ ..._activeDeck ].splice(selectedIdx)
     updatedDeck = _activeDeck.splice(selectedIdx, 1)
 console.log('UPDATED DECK', updatedDeck)
-console.log('ACTIVE DECK (spliced)', _activeDeck)
+console.log('ACTIVE DECK (spliced)', _activeDeck.length, _activeDeck)
 
-    return selected
+    return [selected]
 }
 
 export const fullDeck = () => {

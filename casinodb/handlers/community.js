@@ -13,7 +13,7 @@ import castPokerAbi from '../abi/CastPoker.js'
 /* Import deck manager (utils). */
 import {
     fullDeck,
-    selectCard,
+    selectCards,
 } from '../libs/deckManager.js'
 
 /* Initialize databases. */
@@ -53,7 +53,7 @@ console.log('UNSET', unset)
         const activeDeck = fullDeck()
 console.log('(FULL) DECK', activeDeck)
 
-        const selected = selectCard(
+        const selected = selectCards(
             activeDeck,
             '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
             1,
