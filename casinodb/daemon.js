@@ -52,7 +52,9 @@ console.info('\n  Starting Cast Casino daemon...\n')
     console.log('MNEMONIC', process.env.MNEMONIC)
     console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
 
-    const accounts = await baseWallet.getAddresses()
+    const accounts = await baseWallet
+        .getAddresses()
+        .catch(err => console.error(err))
 console.log('BASE ACCOUNTS', accounts)
     // handlePlaysQueue()
     // handleWalletQueue()
