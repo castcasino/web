@@ -9,10 +9,23 @@ export default async () => {
 // console.log('MANAGING QUOTES')
 
     /* Initialize locals. */
+    let quotes
     let response
+
+    quotes = {}
 
     response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,CNY,JPY,GBP')
 console.log('RESPONSE (quote)', response)
-return
 
+    quotes.ETH = await response.json()
+console.log('QUOTES', quotes)
+
+    response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=DEGEN&tsyms=USD,EUR,CNY,JPY,GBP')
+console.log('RESPONSE (quote)', response)
+
+    quotes.DEGEN = await response.json()
+console.log('QUOTES', quotes)
+
+    /* Return quotes. */
+    return quotes
 }
