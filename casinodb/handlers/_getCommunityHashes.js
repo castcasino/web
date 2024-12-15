@@ -9,6 +9,7 @@ export default async () => {
         .query('api/byTimestamp', {
             descending: true,
             limit: 5,
+            include_docs: true,
         }).catch(err => console.error(err))
     console.log('BLOCKS', blocks)
 }
