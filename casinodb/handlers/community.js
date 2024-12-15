@@ -114,22 +114,6 @@ console.log('COMMUNITY HASHES', communityHashes)
             }
         }
 console.log('COMMUNITY PACKAGE', communityPkg)
-
-
-//         selected = selectCards(
-//             activeDeck,
-//             '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
-//             1,
-//         )
-// console.log('SELECTED CARD-1', selected, indexLookup(selected[0]))
-// // console.log('ACTIVE DECK (original)-1', activeDeck.length, activeDeck)
-//
-//         selected = selectCards(
-//             activeDeck,
-//             '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
-//             2,
-//         )
-// console.log('SELECTED CARD-2', selected, indexLookup(selected[0]), indexLookup(selected[1]))
-// console.log('ACTIVE DECK (original)-2', activeDeck.length, activeDeck)
+console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
     }
 }
