@@ -7,6 +7,7 @@ const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.e
 export default async () => {
     const blocks = await blocksBaseDb
         .query('api/byTimestamp', {
+            descending: true,
             limit: 5,
         }).catch(err => console.error(err))
     console.log('BLOCKS', blocks)
