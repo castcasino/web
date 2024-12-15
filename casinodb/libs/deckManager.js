@@ -9,6 +9,7 @@ console.log('ACTIVE DECK', _activeDeck)
 console.log('HASH INDEX', _hashIdx)
     /* Initialize locals. */
     // let activeDeck
+    let cards
     let hashByte1
     let hashByte2
     let hashVal1
@@ -19,17 +20,14 @@ console.log('HASH INDEX', _hashIdx)
     let selected
     let updatedDeck
 
+    /* Initialize cards. */
+    cards = []
+
     hashByte1 = _hashIdx.slice(0, 2)
 console.log('HASH BYTE-1', hashByte1)
 
     hashVal1 = parseInt((hashByte1), 16)
 console.log('HASH VALUE-1', hashVal1)
-
-    hashByte2 = _hashIdx.slice(-2)
-console.log('HASH BYTE-2', hashByte2)
-
-    hashVal2 = parseInt((hashByte2), 16)
-console.log('HASH VALUE-2', hashVal2)
 
     /* Calculate remaining cards. */
     numRemaining = _activeDeck.length
@@ -42,15 +40,39 @@ console.log('SELECTED INDEX', selectedIdx)
     selected = _activeDeck[selectedIdx]
 console.log('SELECTED', selected)
 
-    // updatedDeck = [ ..._activeDeck ].splice(selectedIdx)
-    updatedDeck = _activeDeck.splice(selectedIdx, 1)
-console.log('UPDATED DECK', updatedDeck)
-console.log('ACTIVE DECK (spliced)', _activeDeck.length, _activeDeck)
+    /* Add card. */
+    cards.push(selected)
 
-    return {
-        cards: [selected],
-        deck: _activeDeck,
+    // [ ..._activeDeck ].splice(selectedIdx, 1)
+    _activeDeck.splice(selectedIdx, 1)
+
+    if (_numCards === 2) {
+        hashByte2 = _hashIdx.slice(-2)
+console.log('HASH BYTE-2', hashByte2)
+
+        hashVal2 = parseInt((hashByte2), 16)
+console.log('HASH VALUE-2', hashVal2)
+
+        /* Calculate remaining cards. */
+        numRemaining = _activeDeck.length
+console.log('NUM REMAINING', numRemaining)
+
+        /* Calculate selected index. */
+        selectedIdx = (hashVal1 % (numRemaining - 1))
+console.log('2ND SELECTED INDEX', selectedIdx)
+
+        selected = _activeDeck[selectedIdx]
+console.log('2ND SELECTED', selected)
+
+        /* Add card. */
+        cards.push(selected)
+
+        // [ ..._activeDeck ].splice(selectedIdx, 1)
+        _activeDeck.splice(selectedIdx, 1)
     }
+
+    /* Return (selected) cards. */
+    return cards
 }
 
 export const fullDeck = () => {
