@@ -78,7 +78,7 @@ console.log('PLAYER RESPONSE', response)
                     _id: pkg.user.fid.toString(),
                     address: pkg.address,
                     ...pkg.user,
-                    ...pkg.client,
+                    client: pkg.client,
                     createdAt,
                 }).catch(err => console.error(err))
             } else {
@@ -86,10 +86,9 @@ console.log('PLAYER RESPONSE', response)
                     _id: response._id,
                     _rev: response._rev,
                     address: pkg.address || response.address,
-                    ...response.user,
-                    ...pkg.user,
-                    ...response.client,
-                    ...pkg.client,
+                    ...response.user, // 1st use response
+                    ...pkg.user, // then try to overrid with pkg
+                    client: pkg.client || response.client,
                     createdAt: response.createdAt,
                     updatedAt: moment().unix(),
                 }).catch(err => console.error(err))
