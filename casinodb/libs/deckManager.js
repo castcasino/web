@@ -45,6 +45,7 @@ console.log('SELECTED', selected)
     // updatedDeck = [ ..._activeDeck ].splice(selectedIdx)
     updatedDeck = _activeDeck.splice(selectedIdx)
 console.log('UPDATED DECK', updatedDeck)
+console.log('ACTIVE DECK (spliced)', _activeDeck)
 
     return selected
 }
