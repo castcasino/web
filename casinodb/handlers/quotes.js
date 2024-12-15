@@ -11,7 +11,7 @@ export default async () => {
     /* Initialize locals. */
     let response
 
-    response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD')
+    response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,CNY,JPY,GBP')
 console.log('RESPONSE (quote)', response)
 return
 

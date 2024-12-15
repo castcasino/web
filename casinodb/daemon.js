@@ -99,19 +99,23 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
         // console.log('Managing Tables...')
         handleQuotes()
     }, QUOTES_INTERVAL)
+    handleQuotes()
 
     setInterval(() => {
         // console.log('Managing Tables...')
         handleTables()
     }, TABLES_INTERVAL)
+    handleTables()
 
     setInterval(() => {
         console.log('Managing Community...')
         handleCommunity()
     }, COMMUNITY_INTERVAL)
+    handleCommunity()
 
     setInterval(() => {
         console.log('Managing Unseated...')
         handleUnseated()
     }, HASHES_INTERVAL)
+    handleUnseated()
 })()
