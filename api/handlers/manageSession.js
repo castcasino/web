@@ -8,6 +8,7 @@ const TODAY = moment().format('YYYYMMDD')
 
 /* Initialize databases. */
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
+const playersDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/players`)
 const sessionsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/sessions`)
 
 export default async (_req, _res) => {
@@ -18,6 +19,7 @@ export default async (_req, _res) => {
     let exec
     let id
     let pkg
+    let profile
     let request
     let response
     let sessionid
@@ -59,6 +61,22 @@ console.log('SESSION ID', sessionid)
             } catch (err) {
                 console.error(err)
                 return _res.json(err)
+            }
+        }
+
+        /* Validate package. */
+// FIXME WE MUST AUTHENTICATE THE DATA BEFORE STORING
+        if (pkg && pkg.user && pkg.client) {
+            response = await playersDb
+                .get(pkg.user.fid)
+                .catch(err => console.error(err))
+
+            if (typeof response === 'undefined' || response === null) {
+                await players.put({
+                    _id: pkg.user.fid,
+                    ...pkg.user,
+                    createdAt,
+                }).catch(err => console.error(err))
             }
         }
 

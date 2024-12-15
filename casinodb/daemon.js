@@ -49,8 +49,8 @@ const jsonParse = (_data, _transform = true) => {
 
 console.info('\n  Starting Cast Casino daemon...\n')
 ;(async () => {
-    console.log('MNEMONIC', process.env.MNEMONIC)
-    console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
+console.log('MNEMONIC', process.env.MNEMONIC)
+console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
 
     const accounts = await baseWallet(process.env.MNEMONIC)
         .getAddresses()
