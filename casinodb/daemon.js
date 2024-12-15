@@ -2,6 +2,7 @@
 import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
+import { formatEther } from 'viem'
 
 /* Import handlers. */
 import handleBlocksBase from './handlers/blocksBase.js'
@@ -49,13 +50,20 @@ const jsonParse = (_data, _transform = true) => {
 
 console.info('\n  Starting Cast Casino daemon...\n')
 ;(async () => {
-console.log('MNEMONIC', process.env.MNEMONIC)
-console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
+// console.log('MNEMONIC', process.env.MNEMONIC)
+// console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
 
     const accounts = await baseWallet(process.env.MNEMONIC)
         .getAddresses()
         .catch(err => console.error(err))
 console.log('BASE ACCOUNTS', accounts)
+
+    const balance = await baseClient.getBalance({
+        address: accounts,
+        blockTag: 'safe'
+    })
+    const balanceAsEther = formatEther(balance)
+console.log('BALANCE AS ETHER', balanceAsEther, balance)
     // handlePlaysQueue()
     // handleWalletQueue()
 
