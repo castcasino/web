@@ -85,8 +85,10 @@ console.log('SESSION ID', sessionid)
                     _id: response._id,
                     _rev: response._rev,
                     address: pkg.address || response.address,
-                    ...pkg.user  || ...response.user,
-                    ...pkg.client || ...response.client,
+                    ...response.user,
+                    ...pkg.user,
+                    ...response.client,
+                    ...pkg.client,
                     createdAt: response.createdAt,
                     updatedAt: moment().unix(),
                 }).catch(err => console.error(err))
