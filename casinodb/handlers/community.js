@@ -84,31 +84,31 @@ console.log('COMMUNITY HASHES', communityHashes)
         communityPkg = {
             flop1: {
                 card: selected[0][0],
-                cardIdx: indexLookup(selected[0][0],
+                cardIdx: indexLookup(selected[0][0]),
                 blockIdx: communityHashes[0]._id,
                 blockHash: communityHashes[0].hash
             },
             flop2: {
                 card: selected[1][0],
-                cardIdx: indexLookup(selected[1][0],
+                cardIdx: indexLookup(selected[1][0]),
                 blockIdx: communityHashes[1]._id,
                 blockHash: communityHashes[1].hash
             },
             flop3: {
                 card: selected[2][0],
-                cardIdx: indexLookup(selected[2][0],
+                cardIdx: indexLookup(selected[2][0]),
                 blockIdx: communityHashes[2]._id,
                 blockHash: communityHashes[2].hash
             },
             turn: {
                 card: selected[3][0],
-                cardIdx: indexLookup(selected[3][0],
+                cardIdx: indexLookup(selected[3][0]),
                 blockIdx: communityHashes[3]._id,
                 blockHash: communityHashes[3].hash
             },
             river: {
                 card: selected[4][0],
-                cardIdx: indexLookup(selected[4][0],
+                cardIdx: indexLookup(selected[4][0]),
                 blockIdx: communityHashes[4]._id,
                 blockHash: communityHashes[4].hash
             }
