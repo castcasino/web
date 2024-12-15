@@ -24,7 +24,7 @@ export default async (req, res) => {
 console.log('TABLE ID', tableid)
 
         /* Request table. */
-        table = pokerTablesDb
+        table = await pokerTablesDb
             .get(tableid)
             .catch(err => console.error(err))
 console.log('TABLE', table)
