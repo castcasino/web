@@ -138,7 +138,7 @@ export const fullDeck = () => {
     return deck
 }
 
-export indexLookup(_code) => {
+export const indexLookup = (_code) => {
     const fullDeck = fullDeck()
 console.log('INDEX LOOKUP DECK', fullDeck.length, fullDeck)
 
