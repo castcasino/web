@@ -13,7 +13,25 @@ export default async (req, res) => {
 
     /* Initialize locals. */
     let response
+    let table
+    let tableid
     let tables
+
+    /* Validate table id. */
+    if (req.params && req.params.tableid) {
+        /* Set table id. */
+        tableid = req.params.tableid
+console.log('TABLE ID', tableid)
+
+        /* Request table. */
+        table = pokerTablesDb
+            .get(tableid)
+            .catch(err => console.error(err))
+console.log('TABLE', table)
+
+        /* Return table. */
+        return res.json(table)
+    }
 
     response = await pokerTablesDb
         .allDocs({
