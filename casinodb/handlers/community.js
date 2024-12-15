@@ -51,7 +51,7 @@ console.log('UNSET', unset)
     /* Validate unset. */
     if (unset) {
         const activeDeck = fullDeck()
-console.log('(FULL) DECK', activeDeck)
+console.log('(FULL) DECK', activeDeck.length, activeDeck)
 
         const selected = selectCards(
             activeDeck,
@@ -59,6 +59,6 @@ console.log('(FULL) DECK', activeDeck)
             1,
         )
 console.log('SELECTED CARD', selected)
-console.log('ACTIVE DECK (original)', activeDeck)
+console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
     }
 }
