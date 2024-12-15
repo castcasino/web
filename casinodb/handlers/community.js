@@ -115,5 +115,14 @@ console.log('COMMUNITY HASHES', communityHashes)
         }
 console.log('COMMUNITY PACKAGE', communityPkg)
 console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
+
+        /* Update dealer. */
+        dealer.community = communityPkg
+        dealer.updatedAt = moment().unix()
+
+        response = await pokerTablesDb
+            .put(dealer)
+            .catch(err => console.error(err))
+console.log('RESPONSE (dealer)', response)
     }
 }
