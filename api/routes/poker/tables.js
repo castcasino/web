@@ -29,6 +29,10 @@ console.log('TABLE ID', tableid)
             .catch(err => console.error(err))
 console.log('TABLE', table)
 
+        /* Sanitize table. */
+        delete table._id
+        delete table._rev
+
         /* Return table. */
         return res.json(table)
     }
