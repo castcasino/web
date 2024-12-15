@@ -61,32 +61,54 @@ console.log('UNSET', unset)
         dealer = unset[0]
 console.log('DEALER', dealer)
 
+        activeDeck = fullDeck()
+// console.log('(FULL) DECK', activeDeck.length, activeDeck)
+
+        /* Initialize selected handler. */
+        selected = []
+
+        selected.push(selectCards(
+            activeDeck, communityHashes[0].hash.slice(2), 1))
+        selected.push(selectCards(
+            activeDeck, communityHashes[1].hash.slice(2), 1))
+        selected.push(selectCards(
+            activeDeck, communityHashes[2].hash.slice(2), 1))
+        selected.push(selectCards(
+            activeDeck, communityHashes[3].hash.slice(2), 1))
+        selected.push(selectCards(
+            activeDeck, communityHashes[4].hash.slice(2), 1))
+
         communityHashes = await _getCommunityHashes()
 console.log('COMMUNITY HASHES', communityHashes)
 
         communityPkg = {
             flop1: {
-                cardIdx: 1,
+                card: selected[0][0],
+                cardIdx: indexLookup(selected[0][0],
                 blockIdx: communityHashes[0]._id,
                 blockHash: communityHashes[0].hash
             },
             flop2: {
-                cardIdx: 3,
+                card: selected[1][0],
+                cardIdx: indexLookup(selected[1][0],
                 blockIdx: communityHashes[1]._id,
                 blockHash: communityHashes[1].hash
             },
             flop3: {
-                cardIdx: 5,
+                card: selected[2][0],
+                cardIdx: indexLookup(selected[2][0],
                 blockIdx: communityHashes[2]._id,
                 blockHash: communityHashes[2].hash
             },
             turn: {
-                cardIdx: 7,
+                card: selected[3][0],
+                cardIdx: indexLookup(selected[3][0],
                 blockIdx: communityHashes[3]._id,
                 blockHash: communityHashes[3].hash
             },
             river: {
-                cardIdx: 9,
+                card: selected[4][0],
+                cardIdx: indexLookup(selected[4][0],
                 blockIdx: communityHashes[4]._id,
                 blockHash: communityHashes[4].hash
             }
@@ -94,23 +116,20 @@ console.log('COMMUNITY HASHES', communityHashes)
 console.log('COMMUNITY PACKAGE', communityPkg)
 
 
-        activeDeck = fullDeck()
-// console.log('(FULL) DECK', activeDeck.length, activeDeck)
-
-        selected = selectCards(
-            activeDeck,
-            '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
-            1,
-        )
-console.log('SELECTED CARD-1', selected, indexLookup(selected[0]))
-// console.log('ACTIVE DECK (original)-1', activeDeck.length, activeDeck)
-
-        selected = selectCards(
-            activeDeck,
-            '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
-            2,
-        )
-console.log('SELECTED CARD-2', selected, indexLookup(selected[0]), indexLookup(selected[1]))
+//         selected = selectCards(
+//             activeDeck,
+//             '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
+//             1,
+//         )
+// console.log('SELECTED CARD-1', selected, indexLookup(selected[0]))
+// // console.log('ACTIVE DECK (original)-1', activeDeck.length, activeDeck)
+//
+//         selected = selectCards(
+//             activeDeck,
+//             '13bdbadaeb217c08069c2821f5183d2ada5e4fdb158133ecda0c338f04633f34',
+//             2,
+//         )
+// console.log('SELECTED CARD-2', selected, indexLookup(selected[0]), indexLookup(selected[1]))
 // console.log('ACTIVE DECK (original)-2', activeDeck.length, activeDeck)
     }
 }
