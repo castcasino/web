@@ -10,40 +10,25 @@ import { ethClient } from '../clients/eth.js'
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
 
-import _getCommunityHashes from './_getCommunityHashes.js'
-
-/* Import deck manager (utils). */
-import {
-    fullDeck,
-    indexLookup,
-    selectCards,
-} from '../libs/deckManager.js'
-
 /* Initialize databases. */
-const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_base`)
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
 
 /* Initialize constants. */
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 
 export default async () => {
-console.log('MANAGING UNSEATED')
-return
+// console.log('MANAGING UNSEATED')
+
     /* Initialize locals. */
-    let activeDeck
-    let communityHashes
-    let dealer
     let response
-    let selected
-    let unset
 
     response = await pokerTablesDb
-        .query('api/unsetTables', {
+        .query('api/unseated', {
             include_docs: true,
         })
         .catch(err => console.error(err))
-// console.log('RESPONSE (unset tables)', response)
-
+console.log('RESPONSE (unseated tables)', response)
+return
     /* Validate response. */
     if (!response || response.total_rows === 0) {
         return console.log('  All tables are set!')
