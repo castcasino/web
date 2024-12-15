@@ -80,6 +80,16 @@ console.log('SESSION ID', sessionid)
                     ...pkg.client,
                     createdAt,
                 }).catch(err => console.error(err))
+            } else {
+                await playersDb.put({
+                    _id: response._id,
+                    _rev: response._rev,
+                    address: pkg.address || response.address,
+                    ...pkg.user  || ...response.user,
+                    ...pkg.client || ...response.client,
+                    createdAt: response.createdAt,
+                    updatedAt: moment().unix(),
+                }).catch(err => console.error(err))
             }
         }
 
