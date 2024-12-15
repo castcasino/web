@@ -13,6 +13,7 @@ import handleBlocksEth from './handlers/blocksEth.js'
 import baseWallet from './wallets/base.js'
 
 import handleCommunity from './handlers/community.js'
+import handleHashes from './handlers/hashes.js'
 import handleTables from './handlers/tables.js'
 
 /* Import blockchain clients. */
@@ -23,6 +24,7 @@ import { ethClient } from './clients/eth.js'
 /* Set constants. */
 const TABLES_INTERVAL = 5000
 const COMMUNITY_INTERVAL = 15000
+const HASHES_INTERVAL = 15000
 
 // TODO Replace with @nexajs/utils
 const jsonParse = (_data, _transform = true) => {
@@ -97,7 +99,12 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
     }, TABLES_INTERVAL)
 
     setInterval(() => {
-        console.log('Managing Community...')
-        handleCommunity()
-    }, COMMUNITY_INTERVAL)
+        console.log('Managing Hashes...')
+        handleHashes()
+    }, HASHES_INTERVAL)
+
+    // setInterval(() => {
+    //     console.log('Managing Community...')
+    //     handleCommunity()
+    // }, COMMUNITY_INTERVAL)
 })()
