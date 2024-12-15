@@ -19,8 +19,10 @@ const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 export default async () => {
 // console.log('MANAGING UNSEATED')
 
-    /* Initialize locals. */
+    /* Initialize locals. */2
+    let hostess
     let response
+    let table
     let unseated
 
     response = await pokerTablesDb
@@ -40,5 +42,20 @@ export default async () => {
         return _unset.doc
     })
 console.log('UNSEATED', unseated)
+
+    /* Assign hostess. */
+    hostess = unseated[0]
+
+    /* Validate hostess. */
+    if (hostess) {
+        table = await baseClient.readContract({
+            address: CAST_POKER_ADDRESS,
+            abi: castPokerAbi,
+            functionName: 'tables',
+            args: [BigInt(hostess._id)]
+        })
+console.log('TABLE', table)
+
+    }
 
 }
