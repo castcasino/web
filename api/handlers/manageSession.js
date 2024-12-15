@@ -70,7 +70,7 @@ console.log('SESSION ID', sessionid)
             response = await playersDb
                 .get(pkg.user.fid.toString())
                 .catch(err => console.error(err))
-console.log('PLAYER RESPONSE', response)
+// console.log('PLAYER RESPONSE', response)
 
             /* Validate response. */
             if (typeof response === 'undefined' || response === null) {
@@ -82,7 +82,7 @@ console.log('PLAYER RESPONSE', response)
                     createdAt,
                 }).catch(err => console.error(err))
             } else {
-                const success = await playersDb.put({
+                await playersDb.put({
                     _id: response._id,
                     _rev: response._rev,
                     address: pkg.address || response.address,
@@ -92,7 +92,6 @@ console.log('PLAYER RESPONSE', response)
                     createdAt: response.createdAt,
                     updatedAt: moment().unix(),
                 }).catch(err => console.error(err))
-console.log('UPDATE SUCCESS', success)
             }
         }
 
@@ -106,7 +105,7 @@ console.log('UPDATE SUCCESS', success)
                 console.error(err)
                 error = JSON.stringify(err)
             })
-console.log('RESPONSE (request)', response)
+// console.log('RESPONSE (request)', response)
 
         /* Validate response. */
         if (response.ok === true) {
