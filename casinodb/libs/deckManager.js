@@ -34,7 +34,7 @@ export const selectCards = (_activeDeck, _hashIdx, _numCards = 1) => {
 // console.log('NUM REMAINING', numRemaining)
 
     /* Calculate selected index. */
-    selectedIdx = (hashVal1 % (numRemaining - 1))
+    selectedIdx = (hashVal1 % numRemaining)
 // console.log('SELECTED INDEX', selectedIdx)
 
     selected = _activeDeck[selectedIdx]
