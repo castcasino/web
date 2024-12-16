@@ -27,7 +27,7 @@ import { ethClient } from './clients/eth.js'
 const COMMUNITY_INTERVAL = 15000
 const UNSEATED_INTERVAL = 10000
 const QUOTES_INTERVAL = 60000
-const SEATED_INTERVAL = 10000
+const HOSTESS_INTERVAL = 15000
 const TABLES_INTERVAL = 5000
 
 // TODO Replace with @nexajs/utils
@@ -122,8 +122,8 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
     handleUnseated()
 
     setInterval(() => {
-        console.log('Managing Seated...')
+        console.log('Managing Seated (by Hostess)...')
         handleSeated()
-    }, SEATED_INTERVAL)
+    }, HOSTESS_INTERVAL)
     handleSeated()
 })()

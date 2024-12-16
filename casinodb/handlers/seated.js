@@ -59,6 +59,15 @@ console.log('SEATED', seated)
 
         if (seated.length > hostess.seated.length) {
 console.log('\n  ***HOSTESS! WE GOTTA UPDATE***\n')
+
+            /* Update hostess. */
+            hostess.seated = seated
+            hostess.updatedAt = moment().unix()
+
+            /* Save hostess. */
+            pokerTablesDb
+                .put(hostess)
+                .catch(err => console.error(err))
         }
 
     }
