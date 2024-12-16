@@ -38,15 +38,19 @@ export async function start(_databases) {
         txid: 'd465b82e9d9e74a19b5ea0ac09308be93be8e5f3b46ad8ceb0da99005b7e9b2e',
     }
 
+    const auth = {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+    }
+console.log('AUTH', auth)
+console.log('HOST', process.env.SMTP_HOST)
+
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: 587,
         secure: false, // true for 465, false for other ports
-        auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-        },
+        auth,
     })
 
     const mailPkg = {
