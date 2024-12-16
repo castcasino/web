@@ -42,8 +42,6 @@ export async function start(_databases) {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
     }
-console.log('AUTH', auth)
-console.log('HOST', process.env.SMTP_HOST)
 
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
