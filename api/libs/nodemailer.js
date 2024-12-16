@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 /**
  * Start Daemon
  */
-export async function send(_message) {
+export async function send(_pkg) {
     let id
     let address
     let body
@@ -51,7 +51,7 @@ export async function send(_message) {
 
     const html = `
 <h1>Event Notifcation</h1>
-<pre>${JSON.stringify(_message, null, 2)}</pre>
+<pre>${JSON.stringify(_pkg, null, 2)}</pre>
 <br /><br />🤓
 `
 
