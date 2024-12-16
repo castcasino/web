@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 /**
  * Start Daemon
  */
-export async function start(_databases) {
+export async function send(_message) {
     let id
     let address
     let body
@@ -52,8 +52,8 @@ export async function start(_databases) {
     const html = `
 <h1>Cast Casino Event Notifcation</h1>
 <p>
-    This is just some <strong>HTML!</strong>
-    🤓
+    ${_message}
+    <br />🤓
 </p>
 `
 

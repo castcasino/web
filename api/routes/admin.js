@@ -15,6 +15,7 @@ export default async (req, res) => {
     /* Initialize locals. */
     let body
     let method
+    // let message
     let response
 
     body = req.body
@@ -47,7 +48,7 @@ export default async (req, res) => {
     /* Handle method. */
     switch(method) {
     case 'notify':
-        response = await start()
+        response = await send(body.message)
         break
     default:
         response = {}
