@@ -14,6 +14,7 @@ import baseWallet from './wallets/base.js'
 
 import handleCommunity from './handlers/community.js'
 import handleQuotes from './handlers/quotes.js'
+import handleSeated from './handlers/seated.js'
 import handleTables from './handlers/tables.js'
 import handleUnseated from './handlers/unseated.js'
 
@@ -26,6 +27,7 @@ import { ethClient } from './clients/eth.js'
 const COMMUNITY_INTERVAL = 15000
 const UNSEATED_INTERVAL = 10000
 const QUOTES_INTERVAL = 60000
+const SEATED_INTERVAL = 10000
 const TABLES_INTERVAL = 5000
 
 // TODO Replace with @nexajs/utils
@@ -118,4 +120,10 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
         handleUnseated()
     }, UNSEATED_INTERVAL)
     handleUnseated()
+
+    setInterval(() => {
+        console.log('Managing Seated...')
+        handleSeated()
+    }, SEATED_INTERVAL)
+    handleSeated()
 })()
