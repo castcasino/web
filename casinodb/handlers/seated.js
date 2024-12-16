@@ -41,10 +41,11 @@ console.log('RESPONSE (seated players)', response)
     unseated = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('UNSEATED', unseated)
+// console.log('UNSEATED', unseated)
 
     /* Assign hostess. */
     hostess = unseated[0]
+console.log('HOSTESS', hostess)
 
     /* Validate hostess. */
     if (hostess) {
@@ -56,8 +57,8 @@ console.log('UNSEATED', unseated)
         })
 console.log('SEATED', seated)
 
-        if (seated.length > unseated.seated.length) {
-console.log('\n  ***WE GOT UPDATE***\n')
+        if (seated.length > hostess.seated.length) {
+console.log('\n  ***HOSTESS! WE GOTTA UPDATE***\n')
         }
 
     }
