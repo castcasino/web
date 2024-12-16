@@ -32,11 +32,7 @@ export async function start(_databases) {
 
     const msgRecipient = 'info@bchplease.org'
 
-    const msgSubject = 'Cast Casino Event'
-
-    const msgDetails = {
-        txid: 'd465b82e9d9e74a19b5ea0ac09308be93be8e5f3b46ad8ceb0da99005b7e9b2e',
-    }
+    const msgSubject = 'Event Notification'
 
     const auth = {
         user: process.env.SMTP_USER,
@@ -51,14 +47,22 @@ export async function start(_databases) {
         auth,
     })
 
+    const text = `This is just some plaintext`
+
+    const html = `
+<h1>Cast Casino Event Notifcation</h1>
+<p>
+    This is just some <strong>HTML!</strong>
+    🤓
+</p>
+`
+
     const mailPkg = {
         from: msgFrom,
         to: msgRecipient,
         subject: msgSubject,
-        text: `This is just some text`,
-        html: `<h1>Heading</h1> <p>This is just some <strong>HTML</strong></p>`
-        // text: require('../templates/plaintext')(msgDetails),
-        // html: require('../templates/html')(msgDetails),
+        text,
+        html,
     }
 
     // send mail with defined transport object
