@@ -47,13 +47,13 @@ export async function send(_message) {
         auth,
     })
 
-    const text = `This is just some plaintext`
+    const text = `This is just some plaintext.`
 
     const html = `
-<h1>Cast Casino Event Notifcation</h1>
+<h1>Event Notifcation</h1>
 <p>
     ${_message}
-    <br />🤓
+    <br /><br />🤓
 </p>
 `
 
