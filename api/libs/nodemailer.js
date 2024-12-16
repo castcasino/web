@@ -1,10 +1,6 @@
 /* Import modules. */
 import moment from 'moment'
 import nodemailer from 'nodemailer'
-import PouchDB from 'pouchdb'
-import util from 'util'
-import { call } from '@nexajs/rpc'
-import superagent from 'superagent'
 import { v4 as uuidv4 } from 'uuid'
 
 /**
