@@ -30,7 +30,7 @@ export async function send(_message) {
 
     const msgFrom = '"Cast Casino" <hello@cast.casino>'
 
-    const msgRecipient = 'info@bchplease.org'
+    const msgRecipient = 'nyusternie@protonmail.com, info@bchplease.org'
 
     const msgSubject = 'Event Notification'
 
