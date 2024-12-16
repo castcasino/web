@@ -66,10 +66,10 @@ export async function start(_databases) {
     console.log('Message sent: %s', info.messageId)
 
     /* Send response back to client. */
-    res.json({
+    return {
         databaseId: response.id,
         messageId: info.messageId,
-    })
+    }
 }
 
 /**
