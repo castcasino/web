@@ -30,7 +30,7 @@ export default async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-console.log('RESPONSE (seated players)', response)
+// console.log('RESPONSE (seated players)', response)
 
     /* Validate response. */
     if (!response || response.total_rows === 0) {
@@ -45,7 +45,7 @@ console.log('RESPONSE (seated players)', response)
 
     /* Assign hostess. */
     hostess = unseated[0]
-console.log('HOSTESS', hostess)
+// console.log('HOSTESS', hostess)
 
     /* Validate hostess. */
     if (hostess) {
@@ -55,10 +55,10 @@ console.log('HOSTESS', hostess)
             functionName: 'getSeated',
             args: [BigInt(hostess._id)]
         })
-console.log('SEATED', seated)
+// console.log('SEATED', seated)
 
         if (seated.length > hostess.seated.length) {
-console.log('\n  ***HOSTESS! WE GOTTA UPDATE***\n')
+// console.log('\n  ***HOSTESS! WE GOTTA UPDATE***\n')
 
             /* Update hostess. */
             hostess.seated = seated
