@@ -65,6 +65,16 @@ export default async () => {
                     console.error(err)
                 }
             })
+
+        /* Send (Admin) notification. */
+        fetch('https://cast.casino/v1/admin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                method: 'notify',
+                pkg: idxTables,
+            }),
+        })
     }
 
     idxCommunity = await systemDb.get('idx_community')

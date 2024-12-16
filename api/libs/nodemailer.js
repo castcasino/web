@@ -51,10 +51,8 @@ export async function send(_message) {
 
     const html = `
 <h1>Event Notifcation</h1>
-<p>
-    ${_message}
-    <br /><br />🤓
-</p>
+<pre>${JSON.stringify(_message, null, 2)}</pre>
+<br /><br />🤓
 `
 
     const mailPkg = {

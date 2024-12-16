@@ -48,7 +48,7 @@ export default async (req, res) => {
     /* Handle method. */
     switch(method) {
     case 'notify':
-        response = await send(body.message)
+        response = await send(body.pkg)
         break
     default:
         response = {}
