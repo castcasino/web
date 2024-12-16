@@ -15,5 +15,5 @@ export default async (req, res) => {
     const response = await start()
 console.log('RESPONSE (nodemailer start)', response)
 
-    return res.json({ hi: 'there!' })
+    return res.json(response)
 }
