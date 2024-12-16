@@ -1,7 +1,7 @@
 /* Import modules. */
 import moment from 'moment'
 
-import { start } from '../libs/nodemailer.js'
+import { send } from '../libs/nodemailer.js'
 
 /* Set today. */
 const TODAY = moment().format('YYYYMMDD')
