@@ -30,7 +30,7 @@ export default async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-console.log('RESPONSE (unseated tables)', response)
+// console.log('RESPONSE (unseated tables)', response)
 
     /* Validate response. */
     if (!response || response.total_rows === 0) {
@@ -41,7 +41,7 @@ console.log('RESPONSE (unseated tables)', response)
     unseated = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('UNSEATED', unseated)
+// console.log('UNSEATED', unseated)
 
     /* Assign hostess. */
     hostess = unseated[0]
@@ -54,7 +54,7 @@ console.log('UNSEATED', unseated)
             functionName: 'getSeated',
             args: [BigInt(hostess._id)]
         })
-console.log('SEATED', seated)
+// console.log('SEATED', seated)
 
     }
 
