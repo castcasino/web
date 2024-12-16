@@ -56,6 +56,10 @@ console.log('UNSEATED', unseated)
         })
 console.log('SEATED', seated)
 
+        if (seated.length > unseated.seated.length) {
+console.log('\n  ***WE GOT UPDATE***\n')
+        }
+
     }
 
 }
