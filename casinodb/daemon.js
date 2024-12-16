@@ -24,7 +24,7 @@ import { ethClient } from './clients/eth.js'
 
 /* Set constants. */
 const COMMUNITY_INTERVAL = 15000
-const HASHES_INTERVAL = 15000
+const UNSEATED_INTERVAL = 10000
 const QUOTES_INTERVAL = 60000
 const TABLES_INTERVAL = 5000
 
@@ -116,6 +116,6 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
     setInterval(() => {
         console.log('Managing Unseated...')
         handleUnseated()
-    }, HASHES_INTERVAL)
+    }, UNSEATED_INTERVAL)
     handleUnseated()
 })()
