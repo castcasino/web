@@ -8,9 +8,11 @@ services:
     # ports:
       # - '127.0.0.1:4000:3000'
     environment:
-      - HOST=${HOST}
       - COUCHDB_USER=${COUCHDB_USER}
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
+      - SMTP_HOST=${SMTP_HOST}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
     logging: # apply better controls to Docker overlay folder
       driver: 'json-file'
       options:

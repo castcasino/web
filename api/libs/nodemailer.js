@@ -21,22 +21,22 @@ export async function start(_databases) {
     id = uuidv4()
 
     /* Add record to database. */
-    response = await notifsDb
-        .put({
-            _id: id,
-            ...body,
-        })
-        .catch(err => {
-            console.error(err)
+    // response = await notifsDb
+    //     .put({
+    //         _id: id,
+    //         ...body,
+    //     })
+    //     .catch(err => {
+    //         console.error(err)
+    //
+    //         return res.json(err)
+    //     })
 
-            return res.json(err)
-        })
+    const msgFrom = '"CannMoon" <hello@cannmoon.com>'
 
-    const msgFrom = '"Nexa Events" <notify@nexa.events>'
+    const msgRecipient = 'info@bchplease.org'
 
-    const msgRecipient = 'info@avasdao.org'
-
-    const msgSubject = 'NEXA Transaction Event'
+    const msgSubject = 'Cast Casino Event'
 
     const msgDetails = {
         txid: 'd465b82e9d9e74a19b5ea0ac09308be93be8e5f3b46ad8ceb0da99005b7e9b2e',
@@ -53,14 +53,18 @@ export async function start(_databases) {
         },
     })
 
-    // send mail with defined transport object
-    const info = await transporter.sendMail({
+    const mailPkg = {
         from: msgFrom,
         to: msgRecipient,
         subject: msgSubject,
-        text: require('../templates/plaintext')(msgDetails),
-        html: require('../templates/html')(msgDetails),
-    })
+        text: `This is just some text`,
+        html: `<h1>Heading</h1> <p>This is just some <strong>HTML</strong></p>`
+        // text: require('../templates/plaintext')(msgDetails),
+        // html: require('../templates/html')(msgDetails),
+    }
+
+    // send mail with defined transport object
+    const info = await transporter.sendMail(mailPkg)
     console.log('Message sent: %s', info.messageId)
 
     /* Send response back to client. */
