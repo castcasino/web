@@ -28,7 +28,7 @@ export async function start(_databases) {
     //         return res.json(err)
     //     })
 
-    const msgFrom = '"CannMoon" <hello@cannmoon.com>'
+    const msgFrom = '"AwesomeNexa" <hello@awesomenexa.org>'
 
     const msgRecipient = 'info@bchplease.org'
 
