@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { getAddressBalance } from '@nexajs/provider'
 import { ref } from 'vue'
 
 /* Initialize stores. */
@@ -11,13 +10,13 @@ const System = useSystemStore()
 useHead({
     title: 'Help — Cast Casino',
     meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
+        { name: 'description', content: 'Cast Casino offers a revolutionary blockchain experience.' }
     ],
 })
 
 const treasuryBalance = ref(0)
 
-const treasuryAddress = 'nexa:nqtsq5g5avzufcrcw00jnpwyq9m5fe6rmwgty5fzaaqlngh5'
+const treasuryAddress = 'TBD'
 
 const getBalance = async () => {
     const balance = await $fetch(`/api/balance/${treasuryAddress}`)
@@ -50,8 +49,8 @@ getBalance()
             Balance: {{treasuryBalance}}
         </h2>
 
-        <NuxtLink to="https://explorer.nexa.org/address/nexa:nqtsq5g5avzufcrcw00jnpwyq9m5fe6rmwgty5fzaaqlngh5" target="_blank" class="text-blue-500 font-medium hover:underline">
-            nexa:nqtsq5g5avzufcrcw00jnpwyq9m5fe6rmwgty5fzaaqlngh5
+        <NuxtLink to="" target="_blank" class="text-blue-500 font-medium hover:underline">
+            TBD
         </NuxtLink>
     </main>
 </template>

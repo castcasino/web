@@ -1,15 +1,11 @@
 /* Import modules. */
-// import { getAddressBalance } from '@nexajs/provider'
-// import { listUnspent } from '@nexajs/address'
 import moment from 'moment'
 import PouchDB from 'pouchdb'
-// import { getHmac } from '@nexajs/crypto'
 
 /* Initialize databases. */
 const playsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/plays`)
 const logsDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/logs`)
 
-// TODO Replace with @nexajs/utils
 const jsonStringify = (_data, _transform = true) => {
     let data
 

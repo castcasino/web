@@ -1,4 +1,21 @@
 <script setup lang="ts">
+/* Import modules. */
+import moment from 'moment'
+
+const curYear = ref(null)
+
+const init = () => {
+    curYear.value = moment().format('YYYY')
+}
+
+onMounted(() => {
+    init()
+})
+
+// onBeforeUnmount(() => {
+//     console.log('Before Unmount!')
+//     // Now is the time to perform all cleanup operations.
+// })
 
 </script>
 
@@ -102,7 +119,7 @@
                                 </li>
 
                                 <li>
-                                    <NuxtLink to="https://repo.hos.im/nyusternie/nexa-games" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
+                                    <NuxtLink to="https://repo.hos.im/nyusternie" target="_blank" class="text-base text-gray-500 hover:text-gray-900">
                                         View the source
                                     </NuxtLink>
                                 </li>
@@ -156,7 +173,7 @@
                     <form class="mt-4 sm:flex sm:max-w-md">
                         <label for="email-address" class="sr-only">Email address</label>
 
-<NuxtLink to="https://twitter.com/NEXAdotgames" target="_blank" class="flex">
+<NuxtLink to="https://twitter.com/0xShomari" target="_blank" class="flex">
                         <input
                             type="email"
                             name="email-address"
@@ -169,7 +186,7 @@
                         />
 </NuxtLink>
                         <div class="mt-3 rounded-md sm:mt-0 sm:ml-3 sm:flex-shrink-0">
-                            <NuxtLink to="https://twitter.com/NEXAdotgames" target="_blank"
+                            <NuxtLink to="https://twitter.com/0xShomari" target="_blank"
                                 class="flex w-full items-center justify-center rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 text-base font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                                 disabled
                             >
@@ -182,7 +199,7 @@
 
             <div class="mt-12 border-t border-gray-200 pt-8 md:flex md:items-center md:justify-between lg:mt-16">
                 <div class="flex space-x-6 md:order-2 justify-center">
-                    <a href="https://twitter.com/NEXAdotgames" target="_blank" class="text-gray-400 hover:text-gray-500">
+                    <a href="https://twitter.com/0xShomari" target="_blank" class="text-gray-400 hover:text-gray-500">
                         <span class="sr-only">Twitter</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path
@@ -202,20 +219,10 @@
                         </svg>
                     </a> -->
 
-                    <a href="https://www.reddit.com/r/NexaGames/" target="_blank" class="text-gray-400 hover:text-gray-500">
-                        <span class="sr-only">Reddit</span>
-                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path
-                                fill-rule="evenodd"
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
-                    </a>
                 </div>
 
                 <p class="mt-8 text-sm text-center sm:text-base sm:text-left text-gray-400 md:order-1 md:mt-0">
-                    &copy; 2023 Cast Casino DAO. All rights reserved.
+                    &copy; {{curYear}} Cast Casino DAO. All rights reserved.
                 </p>
             </div>
         </div>

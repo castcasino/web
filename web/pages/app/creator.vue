@@ -6,7 +6,7 @@ definePageMeta({
 useHead({
     title: 'Game Creator — Cast Casino',
     meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
+        { name: 'description', content: 'Cast Casino offers a revolutionary blockchain experience.' }
     ],
 })
 

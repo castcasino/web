@@ -1,12 +1,10 @@
 <script setup lang="ts">
 /* Import modules. */
-// import { binToHex } from '@nexajs/utils'
-// import { decodeAddress } from '@nexajs/address'
 
 useHead({
     title: 'Fairplay — Cast Casino',
     meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
+        { name: 'description', content: 'Cast Casino offers a revolutionary blockchain experience.' }
     ],
 })
 

@@ -53,7 +53,7 @@ const isShowingProfileMenu = ref(true)
                     <!-- Sidebar component, swap this element with another sidebar if you like -->
                     <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
                         <div class="flex h-16 shrink-0 items-center">
-                            <img class="h-12 w-auto" src="~/assets/icon.svg" alt="Nexa Logo" />
+                            <img class="h-12 w-auto" src="~/assets/icon.svg" alt="Cast Casino Logo" />
                         </div>
 
                         <nav class="flex flex-1 flex-col">
@@ -146,23 +146,23 @@ const isShowingProfileMenu = ref(true)
                                     <ul role="list" class="-mx-2 mt-2 space-y-1">
                                         <li>
                                             <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                            <NuxtLink to="https://nexa.studio" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <NuxtLink to="/manager" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">NS</span>
-                                                <span class="truncate">NEXA.studio</span>
+                                                <span class="truncate">Cast Casino</span>
                                             </NuxtLink>
                                         </li>
 
                                         <li>
-                                            <NuxtLink to="https://nexajs.org" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <NuxtLink to="/manager" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">JS</span>
-                                                <span class="truncate">NEXA.js</span>
+                                                <span class="truncate">Cast Casino</span>
                                             </NuxtLink>
                                         </li>
 
                                         <li>
-                                            <NuxtLink to="https://heroicons.dev" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                            <NuxtLink to="/manager" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                                 <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">HI</span>
-                                                <span class="truncate">Heroicons</span>
+                                                <span class="truncate">Cast Casino</span>
                                             </NuxtLink>
                                         </li>
                                     </ul>
@@ -192,7 +192,7 @@ const isShowingProfileMenu = ref(true)
             <!-- Sidebar component, swap this element with another sidebar if you like -->
             <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
                 <div class="flex h-16 shrink-0 items-center">
-                    <img class="h-12 w-auto" src="~/assets/icon.svg" alt="Nexa Logo" />
+                    <img class="h-12 w-auto" src="~/assets/icon.svg" alt="Cast Casino Logo" />
                 </div>
                 <nav class="flex flex-1 flex-col">
                     <ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -276,17 +276,17 @@ const isShowingProfileMenu = ref(true)
                             <ul role="list" class="-mx-2 mt-2 space-y-1">
                                 <li>
                                     <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                                    <NuxtLink to="/admin" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <NuxtLink to="/manager" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
                                             NS
                                         </span>
 
-                                        <span class="truncate">Nexa Style</span>
+                                        <span class="truncate">Cast Casino Style</span>
                                     </NuxtLink>
                                 </li>
 
                                 <li>
-                                    <NuxtLink to="https://jsfiddle.net/user/avasdao/" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <NuxtLink to="https://jsfiddle.net/" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
                                             JSF
                                         </span>
@@ -296,7 +296,7 @@ const isShowingProfileMenu = ref(true)
                                 </li>
 
                                 <li>
-                                    <NuxtLink to="https://nexajs.org/studio" target="_blank" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+                                    <NuxtLink to="/" class="text-gray-400 hover:text-white hover:bg-gray-800 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                                         <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
                                             SD
                                         </span>

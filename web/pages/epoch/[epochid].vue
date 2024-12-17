@@ -8,7 +8,7 @@ const System = useSystemStore()
 useHead({
     title: 'Epochs — Cast Casino',
     meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
+        { name: 'description', content: 'Cast Casino offers a revolutionary blockchain experience.' }
     ],
 })
 
@@ -63,7 +63,7 @@ a359601231f93af0b35be9ddd2abe8daedd890577ffb7d36e34aba81dc9777134d788ff360c2b2ca
                 On-chain (OP_RETURN) Proof
             </h2>
 
-            <NuxtLink to="https://explorer.nexa.org/" target="_blank" class="text-sm text-blue-100 font-medium hover:underline">
+            <NuxtLink to="/" class="text-sm text-blue-100 font-medium hover:underline">
                 [ put transaction id here ]
             </NuxtLink>
         </section>

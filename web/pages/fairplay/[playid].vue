@@ -1,11 +1,8 @@
 <script setup lang="ts">
 /* Import modules. */
-// import { binToHex } from '@nexajs/utils'
-// import { decodeAddress } from '@nexajs/address'
 import formatPosition from './_formatPosition.js'
 import moment from 'moment'
 import numeral from 'numeral'
-// import { sha512 } from '@nexajs/crypto'
 
 const route = useRoute()
 
@@ -145,7 +142,7 @@ loadPlay(playid)
 
             <FairplayItem
                 v-if="wagerNEX !== null"
-                title="Wager ( in NEXA )"
+                title="Wager ( in ETH )"
                 :value="wagerNEX || 'n/a'"
             />
 
@@ -176,7 +173,7 @@ loadPlay(playid)
 
             <NuxtLink
                 v-if="play?.txidem"
-                :to="'https://explorer.nexa.org/tx/' + play.txidem" target="_blank"
+                :to="'/' + play.txidem" target="_blank"
             >
                 <FairplayFeature
 

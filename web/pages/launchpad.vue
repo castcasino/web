@@ -8,7 +8,7 @@ const System = useSystemStore()
 useHead({
     title: 'Launchpad — Cast Casino',
     meta: [
-        { name: 'description', content: 'Nexa Gaming offers a revolutionary blockchain experience.' }
+        { name: 'description', content: 'Cast Casino offers a revolutionary blockchain experience.' }
     ],
 })
 </script>
@@ -24,7 +24,7 @@ useHead({
         </p>
 
         <p>
-            Nexa Gaming Engine (NGE) is a permissionless and provably fair wagering system, powered by the Nexa blockchain.
+            Cast Casino Gaming Engine (NGE) is a permissionless and provably fair wagering system, powered by the Cast Casino blockchain.
         </p>
     </main>
 </template>

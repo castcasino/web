@@ -79,7 +79,7 @@ useHead({
 
                                 <div class="mt-6">
                                     <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-                                        Nexa Game Engine (NGE) guarantees 100% <em class="text-indigo-500">provably fair</em> gameplay
+                                        Cast Casino Game Engine (NGE) guarantees 100% <em class="text-indigo-500">provably fair</em> gameplay
                                     </h2>
 
                                     <p class="mt-4 text-lg text-gray-500">
@@ -125,8 +125,8 @@ useHead({
                             <div class="-mr-48 pl-4 sm:pl-6 md:-mr-16 lg:relative lg:m-0 lg:h-full lg:px-0">
                                 <img
                                     class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
-                                    src="~/assets/nexa-game-engine.jpg"
-                                    alt="Nexa Game Engine"
+                                    src="~/assets/cast-casino-game-engine.jpg"
+                                    alt="Cast Casino Game Engine"
                                 />
                             </div>
                         </div>
@@ -165,14 +165,14 @@ useHead({
 
                                     <div class="mt-6">
                                         <NuxtLink
-                                            to="https://repo.hos.im/nyusternie/nexa-games" target="_blank"
+                                            to="https://repo.hos.im/nyusternie/" target="_blank"
                                             class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-2xl font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                                         >
                                             View the NGE source
                                         </NuxtLink>
 
                                         <em class="block w-2/3 my-2 text-sm text-gray-500">
-                                            The Nexa Game Engine (NGE) is temporarily closed-source until Beta release.
+                                            The Cast Casino Game Engine (NGE) is temporarily closed-source until Beta release.
                                             Sorry for any inconvenience.
                                         </em>
                                     </div>
