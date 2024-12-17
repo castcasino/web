@@ -31,7 +31,7 @@ export default async () => {
     response = await pokerTablesDb
         .query('api/byState', {
             key: 2, // Community (betting is allowed)
-            include_docs: true,
+            // include_docs: true,
         })
         .catch(err => console.error(err))
 console.log('RESPONSE (community)', response)
