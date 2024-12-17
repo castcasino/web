@@ -24,6 +24,7 @@ export default async () => {
 
     /* Initialize locals. */
     let pitBoss
+    let pot
     let registered // i.e. on-chain table
     let response
     let tables
@@ -63,7 +64,11 @@ console.log('PIT BOSS', pitBoss)
         })
 console.log('REGISTERED', registered)
 
-        if (registered.pot > BigInt(pitBoss.pot)) {
+        /* Set pot. */
+        pot = registered[6]
+console.log('POT', pot)
+
+        if (pot > BigInt(pitBoss.pot)) {
 console.log('\n  ***PIT BOSS! WE GOTTA UPDATE***\n')
 return
             /* Update pit boss. */
