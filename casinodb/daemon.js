@@ -13,6 +13,7 @@ import handleBlocksEth from './handlers/blocksEth.js'
 import baseWallet from './wallets/base.js'
 
 import handleCommunity from './handlers/community.js'
+import handlePot from './handlers/pot.js'
 import handleQuotes from './handlers/quotes.js'
 import handleSeated from './handlers/seated.js'
 import handleTables from './handlers/tables.js'
@@ -27,6 +28,7 @@ import { ethClient } from './clients/eth.js'
 const COMMUNITY_INTERVAL = 15000
 const UNSEATED_INTERVAL = 10000
 const QUOTES_INTERVAL = 60000
+const PITBOSS_INTERVAL = 60000
 const HOSTESS_INTERVAL = 60000
 const TABLES_INTERVAL = 5000
 
@@ -120,6 +122,12 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
         handleUnseated()
     }, UNSEATED_INTERVAL)
     handleUnseated()
+
+    setInterval(() => {
+        console.log('Managing Seated (by Pit Boss)...')
+        handlePot()
+    }, PITBOSS_INTERVAL)
+    handlePot()
 
     setInterval(() => {
         console.log('Managing Seated (by Hostess)...')
