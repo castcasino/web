@@ -27,7 +27,7 @@ import { ethClient } from './clients/eth.js'
 const COMMUNITY_INTERVAL = 15000
 const UNSEATED_INTERVAL = 10000
 const QUOTES_INTERVAL = 60000
-const HOSTESS_INTERVAL = 15000
+const HOSTESS_INTERVAL = 60000
 const TABLES_INTERVAL = 5000
 
 // TODO Replace with @nexajs/utils

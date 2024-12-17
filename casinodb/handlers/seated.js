@@ -15,6 +15,9 @@ const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.
 
 /* Initialize constants. */
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
+const FREE_API_DELAY = 3000
+
+const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 export default async () => {
 // console.log('MANAGING UNSEATED')
@@ -43,12 +46,14 @@ export default async () => {
     })
 // console.log('UNSEATED', unseated)
 
-    /* Assign hostess. */
-    hostess = unseated[0]
+    for (let i = 0; i < unseated.length; i++) {
+        /* Assign hostess. */
+        hostess = unseated[i]
 // console.log('HOSTESS', hostess)
 
-    /* Validate hostess. */
-    if (hostess) {
+        /* Pause before reading from "FREE" API. */
+        sleep(FREE_API_DELAY)
+
         seated = await baseClient.readContract({
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
