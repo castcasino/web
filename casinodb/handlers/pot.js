@@ -71,7 +71,7 @@ console.log('POT', pot)
 console.log('\n  ***PIT BOSS! WE GOTTA UPDATE***\n')
 
             /* Update pit boss. */
-            pitBoss.pot = registered.pot.toString()
+            pitBoss.pot = pot.toString()
             pitBoss.updatedAt = moment().unix()
 
             /* Save pit boss. */
