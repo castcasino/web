@@ -70,7 +70,7 @@ console.log('POT', pot)
 
         if (pot > BigInt(pitBoss.pot)) {
 console.log('\n  ***PIT BOSS! WE GOTTA UPDATE***\n')
-return
+
             /* Update pit boss. */
             pitBoss.pot = registered.pot.toString()
             pitBoss.updatedAt = moment().unix()
