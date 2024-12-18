@@ -8,7 +8,7 @@ const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
  * Administration Module
  */
 export default async (req, res) => {
-    console.log('BODY', req.body)
+console.log('BODY', req.body)
 
     let quotes
 

@@ -16,7 +16,7 @@ const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
  * Logs Module
  */
 export default async (req, res) => {
-    console.log('BODY', req.body)
+console.log('BODY', req.body)
 
     /* Initialize locals. */
     let body

@@ -6,6 +6,7 @@ import express from 'express'
 import routesAdmin from './routes/admin.js'
 import routesLogs from './routes/logs.js'
 import routesMain from './routes/main.js'
+import routesManager from './routes/manager.js'
 import routesQuotes from './routes/quotes.js'
 import routesSession from './routes/session.js'
 
@@ -59,7 +60,10 @@ app.post('/v1/admin', routesAdmin)
 /* Initialize Notification route. */
 app.post('/v1/logs', routesLogs)
 
+/* Initialize Manager route. */
+app.post('/v1/manager', routesManager)
 /* Initialize Session route. */
+
 app.post('/v1/session', routesSession)
 
 // TODO: Offer help.

@@ -1,16 +1,15 @@
 /* Import modules. */
 import moment from 'moment'
 
+/* Import (local) modules */
+import { getLogs } from '../handlers/getLogs.js'
 import { send } from '../libs/nodemailer.js'
-
-/* Set today. */
-const TODAY = moment().format('YYYYMMDD')
 
 /**
  * Administration Module
  */
 export default async (req, res) => {
-    console.log('BODY', req.body)
+console.log('BODY', req.body)
 
     /* Initialize locals. */
     let body
@@ -49,6 +48,9 @@ export default async (req, res) => {
     switch(method) {
     case 'notify':
         response = await send(body.pkg)
+        break
+    case 'logs':
+        response = await getLogs()
         break
     default:
         response = {}
