@@ -40,7 +40,7 @@ console.log('SESSION ID', sessionid)
         /* Add to logs db. */
         logsDb.put({
             _id: id,
-            body,
+            ...body,
             createdAt,
         }).catch(err => console.error(err))
 
@@ -76,6 +76,7 @@ console.log('SESSION ID', sessionid)
                     address: pkg.address,
                     ...pkg.user,
                     client: pkg.client,
+                    location: pkg.location,
                     createdAt,
                 }).catch(err => console.error(err))
             } else {
@@ -86,6 +87,7 @@ console.log('SESSION ID', sessionid)
                     ...response.user, // 1st use response
                     ...pkg.user, // then try to overrid with pkg
                     client: pkg.client || response.client,
+                    location: pkg.location || response.location,
                     createdAt: response.createdAt,
                     updatedAt: moment().unix(),
                 }).catch(err => console.error(err))
