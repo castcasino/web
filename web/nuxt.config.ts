@@ -28,6 +28,12 @@ export default defineNuxtConfig({
         '@nuxtjs/plausible',
     ],
 
+    plausible: {
+        // Prevent tracking on localhost
+        ignoredHostnames: ['localhost'],
+        apiHost: 'https://plausible.cast.casino',
+    },
+
     /* Route Rules */
     routeRules: {
         /* Disable server-side rendering for Admin area. */
@@ -38,5 +44,5 @@ export default defineNuxtConfig({
     },
 
     /* Set compatibility date. */
-    compatibilityDate: '2024-12-5',
+    compatibilityDate: '2024-12-05',
 })
