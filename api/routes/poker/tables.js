@@ -43,12 +43,12 @@ export default async (req, res) => {
     if (req.params && req.params.nextid) {
         /* Set table id. */
         nextid = req.params.nextid
-console.log('NEXT (TABLE) ID', nextid)
+// console.log('NEXT (TABLE) ID', nextid)
 
         response = await systemDb
             .get('next_table')
             .catch(err => console.error(err))
-console.log('RESPONSE (next table)', response)
+// console.log('RESPONSE (next table)', response)
 
         /* Sanitize. */
         delete response._id
