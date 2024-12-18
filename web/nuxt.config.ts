@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     /* Route Rules */
     routeRules: {
         /* Disable server-side rendering for Admin area. */
-        '/admin/**': { ssr: false },
+        '/manager/**': { ssr: false },
 
         /* Add CORS headers to API. */
         '/v1/**': { cors: true },
