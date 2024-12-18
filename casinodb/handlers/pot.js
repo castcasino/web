@@ -34,7 +34,7 @@ export default async () => {
             include_docs: true,
         })
         .catch(err => console.error(err))
-console.log('RESPONSE (community)', response)
+// console.log('RESPONSE (community)', response)
 
     /* Validate response. */
     if (!response || response.total_rows === 0) {
@@ -45,12 +45,12 @@ console.log('RESPONSE (community)', response)
     tables = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('TABLES', tables)
+// console.log('TABLES', tables)
 
     for (let i = 0; i < tables.length; i++) {
         /* Assign pit boss. */
         pitBoss = tables[i]
-console.log('PIT BOSS', pitBoss)
+// console.log('PIT BOSS', pitBoss)
 
         /* Pause before reading from "FREE" API. */
         sleep(FREE_API_DELAY)
@@ -61,14 +61,14 @@ console.log('PIT BOSS', pitBoss)
             functionName: 'tables',
             args: [BigInt(pitBoss._id)]
         })
-console.log('REGISTERED', registered)
+// console.log('REGISTERED', registered)
 
         /* Set pot. */
         pot = registered[6]
-console.log('POT', pot)
+// console.log('POT', pot)
 
         if (pot > BigInt(pitBoss.pot)) {
-console.log('\n  ***PIT BOSS! WE GOTTA UPDATE***\n')
+// console.log('\n  ***PIT BOSS! WE GOTTA UPDATE***\n')
 
             /* Update pit boss. */
             pitBoss.pot = pot.toString()
