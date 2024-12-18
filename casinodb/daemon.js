@@ -27,7 +27,7 @@ import { ethClient } from './clients/eth.js'
 /* Set constants. */
 const COMMUNITY_INTERVAL = 15000
 const UNSEATED_INTERVAL = 10000
-const QUOTES_INTERVAL = 60000
+const QUOTES_INTERVAL = 300000
 const PITBOSS_INTERVAL = 60000
 const HOSTESS_INTERVAL = 60000
 const TABLES_INTERVAL = 5000

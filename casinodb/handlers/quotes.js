@@ -7,12 +7,12 @@ import PouchDB from 'pouchdb'
 const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
 
 /* Initialize constants. */
-const ENDPOINT = 'https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+const ENDPOINT = 'https://api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
 const getQuotes = async () => {
     /* Initialize locals. */
     let headers
-    let json
+    let quotes
     let response
 
     /* Set headers. */
@@ -24,18 +24,18 @@ const getQuotes = async () => {
     response = await axios
         .get(ENDPOINT, { headers })
         .catch(err => console.error(err))
-console.log('RESPONSE (quotes)', response)
+// console.log('RESPONSE (quotes)', response)
 
     /* Validate response. */
     if (response) {
-        json = response.data
-console.log('RESPONSE (json)', json)
+        quotes = response.data
+console.log('RESPONSE (quotes)', quotes)
     } else {
-        json = {}
+        quotes = {}
     }
 
-    /* Return json. */
-    return json
+    /* Return quotes. */
+    return quotes
 }
 
 export default async () => {
