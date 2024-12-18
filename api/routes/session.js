@@ -4,9 +4,7 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 import { v4 as uuidv4 } from 'uuid'
 
-import _handleRegister from '../handlers/register.js'
-// import _handleRequest from '../handlers/request.js'
-import _handleResponse from '../handlers/response.js'
+// import _handleResponse from '../handlers/response.js'
 
 /* Set today. */
 const TODAY = moment().format('YYYYMMDD')
@@ -95,12 +93,8 @@ console.log('BODY', body)
     /* Validate method. */
     if (method) {
         switch(method) {
-        case 'reg':
-            return _handleRegister(_req, _res)
-        // case 'req':
-        //     return _handleRequest(_req, _res)
-        case 'res':
-            return _handleResponse(_req, _res)
+        // case 'res':
+        //     return _handleResponse(_req, _res)
         default:
             // NO ACTION SPECIFIED
         }
