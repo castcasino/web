@@ -1,8 +1,10 @@
 /* Import modules. */
 import moment from 'moment'
 
-/* Import (local) modules */
-import { getLogs } from '../handlers/getLogs.js'
+/* Import (local) modules. */
+import getLogs from '../handlers/getLogs.js'
+
+/* Import libs. */
 import { send } from '../libs/nodemailer.js'
 
 /**
