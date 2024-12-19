@@ -33,8 +33,8 @@ console.log('RESPONSE (quotes)', quotes)
 
         /* Find quotes. */
         quotes = {
-            ETH: response.data.data.find(_asset => (_asset.id === 1027) ? _asset.quote : {}),
-            DEGEN: response.data.data.find(_asset => (_asset.id === 30096) ? _asset.quote : {}),
+            ETH: response.data.data.find(_asset => (_asset.id === 1027) ? _asset.quote.quote : {}),
+            DEGEN: response.data.data.find(_asset => (_asset.id === 30096) ? _asset.quote.quote : {}),
         }
     } else {
         quotes = {}
@@ -66,7 +66,7 @@ export default async () => {
 //     quotes.DEGEN = await response.json()
 
     quotes = await getQuotes()
-console.log('QUOTES', quotes)
+// console.log('QUOTES', quotes)
 
     response = await systemDb
         .get('quotes')
