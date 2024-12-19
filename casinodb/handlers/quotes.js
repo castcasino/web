@@ -7,12 +7,14 @@ import PouchDB from 'pouchdb'
 const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
 
 /* Initialize constants. */
-const ENDPOINT = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+// const ENDPOINT = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+const ENDPOINT = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 
 const getQuotes = async () => {
     /* Initialize locals. */
     let headers
     let quotes
+    let query
     let response
 
     /* Set headers. */
@@ -20,16 +22,21 @@ const getQuotes = async () => {
         'X-CMC_PRO_API_KEY': process.env.CMC_PRO_API_KEY,
     }
 
+    /* Query (parameters). */
+    query = {
+        id: 'ETH,DEGEN',
+    }
+
     /* Request data. */
     response = await axios
-        .get(ENDPOINT, { headers })
+        .get(ENDPOINT, { headers, query })
         .catch(err => console.error(err))
 // console.log('RESPONSE (quotes)', response)
 
     /* Validate response. */
     if (response) {
         // quotes = response.data
-// console.log('RESPONSE (quotes)', quotes)
+console.log('RESPONSE (quotes)', quotes)
 
         /* Find quotes. */
         quotes = {
