@@ -2,7 +2,7 @@
 import moment from 'moment'
 
 /* Import (local) modules. */
-import getLogs from '../handlers/getLogs.js'
+import getLogs from '../handlers/admin/getLogs.js'
 
 /* Import libs. */
 import { send } from '../libs/nodemailer.js'
