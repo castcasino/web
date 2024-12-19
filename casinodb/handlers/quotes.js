@@ -51,23 +51,22 @@ export default async () => {
     let quotes
     let response
 
-    quotes = {}
+    // quotes = {}
 
-    response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,CNY,JPY,GBP')
-        .catch(err => console.error(err))
+    // response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD,EUR,CNY,JPY,GBP')
+    //     .catch(err => console.error(err))
 // console.log('RESPONSE (quote)', response)
 
-    quotes.ETH = await response.json()
+    // quotes.ETH = await response.json()
 // console.log('QUOTES', quotes)
 
-    response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=DEGEN&tsyms=USD,EUR,CNY,JPY,GBP')
+    // response = await fetch('https://min-api.cryptocompare.com/data/price?fsym=DEGEN&tsyms=USD,EUR,CNY,JPY,GBP')
 // console.log('RESPONSE (quote)', response)
 
-    quotes.DEGEN = await response.json()
-console.log('QUOTES', quotes)
+//     quotes.DEGEN = await response.json()
 
-const test = await getQuotes()
-console.log('QUOTES TEST', test)
+    quotes = await getQuotes()
+console.log('QUOTES', quotes)
 
     response = await systemDb
         .get('quotes')
