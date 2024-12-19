@@ -12,6 +12,7 @@ export default async (_req, _res) => {
     let error
     let response
     let sessionid
+    let sessions
 
     /* Set body. */
     body = _req.body
@@ -26,6 +27,17 @@ export default async (_req, _res) => {
             include_docs: true,
         }).catch(err => console.error(err))
 
+    if (response && response.total_rows > 0) {
+        sessions = response.rows.map(_session => {
+            const doc = _session.doc
+            delete doc._id
+            delete doc._rev
+            return doc
+        })
+    } else {
+        sessions = []
+    }
+
     /* Return (request) error. */
-    _res.json(response)
+    _res.json(sessions)
 }
