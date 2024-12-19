@@ -12,10 +12,25 @@ import { useSystemStore } from '@/stores/system'
 /* Initialize System. */
 const System = useSystemStore()
 
-// onMounted(() => {
-//     console.log('Mounted!')
-//     // Now it's safe to perform setup operations.
-// })
+const sessions = ref(null)
+
+const init = async () => {
+    const response = await $fetch('https://cast.casino/v1/admin', {
+        method: 'POST',
+        body: JSON.stringify({
+            method: 'sessions',
+        })
+    }).catch(err => console.error(err))
+console.log('RESPONSE', response)
+
+    if (response && response.length > 0) {
+        sessions.value = response
+    }
+}
+
+onMounted(() => {
+    init()
+})
 
 // onBeforeUnmount(() => {
 //     console.log('Before Unmount!')
@@ -24,13 +39,11 @@ const System = useSystemStore()
 </script>
 
 <template>
-    <main class="max-w-5xl mx-auto my-10">
+    <main class="max-w-5xl mx-auto my-10 gap-4">
         <h1 class="text-5xl font-medium">
-            Blank
+            Session Logs
         </h1>
 
-        <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id eius voluptatem minus natus at eveniet dolorum eos mollitia, maxime animi excepturi harum omnis illum odit recusandae pariatur! Unde, explicabo molestias.
-        </p>
+        <pre class="text-xs">{{JSON.stringify(sessions, null, 2)}}</pre>
     </main>
 </template>
