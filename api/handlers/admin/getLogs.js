@@ -18,11 +18,12 @@ export default async (_req, _res) => {
 
     /* Set session id. */
     sessionid = body.sessionid
-console.log('SESSION ID', sessionid)
+// console.log('SESSION ID', sessionid)
 
     response = await logsDb
         .allDocs({
             limit: 10,
+            include_docs: true,
         }).catch(err => console.error(err))
 
     /* Return (request) error. */
