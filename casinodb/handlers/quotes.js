@@ -8,13 +8,13 @@ const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 
 /* Initialize constants. */
 // const ENDPOINT = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
-const ENDPOINT = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
+const ENDPOINT = 'https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest'
 
 const getQuotes = async () => {
     /* Initialize locals. */
     let headers
+    let params
     let quotes
-    let query
     let response
 
     /* Set headers. */
@@ -23,13 +23,13 @@ const getQuotes = async () => {
     }
 
     /* Query (parameters). */
-    query = {
+    params = {
         id: 'ETH,DEGEN',
     }
 
     /* Request data. */
     response = await axios
-        .get(ENDPOINT, { headers, query })
+        .get(ENDPOINT, { headers, params })
         .catch(err => console.error(err))
 // console.log('RESPONSE (quotes)', response)
 
