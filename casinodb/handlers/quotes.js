@@ -35,7 +35,7 @@ const getQuotes = async () => {
 
     /* Validate response. */
     if (response) {
-        quotes = response.data.map(_asset => _asset.quote)
+        quotes = response.data//.map(_asset => _asset.quote)
 console.log('RESPONSE (quotes)', quotes)
 
 //         /* Find quotes. */
