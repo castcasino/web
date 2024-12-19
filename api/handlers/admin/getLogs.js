@@ -21,8 +21,8 @@ export default async (_req, _res) => {
 // console.log('SESSION ID', sessionid)
 
     response = await logsDb
-        .allDocs({
-            limit: 10,
+        .query('api/isCastEmbed', {
+            limit: 50,
             include_docs: true,
         }).catch(err => console.error(err))
 
