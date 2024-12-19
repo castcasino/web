@@ -2,7 +2,7 @@
 import moment from 'moment'
 
 /* Import (local) modules. */
-import getLogs from '../handlers/admin/getLogs.js'
+import getSessions from '../handlers/admin/getSessions.js'
 
 /* Import libs. */
 import { send } from '../libs/nodemailer.js'
@@ -51,8 +51,8 @@ console.log('BODY', req.body)
     case 'notify':
         response = await send(body.pkg)
         break
-    case 'logs':
-        response = await getLogs(req, res)
+    case 'sessions':
+        response = await getSessions(req, res)
         break
     default:
         response = {}
