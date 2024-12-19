@@ -28,8 +28,8 @@ const getQuotes = async () => {
 
     /* Validate response. */
     if (response) {
-        // quotes = response.data
-// console.log('RESPONSE (quotes)', quotes)
+        quotes = response.data
+console.log('RESPONSE (quotes)', quotes)
 
         /* Find quotes. */
         quotes = {
