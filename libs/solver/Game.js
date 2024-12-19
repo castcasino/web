@@ -4,8 +4,27 @@
  * http://goldfirestudios.com
  */
 
+/* Import (local) modules. */
+import FiveOfAKind from './FiveOfAKind.js'
+import NaturalRoyalFlush from './NaturalRoyalFlush.js'
+import StraightFlush from './StraightFlush.js'
+import WildRoyalFlush from './WildRoyalFlush.js'
+import FourOfAKindPairPlus from './FourOfAKindPairPlus.js'
+import FourOfAKind from './FourOfAKind.js'
+import FourWilds from './FourWilds.js'
+import FullHouse from './FullHouse.js'
+import Flush from './Flush.js'
+import Straight from './Straight.js'
+import ThreeOfAKindTwoPair from './ThreeOfAKindTwoPair.js'
+import TwoThreeOfAKind from './TwoThreeOfAKind.js'
+import ThreeOfAKind from './ThreeOfAKind.js'
+import ThreePair from './ThreePair.js'
+import TwoPair from './TwoPair.js'
+import OnePair from './OnePair.js'
+import HighCard from './HighCard.js'
+
 // NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
-export const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 
 export const gameRules = {
     'standard': {
@@ -173,6 +192,7 @@ export default class Game {
         this.noKickers = gameRules[this.descr]['noKickers']
     }
 }
+
 
 // function exportToGlobal(global) {
 //     global.Card = Card;

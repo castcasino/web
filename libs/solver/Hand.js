@@ -1,3 +1,9 @@
+/* Import modules. */
+import Card from './Card.js'
+
+// NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
+const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+
 /**
  * Base Hand class that handles comparisons of full hands.
  */
@@ -13,6 +19,10 @@ export default class Hand {
         this.sfLength = 0
         this.alwaysQualifies = true
 
+        this.init()
+    }
+
+    async init() {
         // Qualification rules apply for dealer's hand.
         // Also applies for single player games, like video poker.
         if (canDisqualify && this.game.lowestQualified) {
@@ -34,6 +44,9 @@ export default class Hand {
         }
 
         this.rank = handRank - i
+
+        /* (dynamic) Import modules. */
+        const Card = (await import('./Card.js')).default
 
         // Set up the pool of cards.
         this.cardPool = cards.map(function(c) {
@@ -290,22 +303,37 @@ export default class Hand {
      * @param  {Boolean} canDisqualify Check for a qualified hand.
      * @return {Hand}       Best hand.
      */
-    static solve(cards, game, canDisqualify) {
-        game = game || 'standard'
-        game = (typeof game === 'string') ? new Game(game) : game
+    static async solve(cards, game, canDisqualify) {
+        /* Initialize locals. */
+        let result = null
+
+        /* Validate cards. */
         cards = cards || ['']
 
-        var hands = game.handValues
-        var result = null
+        /* (Dynamic) import module. */
+        const Game = (await import('./Game.js')).default
 
-        for (var i = 0; i < hands.length; i++) {
+        game = game || 'standard'
+        game = (typeof game === 'string') ? new Game(game) : game
+
+        /* Set hands. */
+        const hands = game.handValues
+console.log('HANDS', hands)
+console.log('CARDS', cards)
+
+        /* Handle hands. */
+        for (let i = 0; i < hands.length; i++) {
             result = new hands[i](cards, game, canDisqualify)
+// console.log('RESULT', result)
 
+            /* Validate result. */
             if (result.isPossible) {
+console.log('***RESULT (break)', result)
                 break
             }
         }
 
+        /* Return result. */
         return result
     }
 
