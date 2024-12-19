@@ -7,7 +7,7 @@ import PouchDB from 'pouchdb'
 const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
 
 /* Initialize constants. */
-const ENDPOINT = 'https://api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+const ENDPOINT = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 
 const getQuotes = async () => {
     /* Initialize locals. */
