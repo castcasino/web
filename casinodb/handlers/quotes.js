@@ -24,7 +24,7 @@ const getQuotes = async () => {
 
     /* Query (parameters). */
     params = {
-        id: 'ETH,DEGEN',
+        id: '1027,30096',
     }
 
     /* Request data. */
@@ -35,15 +35,15 @@ const getQuotes = async () => {
 
     /* Validate response. */
     if (response) {
-        // quotes = response.data
+        quotes = response.data.map(_asset => _asset.quote)
 console.log('RESPONSE (quotes)', quotes)
 
-        /* Find quotes. */
-        quotes = {
-            ETH: response.data.data.find(_asset => _asset.id === 1027),
-            DEGEN: response.data.data.find(_asset => _asset.id === 30096),
-        }
-console.log('RESPONSE (quotes)', quotes)
+//         /* Find quotes. */
+//         quotes = {
+//             ETH: response.data.data.find(_asset => _asset.id === 1027),
+//             DEGEN: response.data.data.find(_asset => _asset.id === 30096),
+//         }
+// console.log('RESPONSE (quotes)', quotes)
     } else {
         quotes = {}
     }
