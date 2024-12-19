@@ -1,4 +1,5 @@
 /* Import modules. */
+import Card from './Card.js'
 import Hand from './Hand.js'
 
 // NOTE: The 'joker' will be denoted with a value of 'O' and any suit.

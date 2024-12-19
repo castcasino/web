@@ -15,8 +15,7 @@ const gameForTest = new Game('standard')
 
 describe('A basic hand', function() {
     it('should return a hand with cards sorted descending', async () => {
-        const hand = await Hand.solve(['Kh', 'Tc', '5d', 'As', '3c', '3s', '2h'])
-console.log('\n***HAND', hand)
+        const hand = Hand.solve(['Kh', 'Tc', '5d', 'As', '3c', '3s', '2h'])
 
         hand.cardPool[0].toString().should.equal('As')
         return hand.cardPool[6].toString().should.equal('2h')
