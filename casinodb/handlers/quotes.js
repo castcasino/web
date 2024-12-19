@@ -29,7 +29,12 @@ const getQuotes = async () => {
     /* Validate response. */
     if (response) {
         quotes = response.data
-console.log('RESPONSE (quotes)', quotes)
+// console.log('RESPONSE (quotes)', quotes)
+
+        quotes: {
+            ETH: response.data.find(_asset => (_asset.id === 1027) ? _asset.quote
+            DEGEN: response.data.find(_asset => (_asset.id === 30096) ? _asset.quote
+        }
     } else {
         quotes = {}
     }
@@ -58,7 +63,7 @@ export default async () => {
 // console.log('RESPONSE (quote)', response)
 
     quotes.DEGEN = await response.json()
-// console.log('QUOTES', quotes)
+console.log('QUOTES', quotes)
 
 const test = await getQuotes()
 console.log('QUOTES TEST', test)
