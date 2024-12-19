@@ -52,7 +52,7 @@ console.log('BODY', req.body)
         response = await send(body.pkg)
         break
     case 'logs':
-        response = await getLogs()
+        response = await getLogs(req, res)
         break
     default:
         response = {}
