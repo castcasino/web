@@ -24,7 +24,7 @@ import OnePair from './OnePair.js'
 import HighCard from './HighCard.js'
 
 // NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
-const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+import values from './values.js'
 
 export const gameRules = {
     'standard': {

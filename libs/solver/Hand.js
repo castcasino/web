@@ -1,91 +1,85 @@
 /* Import modules. */
 import Card from './Card.js'
+// import Game from './Game.js'
 
 // NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
-const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+import values from './values.js'
 
 /**
  * Base Hand class that handles comparisons of full hands.
  */
 export default class Hand {
     constructor(cards, name, game, canDisqualify) {
-        this.cardPool = []
-        this.cards = []
-        this.suits = {}
-        this.values = []
-        this.wilds = []
-        this.name = name
-        this.game = game
-        this.sfLength = 0
-        this.alwaysQualifies = true
+        this.cardPool = [];
+        this.cards = [];
+        this.suits = {};
+        this.values = [];
+        this.wilds = [];
+        this.name = name;
+        this.game = game;
+        this.sfLength = 0;
+        this.alwaysQualifies = true;
 
-        this.init()
-    }
-
-    async init() {
         // Qualification rules apply for dealer's hand.
         // Also applies for single player games, like video poker.
         if (canDisqualify && this.game.lowestQualified) {
-            this.alwaysQualifies = false
+            this.alwaysQualifies = false;
         }
 
         // Ensure no duplicate cards in standard game.
         if (game.descr === 'standard' && new Set(cards).size !== cards.length) {
-            throw new Error('Duplicate cards')
+            throw new Error('Duplicate cards');
         }
 
         // Get rank based on game.
-        var handRank = this.game.handValues.length
+        var handRank = this.game.handValues.length;
 
-        for (var i = 0; i < this.game.handValues.length; i++) {
+        for (var i=0; i<this.game.handValues.length; i++) {
             if (this.game.handValues[i] === this.constructor) {
-                break
+                break;
             }
         }
 
-        this.rank = handRank - i
-
-        /* (dynamic) Import modules. */
-        const Card = (await import('./Card.js')).default
+        this.rank = handRank - i;
 
         // Set up the pool of cards.
         this.cardPool = cards.map(function(c) {
-            return (typeof c === 'string') ? new Card(c) : c
-        })
+            return (typeof c === 'string') ? new Card(c) : c;
+        });
 
         // Fix the card ranks for wild cards, and sort.
-        for (var i = 0; i < this.cardPool.length; i++) {
-            card = this.cardPool[i]
+        for (var i=0; i<this.cardPool.length; i++) {
+            card = this.cardPool[i];
 
             if (card.value === this.game.wildValue) {
-                card.rank = -1
+                card.rank = -1;
             }
         }
 
-        this.cardPool = this.cardPool.sort(Card.sort)
+        this.cardPool = this.cardPool.sort(Card.sort);
 
         // Create the arrays of suits and values.
-        var obj, obj1, key, key1, card
+        var obj, obj1, key, key1, card;
 
-        for (var i = 0; i < this.cardPool.length; i++) {
+        for (var i=0; i<this.cardPool.length; i++) {
             // Make sure this value already exists in the object.
-            card = this.cardPool[i]
+            card = this.cardPool[i];
 
             // We do something special if this is a wild card.
             if (card.rank === -1) {
-                this.wilds.push(card)
+                this.wilds.push(card);
             } else {
-                (obj = this.suits)[key = card.suit] || (obj[key] = [])
-                (obj1 = this.values)[key1 = card.rank] || (obj1[key1] = [])
+                (obj = this.suits)[key = card.suit] || (obj[key] = []);
+                (obj1 = this.values)[key1 = card.rank] || (obj1[key1] = []);
 
                 // Add the value to the array for that type in the object.
-                this.suits[card.suit].push(card)
-                this.values[card.rank].push(card)
+                this.suits[card.suit].push(card);
+                this.values[card.rank].push(card);
             }
         }
 
-        this.values.reverse()
-        this.isPossible = this.solve()
+        this.values.reverse();
+        this.isPossible = this.solve();
     }
 
     /**
@@ -95,24 +89,23 @@ export default class Hand {
      */
     compare(a) {
         if (this.rank < a.rank) {
-            return 1
+            return 1;
         } else if (this.rank > a.rank) {
-            return -1
+            return -1;
         }
 
-        var result = 0
-
-        for (var i = 0; i <= 4; i++) {
+        var result = 0;
+        for (var i=0; i<=4; i++) {
             if (this.cards[i] && a.cards[i] && this.cards[i].rank < a.cards[i].rank) {
-                result = 1
-                break
+                result = 1;
+                break;
             } else if (this.cards[i] && a.cards[i] && this.cards[i].rank > a.cards[i].rank) {
-                result = -1
-                break
+                result = -1;
+                break;
             }
         }
 
-        return result
+        return result;
     }
 
     /**
@@ -121,7 +114,7 @@ export default class Hand {
      * @return {Boolean}
      */
     loseTo(hand) {
-        return (this.compare(hand) > 0)
+        return (this.compare(hand) > 0);
     }
 
     /**
@@ -169,7 +162,6 @@ export default class Hand {
                         break;
                     }
                 }
-
                 wild.rank = values.length-1-j;
                 wild.wildValue = values[wild.rank];
             }
@@ -198,7 +190,6 @@ export default class Hand {
     nextHighest() {
         var picks;
         var excluding = [];
-
         excluding = excluding.concat(this.cards);
 
         picks = this.cardPool.filter(function(card) {
@@ -211,13 +202,11 @@ export default class Hand {
         if (this.game.wildStatus === 0) {
             for (var i=0; i<picks.length; i++) {
                 var card = picks[i];
-
                 if (card.rank === -1) {
                     card.wildValue = 'A';
                     card.rank = values.length - 1;
                 }
             }
-
             picks = picks.sort(Card.sort);
         }
 
@@ -261,39 +250,36 @@ export default class Hand {
     }
 
     /**
-     * Find highest ranked hands and remove any that don't qualify
-     * or lose to another hand.
+     * Find highest ranked hands and remove any that don't qualify or lose to another hand.
      * @param  {Array} hands Hands to evaluate.
      * @return {Array}       Winning hands.
      */
     static winners(hands) {
         hands = hands.filter(function(h) {
-            return h.qualifiesHigh()
-        })
+            return h.qualifiesHigh();
+        });
 
         var highestRank = Math.max.apply(Math, hands.map(function(h) {
-            return h.rank
-        }))
+            return h.rank;
+        }));
 
         hands = hands.filter(function(h) {
-            return h.rank === highestRank
-        })
+            return h.rank === highestRank;
+        });
 
         hands = hands.filter(function(h) {
-            var lose = false
-
-            for (var i = 0; i < hands.length; i++) {
-                lose = h.loseTo(hands[i])
-
+            var lose = false;
+            for (var i=0; i<hands.length; i++) {
+                lose = h.loseTo(hands[i]);
                 if (lose) {
-                    break
+                    break;
                 }
             }
 
-            return !lose
-        })
+            return !lose;
+        });
 
-        return hands
+        return hands;
     }
 
     /**
@@ -303,38 +289,22 @@ export default class Hand {
      * @param  {Boolean} canDisqualify Check for a qualified hand.
      * @return {Hand}       Best hand.
      */
-    static async solve(cards, game, canDisqualify) {
-        /* Initialize locals. */
-        let result = null
+    static solve(cards, game, canDisqualify) {
+        game = game || 'standard';
+        game = (typeof game === 'string') ? new Game(game) : game;
+        cards = cards || [''];
 
-        /* Validate cards. */
-        cards = cards || ['']
+        var hands = game.handValues;
+        var result = null;
 
-        /* (Dynamic) import module. */
-        const Game = (await import('./Game.js')).default
-
-        game = game || 'standard'
-        game = (typeof game === 'string') ? new Game(game) : game
-
-        /* Set hands. */
-        const hands = game.handValues
-console.log('HANDS', hands)
-console.log('CARDS', cards)
-
-        /* Handle hands. */
-        for (let i = 0; i < hands.length; i++) {
-            result = new hands[i](cards, game, canDisqualify)
-// console.log('RESULT', result)
-
-            /* Validate result. */
+        for (var i=0; i<hands.length; i++) {
+            result = new hands[i](cards, game, canDisqualify);
             if (result.isPossible) {
-console.log('***RESULT (break)', result)
-                break
+                break;
             }
         }
 
-        /* Return result. */
-        return result
+        return result;
     }
 
     /**
@@ -344,22 +314,20 @@ console.log('***RESULT (break)', result)
      * @return {Array} [wilds, nonWilds] Wild and non-Wild Cards.
      */
     static stripWilds(cards, game) {
-        var card, wilds, nonWilds
+        var card, wilds, nonWilds;
+        cards = cards || [''];
+        wilds = [];
+        nonWilds = [];
 
-        cards = cards || ['']
-        wilds = []
-        nonWilds = []
-
-        for (var i = 0; i < cards.length; i++) {
-            card = cards[i]
-
+        for (var i=0; i<cards.length; i++) {
+            card = cards[i];
             if (card.rank === -1) {
-                wilds.push(cards[i])
+                wilds.push(cards[i]);
             } else {
-                nonWilds.push(cards[i])
+                nonWilds.push(cards[i]);
             }
         }
 
-        return [ wilds, nonWilds ]
+        return [wilds, nonWilds];
     }
 }

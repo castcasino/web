@@ -4,37 +4,13 @@
  * http://goldfirestudios.com
  */
 
-(function() {
-  'use strict';
+// (function() {
+//   'use strict';
 
-  // NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
-  var values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'];
+// NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
+import values from './solver/values.js'
 
-  /**
-   * Base Card class that defines a single card.
-   */
-  class Card {
-    constructor(str) {
-      this.value = str.substr(0, 1);
-      this.suit = str.substr(1, 1).toLowerCase();
-      this.rank = values.indexOf(this.value);
-      this.wildValue = str.substr(0, 1);
-    }
-
-    toString() {
-      return this.wildValue.replace('T', '10') + this.suit;
-    }
-
-    static sort(a, b) {
-      if (a.rank > b.rank) {
-        return -1;
-      } else if (a.rank < b.rank) {
-        return 1;
-      } else {
-        return 0;
-      }
-    }
-  }
+import Card from './solver/Card.js'
 
   /**
    * Base Hand class that handles comparisons of full hands.
@@ -358,7 +334,7 @@
     }
   }
 
-  class StraightFlush extends Hand {
+class StraightFlush extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Straight Flush', game, canDisqualify);
     }
@@ -404,7 +380,7 @@
     }
   }
 
-  class RoyalFlush extends StraightFlush {
+class RoyalFlush extends StraightFlush {
     constructor(cards, game, canDisqualify) {
       super(cards, game, canDisqualify);
     }
@@ -441,7 +417,7 @@
     }
   }
 
-  class WildRoyalFlush extends RoyalFlush {
+class WildRoyalFlush extends RoyalFlush {
     constructor(cards, game, canDisqualify) {
       super(cards, game, canDisqualify);
     }
@@ -466,7 +442,7 @@
     }
   }
 
-  class FiveOfAKind extends Hand {
+class FiveOfAKind extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Five of a Kind', game, canDisqualify);
     }
@@ -500,7 +476,7 @@
     }
   }
 
-  class FourOfAKindPairPlus extends Hand {
+class FourOfAKindPairPlus extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Four of a Kind with Pair or Better', game, canDisqualify);
     }
@@ -564,7 +540,7 @@
     }
   }
 
-  class FourOfAKind extends Hand {
+class FourOfAKind extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Four of a Kind', game, canDisqualify);
     }
@@ -603,7 +579,7 @@
     }
   }
 
-  class FourWilds extends Hand {
+class FourWilds extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Four Wild Cards', game, canDisqualify);
     }
@@ -626,7 +602,7 @@
     }
   }
 
-  class ThreeOfAKindTwoPair extends Hand {
+class ThreeOfAKindTwoPair extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Three of a Kind with Two Pair', game, canDisqualify);
     }
@@ -707,7 +683,7 @@
     }
   }
 
-  class FullHouse extends Hand {
+class FullHouse extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Full House', game, canDisqualify);
     }
@@ -771,7 +747,7 @@
     }
   }
 
-  class Flush extends Hand {
+class Flush extends Hand {
     constructor(cards, game, canDisqualify) {
       super(cards, 'Flush', game, canDisqualify);
     }
@@ -1230,43 +1206,44 @@
     }
   }
 
-  class OnePair extends Hand {
-    constructor(cards, game, canDisqualify) {
-      super(cards, 'Pair', game, canDisqualify);
-    }
-
-    solve() {
-      this.resetWildCards();
-
-      for (var i=0; i<this.values.length; i++) {
-        if (this.getNumCardsByRank(i) === 2) {
-          this.cards = this.cards.concat(this.values[i] || []);
-          for (var j=0; j<this.wilds.length && this.cards.length<2; j++) {
-            var wild = this.wilds[j];
-            if (this.cards) {
-              wild.rank = this.cards[0].rank;
-            } else {
-              wild.rank = values.length - 1;
-            }
-            wild.wildValue = values[wild.rank];
-            this.cards.push(wild);
-          }
-          this.cards = this.cards.concat(this.nextHighest().slice(0, this.game.cardsInHand-2));
-          break;
-        }
-      }
-
-      if (this.cards.length >= 2) {
-        if (this.game.noKickers) {
-          this.cards.length = 2;
-        }
-
-        this.descr = this.name + ', ' + this.cards[0].toString().slice(0, -1) + '\'s';
-      }
-
-      return this.cards.length >= 2;
-    }
-  }
+import OnePair from './solver/OnePair.js'
+// class OnePair extends Hand {
+//     constructor(cards, game, canDisqualify) {
+//       super(cards, 'Pair', game, canDisqualify);
+//     }
+//
+//     solve() {
+//       this.resetWildCards();
+//
+//       for (var i=0; i<this.values.length; i++) {
+//         if (this.getNumCardsByRank(i) === 2) {
+//           this.cards = this.cards.concat(this.values[i] || []);
+//           for (var j=0; j<this.wilds.length && this.cards.length<2; j++) {
+//             var wild = this.wilds[j];
+//             if (this.cards) {
+//               wild.rank = this.cards[0].rank;
+//             } else {
+//               wild.rank = values.length - 1;
+//             }
+//             wild.wildValue = values[wild.rank];
+//             this.cards.push(wild);
+//           }
+//           this.cards = this.cards.concat(this.nextHighest().slice(0, this.game.cardsInHand-2));
+//           break;
+//         }
+//       }
+//
+//       if (this.cards.length >= 2) {
+//         if (this.game.noKickers) {
+//           this.cards.length = 2;
+//         }
+//
+//         this.descr = this.name + ', ' + this.cards[0].toString().slice(0, -1) + '\'s';
+//       }
+//
+//       return this.cards.length >= 2;
+//     }
+//   }
 
   class HighCard extends Hand {
     constructor(cards, game, canDisqualify) {
@@ -1824,39 +1801,43 @@
     }
   }
 
-  function exportToGlobal(global) {
-    global.Card = Card;
-    global.Hand = Hand;
-    global.Game = Game;
-    global.RoyalFlush = RoyalFlush;
-    global.NaturalRoyalFlush = NaturalRoyalFlush;
-    global.WildRoyalFlush = WildRoyalFlush;
-    global.FiveOfAKind = FiveOfAKind;
-    global.StraightFlush = StraightFlush;
-    global.FourOfAKindPairPlus = FourOfAKindPairPlus;
-    global.FourOfAKind = FourOfAKind;
-    global.FourWilds = FourWilds;
-    global.TwoThreeOfAKind = TwoThreeOfAKind;
-    global.ThreeOfAKindTwoPair = ThreeOfAKindTwoPair;
-    global.FullHouse = FullHouse;
-    global.Flush = Flush;
-    global.Straight = Straight;
-    global.ThreeOfAKind = ThreeOfAKind;
-    global.ThreePair = ThreePair;
-    global.TwoPair = TwoPair;
-    global.OnePair = OnePair;
-    global.HighCard = HighCard;
-    global.PaiGowPokerHelper = PaiGowPokerHelper;
-  }
+  export const _Card = Card
+  export const _Hand = Hand
+  export const _Game = Game
 
-  // Export the classes for node.js use.
-  if (typeof exports !== 'undefined') {
-    exportToGlobal(exports);
-  }
+  // function exportToGlobal(global) {
+  //   global.Card = Card;
+  //   global.Hand = Hand;
+  //   global.Game = Game;
+  //   global.RoyalFlush = RoyalFlush;
+  //   global.NaturalRoyalFlush = NaturalRoyalFlush;
+  //   global.WildRoyalFlush = WildRoyalFlush;
+  //   global.FiveOfAKind = FiveOfAKind;
+  //   global.StraightFlush = StraightFlush;
+  //   global.FourOfAKindPairPlus = FourOfAKindPairPlus;
+  //   global.FourOfAKind = FourOfAKind;
+  //   global.FourWilds = FourWilds;
+  //   global.TwoThreeOfAKind = TwoThreeOfAKind;
+  //   global.ThreeOfAKindTwoPair = ThreeOfAKindTwoPair;
+  //   global.FullHouse = FullHouse;
+  //   global.Flush = Flush;
+  //   global.Straight = Straight;
+  //   global.ThreeOfAKind = ThreeOfAKind;
+  //   global.ThreePair = ThreePair;
+  //   global.TwoPair = TwoPair;
+  //   global.OnePair = OnePair;
+  //   global.HighCard = HighCard;
+  //   global.PaiGowPokerHelper = PaiGowPokerHelper;
+  // }
 
-  // Add the classes to the window for browser use.
-  if (typeof window !== 'undefined') {
-    exportToGlobal(window);
-  }
+  // // Export the classes for node.js use.
+  // if (typeof exports !== 'undefined') {
+  //   exportToGlobal(exports);
+  // }
+  //
+  // // Add the classes to the window for browser use.
+  // if (typeof window !== 'undefined') {
+  //   exportToGlobal(window);
+  // }
 
-})();
+// })();

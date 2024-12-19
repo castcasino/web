@@ -2,17 +2,14 @@
 import Hand from './Hand.js'
 
 // NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
-const values = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
+import values from './values.js'
 
 export default class OnePair extends Hand {
     constructor(cards, game, canDisqualify) {
         super(cards, 'Pair', game, canDisqualify)
-console.log('\n\n***CONSTRUCT ONE PAIR\n', this.values)
-        this.init()
     }
 
     solve() {
-console.log('\n\n***SOLVE ONE PAIR\n', this.values)
         this.resetWildCards()
 
         for (var i = 0; i < this.values.length; i++) {
