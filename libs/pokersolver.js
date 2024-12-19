@@ -61,7 +61,7 @@
       if (game.descr === 'standard' && new Set(cards).size !== cards.length) {
         throw new Error('Duplicate cards');
       }
-      
+
       // Get rank based on game.
       var handRank = this.game.handValues.length;
       for (var i=0; i<this.game.handValues.length; i++) {
@@ -348,9 +348,9 @@
       for (var i=0; i<cards.length; i++) {
         card = cards[i];
         if (card.rank === -1) {
-          wilds.push(cards[i]);  
+          wilds.push(cards[i]);
         } else {
-          nonWilds.push(cards[i]);  
+          nonWilds.push(cards[i]);
         }
       }
 
@@ -374,7 +374,7 @@
         if (cards && cards.length >= this.game.sfQualify) {
           possibleStraight = cards;
           break;
-        } 
+        }
       }
 
       if (possibleStraight) {

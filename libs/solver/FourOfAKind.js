@@ -1,6 +1,9 @@
+/* Import modules. */
+import Hand from './Hand.js'
+
 export default class FourOfAKind extends Hand {
     constructor(cards, game, canDisqualify) {
-        super(cards, 'Four of a Kind', game, canDisqualify);
+        super(cards, 'Four of a Kind', game, canDisqualify)
     }
 
   solve() {

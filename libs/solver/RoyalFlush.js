@@ -1,6 +1,9 @@
+/* Import modules. */
+import StraightFlush from './StraightFlush.js'
+
 export default class RoyalFlush extends StraightFlush {
     constructor(cards, game, canDisqualify) {
-        super(cards, game, canDisqualify);
+        super(cards, game, canDisqualify)
     }
 
     solve() {

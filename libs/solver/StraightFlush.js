@@ -1,13 +1,18 @@
+/* Import modules. */
+import Hand from './Hand.js'
+
 export default class StraightFlush extends Hand {
     constructor(cards, game, canDisqualify) {
         super(cards, 'Straight Flush', game, canDisqualify)
     }
 
     solve() {
-        var cards
+        let cards
+
         this.resetWildCards()
-        var possibleStraight = null
-        var nonCards = []
+
+        let possibleStraight = null
+        let nonCards = []
 
         for (var suit in this.suits) {
             cards = this.getCardsForFlush(suit, false)
@@ -28,7 +33,7 @@ export default class StraightFlush extends Hand {
                 }
             }
 
-            var straight = new Straight(possibleStraight, this.game)
+            const straight = new Straight(possibleStraight, this.game)
 
             if (straight.isPossible) {
                 this.cards = straight.cards

@@ -41,7 +41,7 @@ export default class Hand {
         })
 
         // Fix the card ranks for wild cards, and sort.
-        for (var i=0; i<this.cardPool.length; i++) {
+        for (var i = 0; i < this.cardPool.length; i++) {
             card = this.cardPool[i]
 
             if (card.value === this.game.wildValue) {

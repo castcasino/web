@@ -1,6 +1,9 @@
+/* Import modules. */
+import RoyalFlush from './RoyalFlush.js'
+
 export default class NaturalRoyalFlush extends RoyalFlush {
     constructor(cards, game, canDisqualify) {
-        super(cards, game, canDisqualify);
+        super(cards, game, canDisqualify)
     }
 
     solve() {

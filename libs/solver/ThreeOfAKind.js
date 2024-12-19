@@ -1,6 +1,9 @@
+/* Import modules. */
+import Hand from './Hand.js'
+
 export default class ThreeOfAKind extends Hand {
     constructor(cards, game, canDisqualify) {
-        super(cards, 'Three of a Kind', game, canDisqualify);
+        super(cards, 'Three of a Kind', game, canDisqualify)
     }
 
   solve() {

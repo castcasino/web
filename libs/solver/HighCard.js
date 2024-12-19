@@ -1,6 +1,9 @@
+/* Import modules. */
+import Hand from './Hand.js'
+
 export default class HighCard extends Hand {
     constructor(cards, game, canDisqualify) {
-        super(cards, 'High Card', game, canDisqualify);
+        super(cards, 'High Card', game, canDisqualify)
     }
 
     solve() {

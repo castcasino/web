@@ -10,20 +10,20 @@ export default class PaiGowPokerHelper {
      * @param {Hand} hand Solved hand against Game 'paigowpokerfull'.
      */
     constructor(hand) {
-        this.baseHand = null;
-        this.hiHand = null;
-        this.loHand = null;
-        this.game = null;
-        this.loGame = new Game('paigowpokerlo');
-        this.hiGame = new Game('paigowpokerhi');
+        this.baseHand = null
+        this.hiHand = null
+        this.loHand = null
+        this.game = null
+        this.loGame = new Game('paigowpokerlo')
+        this.hiGame = new Game('paigowpokerhi')
 
         if (Array.isArray(hand)) {
-            this.baseHand = Hand.solve(hand, new Game('paigowpokerfull'));
+            this.baseHand = Hand.solve(hand, new Game('paigowpokerfull'))
         } else {
-            this.baseHand = hand;
+            this.baseHand = hand
         }
 
-        this.game = this.baseHand.game;
+        this.game = this.baseHand.game
     }
 
   /*

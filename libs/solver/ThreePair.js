@@ -1,6 +1,9 @@
+/* Import modules. */
+import Hand from './Hand.js'
+
 export default class ThreePair extends Hand {
     constructor(cards, game, canDisqualify) {
-        super(cards, 'Three Pair', game, canDisqualify);
+        super(cards, 'Three Pair', game, canDisqualify)
     }
 
   solve() {

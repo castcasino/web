@@ -1,6 +1,9 @@
+/* Import modules. */
+import Hand from './Hand.js'
+
 export default class FullHouse extends Hand {
     constructor(cards, game, canDisqualify) {
-        super(cards, 'Full House', game, canDisqualify);
+        super(cards, 'Full House', game, canDisqualify)
     }
 
   solve() {
