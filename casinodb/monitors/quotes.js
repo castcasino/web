@@ -43,7 +43,7 @@ const getQuotes = async () => {
             ETH: response.data.data['1027'].quote,
             DEGEN: response.data.data['30096'].quote,
         }
-console.log('RESPONSE (quotes)', quotes)
+// console.log('RESPONSE (quotes)', quotes)
     } else {
         quotes = {}
     }
