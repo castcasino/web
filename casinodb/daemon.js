@@ -12,12 +12,12 @@ import handleBlocksEth from './handlers/blocksEth.js'
 /* Import wallets. */
 import baseWallet from './wallets/base.js'
 
-import handleCommunity from './handlers/community.js'
-import handlePot from './handlers/pot.js'
-import handleQuotes from './handlers/quotes.js'
-import handleSeated from './handlers/seated.js'
-import handleTables from './handlers/tables.js'
-import handleUnseated from './handlers/unseated.js'
+import handleCommunity from './monitors/community.js'
+import handlePot from './monitors/pot.js'
+import handleQuotes from './monitors/quotes.js'
+import handleSeated from './monitors/seated.js'
+import handleTables from './monitors/tables.js'
+import handleUnseated from './monitors/unseated.js'
 
 /* Import blockchain clients. */
 import { baseClient } from './clients/base.js'
