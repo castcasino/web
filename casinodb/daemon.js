@@ -17,7 +17,7 @@ import handlePot from './monitors/pot.js'
 import handleQuotes from './monitors/quotes.js'
 import handleSeated from './monitors/seated.js'
 import handleTables from './monitors/tables.js'
-import handleUnseated from './monitors/unseated.js'
+import handleShowdown from './monitors/showdown.js'
 
 /* Import blockchain clients. */
 import { baseClient } from './clients/base.js'
@@ -25,12 +25,12 @@ import { degenClient } from './clients/degen.js'
 import { ethClient } from './clients/eth.js'
 
 /* Set constants. */
-const COMMUNITY_INTERVAL = 15000
-const UNSEATED_INTERVAL = 10000
 const QUOTES_INTERVAL = 300000
+const TABLES_INTERVAL = 5000
+const COMMUNITY_INTERVAL = 15000
 const PITBOSS_INTERVAL = 60000
 const HOSTESS_INTERVAL = 60000
-const TABLES_INTERVAL = 5000
+const SHOWDOWN_INTERVAL = 60000
 
 // TODO Replace with @nexajs/utils
 const jsonParse = (_data, _transform = true) => {
@@ -118,13 +118,7 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
     handleCommunity()
 
     setInterval(() => {
-        console.log('Managing Unseated...')
-        handleUnseated()
-    }, UNSEATED_INTERVAL)
-    handleUnseated()
-
-    setInterval(() => {
-        console.log('Managing Seated (by Pit Boss)...')
+        console.log('Managing Pot (by Pit Boss)...')
         handlePot()
     }, PITBOSS_INTERVAL)
     handlePot()
@@ -134,4 +128,10 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
         handleSeated()
     }, HOSTESS_INTERVAL)
     handleSeated()
+
+    // setInterval(() => {
+    //     console.log('Managing Showdown...')
+    //     handleShowdown()
+    // }, SHOWDOWN_INTERVAL)
+    handleShowdown()
 })()

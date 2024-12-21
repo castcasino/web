@@ -58,6 +58,16 @@ export default async () => {
         idxTables.updatedAt = moment().unix()
         // console.log('NEW IDX', idxTables)
 
+        idxCommunity = await systemDb
+            .get('idx_community')
+            .catch(err => console.error(err))
+// console.log('INDEX COMMUNITY (db)', idxCommunity)
+
+        /* Check community. */
+        if (idxCommunity.height < idxTables.height) {
+            await _addNewTable(idxCommunity)
+        }
+
         await systemDb
             .put(idxTables)
             .catch(err => {
@@ -75,14 +85,5 @@ export default async () => {
                 pkg: idxTables,
             }),
         })
-    }
-
-    idxCommunity = await systemDb.get('idx_community')
-        .catch(err => console.error(err))
-// console.log('INDEX COMMUNITY (db)', idxCommunity)
-
-    /* Check community. */
-    if (idxCommunity.height < idxTables.height) {
-        _addNewTable(idxCommunity)
     }
 }
