@@ -34,6 +34,7 @@ services:
       - TREASURY_ADDRESS=${TREASURY_ADDRESS}
       - NEYNAR_API_KEY=${NEYNAR_API_KEY}
       - CMC_PRO_API_KEY=${CMC_PRO_API_KEY}
+      - METAMASK_API_KEY=${METAMASK_API_KEY}
     logging: # apply better controls to Docker overlay folder
       driver: 'json-file'
       options:
