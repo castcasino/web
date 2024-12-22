@@ -25,17 +25,16 @@ console.log('MANAGING SHOWDOWN')
     let seated
     let unseated
 
-//     const blk = await systemDb
-//         .get('blk_table_created')
-//         .catch(err => console.error(err))
-// console.log('BLOCK', blk)
+    const blk = await systemDb
+        .get('blk_table_created')
+        .catch(err => console.error(err))
+console.log('BLOCK', blk)
 
     const logs = await baseClient.getContractEvents({
         address: '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95',
         abi: castPokerAbi,
         eventName: 'TableCreated',
         fromBlock: 0n,
-    //  fromBlock: 23802731n,
     //    toBlock: 23992520n
     })
 console.log('CONTRACT EVENTS', logs)
