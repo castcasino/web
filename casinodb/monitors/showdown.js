@@ -22,8 +22,8 @@ export default async () => {
 console.log('MANAGING SHOWDOWN')
     /* Initialize locals. */
     let blocks
-    let key
     let response
+    let startkey
     let tables
 
 //     const blk = await systemDb
@@ -49,7 +49,7 @@ console.log('MANAGING SHOWDOWN')
             include_docs: true,
         })
         .catch(err => console.error(err))
-console.log('RESPONSE (unseated tables)', response)
+// console.log('RESPONSE (unseated tables)', response)
 
     /* Validate response. */
     if (!response || response.total_rows === 0) {
@@ -62,12 +62,13 @@ console.log('RESPONSE (unseated tables)', response)
     })
 console.log('OPEN TABLES', tables)
 
-    key = tables[0]?.community?.blockNumber
-console.log('TIME KEY', key)
+    startkey = tables[0]?.community?.blockNumber
+console.log('START KEY', startkey)
 
     blocks = await blocksBaseDb
         .query('api/byTimestamp', {
-            key,
+            startkey,
+            limit: 10,
             include_docs: true,
         })
 console.log('TIME BLOCKS', blocks)
