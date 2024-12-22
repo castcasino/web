@@ -65,13 +65,13 @@ console.log('OPEN TABLES', tables)
     startkey = tables[0]?.community?.blockNumber
 console.log('START KEY', startkey)
 
-    blocks = await blocksBaseDb
+    response = await blocksBaseDb
         .query('api/byTimestamp', {
             startkey,
             limit: 10,
             include_docs: true,
         })
-// console.log('RESPONSE (time blocks)', blocks)
+// console.log('RESPONSE (time blocks)', response)
 
     /* Set (time) blocks. */
     blocks = response.rows.map((_unset) => {
