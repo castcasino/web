@@ -150,6 +150,17 @@ console.log('ACTIVE DECK', activeDeck.length, activeDeck)
 console.log('SELECTED', selected)
 console.log('ACTIVE DECK', activeDeck.length, activeDeck)
 
+    const seat = {
+        address: tables[tableid].seated[0],
+        hole1: selected[0][0],
+        hole1Idx: idxLookup(selected[0][0]),
+        hole2: selected[0][1],
+        hole2Idx: idxLookup(selected[0][1]),
+        blockIdx: blocks[0]._id,
+        blockHash: blocks[0].hash,
+    }
+console.log('SEAT', seat)
+
 return
 
     /* Validate hostess. */
