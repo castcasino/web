@@ -1,6 +1,7 @@
 /* Import modules. */
 import moment from 'moment'
 import PouchDB from 'pouchdb'
+import { parseAbiItem } from 'viem'
 
 /* Import blockchain clients. */
 import { baseClient } from '../clients/base.js'
@@ -18,12 +19,23 @@ const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 
 export default async () => {
 console.log('MANAGING SHOWDOWN')
-return
     /* Initialize locals. */
     let hostess
     let response
     let seated
     let unseated
+
+    const logs = await baseClient.getContractEvents({
+        address: '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95',
+        abi: castPokerAbi,
+        eventName: 'TableCreated',
+        fromBlock: 0n,
+    //  fromBlock: 23802731n,
+    //    toBlock: 23992520n
+    })
+console.log('CONTRACT EVENTS', logs)
+return
+
 
     response = await pokerTablesDb
         .query('api/unseated', {
