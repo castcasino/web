@@ -140,6 +140,12 @@ console.log('ACTIVE DECK', activeDeck.length)
     /* Initialize selected handler. */
     selected = []
 
+    selected.push(dealCards(
+        activeDeck, blocks[0].hash.slice(2), 2))
+console.log('ACTIVE DECK', activeDeck.length)
+
+console.log('SELECTED', selected)
+
 return
 
     /* Validate hostess. */
