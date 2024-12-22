@@ -66,7 +66,7 @@ console.log('OPEN TABLES', tables)
 console.log('BLOCK NUMBER', blockNumber)
 
     response = await blocksBaseDb
-        .get(blockNumber, { include_docs: true })
+        .get(blockNumber.toString(), { include_docs: true })
         .catch(err => console.error(err))
 console.log('RESPONSE (time blocks)', response)
 
