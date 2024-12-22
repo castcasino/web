@@ -71,7 +71,14 @@ console.log('START KEY', startkey)
             limit: 10,
             include_docs: true,
         })
+// console.log('RESPONSE (time blocks)', blocks)
+
+    /* Set (time) blocks. */
+    blocks = response.rows.map((_unset) => {
+        return _unset.doc
+    })
 console.log('TIME BLOCKS', blocks)
+
 return
 
     /* Assign hostess. */
