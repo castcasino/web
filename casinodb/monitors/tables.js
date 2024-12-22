@@ -38,6 +38,28 @@ export default async () => {
     let response
     let totalTables
 
+// TODO
+    // const currentBlkHeight = ...
+
+    const blk = await systemDb
+        .get('blk_table_created')
+        .catch(err => console.error(err))
+// console.log('BLOCK', blk)
+
+    if (typeof blk === 'undefined') {
+        throw new Error('ERROR: System database failed!')
+    }
+
+    const tableLogs = await baseClient.getContractEvents({
+        address: '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95',
+        abi: castPokerAbi,
+        eventName: 'TableCreated',
+        fromBlock: BigInt(blk.height),
+        // toBlock: BigInt(currentBlkHeight),
+    })
+console.log('TABLE LOGS', tableLogs)
+
+
     /* Request total tables. */
     totalTables = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,

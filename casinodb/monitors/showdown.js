@@ -25,22 +25,22 @@ console.log('MANAGING SHOWDOWN')
     let seated
     let unseated
 
-    const blk = await systemDb
-        .get('blk_table_created')
-        .catch(err => console.error(err))
-// console.log('BLOCK', blk)
-
-    if (typeof blk === 'undefined') {
-        throw new Error('ERROR: System database failed!')
-    }
-
-    const logs = await baseClient.getContractEvents({
-        address: '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95',
-        abi: castPokerAbi,
-        eventName: 'TableCreated',
-        fromBlock: BigInt(blk.height),
-    })
-console.log('CONTRACT EVENTS', logs)
+//     const blk = await systemDb
+//         .get('blk_table_created')
+//         .catch(err => console.error(err))
+// // console.log('BLOCK', blk)
+//
+//     if (typeof blk === 'undefined') {
+//         throw new Error('ERROR: System database failed!')
+//     }
+//
+//     const logs = await baseClient.getContractEvents({
+//         address: '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95',
+//         abi: castPokerAbi,
+//         eventName: 'TableCreated',
+//         fromBlock: BigInt(blk.height),
+//     })
+// console.log('CONTRACT EVENTS', logs)
 return
 
 
