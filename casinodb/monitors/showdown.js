@@ -114,12 +114,13 @@ console.log('SHOWDOWN AT', showdownAt)
     blocks = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('SHOWDOWN BLOCKS', blocks)
+console.log('SHOWDOWN BLOCKS', blocks.length, blocks[0])
 
 
     activeDeck = fullDeck()
     // console.log('(FULL) DECK', activeDeck.length, activeDeck)
 
+console.log('ACTIVE DECK', activeDeck.length, activeDeck)
     dealCards(
         activeDeck, tables[tableid].community.flop1.blockHash.slice(2), 1)
 console.log('ACTIVE DECK', activeDeck.length)
