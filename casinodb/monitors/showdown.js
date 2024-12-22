@@ -123,38 +123,38 @@ console.log('SHOWDOWN BLOCKS', blocks.length, blocks[0])
 console.log('ACTIVE DECK', activeDeck.length, activeDeck)
     dealCards(
         activeDeck, tables[tableid].community.flop1.blockHash.slice(2), 1)
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     dealCards(
         activeDeck, tables[tableid].community.flop2.blockHash.slice(2), 1)
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     dealCards(
         activeDeck, tables[tableid].community.flop3.blockHash.slice(2), 1)
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     dealCards(
         activeDeck, tables[tableid].community.turn.blockHash.slice(2), 1)
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     dealCards(
         activeDeck, tables[tableid].community.river.blockHash.slice(2), 1)
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
 
     /* Initialize selected handler. */
     selected = []
 
     selected.push(dealCards(
         activeDeck, blocks[0].hash.slice(2), 2))
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     selected.push(dealCards(
         activeDeck, blocks[1].hash.slice(2), 2))
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     selected.push(dealCards(
         activeDeck, blocks[2].hash.slice(2), 2))
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     selected.push(dealCards(
         activeDeck, blocks[3].hash.slice(2), 2))
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
     selected.push(dealCards(
         activeDeck, blocks[4].hash.slice(2), 2))
-console.log('ACTIVE DECK', activeDeck.length)
+// console.log('ACTIVE DECK', activeDeck.length)
 
 console.log('SELECTED', selected)
 console.log('ACTIVE DECK', activeDeck.length, activeDeck)
