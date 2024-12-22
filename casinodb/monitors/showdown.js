@@ -10,6 +10,13 @@ import { ethClient } from '../clients/eth.js'
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
 
+/* Import deck manager (utils). */
+import {
+    fullDeck,
+    idxLookup,
+    dealCards,
+} from '../libs/dealer.js'
+
 /* Initialize databases. */
 const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_base`)
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
@@ -17,6 +24,7 @@ const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.C
 
 /* Initialize constants. */
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
+const MIN_SHOWDOWN_BLOCKS = 50
 
 export default async () => {
 console.log('MANAGING SHOWDOWN')
@@ -64,11 +72,10 @@ console.log('MANAGING SHOWDOWN')
     })
 console.log('OPEN TABLES', tables)
 
-    blockIdx = tables[0]?.community?.flop1?.blockIdx
-console.log('BLOCK INDEX', blockIdx)
+const tableid = 0
 
-    tts = tables[0]?.tts
-console.log('TIME TO SIT', tts)
+    blockIdx = tables[tableid]?.community?.flop1?.blockIdx
+console.log('BLOCK INDEX', blockIdx)
 
     response = await blocksBaseDb
         .get(blockIdx.toString(), { include_docs: true })
@@ -84,13 +91,18 @@ console.log('RESPONSE (time blocks)', response)
     }
 console.log('TIMESTAMP', timestamp)
 
+    /* Set time to sit. */
+    tts = tables[tableid]?.tts
+console.log('TIME TO SIT', tts)
+
+    /* Set showdown timestamp. */
     showdownAt = timestamp + Number(tts)
 console.log('SHOWDOWN AT', showdownAt)
 
     response = await blocksBaseDb
         .query('api/byTimestamp', {
             startkey: showdownAt,
-            limit: 10,
+            limit: MIN_SHOWDOWN_BLOCKS,
             include_docs: true,
         }).catch(err => console.error(err))
 // console.log('RESPONSE (time blocks)', response)
@@ -100,6 +112,33 @@ console.log('SHOWDOWN AT', showdownAt)
         return _unset.doc
     })
 console.log('SHOWDOWN BLOCKS', blocks)
+
+
+    activeDeck = fullDeck()
+    // console.log('(FULL) DECK', activeDeck.length, activeDeck)
+
+    /* Initialize selected handler. */
+    selected = []
+
+    /* Request community hashes. */
+    communityHashes = await _getCommunityHashes()
+console.log('COMMUNITY HASHES', communityHashes)
+
+    dealCards(
+        activeDeck, tables[tableid].community.flop1.blockHash.slice(2), 1)
+console.log('ACTIVE DECK', activeDeck.length)
+    dealCards(
+        activeDeck, tables[tableid].community.flop2.blockHash.slice(2), 1)
+console.log('ACTIVE DECK', activeDeck.length)
+    dealCards(
+        activeDeck, tables[tableid].community.flop3.blockHash.slice(2), 1)
+console.log('ACTIVE DECK', activeDeck.length)
+    dealCards(
+        activeDeck, tables[tableid].community.turn.blockHash.slice(2), 1)
+console.log('ACTIVE DECK', activeDeck.length)
+    dealCards(
+        activeDeck, tables[tableid].community.river.blockHash.slice(2), 1)
+console.log('ACTIVE DECK', activeDeck.length)
 
 return
 
