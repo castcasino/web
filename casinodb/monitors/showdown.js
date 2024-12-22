@@ -29,9 +29,12 @@ const MIN_SHOWDOWN_BLOCKS = 50
 export default async () => {
 console.log('MANAGING SHOWDOWN')
     /* Initialize locals. */
+    let activeDeck
     let blocks
     let blockIdx
+    let playerHashes
     let response
+    let selected
     let showdownAt
     let tables
     let timestamp
@@ -117,13 +120,6 @@ console.log('SHOWDOWN BLOCKS', blocks)
     activeDeck = fullDeck()
     // console.log('(FULL) DECK', activeDeck.length, activeDeck)
 
-    /* Initialize selected handler. */
-    selected = []
-
-    /* Request community hashes. */
-    communityHashes = await _getCommunityHashes()
-console.log('COMMUNITY HASHES', communityHashes)
-
     dealCards(
         activeDeck, tables[tableid].community.flop1.blockHash.slice(2), 1)
 console.log('ACTIVE DECK', activeDeck.length)
@@ -140,10 +136,10 @@ console.log('ACTIVE DECK', activeDeck.length)
         activeDeck, tables[tableid].community.river.blockHash.slice(2), 1)
 console.log('ACTIVE DECK', activeDeck.length)
 
-return
+    /* Initialize selected handler. */
+    selected = []
 
-    /* Assign hostess. */
-    hostess = unseated[0]
+return
 
     /* Validate hostess. */
     if (hostess) {
