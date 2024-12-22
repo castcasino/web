@@ -22,7 +22,7 @@ export default async () => {
 console.log('MANAGING SHOWDOWN')
     /* Initialize locals. */
     let blocks
-    let blockNumber
+    let blockIdx
     let response
     let showdownAt
     let tables
@@ -64,14 +64,14 @@ console.log('MANAGING SHOWDOWN')
     })
 console.log('OPEN TABLES', tables)
 
-    blockNumber = tables[0]?.community?.blockNumber
-console.log('BLOCK NUMBER', blockNumber)
+    blockIdx = tables[0]?.flop1?.blockIdx
+console.log('BLOCK INDEX', blockIdx)
 
     tts = tables[0]?.tts
 console.log('TIME TO SIT', tts)
 
     response = await blocksBaseDb
-        .get(blockNumber.toString(), { include_docs: true })
+        .get(blockIdx.toString(), { include_docs: true })
         .catch(err => console.error(err))
 console.log('RESPONSE (time blocks)', response)
 
