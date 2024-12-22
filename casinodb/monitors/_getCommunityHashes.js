@@ -9,6 +9,7 @@ const RETRY_DELAY = 5000
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 
 const _requestBlocks = async () => {
+    /* Initialize locals. */
     let blocks
     let response
 
@@ -18,7 +19,7 @@ const _requestBlocks = async () => {
             limit: 5,
             include_docs: true,
         }).catch(err => console.error(err))
-    console.log('RESPONSE (blocks)', response)
+console.log('RESPONSE (blocks)', response)
 
 // FIXME ALL 5 BLOCKS MUST BE SEQUENTIAL -- OR ELSE TRY AGAIN!!
     /* Validate response. */
@@ -39,7 +40,7 @@ const _requestBlocks = async () => {
         }
 
     } else {
-        sleep(RETRY_DELAY)
+        await sleep(RETRY_DELAY)
         return _requestBlocks()
     }
 

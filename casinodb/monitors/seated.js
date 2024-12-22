@@ -31,8 +31,7 @@ export default async () => {
     response = await pokerTablesDb
         .query('api/seated', {
             include_docs: true,
-        })
-        .catch(err => console.error(err))
+        }).catch(err => console.error(err))
 // console.log('RESPONSE (seated players)', response)
 
     /* Validate response. */
@@ -59,7 +58,7 @@ export default async () => {
             abi: castPokerAbi,
             functionName: 'getSeated',
             args: [BigInt(hostess._id)]
-        })
+        }).catch(err => console.error(err))
 // console.log('SEATED', seated)
 
         if (seated.length > hostess.seated.length) {

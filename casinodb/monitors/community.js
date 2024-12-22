@@ -41,8 +41,7 @@ export default async () => {
     response = await pokerTablesDb
         .query('api/unsetTables', {
             include_docs: true,
-        })
-        .catch(err => console.error(err))
+        }).catch(err => console.error(err))
 // console.log('RESPONSE (unset tables)', response)
 
     /* Validate response. */

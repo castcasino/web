@@ -32,8 +32,7 @@ export default async () => {
     response = await pokerTablesDb
         .query('api/hasCommunity', {
             include_docs: true,
-        })
-        .catch(err => console.error(err))
+        }).catch(err => console.error(err))
 // console.log('RESPONSE (community)', response)
 
     /* Validate response. */
@@ -53,14 +52,14 @@ export default async () => {
 // console.log('PIT BOSS', pitBoss)
 
         /* Pause before reading from "FREE" API. */
-        sleep(FREE_API_DELAY)
+        await sleep(FREE_API_DELAY)
 
         registered = await baseClient.readContract({
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
             functionName: 'tables',
             args: [BigInt(pitBoss._id)]
-        })
+        }).catch(err => console.error(err))
 // console.log('REGISTERED', registered)
 
         /* Set pot. */

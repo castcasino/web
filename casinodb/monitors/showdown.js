@@ -22,6 +22,7 @@ export default async () => {
 console.log('MANAGING SHOWDOWN')
     /* Initialize locals. */
     let blocks
+    let blockNumber
     let response
     let startkey
     let tables
@@ -47,8 +48,7 @@ console.log('MANAGING SHOWDOWN')
     response = await pokerTablesDb
         .query('api/hasCommunity', {
             include_docs: true,
-        })
-        .catch(err => console.error(err))
+        }).catch(err => console.error(err))
 // console.log('RESPONSE (unseated tables)', response)
 
     /* Validate response. */
@@ -62,15 +62,20 @@ console.log('MANAGING SHOWDOWN')
     })
 console.log('OPEN TABLES', tables)
 
-    startkey = tables[0]?.community?.blockNumber
-console.log('START KEY', startkey)
+    blockNumber = tables[0]?.community?.blockNumber
+console.log('BLOCK NUMBER', blockNumber)
 
     response = await blocksBaseDb
-        .query('api/byTimestamp', {
-            startkey,
-            limit: 10,
-            include_docs: true,
-        })
+        .get(blockNumber, { include_docs: true })
+        .catch(err => console.error(err))
+console.log('RESPONSE (time blocks)', response)
+
+//     response = await blocksBaseDb
+//         .query('api/byTimestamp', {
+//             startkey,
+//             limit: 10,
+//             include_docs: true,
+//         }).catch(err => console.error(err))
 // console.log('RESPONSE (time blocks)', response)
 
     /* Set (time) blocks. */
@@ -91,7 +96,7 @@ return
             abi: castPokerAbi,
             functionName: 'getSeated',
             args: [BigInt(hostess._id)]
-        })
+        }).catch(err => console.error(err))
 // console.log('SEATED', seated)
 
     }

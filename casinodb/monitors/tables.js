@@ -56,7 +56,7 @@ export default async () => {
         eventName: 'TableCreated',
         fromBlock: BigInt(blk.height),
         // toBlock: BigInt(currentBlkHeight),
-    })
+    }).catch(err => console.error(err))
 console.log('TABLE LOGS', tableLogs)
 
 
@@ -65,7 +65,7 @@ console.log('TABLE LOGS', tableLogs)
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'getTotalTables',
-    })
+    }).catch(err => console.error(err))
 // console.log('TOTAL TABLES (contract)', totalTables)
 
     idxTables = await systemDb.get('idx_tables')

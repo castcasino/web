@@ -34,7 +34,7 @@ export default async (_idxCommunity) => {
         abi: castPokerAbi,
         functionName: 'tables',
         args: [tableid]
-    })
+    }).catch(err => console.error(err))
 // console.log('TABLE INFO (raw)', tableInfo)
 
     tableInfo = {
