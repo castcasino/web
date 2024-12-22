@@ -146,15 +146,6 @@ console.log('ACTIVE DECK', activeDeck.length, activeDeck)
     selected.push(dealCards(
         activeDeck, blocks[1].hash.slice(2), 2))
 // console.log('ACTIVE DECK', activeDeck.length)
-    selected.push(dealCards(
-        activeDeck, blocks[2].hash.slice(2), 2))
-// console.log('ACTIVE DECK', activeDeck.length)
-    selected.push(dealCards(
-        activeDeck, blocks[3].hash.slice(2), 2))
-// console.log('ACTIVE DECK', activeDeck.length)
-    selected.push(dealCards(
-        activeDeck, blocks[4].hash.slice(2), 2))
-// console.log('ACTIVE DECK', activeDeck.length)
 
 console.log('SELECTED', selected)
 console.log('ACTIVE DECK', activeDeck.length, activeDeck)
