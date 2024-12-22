@@ -78,21 +78,20 @@ useHead({
 
                             <div class="mt-6">
                                 <h2 class="text-3xl font-bold tracking-tight text-gray-900">
-                                    Cast Casino Game Engine (NGE) guarantees 100% <em class="text-indigo-500">provably fair</em> gameplay
+                                    Coincun Game Engine (CGE) GUARANTEES 100% <em class="text-indigo-500">Provably Fair</em> Gameplay
                                 </h2>
 
                                 <p class="mt-4 text-lg text-gray-500">
-                                    Every game play MUST pass through the NGE to protect Players from code bugs and malware.
-                                    The NGE protects both Players and Bankers by offering mathematical proofs and/or hardware attestations for every action executed by the engine.
+                                    Every game play MUST pass through the CGE to protect Players from code bugs and malware.
+                                    The CGE protects both Players and Bankers by offering mathematical proofs and/or hardware attestations for every action executed by the engine.
                                 </p>
 
                                 <div class="mt-6">
-                                    <a
-                                        href="javascript://"
+                                    <NuxtLink to="/fairplay"
                                         class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-2xl font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                                     >
                                         Learn more
-                                    </a>
+                                    </NuxtLink>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +100,7 @@ useHead({
                             <blockquote>
                                 <div>
                                     <p class="text-base text-gray-500">
-                                        &ldquo;NGE made it possible to monetize my 3yr old indie game; and be able to support myself and the rest of my team to continue living out our dreams.&rdquo;
+                                        &ldquo;CGE made it possible to monetize my 3yr old indie game; and be able to support myself and the rest of my team to continue living out our dreams.&rdquo;
                                     </p>
                                 </div>
 
@@ -124,8 +123,8 @@ useHead({
                         <div class="-mr-48 pl-4 sm:pl-6 md:-mr-16">
                             <img
                                 class="w-full rounded-xl shadow-xl ring-1 ring-black ring-opacity-5"
-                                src="~/assets/cast-casino-game-engine.jpg"
-                                alt="Cast Casino Game Engine"
+                                src="~/assets/coincun-game-engine.jpg"
+                                alt="Coincun Game Engine"
                             />
                         </div>
                     </div>
@@ -159,29 +158,29 @@ useHead({
                                 </p>
 
                                 <p class="mt-4 text-lg text-gray-500">
-                                    The <span class="font-medium text-indigo-500">Cast Casino Peer-review Network (NGPN)</span> allows our Players to receive the MOST up-to-date and accurate safety &amp; security assurances from the MOST trusted names in Crypto gaming.
+                                    The <span class="font-medium text-indigo-500">Coincun Professionals Network (CPN)</span> supports our Players to receive the MOST up-to-date and accurate safety &amp; security assurances from the MOST trusted names in Crypto gaming.
                                 </p>
 
                                 <div class="mt-6">
                                     <NuxtLink
-                                        to="https://repo.hos.im/nyusternie/" target="_blank"
+                                        to="https://github.com/nyusternie/" target="_blank"
                                         class="inline-flex rounded-md border border-transparent bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 text-2xl font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                                     >
-                                        View the NGE source
+                                        View the CGE source
                                     </NuxtLink>
 
                                     <em class="block w-2/3 my-2 text-sm text-gray-500">
-                                        The Cast Casino Game Engine (NGE) is temporarily closed-source until Beta release.
+                                        The Coincun Game Engine (CGE) is temporarily closed-source until Beta release.
                                         Sorry for any inconvenience.
                                     </em>
                                 </div>
 
                                 <div class="mt-6">
                                     <NuxtLink
-                                        to="https://repo.hos.im/nyusternie/wally-dice" target="_blank"
+                                        to="https://github.com/nyusternie/" target="_blank"
                                         class="inline-flex rounded-md border border-transparent bg-yellow-600 bg-origin-border px-4 py-2 text-xl font-medium text-white shadow-sm hover:from-purple-700 hover:to-indigo-700"
                                     >
-                                        Wally Dice
+                                        View the Cast Poker source
                                     </NuxtLink>
                                 </div>
                             </div>
@@ -234,7 +233,7 @@ useHead({
                     <div class="mt-12 grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
                         <p>
                             <span class="block text-4xl font-bold text-white">3</span>
-                            <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white">Developers building</span> the next BIG blockbuster game using NGE.</span>
+                            <span class="mt-1 block text-base text-gray-300"><span class="font-medium text-white">Developers building</span> the next BIG blockbuster game using CGE.</span>
                         </p>
 
                         <p>
