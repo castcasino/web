@@ -24,8 +24,9 @@ console.log('MANAGING SHOWDOWN')
     let blocks
     let blockNumber
     let response
-    let startkey
+    // let startkey
     let tables
+    let timestamp
 
 //     const blk = await systemDb
 //         .get('blk_table_created')
@@ -70,18 +71,27 @@ console.log('BLOCK NUMBER', blockNumber)
         .catch(err => console.error(err))
 console.log('RESPONSE (time blocks)', response)
 
-//     response = await blocksBaseDb
-//         .query('api/byTimestamp', {
-//             startkey,
-//             limit: 10,
-//             include_docs: true,
-//         }).catch(err => console.error(err))
-// console.log('RESPONSE (time blocks)', response)
+    if (typeof response !== 'undefined') {
+        timestamp = response.timestamp
+    }
+
+    if (typeof timestamp === 'undefined') {
+        throw new Error('ERROR: Invalid timestamp in blocks database.')
+    }
+console.log('TIMESTAMP', timestamp)
+
+    response = await blocksBaseDb
+        .query('api/byTimestamp', {
+            startkey: timestamp,
+            limit: 10,
+            include_docs: true,
+        }).catch(err => console.error(err))
+console.log('RESPONSE (time blocks)', response)
 
     /* Set (time) blocks. */
-    // blocks = response.rows.map((_unset) => {
-    //     return _unset.doc
-    // })
+    blocks = response.rows.map((_unset) => {
+        return _unset.doc
+    })
 console.log('TIME BLOCKS', blocks)
 
 return
