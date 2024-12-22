@@ -57,7 +57,7 @@ export default async () => {
         fromBlock: BigInt(blk.height),
         // toBlock: BigInt(currentBlkHeight),
     })
-// console.log('TABLE LOGS', tableLogs)
+console.log('TABLE LOGS', tableLogs)
 
 
     /* Request total tables. */
