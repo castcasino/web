@@ -24,9 +24,10 @@ console.log('MANAGING SHOWDOWN')
     let blocks
     let blockNumber
     let response
-    // let startkey
+    let showdownAt
     let tables
     let timestamp
+    let tts
 
 //     const blk = await systemDb
 //         .get('blk_table_created')
@@ -66,6 +67,9 @@ console.log('OPEN TABLES', tables)
     blockNumber = tables[0]?.community?.blockNumber
 console.log('BLOCK NUMBER', blockNumber)
 
+    tts = tables[0]?.tts
+console.log('TIME TO SIT', tts)
+
     response = await blocksBaseDb
         .get(blockNumber.toString(), { include_docs: true })
         .catch(err => console.error(err))
@@ -80,19 +84,22 @@ console.log('RESPONSE (time blocks)', response)
     }
 console.log('TIMESTAMP', timestamp)
 
+    showdownAt = timestamp + Number(tts)
+console.log('SHOWDOWN AT', showdownAt)
+
     response = await blocksBaseDb
         .query('api/byTimestamp', {
-            startkey: timestamp,
+            startkey: showdownAt,
             limit: 10,
             include_docs: true,
         }).catch(err => console.error(err))
-console.log('RESPONSE (time blocks)', response)
+// console.log('RESPONSE (time blocks)', response)
 
     /* Set (time) blocks. */
     blocks = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('TIME BLOCKS', blocks)
+console.log('SHOWDOWN BLOCKS', blocks)
 
 return
 
