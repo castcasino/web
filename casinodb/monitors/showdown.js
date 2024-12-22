@@ -1,7 +1,6 @@
 /* Import modules. */
 import moment from 'moment'
 import PouchDB from 'pouchdb'
-import { parseAbiItem } from 'viem'
 
 /* Import blockchain clients. */
 import { baseClient } from '../clients/base.js'
@@ -13,6 +12,7 @@ import castPokerAbi from '../abi/CastPoker.js'
 
 /* Initialize databases. */
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
+const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
 
 /* Initialize constants. */
 const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
@@ -24,6 +24,11 @@ console.log('MANAGING SHOWDOWN')
     let response
     let seated
     let unseated
+
+//     const blk = await systemDb
+//         .get('blk_table_created')
+//         .catch(err => console.error(err))
+// console.log('BLOCK', blk)
 
     const logs = await baseClient.getContractEvents({
         address: '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95',
