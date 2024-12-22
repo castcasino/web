@@ -64,7 +64,7 @@ console.log('MANAGING SHOWDOWN')
     })
 console.log('OPEN TABLES', tables)
 
-    blockIdx = tables[0]?.flop1?.blockIdx
+    blockIdx = tables[0]?.community?.flop1?.blockIdx
 console.log('BLOCK INDEX', blockIdx)
 
     tts = tables[0]?.tts
