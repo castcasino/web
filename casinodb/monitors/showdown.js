@@ -34,6 +34,7 @@ console.log('MANAGING SHOWDOWN')
     let blockIdx
     let playerHashes
     let response
+    let seat
     let selected
     let showdownAt
     let tables
@@ -150,7 +151,7 @@ console.log('ACTIVE DECK', activeDeck.length, activeDeck)
 console.log('SELECTED', selected)
 console.log('ACTIVE DECK', activeDeck.length, activeDeck)
 
-    const seat = {
+    seat = {
         address: tables[tableid].seated[0],
         hole1: selected[0][0],
         hole1Idx: idxLookup(selected[0][0]),
@@ -159,7 +160,18 @@ console.log('ACTIVE DECK', activeDeck.length, activeDeck)
         blockIdx: blocks[0]._id,
         blockHash: blocks[0].hash,
     }
-console.log('SEAT', seat)
+console.log('SEAT-1', seat)
+
+    seat = {
+        address: tables[tableid].seated[1],
+        hole1: selected[1][0],
+        hole1Idx: idxLookup(selected[1][0]),
+        hole2: selected[1][1],
+        hole2Idx: idxLookup(selected[1][1]),
+        blockIdx: blocks[1]._id,
+        blockHash: blocks[1].hash,
+    }
+console.log('SEAT-2', seat)
 
 return
 
