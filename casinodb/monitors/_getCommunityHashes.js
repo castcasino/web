@@ -19,14 +19,11 @@ const _requestBlocks = async () => {
             limit: 5,
             include_docs: true,
         }).catch(err => console.error(err))
-console.log('RESPONSE (blocks)', response)
+// console.log('RESPONSE (blocks)', response)
 
 // FIXME ALL 5 BLOCKS MUST BE SEQUENTIAL -- OR ELSE TRY AGAIN!!
     /* Validate response. */
     if (typeof response !== 'undefined' && response !== null) {
-        // sleep(RETRY_DELAY)
-        // return _requestBlocks()
-
         /* Set blocks. */
         blocks = response.rows
 
@@ -36,7 +33,8 @@ console.log('RESPONSE (blocks)', response)
                 return _block.doc
             })
 
-            return blocks
+            /* Return (reversed/ascending) blocks. */
+            return blocks.reverse()
         }
 
     } else {
@@ -44,6 +42,7 @@ console.log('RESPONSE (blocks)', response)
         return _requestBlocks()
     }
 
+    /* Return empty. */
     return response
 }
 

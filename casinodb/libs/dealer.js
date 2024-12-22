@@ -4,7 +4,7 @@
  * Provides ALL functions for managing a deck of cards.
  */
 
-export const selectCards = (_activeDeck, _hashIdx, _numCards = 1) => {
+export const dealCards = (_activeDeck, _hashIdx, _numCards = 1) => {
 // console.log('ACTIVE DECK', _activeDeck)
 // console.log('HASH INDEX', _hashIdx)
     /* Initialize locals. */
@@ -138,7 +138,7 @@ export const fullDeck = () => {
     return deck
 }
 
-export const indexLookup = (_code) => {
+export const idxLookup = (_code) => {
     const deck = fullDeck()
 // console.log('INDEX LOOKUP DECK', deck.length, deck)
 

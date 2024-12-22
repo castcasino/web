@@ -15,9 +15,9 @@ import _getCommunityHashes from './_getCommunityHashes.js'
 /* Import deck manager (utils). */
 import {
     fullDeck,
-    indexLookup,
-    selectCards,
-} from '../libs/deckManager.js'
+    idxLookup,
+    dealCards,
+} from '../libs/dealer.js'
 
 /* Initialize databases. */
 const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_base`)
@@ -66,48 +66,49 @@ console.log('DEALER', dealer)
         /* Initialize selected handler. */
         selected = []
 
+        /* Request community hashes. */
         communityHashes = await _getCommunityHashes()
 console.log('COMMUNITY HASHES', communityHashes)
 
-        selected.push(selectCards(
+        selected.push(dealCards(
             activeDeck, communityHashes[0].hash.slice(2), 1))
-        selected.push(selectCards(
+        selected.push(dealCards(
             activeDeck, communityHashes[1].hash.slice(2), 1))
-        selected.push(selectCards(
+        selected.push(dealCards(
             activeDeck, communityHashes[2].hash.slice(2), 1))
-        selected.push(selectCards(
+        selected.push(dealCards(
             activeDeck, communityHashes[3].hash.slice(2), 1))
-        selected.push(selectCards(
+        selected.push(dealCards(
             activeDeck, communityHashes[4].hash.slice(2), 1))
 
         communityPkg = {
             flop1: {
                 card: selected[0][0],
-                cardIdx: indexLookup(selected[0][0]),
+                cardIdx: idxLookup(selected[0][0]),
                 blockIdx: communityHashes[0]._id,
                 blockHash: communityHashes[0].hash
             },
             flop2: {
                 card: selected[1][0],
-                cardIdx: indexLookup(selected[1][0]),
+                cardIdx: idxLookup(selected[1][0]),
                 blockIdx: communityHashes[1]._id,
                 blockHash: communityHashes[1].hash
             },
             flop3: {
                 card: selected[2][0],
-                cardIdx: indexLookup(selected[2][0]),
+                cardIdx: idxLookup(selected[2][0]),
                 blockIdx: communityHashes[2]._id,
                 blockHash: communityHashes[2].hash
             },
             turn: {
                 card: selected[3][0],
-                cardIdx: indexLookup(selected[3][0]),
+                cardIdx: idxLookup(selected[3][0]),
                 blockIdx: communityHashes[3]._id,
                 blockHash: communityHashes[3].hash
             },
             river: {
                 card: selected[4][0],
-                cardIdx: indexLookup(selected[4][0]),
+                cardIdx: idxLookup(selected[4][0]),
                 blockIdx: communityHashes[4]._id,
                 blockHash: communityHashes[4].hash
             }
