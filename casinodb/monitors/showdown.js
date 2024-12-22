@@ -20,10 +20,8 @@ const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 export default async () => {
 console.log('MANAGING SHOWDOWN')
     /* Initialize locals. */
-    let hostess
     let response
-    let seated
-    let unseated
+    let tables
 
 //     const blk = await systemDb
 //         .get('blk_table_created')
@@ -41,26 +39,26 @@ console.log('MANAGING SHOWDOWN')
 //         fromBlock: BigInt(blk.height),
 //     })
 // console.log('CONTRACT EVENTS', logs)
-return
 
 
     response = await pokerTablesDb
-        .query('api/unseated', {
+        .query('api/hasCommunity', {
             include_docs: true,
         })
         .catch(err => console.error(err))
-// console.log('RESPONSE (unseated tables)', response)
+console.log('RESPONSE (unseated tables)', response)
 
     /* Validate response. */
     if (!response || response.total_rows === 0) {
         return console.log('  All tables are seated!')
     }
 
-    /* Set unseated. */
-    unseated = response.rows.map((_unset) => {
+    /* Set (open) tables. */
+    tables = response.rows.map((_unset) => {
         return _unset.doc
     })
-// console.log('UNSEATED', unseated)
+console.log('OPEN TABLES', tables)
+return
 
     /* Assign hostess. */
     hostess = unseated[0]
