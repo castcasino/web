@@ -79,9 +79,9 @@ console.log('RESPONSE (time blocks)', response)
 // console.log('RESPONSE (time blocks)', response)
 
     /* Set (time) blocks. */
-    blocks = response.rows.map((_unset) => {
-        return _unset.doc
-    })
+    // blocks = response.rows.map((_unset) => {
+    //     return _unset.doc
+    // })
 console.log('TIME BLOCKS', blocks)
 
 return
