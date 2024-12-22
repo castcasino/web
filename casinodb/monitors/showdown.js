@@ -11,6 +11,7 @@ import { ethClient } from '../clients/eth.js'
 import castPokerAbi from '../abi/CastPoker.js'
 
 /* Initialize databases. */
+const blocksBaseDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/blocks_base`)
 const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/poker_tables`)
 const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
 
@@ -20,6 +21,8 @@ const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
 export default async () => {
 console.log('MANAGING SHOWDOWN')
     /* Initialize locals. */
+    let blocks
+    let key
     let response
     let tables
 
@@ -58,6 +61,16 @@ console.log('RESPONSE (unseated tables)', response)
         return _unset.doc
     })
 console.log('OPEN TABLES', tables)
+
+    key = tables[0]?.community?.blockNumber
+console.log('TIME KEY', key)
+
+    blocks = await blocksBaseDb
+        .query('api/byTimestamp', {
+            key,
+            include_docs: true,
+        })
+console.log('TIME BLOCKS', blocks)
 return
 
     /* Assign hostess. */
