@@ -35,6 +35,7 @@ console.log('MANAGING SHOWDOWN')
     let activeDeck
     let blocks
     let blockIdx
+    let params
     let playerHashes
     let response
     let seat
@@ -203,7 +204,7 @@ console.log('SEAT-2', seat)
     /* Set seat index. */
     seatIdx = 1
 
-    const params = {
+    params = {
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'dealCards',
@@ -218,7 +219,6 @@ console.log('SEAT-2', seat)
 // console.log('CONTRACT PARAMS', params)
 
     /* Validate hostess. */
-    // if (hostess) {
     response = await baseClient
         .simulateContract(params)
         .catch(err => {
@@ -228,13 +228,12 @@ console.log('RESPONSE (simulate)', response)
 
 // return
 
-    if (typeof response !== 'undefined' && response.request) {
-        response = await baseAccount()
-            .writeContract(response.request)
-            .catch(err => console.error(err))
-console.log('RESPONSE (write contract)', response)
-    }
+//     if (typeof response !== 'undefined' && response.request) {
+//         response = await baseAccount()
+//             .writeContract(response.request)
+//             .catch(err => console.error(err))
+// console.log('RESPONSE (write contract)', response)
+//     }
 
-    // }
 
 }
