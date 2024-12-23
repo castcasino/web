@@ -84,9 +84,9 @@ console.log('MANAGING SHOWDOWN')
 
     /* Remodel tables data (to object). */
     response.rows.forEach(_table => {
-        tables[_table._id] = _table
-        delete tables[_table._id]._id
-        delete tables[_table._id]._rev
+        tables[_table.id] = _table.doc
+        delete tables[_table.id]._id
+        delete tables[_table.id]._rev
     })
 console.log('OPEN TABLES', tables)
 
