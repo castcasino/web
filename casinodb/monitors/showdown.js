@@ -220,9 +220,9 @@ console.log('CONTRACT PARAMS', params)
         .catch(err => console.error(err))
 console.log('RESPONSE (simulate)', response)
 
-    if (typeof response !== 'undefined') {
+    if (typeof response !== 'undefined' && response.request) {
         response = await baseAccount
-            .writeContract(request)
+            .writeContract(response.request)
             .catch(err => console.error(err))
 console.log('RESPONSE (write contract)', response)
     }
