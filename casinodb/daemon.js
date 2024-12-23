@@ -12,12 +12,13 @@ import handleBlocksEth from './handlers/blocksEth.js'
 /* Import wallets. */
 import baseAccount from './accounts/base.js'
 
-import handleCommunity from './monitors/community.js'
-import handlePot from './monitors/pot.js'
-import handleQuotes from './monitors/quotes.js'
-import handleSeated from './monitors/seated.js'
-import handleTables from './monitors/tables.js'
-import handleShowdown from './monitors/showdown.js'
+import manageCommunity from './managers/community.js'
+import managePot from './managers/pot.js'
+import manageQuotes from './managers/quotes.js'
+import manageSeated from './managers/seated.js'
+import manageTables from './managers/tables.js'
+import manageShowdown from './managers/showdown.js'
+import managePayout from './managers/payout.js'
 
 /* Import blockchain clients. */
 import baseClient from './clients/base.js'
@@ -101,37 +102,43 @@ console.log('BALANCE AS ETHER', balanceAsEther, balance)
 
     setInterval(() => {
         // console.log('Managing Tables...')
-        handleQuotes()
+        manageQuotes()
     }, QUOTES_INTERVAL)
-    handleQuotes()
+    manageQuotes()
 
     setInterval(() => {
         // console.log('Managing Tables...')
-        handleTables()
+        manageTables()
     }, TABLES_INTERVAL)
-    handleTables()
+    manageTables()
 
     setInterval(() => {
         console.log('Managing Community...')
-        handleCommunity()
+        manageCommunity()
     }, COMMUNITY_INTERVAL)
-    handleCommunity()
+    manageCommunity()
 
     setInterval(() => {
         console.log('Managing Pot (by Pit Boss)...')
-        handlePot()
+        managePot()
     }, PITBOSS_INTERVAL)
-    handlePot()
+    managePot()
 
     setInterval(() => {
         console.log('Managing Seated (by Hostess)...')
-        handleSeated()
+        manageSeated()
     }, HOSTESS_INTERVAL)
-    handleSeated()
+    manageSeated()
 
     // setInterval(() => {
     //     console.log('Managing Showdown...')
-    //     handleShowdown()
+    //     manageShowdown()
     // }, SHOWDOWN_INTERVAL)
-    handleShowdown()
+    // manageShowdown()
+
+    // setInterval(() => {
+    //     console.log('Managing Showdown...')
+    //     manageShowdown()
+    // }, SHOWDOWN_INTERVAL)
+    managePayout()
 })()

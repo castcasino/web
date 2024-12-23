@@ -3,17 +3,17 @@ import { _Hand as Hand } from './pokersolver.js'
 
 const findWinner = (_player1, _player2) => {
     const hand1 = Hand.solve([ ...community, ...player1 ])
-    // console.log('\nHAND 1', hand1.descr)
-    // console.log('\nHAND 1', hand1)
+// console.log('\nHAND 1', hand1.descr)
+// console.log('\nHAND 1', hand1)
 
     const hand2 = Hand.solve([ ...community, ...player2 ])
-    // console.log('\nHAND 2', hand2.descr)
-    // console.log('\nHAND 2', hand2)
+// console.log('\nHAND 2', hand2.descr)
+// console.log('\nHAND 2', hand2)
 
     const winner = Hand.winners([ hand1, hand2 ])
-    console.log('\nWINNER', winner.length, winner.map(_winner => _winner.descr))
-    // console.log('\nWINNER', winner.length, winner.map(_winner => JSON.stringify(_winner.cards)))
-    // console.log('\nWINNER', winner.length, winner)
+console.log('\nWINNER', winner.length, winner.map(_winner => _winner.descr))
+// console.log('\nWINNER', winner.length, winner.map(_winner => JSON.stringify(_winner.cards)))
+// console.log('\nWINNER', winner.length, winner)
 
     const winnerMatch = JSON.stringify(winner[0].cards)
 // console.log('winnerMatch', winnerMatch)
@@ -30,7 +30,7 @@ const findWinner = (_player1, _player2) => {
         return 2
     }
 
-    return 'ERROR!'
+    return -1
 }
 
 const community = ['KS', 'JS', '9S', '7S', '5S']
