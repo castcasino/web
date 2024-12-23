@@ -216,7 +216,7 @@ console.log('SEAT-2', seat)
         ],
         account: baseAccount().account,
     }
-// console.log('CONTRACT PARAMS', params)
+// console.log('CONTRACT PARAMS (deal cards)', params)
 
     /* Validate hostess. */
 //     response = await baseClient
@@ -225,7 +225,7 @@ console.log('SEAT-2', seat)
 //             // console.error(err)
 //             console.error('ERROR MSG:', err.message)
 //         })
-// console.log('RESPONSE (simulate)', response)
+// console.log('RESPONSE (simulate deal cards)', response)
 
 // return
 
@@ -233,7 +233,7 @@ console.log('SEAT-2', seat)
 //         response = await baseAccount()
 //             .writeContract(response.request)
 //             .catch(err => console.error(err))
-// console.log('RESPONSE (write contract)', response)
+// console.log('RESPONSE (write deal cards)', response)
 //     }
 
     params = {
@@ -243,7 +243,7 @@ console.log('SEAT-2', seat)
         args: [ BigInt(tableid) ],
         account: baseAccount().account,
     }
-console.log('CONTRACT PARAMS-2', params)
+console.log('CONTRACT PARAMS (showdown)', params)
 
     /* Validate hostess. */
     response = await baseClient
@@ -252,6 +252,13 @@ console.log('CONTRACT PARAMS-2', params)
             // console.error(err)
             console.error(err.message)
         })
-console.log('RESPONSE (simulate-2)', response)
+console.log('RESPONSE (simulate showdown)', response)
+
+    if (typeof response !== 'undefined' && response.request) {
+        response = await baseAccount()
+            .writeContract(response.request)
+            .catch(err => console.error(err))
+console.log('RESPONSE (write showdown)', response)
+    }
 
 }
