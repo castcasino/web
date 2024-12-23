@@ -38,6 +38,7 @@ console.log('MANAGING SHOWDOWN')
     let playerHashes
     let response
     let seat
+    let seated
     let selected
     let showdownAt
     let tables
@@ -154,6 +155,9 @@ console.log('ACTIVE DECK', activeDeck.length, activeDeck)
 console.log('SELECTED', selected)
 console.log('ACTIVE DECK', activeDeck.length, activeDeck)
 
+    /* Initialize seated handler. */
+    seated = []
+
     seat = {
         address: tables[tableid].seated[0],
         hole1: selected[0][0],
@@ -163,6 +167,7 @@ console.log('ACTIVE DECK', activeDeck.length, activeDeck)
         blockIdx: blocks[0]._id,
         blockHash: blocks[0].hash,
     }
+    seated.push(seat)
 console.log('SEAT-1', seat)
 
     seat = {
@@ -174,6 +179,7 @@ console.log('SEAT-1', seat)
         blockIdx: blocks[1]._id,
         blockHash: blocks[1].hash,
     }
+    seated.push(seat)
 console.log('SEAT-2', seat)
 
     /* Validate hostess. */
@@ -183,7 +189,12 @@ console.log('SEAT-2', seat)
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
             functionName: 'dealCards',
-            args: [3n, 0x27a9b30DBe015842098F4CD31f0301a1cEE74bfe, 13, 37],
+            args: [
+                BigInt(tableid),
+                seated[0].address,
+                seated[0].hole1Idx,
+                seated[0].hole2Idx,
+            ],
         }).catch(err => console.error(err))
 console.log('RESPONSE (simulate)', response)
 
