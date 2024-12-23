@@ -223,6 +223,7 @@ console.log('SEAT-2', seat)
         .simulateContract(params)
         .catch(err => {
             // console.error(err)
+            console.error('ERROR MSG:', err.message)
         })
 console.log('RESPONSE (simulate)', response)
 
