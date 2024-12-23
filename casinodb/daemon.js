@@ -10,7 +10,7 @@ import handleBlocksDegen from './handlers/blocksDegen.js'
 import handleBlocksEth from './handlers/blocksEth.js'
 
 /* Import wallets. */
-import baseWallet from './wallets/base.js'
+import baseAccount from './accounts/base.js'
 
 import handleCommunity from './monitors/community.js'
 import handlePot from './monitors/pot.js'
@@ -61,7 +61,7 @@ console.info('\n  Starting Cast Casino daemon...\n')
 // console.log('MNEMONIC', process.env.MNEMONIC)
 // console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
 
-    const accounts = await baseWallet()
+    const accounts = await baseAccount()
         .getAddresses()
         .catch(err => console.error(err))
 console.log('BASE ACCOUNTS', accounts)
