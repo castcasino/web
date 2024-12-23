@@ -80,7 +80,8 @@ console.log('MANAGING SHOWDOWN')
     })
 console.log('OPEN TABLES', tables)
 
-const tableid = 0
+// FIXME RUN THIS IN A LOOP
+const tableid = 3
 
     blockIdx = tables[tableid]?.community?.flop1?.blockIdx
 console.log('BLOCK INDEX', blockIdx)
@@ -194,7 +195,7 @@ console.log('SEAT-2', seat)
             seated[0].hole2Idx,
         ],
     }
-// console.log('CONTRACT PARAMS', params)
+console.log('CONTRACT PARAMS', params)
 
     /* Validate hostess. */
     // if (hostess) {
