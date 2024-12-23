@@ -90,8 +90,10 @@ console.log('TABLE INFO (packaged)', tableInfo)
         functionName: 'payout',
         args: [
             BigInt(tableid),
-            '0xC8013A8C09774eb2a008FdCbeDB5f640d1dbec00',
-            9500000000000n,
+            process.env.TREASURY_ADDRESS,
+            1000000000000n,
+            // '0xC8013A8C09774eb2a008FdCbeDB5f640d1dbec00',
+            // 9500000000000n,
         ],
         account: baseAccount().account,
     }
