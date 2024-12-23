@@ -183,7 +183,7 @@ console.log('SEAT-2', seat)
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
             functionName: 'dealCards',
-            args: [BigInt(hostess._id)]
+            args: [3, '0x27a9b30DBe015842098F4CD31f0301a1cEE74bfe', 13, 37],
         }).catch(err => console.error(err))
 console.log('RESPONSE (simulate)', response)
 
