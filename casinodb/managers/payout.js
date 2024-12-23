@@ -133,11 +133,11 @@ console.log('RESPONSE (execute payout)', response)
         })
 console.log('RESPONSE (simulate close)', response)
 
-//     if (typeof response !== 'undefined' && response.request) {
-//         response = await baseAccount()
-//             .writeContract(response.request)
-//             .catch(err => console.error(err))
-// console.log('RESPONSE (execute close)', response)
-//     }
+    if (typeof response !== 'undefined' && response.request) {
+        response = await baseAccount()
+            .writeContract(response.request)
+            .catch(err => console.error(err))
+console.log('RESPONSE (execute close)', response)
+    }
 
 }
