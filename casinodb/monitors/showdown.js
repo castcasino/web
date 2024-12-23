@@ -85,9 +85,10 @@ console.log('MANAGING SHOWDOWN')
     /* Remodel tables data (to object). */
     response.rows.forEach(_table => {
 console.log('TABLE', _table)
-        tables[_table.id] = _table.doc
-        delete tables[_table.id]._id
-        delete tables[_table.id]._rev
+        const id = _table.id
+        tables[id] = _table.doc
+        delete tables[id]._id
+        delete tables[id]._rev
     })
 console.log('OPEN TABLES', tables)
 
@@ -206,7 +207,7 @@ console.log('SEAT-2', seat)
             seated[0].hole2Idx,
         ],
     }
-// console.log('CONTRACT PARAMS', params)
+console.log('CONTRACT PARAMS', params)
 
     /* Validate hostess. */
     // if (hostess) {
