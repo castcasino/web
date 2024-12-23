@@ -33,20 +33,7 @@ const MIN_SHOWDOWN_BLOCKS = 50
 export default async () => {
 console.log('MANAGING PAYOUT')
     /* Initialize locals. */
-    let activeDeck
-    let blocks
-    let blockIdx
-    let params
-    let playerHashes
-    let response
-    let seat
-    let seatIdx
-    let seated
-    let selected
-    let showdownAt
-    let tables
-    let timestamp
-    let tts
+    let tableInfo
 
 //     const blk = await systemDb
 //         .get('blk_table_created')
@@ -64,6 +51,18 @@ console.log('MANAGING PAYOUT')
 //         fromBlock: BigInt(blk.height),
 //     })
 // console.log('CONTRACT EVENTS', logs)
+
+// FIXME RUN THIS IN A LOOP
+const tableid = 3
+
+    tableInfo = await baseClient.readContract({
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        functionName: 'tables',
+        args: [tableid]
+    })
+console.log('TABLE INFO', tableInfo)
+
 return
 
     response = await pokerTablesDb
@@ -98,9 +97,6 @@ return
         delete tables[id]._rev
     })
 console.log('OPEN TABLES', tables)
-
-// FIXME RUN THIS IN A LOOP
-const tableid = 3
 
     blockIdx = tables[tableid]?.community?.flop1?.blockIdx
 console.log('BLOCK INDEX', blockIdx)
