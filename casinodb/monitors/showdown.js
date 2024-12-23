@@ -3,7 +3,7 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 
 /* Import blockchain clients. */
-import baseClient from '../clients/base.js'
+import baseClient from '../clients/baseInfura.js'
 import degenClient from '../clients/degen.js'
 import ethClient from '../clients/eth.js'
 
@@ -176,10 +176,8 @@ console.log('SEAT-1', seat)
     }
 console.log('SEAT-2', seat)
 
-return
-
     /* Validate hostess. */
-    if (hostess) {
+    // if (hostess) {
         response = await baseClient.simulateContract({
             account: baseAccount,
             address: CAST_POKER_ADDRESS,
@@ -189,6 +187,6 @@ return
         }).catch(err => console.error(err))
 console.log('RESPONSE (simulate)', response)
 
-    }
+    // }
 
 }
