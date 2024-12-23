@@ -77,7 +77,6 @@ console.log('TABLE INFO', tableInfo)
         fomo: tableInfo[9],
         theme: tableInfo[10],
         community: tableInfo[11],
-        seated,
     }
 console.log('TABLE INFO (packaged)', tableInfo)
 
