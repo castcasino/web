@@ -75,8 +75,18 @@ console.log('MANAGING SHOWDOWN')
     }
 
     /* Set (open) tables. */
-    tables = response.rows.map((_unset) => {
-        return _unset.doc
+    // tables = response.rows.map((_unset) => {
+    //     return _unset.doc
+    // })
+
+    /* Initialize tables. */
+    tables = {}
+
+    /* Remodel tables data (to object). */
+    response.rows.forEach(_table => {
+        tables[_table._id] = _table
+        delete tables[_table._id]._id
+        delete tables[_table._id]._rev
     })
 console.log('OPEN TABLES', tables)
 
