@@ -178,18 +178,16 @@ console.log('SEAT-2', seat)
 
 return
 
-    const account =
-
     /* Validate hostess. */
     if (hostess) {
-        seated = await baseClient.simulateContract({
-            account,
+        response = await baseClient.simulateContract({
+            account: baseAccount,
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
             functionName: 'dealCards',
             args: [BigInt(hostess._id)]
         }).catch(err => console.error(err))
-// console.log('SEATED', seated)
+console.log('RESPONSE (simulate)', response)
 
     }
 
