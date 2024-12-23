@@ -211,7 +211,7 @@ console.log('SEAT-2', seat)
         ],
         account: baseAccount().account,
     }
-console.log('CONTRACT PARAMS', params)
+// console.log('CONTRACT PARAMS', params)
 
     /* Validate hostess. */
     // if (hostess) {
