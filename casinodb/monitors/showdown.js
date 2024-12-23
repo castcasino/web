@@ -225,7 +225,9 @@ console.log('SEAT-2', seat)
             // console.error(err)
         })
 console.log('RESPONSE (simulate)', response)
-return
+
+// return
+
     if (typeof response !== 'undefined' && response.request) {
         response = await baseAccount()
             .writeContract(response.request)
