@@ -347,10 +347,6 @@ contract CastPoker is Ownable {
         require(_isContract(msg.sender) == false,
             "Oops! You CANNOT buy-in using a smart wallet. Please use a standard EOA wallet.");
 
-        /* Validate player is unique (to this table). */
-        require(_players[_tableid][msg.sender].id == address(0),
-            "Oops! You CANNOT sit more than once at the same table.");
-
         /* Initialize table. */
         Table storage table = _tables[_tableid];
 
@@ -366,6 +362,10 @@ contract CastPoker is Ownable {
 
         require(table.seated.length < MAX_SEATS_PER_TABLE,
             "Oops! This table is already full!");
+
+        /* Validate player is unique (to this table). */
+        require(_players[_tableid][msg.sender].id == address(0),
+            "Oops! You CANNOT sit more than once at the same table.");
 
         /* Validate deposit method. */
         // NOTE: Support is available for either the network's
@@ -422,7 +422,8 @@ contract CastPoker is Ownable {
         /* Validate table host. */
         if (table.host == address(0x0)) {
             /* Delegate call to predecessor. */
-            return CastPoker(_predecessor).dealCards(_tableid, _playersPool, _hole1Pool, _hole2Pool);
+            return CastPoker(_predecessor).dealCards(
+                _tableid, _playersPool, _hole1Pool, _hole2Pool);
         }
 
         /* Validate table status. */
