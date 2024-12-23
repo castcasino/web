@@ -5,3 +5,5 @@ export const degenClient = createPublicClient({
     chain: degen,
     transport: http()
 })
+
+export default degenClient

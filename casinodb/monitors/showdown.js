@@ -3,9 +3,12 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 
 /* Import blockchain clients. */
-import { baseClient } from '../clients/base.js'
-import { degenClient } from '../clients/degen.js'
-import { ethClient } from '../clients/eth.js'
+import baseClient from '../clients/base.js'
+import degenClient from '../clients/degen.js'
+import ethClient from '../clients/eth.js'
+
+/* Import blockchain accounts. */
+import baseAccount from '../accounts/base.js'
 
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
@@ -175,12 +178,15 @@ console.log('SEAT-2', seat)
 
 return
 
+    const account =
+
     /* Validate hostess. */
     if (hostess) {
-        seated = await baseClient.readContract({
+        seated = await baseClient.simulateContract({
+            account,
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
-            functionName: 'getSeated',
+            functionName: 'dealCards',
             args: [BigInt(hostess._id)]
         }).catch(err => console.error(err))
 // console.log('SEATED', seated)

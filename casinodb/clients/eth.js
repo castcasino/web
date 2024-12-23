@@ -5,3 +5,5 @@ export const ethClient = createPublicClient({
     chain: mainnet,
     transport: http()
 })
+
+export default ethClient

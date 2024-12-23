@@ -5,3 +5,5 @@ export const baseClient = createPublicClient({
     chain: base,
     transport: http()
 })
+
+export default baseClient

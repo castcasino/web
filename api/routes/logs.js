@@ -2,9 +2,9 @@
 import moment from 'moment'
 
 /* Import blockchain clients. */
-import { baseClient } from '../clients/baseInfura.js'
-import { degenClient } from '../clients/degen.js'
-import { ethClient } from '../clients/eth.js'
+import baseClient from '../clients/baseInfura.js'
+import degenClient from '../clients/degen.js'
+import ethClient from '../clients/eth.js'
 
 /* Import contract ABI. */
 import { castPokerAbi } from '../abi/CastPoker.js'

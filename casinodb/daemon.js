@@ -20,9 +20,9 @@ import handleTables from './monitors/tables.js'
 import handleShowdown from './monitors/showdown.js'
 
 /* Import blockchain clients. */
-import { baseClient } from './clients/base.js'
-import { degenClient } from './clients/degen.js'
-import { ethClient } from './clients/eth.js'
+import baseClient from './clients/base.js'
+import degenClient from './clients/degen.js'
+import ethClient from './clients/eth.js'
 
 /* Set constants. */
 const QUOTES_INTERVAL = 300000
@@ -61,7 +61,7 @@ console.info('\n  Starting Cast Casino daemon...\n')
 // console.log('MNEMONIC', process.env.MNEMONIC)
 // console.log('TREASURY_ADDRESS', process.env.TREASURY_ADDRESS)
 
-    const accounts = await baseWallet(process.env.MNEMONIC)
+    const accounts = await baseWallet()
         .getAddresses()
         .catch(err => console.error(err))
 console.log('BASE ACCOUNTS', accounts)
