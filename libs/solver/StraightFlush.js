@@ -1,5 +1,6 @@
 /* Import modules. */
 import Hand from './Hand.js'
+import Straight from './Straight.js'
 
 // NOTE: The 'joker' will be denoted with a value of 'O' and any suit.
 import values from './values.js'

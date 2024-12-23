@@ -1,18 +1,41 @@
 import { _Hand as Hand } from './pokersolver.js'
 // console.log('HAND', Hand)
 
-var hand1 = Hand.solve(['AD', 'AS', 'JC', 'TH', '2D', '3C', 'KD']);
-console.log('HAND 1', hand1.descr)
+const findWinner = (_player1, _player2) => {
+    const hand1 = Hand.solve([ ...community, ...player1 ])
+    // console.log('\nHAND 1', hand1.descr)
+    // console.log('\nHAND 1', hand1)
 
-var hand2 = Hand.solve(['AD', 'AS', 'JC', 'TH', '2D', 'QS', 'JD']);
-console.log('HAND 2', hand2.descr)
+    const hand2 = Hand.solve([ ...community, ...player2 ])
+    // console.log('\nHAND 2', hand2.descr)
+    // console.log('\nHAND 2', hand2)
 
-var winner = Hand.winners([hand1, hand2]); // hand2
-console.log('WINNER', winner.length, winner.map(_winner => _winner.descr))
+    const winner = Hand.winners([ hand1, hand2 ])
+    console.log('\nWINNER', winner.length, winner.map(_winner => _winner.descr))
+    // console.log('\nWINNER', winner.length, winner.map(_winner => JSON.stringify(_winner.cards)))
+    // console.log('\nWINNER', winner.length, winner)
 
-var hand3 = Hand.solve(['AD', 'AS', 'JC', 'TH', '2D', 'QS', 'QD']);
-console.log('HAND 3', hand3.descr)
+    const winnerMatch = JSON.stringify(winner[0].cards)
+// console.log('winnerMatch', winnerMatch)
+    const player1Match = JSON.stringify(hand1.cards)
+// console.log('player1Match', player1Match)
+    const player2Match = JSON.stringify(hand2.cards)
+// console.log('player2Match', player2Match)
 
-var winners = Hand.winners([hand2, hand3]); // tie
-console.log('WINNER', winners.length, winners.map(_winner => _winner.name))
-console.log('WINNER', winners.length, winners.map(_winner => _winner.descr))
+    if (winner.length === 2) {
+        return 0
+    } else if (winnerMatch === player1Match) {
+        return 1
+    } else if (winnerMatch === player2Match) {
+        return 2
+    }
+
+    return 'ERROR!'
+}
+
+const community = ['KS', 'JS', '9S', '7S', '5S']
+const player1 = ['3H', '6C']
+const player2 = ['QC', 'JD']
+
+const winner = findWinner()
+console.log('PLAYER', winner)
