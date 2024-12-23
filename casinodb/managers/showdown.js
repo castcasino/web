@@ -233,7 +233,7 @@ return
 //         response = await baseAccount()
 //             .writeContract(response.request)
 //             .catch(err => console.error(err))
-// console.log('RESPONSE (write deal cards)', response)
+// console.log('RESPONSE (execute deal cards)', response)
 //     }
 
     params = {
@@ -258,7 +258,7 @@ console.log('RESPONSE (simulate showdown)', response)
         response = await baseAccount()
             .writeContract(response.request)
             .catch(err => console.error(err))
-console.log('RESPONSE (write showdown)', response)
+console.log('RESPONSE (execute showdown)', response)
     }
 
 }
