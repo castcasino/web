@@ -115,4 +115,29 @@ console.log('RESPONSE (simulate payout)', response)
 console.log('RESPONSE (execute payout)', response)
     }
 
+    params = {
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        functionName: 'close',
+        args: [ BigInt(tableid) ],
+        account: baseAccount().account,
+    }
+// console.log('CONTRACT PARAMS (close)', params)
+
+    /* Validate dealer. */
+    response = await baseClient
+        .simulateContract(params)
+        .catch(err => {
+            // console.error(err)
+            console.error(err.message)
+        })
+console.log('RESPONSE (simulate close)', response)
+
+//     if (typeof response !== 'undefined' && response.request) {
+//         response = await baseAccount()
+//             .writeContract(response.request)
+//             .catch(err => console.error(err))
+// console.log('RESPONSE (execute close)', response)
+//     }
+
 }
