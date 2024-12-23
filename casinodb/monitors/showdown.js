@@ -183,7 +183,7 @@ console.log('SEAT-1', seat)
 console.log('SEAT-2', seat)
 
     const params = {
-        account: baseAccount,
+        account: baseAccount(),
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'dealCards',
