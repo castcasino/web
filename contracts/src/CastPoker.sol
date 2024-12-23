@@ -6,7 +6,7 @@
  * CastPoker - Play a hand of poker in a Farcaster frame.
  *
  * Version 1 (alpha)
- * Released 24.12.10
+ * Released 24.12.23
  *
  * https://cast.poker
  * https://cast.casino
@@ -150,6 +150,12 @@ contract CastPoker is Ownable {
         int8 hole1,
         int8 hole2
     );
+    event PlayersCardsDealt(
+        uint indexed tableid,
+        address[] players,
+        int8[] hole1,
+        int8[] hole2
+    );
     event Payout(
         uint indexed tableid,
         uint pot,
@@ -275,35 +281,6 @@ contract CastPoker is Ownable {
         _castCasinoDb.setUint(hash, totalTables + 1);
 
         return totalTables;
-    }
-
-    /**
-     * Set Bench
-     *
-     * Provides a venue for (one-on-one) heads-up games.
-     *
-     * NOTE: THIS IS CURRENTLY NOT USED FOR ANY GAMEPLAY.
-     */
-    function setBench(
-        address _token
-    ) external returns (bool) {
-        /* Set hash. */
-        bytes32 hash = keccak256(abi.encodePacked(
-            _namespace, ".total.benches"
-        ));
-
-        /* Retrieve value from Cast Casino database. */
-        uint totalBenches = _castCasinoDb.getUint(hash);
-
-        /* Initialize the bench. */
-        benches[totalBenches] = Bench({
-            state: GameplayState.Set,
-            token: _token
-        });
-
-        // TODO Complete implementation.
-
-        return true;
     }
 
     /**
@@ -459,6 +436,53 @@ contract CastPoker is Ownable {
         emit PlayerCardsDealt(
             _tableid,
             _player,
+            _hole1,
+            _hole2
+        );
+    }
+
+    /**
+     * Deal Player Cards
+     *
+     * Distributes the cards for a participating player.
+     *
+     * NOTE: An event is kept onchain so that other players can later verify
+     *       that there was no cheating.
+     */
+    function dealCards(
+        uint _tableid,
+        address[] calldata _players,
+        int8[] calldata _hole1,
+        int8[] calldata _hole2
+    ) external onlyAuthByCastCasino {
+        /* Initialize table. */
+        Table storage table = tables[_tableid];
+
+        /* Validate table status. */
+        require(table.state == GameplayState.Community,
+            "Oops! This table DOES NOT have a community yet.");
+
+        /* Initialize counter. */
+        uint i;
+
+        /* Handle multiple players. */
+        for (i = 0; i < _players.length; i++) {
+            /* Validate hole cards. */
+            require(
+                players[_tableid][_players[i]].cards.hole1 == -1 &&
+                players[_tableid][_players[i]].cards.hole2 == -1,
+                "Oops! Cards have already been dealt to that player."
+            );
+
+            /* Set player (hole) cards. */
+            players[_tableid][_players[i]].cards.hole1 = _hole1[i];
+            players[_tableid][_players[i]].cards.hole2 = _hole2[i];
+        }
+
+        /* Broadcast cards dealt. */
+        emit PlayersCardsDealt(
+            _tableid,
+            _players,
             _hole1,
             _hole2
         );
