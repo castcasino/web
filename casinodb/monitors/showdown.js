@@ -84,9 +84,13 @@ console.log('MANAGING SHOWDOWN')
 
     /* Remodel tables data (to object). */
     response.rows.forEach(_table => {
-// console.log('TABLE', _table)
-        const id = Number(_table.id)
+        /* Set id. */
+        const id = _table.id
+
+        /* Set table. */
         tables[id] = _table.doc
+
+        /* Sanitize. */
         delete tables[id]._id
         delete tables[id]._rev
     })
@@ -196,7 +200,6 @@ console.log('SEAT-1', seat)
 console.log('SEAT-2', seat)
 
     const params = {
-        account: baseAccount().account,
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'dealCards',
@@ -206,15 +209,23 @@ console.log('SEAT-2', seat)
             seated[0].hole1Idx,
             seated[0].hole2Idx,
         ],
+        account: baseAccount().account,
     }
 console.log('CONTRACT PARAMS', params)
 
     /* Validate hostess. */
     // if (hostess) {
-        response = await baseClient
-            .simulateContract(params)
-            .catch(err => console.error(err))
+    response = await baseClient
+        .simulateContract(params)
+        .catch(err => console.error(err))
 console.log('RESPONSE (simulate)', response)
+
+    if (typeof response !== 'undefined') {
+        response = await walletClient
+            .writeContract(request)
+            .catch(err => console.error(err))
+console.log('RESPONSE (write contract)', response)
+    }
 
     // }
 
