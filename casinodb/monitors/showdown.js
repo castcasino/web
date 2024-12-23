@@ -227,7 +227,7 @@ console.log('SEAT-2', seat)
 //         })
 // console.log('RESPONSE (simulate deal cards)', response)
 
-// return
+return
 
 //     if (typeof response !== 'undefined' && response.request) {
 //         response = await baseAccount()
@@ -243,7 +243,7 @@ console.log('SEAT-2', seat)
         args: [ BigInt(tableid) ],
         account: baseAccount().account,
     }
-console.log('CONTRACT PARAMS (showdown)', params)
+// console.log('CONTRACT PARAMS (showdown)', params)
 
     /* Validate hostess. */
     response = await baseClient
