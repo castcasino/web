@@ -194,7 +194,7 @@ console.log('SEAT-2', seat)
             seated[0].hole2Idx,
         ],
     }
-console.log('CONTRACT PARAMS', params)
+// console.log('CONTRACT PARAMS', params)
 
     /* Validate hostess. */
     // if (hostess) {
