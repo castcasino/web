@@ -84,8 +84,8 @@ console.log('MANAGING SHOWDOWN')
 
     /* Remodel tables data (to object). */
     response.rows.forEach(_table => {
-console.log('TABLE', _table)
-        const id = _table.id
+// console.log('TABLE', _table)
+        const id = Number(_table.id)
         tables[id] = _table.doc
         delete tables[id]._id
         delete tables[id]._rev
