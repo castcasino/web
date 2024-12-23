@@ -38,6 +38,7 @@ console.log('MANAGING SHOWDOWN')
     let playerHashes
     let response
     let seat
+    let seatIdx
     let seated
     let selected
     let showdownAt
@@ -199,15 +200,18 @@ console.log('SEAT-1', seat)
     seated.push(seat)
 console.log('SEAT-2', seat)
 
+    /* Set seat index. */
+    seatIdx = 1
+
     const params = {
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'dealCards',
         args: [
             BigInt(tableid),
-            seated[0].address,
-            seated[0].hole1Idx,
-            seated[0].hole2Idx,
+            seated[seatIdx].address,
+            seated[seatIdx].hole1Idx,
+            seated[seatIdx].hole2Idx,
         ],
         account: baseAccount().account,
     }
@@ -217,7 +221,9 @@ console.log('SEAT-2', seat)
     // if (hostess) {
     response = await baseClient
         .simulateContract(params)
-        .catch(err => console.error(err))
+        .catch(err => {
+            // console.error(err)
+        })
 console.log('RESPONSE (simulate)', response)
 return
     if (typeof response !== 'undefined' && response.request) {
