@@ -70,10 +70,7 @@ console.log('SEATED', seated)
     })
 console.log('TABLE INFO', tableInfo)
 
-//     tableInfo = JSON.stringify(tableInfo, (key, value) =>
-//         typeof value === 'bigint' ? value.toString() + 'n' : value
-//     )
-// console.log('TABLE INFO (sanitized)', tableInfo)
+    /* Package table info. */
     tableInfo = {
         state: tableInfo[0],
         token: tableInfo[1],
@@ -89,7 +86,6 @@ console.log('TABLE INFO', tableInfo)
         community: tableInfo[11],
         seated,
     }
-
 console.log('TABLE INFO (packaged)', tableInfo)
 
     if (tableInfo) {
