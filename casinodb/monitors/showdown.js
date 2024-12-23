@@ -219,13 +219,13 @@ console.log('SEAT-2', seat)
 // console.log('CONTRACT PARAMS', params)
 
     /* Validate hostess. */
-    response = await baseClient
-        .simulateContract(params)
-        .catch(err => {
-            // console.error(err)
-            console.error('ERROR MSG:', err.message)
-        })
-console.log('RESPONSE (simulate)', response)
+//     response = await baseClient
+//         .simulateContract(params)
+//         .catch(err => {
+//             // console.error(err)
+//             console.error('ERROR MSG:', err.message)
+//         })
+// console.log('RESPONSE (simulate)', response)
 
 // return
 
@@ -236,5 +236,22 @@ console.log('RESPONSE (simulate)', response)
 // console.log('RESPONSE (write contract)', response)
 //     }
 
+    params = {
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        functionName: 'showdown',
+        args: [ BigInt(tableid) ],
+        account: baseAccount().account,
+    }
+console.log('CONTRACT PARAMS-2', params)
+
+    /* Validate hostess. */
+    response = await baseClient
+        .simulateContract(params)
+        .catch(err => {
+            // console.error(err)
+            console.error(err.message)
+        })
+console.log('RESPONSE (simulate-2)', response)
 
 }
