@@ -59,15 +59,11 @@ contract CastPoker is Ownable {
 
     /* Initialize tables handler. */
     // tableid => Table
-    mapping(uint => Table) public tables;
-
-    /* Initialize benches handler. */
-    // benchid => Bench
-    mapping(uint => Bench) public benches;
+    mapping(uint => Table) private _tables;
 
     /* Initialize players. */
     // tableid => (player) address => Player
-    mapping(uint => mapping(address => Player)) public players;
+    mapping(uint => mapping(address => Player)) private _players;
 
     /* Gameplay (Round) State */
     enum GameplayState {
@@ -258,7 +254,7 @@ contract CastPoker is Ownable {
         uint totalTables = _castCasinoDb.getUint(hash);
 
         /* Initialize the table. */
-        tables[totalTables] = Table({
+        _tables[totalTables] = Table({
             state: GameplayState.Set,
             token: _token,
             host: msg.sender,
@@ -275,7 +271,7 @@ contract CastPoker is Ownable {
         });
 
         /* Broadcast event. */
-        emit TableCreated(totalTables, tables[totalTables]);
+        emit TableCreated(totalTables, _tables[totalTables]);
 
         /* Update (increment) table count. */
         _castCasinoDb.setUint(hash, totalTables + 1);
@@ -302,7 +298,7 @@ contract CastPoker is Ownable {
         uint8 _river
     ) external onlyAuthByCastCasino {
         /* Initialize table. */
-        Table storage table = tables[_tableid];
+        Table storage table = _tables[_tableid];
 
         /* Validate table status. */
         require(table.state == GameplayState.Set,
@@ -352,11 +348,17 @@ contract CastPoker is Ownable {
             "Oops! You CANNOT buy-in using a smart wallet. Please use a standard EOA wallet.");
 
         /* Validate player is unique (to this table). */
-        require(players[_tableid][msg.sender].id == address(0),
+        require(_players[_tableid][msg.sender].id == address(0),
             "Oops! You CANNOT sit more than once at the same table.");
 
         /* Initialize table. */
-        Table storage table = tables[_tableid];
+        Table storage table = _tables[_tableid];
+
+        /* Validate table host. */
+        if (table.host == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).buyIn(_tableid, _seed);
+        }
 
         /* Validate table status. */
         require(table.state == GameplayState.Community,
@@ -394,7 +396,7 @@ contract CastPoker is Ownable {
         );
 
         /* Add to players. */
-        players[_tableid][msg.sender] = player;
+        _players[_tableid][msg.sender] = player;
 
         /* Broadcast (player) buy-in. */
         emit BuyIn(_tableid, player);
@@ -410,53 +412,18 @@ contract CastPoker is Ownable {
      */
     function dealCards(
         uint _tableid,
-        address _player,
-        int8 _hole1,
-        int8 _hole2
+        address[] calldata _playersPool,
+        int8[] calldata _hole1Pool,
+        int8[] calldata _hole2Pool
     ) external onlyAuthByCastCasino {
         /* Initialize table. */
-        Table storage table = tables[_tableid];
+        Table storage table = _tables[_tableid];
 
-        /* Validate table status. */
-        require(table.state == GameplayState.Community,
-            "Oops! This table DOES NOT have a community yet.");
-
-        /* Validate hole cards. */
-        require(
-            players[_tableid][_player].cards.hole1 == -1 &&
-            players[_tableid][_player].cards.hole2 == -1,
-            "Oops! Cards have already been dealt to that player."
-        );
-
-        /* Set player (hole) cards. */
-        players[_tableid][_player].cards.hole1 = _hole1;
-        players[_tableid][_player].cards.hole2 = _hole2;
-
-        /* Broadcast cards dealt. */
-        emit PlayerCardsDealt(
-            _tableid,
-            _player,
-            _hole1,
-            _hole2
-        );
-    }
-
-    /**
-     * Deal Player Cards
-     *
-     * Distributes the cards for a participating player.
-     *
-     * NOTE: An event is kept onchain so that other players can later verify
-     *       that there was no cheating.
-     */
-    function dealCards(
-        uint _tableid,
-        address[] calldata _players,
-        int8[] calldata _hole1,
-        int8[] calldata _hole2
-    ) external onlyAuthByCastCasino {
-        /* Initialize table. */
-        Table storage table = tables[_tableid];
+        /* Validate table host. */
+        if (table.host == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).dealCards(_tableid, _playersPool, _hole1Pool, _hole2Pool);
+        }
 
         /* Validate table status. */
         require(table.state == GameplayState.Community,
@@ -466,25 +433,25 @@ contract CastPoker is Ownable {
         uint i;
 
         /* Handle multiple players. */
-        for (i = 0; i < _players.length; i++) {
+        for (i = 0; i < _playersPool.length; i++) {
             /* Validate hole cards. */
             require(
-                players[_tableid][_players[i]].cards.hole1 == -1 &&
-                players[_tableid][_players[i]].cards.hole2 == -1,
+                _players[_tableid][_playersPool[i]].cards.hole1 == -1 &&
+                _players[_tableid][_playersPool[i]].cards.hole2 == -1,
                 "Oops! Cards have already been dealt to that player."
             );
 
             /* Set player (hole) cards. */
-            players[_tableid][_players[i]].cards.hole1 = _hole1[i];
-            players[_tableid][_players[i]].cards.hole2 = _hole2[i];
+            _players[_tableid][_playersPool[i]].cards.hole1 = _hole1Pool[i];
+            _players[_tableid][_playersPool[i]].cards.hole2 = _hole2Pool[i];
         }
 
         /* Broadcast cards dealt. */
         emit PlayersCardsDealt(
             _tableid,
-            _players,
-            _hole1,
-            _hole2
+            _playersPool,
+            _hole1Pool,
+            _hole2Pool
         );
     }
 
@@ -497,7 +464,13 @@ contract CastPoker is Ownable {
         uint _tableid
     ) external onlyAuthByCastCasino returns (bool) {
         /* Initialize table. */
-        Table storage table = tables[_tableid];
+        Table storage table = _tables[_tableid];
+
+        /* Validate table host. */
+        if (table.host == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).showdown(_tableid);
+        }
 
         /* Validate table status. */
         require(table.state == GameplayState.Community,
@@ -523,7 +496,13 @@ contract CastPoker is Ownable {
         uint _amount
     ) external onlyAuthByCastCasino returns (bool) {
         /* Initialize table. */
-        Table storage table = tables[_tableid];
+        Table storage table = _tables[_tableid];
+
+        /* Validate table host. */
+        if (table.host == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).payout(_tableid, _player, _amount);
+        }
 
         /* Validate table status. */
         require(
@@ -544,15 +523,13 @@ contract CastPoker is Ownable {
         // NOTE: Support is available for either the network's
         //       native coin OR an ERC-20 token.
         if (table.token == address(0)) {
-            (bool success, ) = msg.sender.call{ value: _amount}("");
+            (bool success, ) = _player.call{ value: _amount}("");
 
             require(success, "Oops! Asset transfer has failed!");
         } else {
             /* Transfer payout amount from contract to player. */
-            IERC20(table.token).transferFrom(
-                address(this), msg.sender, _amount);
-
-            require(IERC20(table.token).transfer(_player, _amount),
+            require(IERC20(table.token).transferFrom(
+                    address(this), _player, _amount),
                 "Oops! Token transfer has failed!");
         }
 
@@ -569,7 +546,7 @@ contract CastPoker is Ownable {
 
         /* Set hash. */
         bytes32 hash = keccak256(abi.encodePacked(
-            _namespace, ".total.", assetid, ".chips.for", _player
+            _namespace, ".total.", assetid, ".chips.for.", _player
         ));
 
         /* Retrieve value from Cast Casino database. */
@@ -586,11 +563,17 @@ contract CastPoker is Ownable {
      *
      * Everyone has been paid and the table is now closed.
      */
-    function close(
+    function closeTable(
         uint _tableid
     ) external onlyAuthByCastCasino returns (bool) {
         /* Initialize table. */
-        Table storage table = tables[_tableid];
+        Table storage table = _tables[_tableid];
+
+        /* Validate table host. */
+        if (table.host == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).closeTable(_tableid);
+        }
 
         /* Validate table status. */
         require(table.state == GameplayState.Showdown,
@@ -609,6 +592,98 @@ contract CastPoker is Ownable {
      */
 
     /**
+     * Get Chips
+     *
+     * Retrieve the total number of chips a player has earned
+     * for a specific asset.
+     */
+    function getChips(
+        uint _chainid,
+        address _assetid,
+        address _player
+    ) external view returns (uint) {
+        /* Initialize asset id. */
+        uint assetid;
+
+        if (_assetid == address(0)) {
+            assetid = _chainid;
+        } else {
+            assetid = uint160(_assetid);
+        }
+
+        /* Set hash. */
+        bytes32 hash = keccak256(abi.encodePacked(
+            _namespace, ".total.", assetid, ".chips.for.", _player
+        ));
+
+        /* Retrieve value from Cast Casino database. */
+        uint totalChips = _castCasinoDb.getUint(hash);
+
+        return totalChips;
+    }
+
+    /**
+     * Get Player
+     *
+     * Return a player.
+     */
+    function getPlayer(
+        uint _tableid,
+        address _address
+    ) external view returns (Player memory) {
+        /* Initialize player. */
+        Player storage player = _players[_tableid][_address];
+
+        /* Validate player address. */
+        if (player.id == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).getPlayer(_tableid, _address);
+        }
+
+        return player;
+    }
+
+    /**
+     * Get Seated
+     *
+     * Return the addresses of all players currently seated.
+     */
+    function getSeated(
+        uint _tableid
+    ) external view returns (address[] memory) {
+        /* Initialize table. */
+        Table storage table = _tables[_tableid];
+
+        /* Validate table host. */
+        if (table.host == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).getSeated(_tableid);
+        }
+
+        return table.seated;
+    }
+
+    /**
+     * Get Tables
+     *
+     * Return a table.
+     */
+    function getTable(
+        uint _tableid
+    ) external view returns (Table memory) {
+        /* Initialize table. */
+        Table storage table = _tables[_tableid];
+
+        /* Validate table host. */
+        if (table.host == address(0x0)) {
+            /* Delegate call to predecessor. */
+            return CastPoker(_predecessor).getTable(_tableid);
+        }
+
+        return table;
+    }
+
+    /**
      * Get Total Tables
      *
      * Total number of tables created by hosts.
@@ -623,51 +698,6 @@ contract CastPoker is Ownable {
         uint totalTables = _castCasinoDb.getUint(hash);
 
         return totalTables;
-    }
-
-    /**
-     * Get Seated
-     *
-     * Return the addresses of all players currently seated.
-     */
-    function getSeated(
-        uint _tableid
-    ) external view returns (address[] memory) {
-        /* Initialize table. */
-        Table storage table = tables[_tableid];
-
-        return table.seated;
-    }
-
-    /**
-     * Get Chips
-     *
-     * Retrieve the total number of chips a player has earned
-     * for a specific asset.
-     */
-    function getChips(
-        uint _chainid,
-        address _player,
-        address _assetid
-    ) external view returns (uint) {
-        /* Initialize asset id. */
-        uint assetid;
-
-        if (_assetid == address(0)) {
-            assetid = _chainid;
-        } else {
-            assetid = uint160(_assetid);
-        }
-
-        /* Set hash. */
-        bytes32 hash = keccak256(abi.encodePacked(
-            _namespace, ".total.", assetid, ".chips.for", _player
-        ));
-
-        /* Retrieve value from Cast Casino database. */
-        uint totalChips = _castCasinoDb.getUint(hash);
-
-        return totalChips;
     }
 
     /**

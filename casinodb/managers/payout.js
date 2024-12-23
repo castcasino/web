@@ -118,7 +118,7 @@ console.log('RESPONSE (execute payout)', response)
     params = {
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
-        functionName: 'close',
+        functionName: 'closeTable',
         args: [ BigInt(tableid) ],
         account: baseAccount().account,
     }
