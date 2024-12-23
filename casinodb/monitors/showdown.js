@@ -182,20 +182,25 @@ console.log('SEAT-1', seat)
     seated.push(seat)
 console.log('SEAT-2', seat)
 
+    const params = {
+        account: baseAccount,
+        address: CAST_POKER_ADDRESS,
+        abi: castPokerAbi,
+        functionName: 'dealCards',
+        args: [
+            BigInt(tableid),
+            seated[0].address,
+            seated[0].hole1Idx,
+            seated[0].hole2Idx,
+        ],
+    }
+console.log('CONTRACT PARAMS', params)
+
     /* Validate hostess. */
     // if (hostess) {
-        response = await baseClient.simulateContract({
-            account: baseAccount,
-            address: CAST_POKER_ADDRESS,
-            abi: castPokerAbi,
-            functionName: 'dealCards',
-            args: [
-                BigInt(tableid),
-                seated[0].address,
-                seated[0].hole1Idx,
-                seated[0].hole2Idx,
-            ],
-        }).catch(err => console.error(err))
+        response = await baseClient
+            .simulateContract(params)
+            .catch(err => console.error(err))
 console.log('RESPONSE (simulate)', response)
 
     // }
