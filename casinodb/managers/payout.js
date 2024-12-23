@@ -90,7 +90,7 @@ console.log('TABLE INFO (packaged)', tableInfo)
         functionName: 'payout',
         args: [
             BigInt(tableid),
-            '0x27a9b30DBe015842098F4CD31f0301a1cEE74bfe',
+            '0xC8013A8C09774eb2a008FdCbeDB5f640d1dbec00',
             9500000000000n,
         ],
         account: baseAccount().account,
