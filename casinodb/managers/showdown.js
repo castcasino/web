@@ -245,7 +245,7 @@ return
     }
 // console.log('CONTRACT PARAMS (showdown)', params)
 
-    /* Validate hostess. */
+    /* Validate dealer. */
     response = await baseClient
         .simulateContract(params)
         .catch(err => {

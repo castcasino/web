@@ -97,13 +97,19 @@ console.log('TABLE INFO (packaged)', tableInfo)
     }
 console.log('CONTRACT PARAMS (payout)', params)
 
-    /* Validate hostess. */
-//     response = await baseClient
-//         .simulateContract(params)
-//         .catch(err => {
-//             // console.error(err)
-//             console.error('ERROR MSG:', err.message)
-//         })
-// console.log('RESPONSE (simulate deal cards)', response)
+    /* Validate cashier. */
+    response = await baseClient
+        .simulateContract(params)
+        .catch(err => {
+            // console.error(err)
+            console.error('ERROR MSG:', err.message)
+        })
+console.log('RESPONSE (simulate payout)', response)
+
+//     if (typeof response !== 'undefined' && response.request) {
+//         response = await baseAccount()
+//             .writeContract(response.request)
+//             .catch(err => console.error(err))
+// console.log('RESPONSE (write deal cards)', response)
 
 }
