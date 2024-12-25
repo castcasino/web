@@ -55,6 +55,8 @@ export default async () => {
     })
 console.log('UNSET', unset)
 
+return
+
     /* Validate unset. */
     if (unset && unset.length > 0) {
         dealer = unset[0]

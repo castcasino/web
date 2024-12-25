@@ -47,6 +47,8 @@ console.log('BLOCK CREATED', blk)
     }).catch(err => console.error(err))
 console.log('TABLE LOGS', tableLogs)
 
+// TODO Validate table logs.
+
     tableInfo = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
@@ -60,10 +62,8 @@ console.log('TABLE LOGS', tableLogs)
     tableInfo.tts = tableInfo.tts.toString()
     tableInfo.pot = tableInfo.pot.toString()
     tableInfo.paid = tableInfo.paid.toString()
-    tableInfo.blockNumber = tableLogs[0].blockNumber
+    tableInfo.blockNumber = tableLogs[0].blockNumber.toString()
 console.log('ADD NEW TABLE INFO (sanitized)', tableInfo)
-
-return
 
     pokerTablesDb.put({
         _id: tableid.toString(),
