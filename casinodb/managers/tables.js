@@ -67,7 +67,7 @@ console.log('INDEX TABLES (db)', idxTables)
 
         /* Check community. */
         if (idxCommunity.height < idxTables.height) {
-            // await _addNewTable(idxCommunity)
+            await _addNewTable(idxCommunity)
         }
 
         await systemDb
@@ -77,11 +77,6 @@ console.log('INDEX TABLES (db)', idxTables)
                     console.error(err)
                 }
             })
-
-//         response = await systemDb
-//             .put(blk)
-//             .catch(err => console.error(err))
-// console.log('BLOCK INDEX UPDATED', response)
 
         /* Send (Admin) notification. */
         fetch('https://cast.casino/v1/admin', {

@@ -75,6 +75,12 @@ console.log('ADD NEW TABLE INFO (sanitized)', tableInfo)
     _idxCommunity.updatedAt = moment().unix()
 // console.log('NEW IDX', idxTables)
 
+// FIXME WE MUST HANDLE MULTIPLE TABLES FROM A SINGLE BLOCK
+//         response = await systemDb
+//             .put(blk)
+//             .catch(err => console.error(err))
+// console.log('BLOCK INDEX UPDATED', response)
+
     await systemDb
         .put(_idxCommunity)
         .catch(err => {
