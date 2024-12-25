@@ -44,12 +44,12 @@ export default async () => {
         abi: castPokerAbi,
         functionName: 'getTotalTables',
     }).catch(err => console.error(err))
-console.log('TOTAL TABLES (contract)', totalTables)
+// console.log('TOTAL TABLES (contract)', totalTables)
 
     idxTables = await systemDb
         .get('idx_tables')
         .catch(err => console.error(err))
-console.log('INDEX TABLES (db)', idxTables)
+// console.log('INDEX TABLES (db)', idxTables)
 
     /* Validate height. */
     if (idxTables.height === Number(totalTables)) {
