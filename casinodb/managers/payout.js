@@ -60,7 +60,7 @@ const tableid = 3
     tableInfo = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
-        functionName: 'tables',
+        functionName: 'getTable',
         args: [tableid]
     })
 console.log('TABLE INFO', tableInfo)
@@ -82,7 +82,7 @@ console.log('TABLE INFO', tableInfo)
     }
 console.log('TABLE INFO (packaged)', tableInfo)
 
-// return
+return
 
     params = {
         address: CAST_POKER_ADDRESS,
