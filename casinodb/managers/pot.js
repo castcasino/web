@@ -49,7 +49,7 @@ export default async () => {
     for (let i = 0; i < tables.length; i++) {
         /* Assign pit boss. */
         pitBoss = tables[i]
-// console.log('PIT BOSS', pitBoss)
+console.log('PIT BOSS', pitBoss)
 
         /* Pause before reading from "FREE" API. */
         await sleep(FREE_API_DELAY)
@@ -57,17 +57,17 @@ export default async () => {
         registered = await baseClient.readContract({
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
-            functionName: 'tables',
+            functionName: 'getTable',
             args: [BigInt(pitBoss._id)]
         }).catch(err => console.error(err))
-// console.log('REGISTERED', registered)
+console.log('REGISTERED', registered)
 
         /* Set pot. */
-        pot = registered[6]
-// console.log('POT', pot)
+        pot = registered.pot
+console.log('POT', pot)
 
         if (pot > BigInt(pitBoss.pot)) {
-// console.log('\n  ***PIT BOSS! WE GOTTA UPDATE***\n')
+console.log('\n  ***PIT BOSS! WE GOTTA UPDATE***\n')
 
             /* Update pit boss. */
             pitBoss.pot = pot.toString()
