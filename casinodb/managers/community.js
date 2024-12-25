@@ -53,7 +53,7 @@ export default async () => {
     unset = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('UNSET', unset)
+// console.log('UNSET', unset)
 
     /* Validate unset. */
     if (unset && unset.length > 0) {
