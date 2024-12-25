@@ -78,7 +78,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "close",
+		"name": "closeTable",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -140,19 +140,19 @@
 				"type": "uint256"
 			},
 			{
-				"internalType": "address",
-				"name": "_player",
-				"type": "address"
+				"internalType": "address[]",
+				"name": "_playersPool",
+				"type": "address[]"
 			},
 			{
-				"internalType": "int8",
-				"name": "_hole1",
-				"type": "int8"
+				"internalType": "int8[]",
+				"name": "_hole1Pool",
+				"type": "int8[]"
 			},
 			{
-				"internalType": "int8",
-				"name": "_hole2",
-				"type": "int8"
+				"internalType": "int8[]",
+				"name": "_hole2Pool",
+				"type": "int8[]"
 			}
 		],
 		"name": "dealCards",
@@ -303,28 +303,40 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tableid",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address[]",
+				"name": "players",
+				"type": "address[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "int8[]",
+				"name": "hole1",
+				"type": "int8[]"
+			},
+			{
+				"indexed": false,
+				"internalType": "int8[]",
+				"name": "hole2",
+				"type": "int8[]"
+			}
+		],
+		"name": "PlayersCardsDealt",
+		"type": "event"
+	},
+	{
 		"inputs": [],
 		"name": "renounceOwnership",
 		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			}
-		],
-		"name": "setBench",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -553,41 +565,17 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "benches",
-		"outputs": [
-			{
-				"internalType": "enum CastPoker.GameplayState",
-				"name": "state",
-				"type": "uint8"
-			},
-			{
-				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
 				"name": "_chainid",
 				"type": "uint256"
 			},
 			{
 				"internalType": "address",
-				"name": "_player",
+				"name": "_assetid",
 				"type": "address"
 			},
 			{
 				"internalType": "address",
-				"name": "_assetid",
+				"name": "_player",
 				"type": "address"
 			}
 		],
@@ -597,6 +585,59 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "getPlayer",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "id",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "seed",
+						"type": "uint256"
+					},
+					{
+						"components": [
+							{
+								"internalType": "int8",
+								"name": "hole1",
+								"type": "int8"
+							},
+							{
+								"internalType": "int8",
+								"name": "hole2",
+								"type": "int8"
+							}
+						],
+						"internalType": "struct CastPoker.PlayerCards",
+						"name": "cards",
+						"type": "tuple"
+					}
+				],
+				"internalType": "struct CastPoker.Player",
+				"name": "",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -661,6 +702,119 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_tableid",
+				"type": "uint256"
+			}
+		],
+		"name": "getTable",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "enum CastPoker.GameplayState",
+						"name": "state",
+						"type": "uint8"
+					},
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "host",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "seed",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "buyin",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tts",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pot",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "paid",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint8",
+						"name": "seats",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "fomo",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint8",
+						"name": "theme",
+						"type": "uint8"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint8",
+								"name": "flop1",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "flop2",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "flop3",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "turn",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint8",
+								"name": "river",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct CastPoker.CommunityCards",
+						"name": "community",
+						"type": "tuple"
+					},
+					{
+						"internalType": "address[]",
+						"name": "seated",
+						"type": "address[]"
+					}
+				],
+				"internalType": "struct CastPoker.Table",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "getTotalTables",
 		"outputs": [
@@ -681,153 +835,6 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "players",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "id",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "seed",
-				"type": "uint256"
-			},
-			{
-				"components": [
-					{
-						"internalType": "int8",
-						"name": "hole1",
-						"type": "int8"
-					},
-					{
-						"internalType": "int8",
-						"name": "hole2",
-						"type": "int8"
-					}
-				],
-				"internalType": "struct CastPoker.PlayerCards",
-				"name": "cards",
-				"type": "tuple"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "tables",
-		"outputs": [
-			{
-				"internalType": "enum CastPoker.GameplayState",
-				"name": "state",
-				"type": "uint8"
-			},
-			{
-				"internalType": "address",
-				"name": "token",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "host",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "seed",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "buyin",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "tts",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "pot",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "paid",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint8",
-				"name": "seats",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "fomo",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint8",
-				"name": "theme",
-				"type": "uint8"
-			},
-			{
-				"components": [
-					{
-						"internalType": "uint8",
-						"name": "flop1",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "flop2",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "flop3",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "turn",
-						"type": "uint8"
-					},
-					{
-						"internalType": "uint8",
-						"name": "river",
-						"type": "uint8"
-					}
-				],
-				"internalType": "struct CastPoker.CommunityCards",
-				"name": "community",
-				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
