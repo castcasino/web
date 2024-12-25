@@ -121,6 +121,8 @@ export default async () => {
         dealer.community = communityPkg
         dealer.updatedAt = moment().unix()
 
+// TODO Call contract with community cards.
+
         response = await pokerTablesDb
             .put(dealer)
             .catch(err => console.error(err))

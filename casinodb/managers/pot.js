@@ -60,7 +60,7 @@ console.log('PIT BOSS', pitBoss)
             functionName: 'getTable',
             args: [BigInt(pitBoss._id)]
         }).catch(err => console.error(err))
-console.log('REGISTERED', registered)
+console.log('REGISTERED ON-CHAIN', registered)
 
         /* Set pot. */
         pot = registered.pot
