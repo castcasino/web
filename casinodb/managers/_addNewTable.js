@@ -55,26 +55,12 @@ console.log('TABLE LOGS', tableLogs)
     }).catch(err => console.error(err))
 // console.log('TABLE INFO (raw)', tableInfo)
 
-    // tableInfo = {
-    //     state: tableInfo[0],
-    //     token: tableInfo[1],
-    //     host: tableInfo[2],
-    //     seed: tableInfo[3].toString(),
-    //     buyin: tableInfo[4].toString(),
-    //     tts: tableInfo[5].toString(),
-    //     pot: tableInfo[6].toString(),
-    //     paid: tableInfo[7].toString(),
-    //     seats: tableInfo[8],
-    //     fomo: tableInfo[9],
-    //     theme: tableInfo[10],
-    //     community: tableInfo[11],
-    //     seated,
-    // }
     tableInfo.seed = tableInfo.seed.toString()
     tableInfo.buyin = tableInfo.buyin.toString()
     tableInfo.tts = tableInfo.tts.toString()
     tableInfo.pot = tableInfo.pot.toString()
     tableInfo.paid = tableInfo.paid.toString()
+    tableInfo.blockNumber = tableLogs[0].blockNumber
 console.log('ADD NEW TABLE INFO (sanitized)', tableInfo)
 
 return
