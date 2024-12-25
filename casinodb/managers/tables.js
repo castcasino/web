@@ -51,13 +51,12 @@ console.log('TOTAL TABLES (contract)', totalTables)
         .catch(err => console.error(err))
 console.log('INDEX TABLES (db)', idxTables)
 
-return
-
     /* Validate height. */
     if (idxTables.height === Number(totalTables)) {
         console.log('  Tables index is already up-to-date.')
     } else {
-        idxTables.height = Number(totalTables) // cast from BigInt
+        // idxTables.height = Number(totalTables) // cast from BigInt
+        idxTables.height = idxTables.height + 1 // TODO Allow batch add
         idxTables.updatedAt = moment().unix()
 console.log('NEW IDX', idxTables)
 
