@@ -51,7 +51,7 @@ export default async () => {
 // console.log('HOSTESS', hostess)
 
         /* Pause before reading from "FREE" API. */
-        sleep(FREE_API_DELAY)
+        await sleep(FREE_API_DELAY)
 
         seated = await baseClient.readContract({
             address: CAST_POKER_ADDRESS,

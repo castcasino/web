@@ -99,7 +99,7 @@ console.log('MANAGING SHOWDOWN')
 console.log('OPEN TABLES', tables)
 
 // FIXME RUN THIS IN A LOOP
-const tableid = 3
+const tableid = 5
 
     blockIdx = tables[tableid]?.community?.flop1?.blockIdx
 console.log('BLOCK INDEX', blockIdx)

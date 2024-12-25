@@ -68,7 +68,8 @@ export default async () => {
     }).catch(err => console.error(err))
 // console.log('TOTAL TABLES (contract)', totalTables)
 
-    idxTables = await systemDb.get('idx_tables')
+    idxTables = await systemDb
+        .get('idx_tables')
         .catch(err => console.error(err))
 // console.log('INDEX TABLES (db)', idxTables)
 

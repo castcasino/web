@@ -55,14 +55,14 @@ console.log('MANAGING PAYOUT')
 // console.log('CONTRACT EVENTS', logs)
 
 // FIXME RUN THIS IN A LOOP
-const tableid = 3
+const tableid = 5
 
     tableInfo = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'getTable',
         args: [tableid]
-    })
+    }).catch(err => console.error(err))
 console.log('TABLE INFO', tableInfo)
 
     /* Package table info. */
