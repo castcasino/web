@@ -65,21 +65,26 @@ const tableid = 5
     }).catch(err => console.error(err))
 console.log('TABLE INFO', tableInfo)
 
-    /* Package table info. */
-    tableInfo = {
-        state: tableInfo.state,
-        token: tableInfo.token,
-        host: tableInfo.host,
-        seed: tableInfo.seed.toString(),
-        buyin: tableInfo.buyin.toString(),
-        tts: tableInfo.tts.toString(),
-        pot: tableInfo.pot.toString(),
-        paid: tableInfo.paid.toString(),
-        seats: tableInfo.seats,
-        fomo: tableInfo.fomo,
-        theme: tableInfo.theme,
-        community: tableInfo.community,
-    }
+    // /* Package table info. */
+    // tableInfo = {
+    //     state: tableInfo.state,
+    //     token: tableInfo.token,
+    //     host: tableInfo.host,
+    //     seed: tableInfo.seed.toString(),
+    //     buyin: tableInfo.buyin.toString(),
+    //     tts: tableInfo.tts.toString(),
+    //     pot: tableInfo.pot.toString(),
+    //     paid: tableInfo.paid.toString(),
+    //     seats: tableInfo.seats,
+    //     fomo: tableInfo.fomo,
+    //     theme: tableInfo.theme,
+    //     community: tableInfo.community,
+    // }
+    tableInfo.seed = tableInfo.seed.toString()
+    tableInfo.buyin = tableInfo.buyin.toString()
+    tableInfo.tts = tableInfo.tts.toString()
+    tableInfo.pot = tableInfo.pot.toString()
+    tableInfo.paid = tableInfo.paid.toString()
 console.log('TABLE INFO (packaged)', tableInfo)
 
 return

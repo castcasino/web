@@ -38,40 +38,20 @@ export default async () => {
     let response
     let totalTables
 
-// TODO
-    // const currentBlkHeight = ...
-
-    const blk = await systemDb
-        .get('blk_table_created')
-        .catch(err => console.error(err))
-// console.log('BLOCK', blk)
-
-    if (typeof blk === 'undefined') {
-        throw new Error('ERROR: System database failed!')
-    }
-
-    const tableLogs = await baseClient.getContractEvents({
-        address: CAST_POKER_ADDRESS,
-        abi: castPokerAbi,
-        eventName: 'TableCreated',
-        fromBlock: BigInt(blk.height),
-        // toBlock: BigInt(currentBlkHeight),
-    }).catch(err => console.error(err))
-// console.log('TABLE LOGS', tableLogs)
-
-
     /* Request total tables. */
     totalTables = await baseClient.readContract({
         address: CAST_POKER_ADDRESS,
         abi: castPokerAbi,
         functionName: 'getTotalTables',
     }).catch(err => console.error(err))
-// console.log('TOTAL TABLES (contract)', totalTables)
+console.log('TOTAL TABLES (contract)', totalTables)
 
     idxTables = await systemDb
         .get('idx_tables')
         .catch(err => console.error(err))
-// console.log('INDEX TABLES (db)', idxTables)
+console.log('INDEX TABLES (db)', idxTables)
+
+return
 
     /* Validate height. */
     if (idxTables.height === Number(totalTables)) {
@@ -79,17 +59,19 @@ export default async () => {
     } else {
         idxTables.height = Number(totalTables) // cast from BigInt
         idxTables.updatedAt = moment().unix()
-        // console.log('NEW IDX', idxTables)
+console.log('NEW IDX', idxTables)
 
         idxCommunity = await systemDb
             .get('idx_community')
             .catch(err => console.error(err))
-// console.log('INDEX COMMUNITY (db)', idxCommunity)
+console.log('INDEX COMMUNITY (db)', idxCommunity)
 
         /* Check community. */
         if (idxCommunity.height < idxTables.height) {
             await _addNewTable(idxCommunity)
         }
+
+return
 
         await systemDb
             .put(idxTables)
@@ -98,6 +80,11 @@ export default async () => {
                     console.error(err)
                 }
             })
+
+//         response = await systemDb
+//             .put(blk)
+//             .catch(err => console.error(err))
+// console.log('BLOCK INDEX UPDATED', response)
 
         /* Send (Admin) notification. */
         fetch('https://cast.casino/v1/admin', {
