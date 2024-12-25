@@ -26,7 +26,7 @@ const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.
 const systemDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.env.COUCHDB_PASSWORD}@127.0.0.1:5984/system`)
 
 /* Initialize constants. */
-const CAST_POKER_ADDRESS = '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95'
+const CAST_POKER_ADDRESS = '0x3Dabb4d559C176ee7A149222404Af0deB7f8e889'
 const MIN_SHOWDOWN_BLOCKS = 50
 
 export default async () => {
@@ -57,7 +57,7 @@ console.log('MANAGING SHOWDOWN')
 //     }
 //
 //     const logs = await baseClient.getContractEvents({
-//         address: '0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95',
+//         address: CAST_POKER_ADDRESS,
 //         abi: castPokerAbi,
 //         eventName: 'TableCreated',
 //         fromBlock: BigInt(blk.height),

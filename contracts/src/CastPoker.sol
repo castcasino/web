@@ -6,7 +6,7 @@
  * CastPoker - Play a hand of poker in a Farcaster frame.
  *
  * Version 1 (alpha)
- * Released 24.12.23
+ * Released 24.12.25
  *
  * https://cast.poker
  * https://cast.casino
@@ -91,14 +91,6 @@ contract CastPoker is Ownable {
         uint8 theme;                // set artwork (or suit) display on "special" cards [default is Hearts]
         CommunityCards community;   // community cards for the table
         address[] seated;           // seated players (w/ buy-in) at the table
-    }
-
-    /* Initialize bench schema. */
-    // NOTE: If no token is specified, the network's "native" coin is used instead.
-    //       e.g. $BASE, $DEGEN, $ETH, $OP
-    struct Bench {
-        GameplayState state;
-        address token;              // token used for participating at the table
     }
 
     /* Initialize (player) cards schema. */
@@ -529,8 +521,7 @@ contract CastPoker is Ownable {
             require(success, "Oops! Asset transfer has failed!");
         } else {
             /* Transfer payout amount from contract to player. */
-            require(IERC20(table.token).transferFrom(
-                    address(this), _player, _amount),
+            require(IERC20(table.token).transfer(_player, _amount),
                 "Oops! Token transfer has failed!");
         }
 

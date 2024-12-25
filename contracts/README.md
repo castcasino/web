@@ -33,9 +33,9 @@ __Degen | DEGEN__
 
 __Base | BASE__
 
-- Mainnet - [__0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95 ( rev0 )__](https://basescan.org/address/0xD54f3183bB58fAe987F2D1752FFc37BaB4DBaA95#code)
+- Mainnet - [__0x3Dabb4d559C176ee7A149222404Af0deB7f8e889__](https://basescan.org/address/0x3Dabb4d559C176ee7A149222404Af0deB7f8e889#code)
+- Sepolia - [__0xd9C42D5fe064ACCDED586daf37BbAD953e1C7808__](https://sepolia.basescan.org/address/0xd9C42D5fe064ACCDED586daf37BbAD953e1C7808#code)
 
-- ~0x6a529bE3545ED46fF4eEAD60eA32105D8300a564 ( data retrieval bug )~
-- ~0x04a3736810D878AED77f5A7aC30B323BAe5b8105 ( calculation bug )~
+__Degen | DEGEN__
 
-- Sepolia - [__0xAbf9B4f768a801847Aa8F2bed85740f4b23429F8__](https://sepolia.basescan.org/address/0xAbf9B4f768a801847Aa8F2bed85740f4b23429F8#code)
+- Mainnet - [__0x0__](https://explorer.degen.tips/address/0x0?tab=contract)
