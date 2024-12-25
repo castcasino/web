@@ -75,7 +75,7 @@ console.log('TABLE LOGS', tableLogs)
     tableInfo.tts = tableInfo.tts.toString()
     tableInfo.pot = tableInfo.pot.toString()
     tableInfo.paid = tableInfo.paid.toString()
-console.log('ADD NEW TABLE INFO (parsed)', tableInfo)
+console.log('ADD NEW TABLE INFO (sanitized)', tableInfo)
 
 return
 

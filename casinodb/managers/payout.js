@@ -63,7 +63,7 @@ const tableid = 5
         functionName: 'getTable',
         args: [tableid]
     }).catch(err => console.error(err))
-console.log('TABLE INFO', tableInfo)
+// console.log('TABLE INFO', tableInfo)
 
     // /* Package table info. */
     // tableInfo = {
@@ -85,7 +85,7 @@ console.log('TABLE INFO', tableInfo)
     tableInfo.tts = tableInfo.tts.toString()
     tableInfo.pot = tableInfo.pot.toString()
     tableInfo.paid = tableInfo.paid.toString()
-console.log('TABLE INFO (packaged)', tableInfo)
+// console.log('TABLE INFO (sanitized)', tableInfo)
 
 return
 
