@@ -3,7 +3,7 @@ import moment from 'moment'
 import PouchDB from 'pouchdb'
 
 /* Import blockchain clients. */
-import baseClient from '../clients/baseInfura.js'
+import baseClient from '../clients/base.js'
 import degenClient from '../clients/degen.js'
 import ethClient from '../clients/eth.js'
 
@@ -46,24 +46,6 @@ console.log('MANAGING SHOWDOWN')
     let tables
     let timestamp
     let tts
-
-//     const blk = await systemDb
-//         .get('blk_table_created')
-//         .catch(err => console.error(err))
-// // console.log('BLOCK', blk)
-//
-//     if (typeof blk === 'undefined') {
-//         throw new Error('ERROR: System database failed!')
-//     }
-//
-//     const logs = await baseClient.getContractEvents({
-//         address: CAST_POKER_ADDRESS,
-//         abi: castPokerAbi,
-//         eventName: 'TableCreated',
-//         fromBlock: BigInt(blk.height),
-//     })
-// console.log('CONTRACT EVENTS', logs)
-
 
     response = await pokerTablesDb
         .query('api/hasCommunity', {

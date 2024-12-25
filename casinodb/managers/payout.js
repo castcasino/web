@@ -4,7 +4,7 @@ import PouchDB from 'pouchdb'
 import { Sha256 } from '@aws-crypto/sha256-js'
 
 /* Import blockchain clients. */
-import baseClient from '../clients/baseInfura.js'
+import baseClient from '../clients/base.js'
 import degenClient from '../clients/degen.js'
 import ethClient from '../clients/eth.js'
 
@@ -36,23 +36,6 @@ console.log('MANAGING PAYOUT')
     let params
     let response
     let tableInfo
-
-//     const blk = await systemDb
-//         .get('blk_table_created')
-//         .catch(err => console.error(err))
-// // console.log('BLOCK', blk)
-//
-//     if (typeof blk === 'undefined') {
-//         throw new Error('ERROR: System database failed!')
-//     }
-//
-//     const logs = await baseClient.getContractEvents({
-//         address: CAST_POKER_ADDRESS,
-//         abi: castPokerAbi,
-//         eventName: 'TableCreated',
-//         fromBlock: BigInt(blk.height),
-//     })
-// console.log('CONTRACT EVENTS', logs)
 
 // FIXME RUN THIS IN A LOOP
 const tableid = 5
