@@ -67,18 +67,18 @@ console.log('TABLE INFO', tableInfo)
 
     /* Package table info. */
     tableInfo = {
-        state: tableInfo[0],
-        token: tableInfo[1],
-        host: tableInfo[2],
-        seed: tableInfo[3].toString(),
-        buyin: tableInfo[4].toString(),
-        tts: tableInfo[5].toString(),
-        pot: tableInfo[6].toString(),
-        paid: tableInfo[7].toString(),
-        seats: tableInfo[8],
-        fomo: tableInfo[9],
-        theme: tableInfo[10],
-        community: tableInfo[11],
+        state: tableInfo.state,
+        token: tableInfo.token,
+        host: tableInfo.host,
+        seed: tableInfo.seed.toString(),
+        buyin: tableInfo.buyin.toString(),
+        tts: tableInfo.tts.toString(),
+        pot: tableInfo.pot.toString(),
+        paid: tableInfo.paid.toString(),
+        seats: tableInfo.seats,
+        fomo: tableInfo.fomo,
+        theme: tableInfo.theme,
+        community: tableInfo.community,
     }
 console.log('TABLE INFO (packaged)', tableInfo)
 
