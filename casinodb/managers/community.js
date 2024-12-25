@@ -117,6 +117,7 @@ export default async () => {
 // console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
 
         /* Update dealer. */
+        dealer.state = 2 // COMMUNITY
         dealer.community = communityPkg
         dealer.updatedAt = moment().unix()
 
