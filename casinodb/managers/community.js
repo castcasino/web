@@ -58,7 +58,7 @@ export default async () => {
     /* Validate unset. */
     if (unset && unset.length > 0) {
         dealer = unset[0]
-console.log('DEALER', dealer)
+// console.log('DEALER', dealer)
 
         activeDeck = fullDeck()
 // console.log('(FULL) DECK', activeDeck.length, activeDeck)
@@ -68,7 +68,7 @@ console.log('DEALER', dealer)
 
         /* Request community hashes. */
         communityHashes = await _getCommunityHashes()
-console.log('COMMUNITY HASHES', communityHashes)
+// console.log('COMMUNITY HASHES', communityHashes)
 
         selected.push(dealCards(
             activeDeck, communityHashes[0].hash.slice(2), 1))
@@ -113,8 +113,8 @@ console.log('COMMUNITY HASHES', communityHashes)
                 blockHash: communityHashes[4].hash
             }
         }
-console.log('COMMUNITY PACKAGE', communityPkg)
-console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
+// console.log('COMMUNITY PACKAGE', communityPkg)
+// console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
 
         /* Update dealer. */
         dealer.community = communityPkg
@@ -123,6 +123,6 @@ console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
         response = await pokerTablesDb
             .put(dealer)
             .catch(err => console.error(err))
-console.log('RESPONSE (dealer)', response)
+// console.log('RESPONSE (dealer)', response)
     }
 }
