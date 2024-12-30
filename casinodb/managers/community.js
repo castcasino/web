@@ -39,7 +39,7 @@ export default async () => {
     let unset
 
     response = await pokerTablesDb
-        .query('api/unsetTables', {
+        .query('api/isUndealt', {
             include_docs: true,
         }).catch(err => console.error(err))
 // console.log('RESPONSE (unset tables)', response)
@@ -117,7 +117,7 @@ export default async () => {
 // console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
 
         /* Update dealer. */
-        dealer.state = 2 // COMMUNITY
+        // dealer.state = 2 // COMMUNITY
         dealer.community = communityPkg
         dealer.updatedAt = moment().unix()
 
