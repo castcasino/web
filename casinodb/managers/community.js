@@ -7,6 +7,9 @@ import baseClient from '../clients/base.js'
 import degenClient from '../clients/degen.js'
 import ethClient from '../clients/eth.js'
 
+/* Import blockchain accounts. */
+import baseAccount from '../accounts/base.js'
+
 /* Import contract ABI. */
 import castPokerAbi from '../abi/CastPoker.js'
 
@@ -130,9 +133,15 @@ const manageUndealt = async () => {
 
 const manageUnset = async () => {
     /* Initialize locals. */
+    let flop1Card
+    let flop2Card
+    let flop3Card
     let hostess
     let response
+    let riverCard
     let table
+    let tableid
+    let turnCard
     let unset
 
     response = await pokerTablesDb
@@ -165,7 +174,52 @@ console.log('HOSTESS', hostess)
         }).catch(err => console.error(err))
 console.log('TABLE', table)
 
+    /* Validate table state. */
+    if (table.state === 1) {
+console.log('\n***HOSTESS NEEDS TO SET THIS TABLE')
+
+        /* Set cards. */
+        flop1Card = hostess.community.flop1
+        flop2Card = hostess.community.flop2
+        flop3Card = hostess.community.flop3
+        turnCard = hostess.community.turn
+        riverCard = hostess.community.river
+
+        params = {
+            address: CAST_POKER_ADDRESS,
+            abi: castPokerAbi,
+            functionName: 'dealCommunityCards',
+            args: [
+                BigInt(tableid),
+                flop1Card.cardIdx,
+                flop2Card.cardIdx,
+                flop3Card.cardIdx,
+                turnCard.cardIdx,
+                riverCard.cardIdx,
+            ],
+            account: baseAccount().account,
+        }
+console.log('CONTRACT PARAMS (payout)', params)
+
+        /* Validate cashier. */
+        response = await baseClient
+            .simulateContract(params)
+            .catch(err => {
+                // console.error(err)
+                console.error('ERROR MSG:', err.message)
+            })
+console.log('RESPONSE (simulate payout)', response)
+
 return
+
+        if (typeof response !== 'undefined' && response.request) {
+            response = await baseAccount()
+                .writeContract(response.request)
+                .catch(err => console.error(err))
+console.log('RESPONSE (execute payout)', response)
+        }
+    }
+
 // console.log('COMMUNITY PACKAGE', communityPkg)
 // console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
 
