@@ -166,6 +166,10 @@ const manageUnset = async () => {
         hostess = unset[0]
 console.log('HOSTESS', hostess)
 
+        /* Set table id. */
+        tableid = hostess._id
+
+        /* Read (on-chain) table data. */
         table = await baseClient.readContract({
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
@@ -174,7 +178,7 @@ console.log('HOSTESS', hostess)
         }).catch(err => console.error(err))
 console.log('TABLE', table)
 
-    /* Validate table state. */
+    /* Validate (on-chain) table state. */
     if (table.state === 1) {
 console.log('\n***HOSTESS NEEDS TO SET THIS TABLE')
 
