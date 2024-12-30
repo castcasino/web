@@ -34,30 +34,32 @@ export default async () => {
     let communityHashes
     let communityPkg
     let dealer
+    let hostess
     let response
     let selected
+    let undealt
     let unset
 
     response = await pokerTablesDb
         .query('api/isUndealt', {
             include_docs: true,
         }).catch(err => console.error(err))
-// console.log('RESPONSE (unset tables)', response)
+// console.log('RESPONSE (undealt tables)', response)
 
     /* Validate response. */
     if (!response || response.total_rows === 0) {
-        return console.log('  All tables are set!')
+        return console.log('  All cards are dealt!')
     }
 
-    /* Set unset. */
-    unset = response.rows.map((_unset) => {
-        return _unset.doc
+    /* Set undealt. */
+    undealt = response.rows.map((_undealt) => {
+        return _undealt.doc
     })
-// console.log('UNSET', unset)
+// console.log('UNDEALT', undealt)
 
-    /* Validate unset. */
-    if (unset && unset.length > 0) {
-        dealer = unset[0]
+    /* Validate undealt. */
+    if (undealt && undealt.length > 0) {
+        dealer = undealt[0]
 // console.log('DEALER', dealer)
 
         activeDeck = fullDeck()
@@ -113,6 +115,50 @@ export default async () => {
                 blockHash: communityHashes[4].hash
             }
         }
+// console.log('COMMUNITY PACKAGE', communityPkg)
+// console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
+
+        /* Update dealer. */
+        // dealer.state = 2 // COMMUNITY
+        dealer.community = communityPkg
+        dealer.updatedAt = moment().unix()
+
+// TODO Call contract with community cards.
+
+        response = await pokerTablesDb
+            .put(dealer)
+            .catch(err => console.error(err))
+// console.log('RESPONSE (dealer)', response)
+    }
+
+
+console.log('Checking for UNSET tables...')
+
+
+    response = await pokerTablesDb
+        .query('api/unsetTables', {
+            include_docs: true,
+        }).catch(err => console.error(err))
+// console.log('RESPONSE (unset tables)', response)
+
+    /* Validate response. */
+    if (!response || response.total_rows === 0) {
+        return console.log('  All tables are set!')
+    }
+
+    /* Set unset. */
+    unset = response.rows.map((_unset) => {
+        return _unset.doc
+    })
+console.log('UNSET', unset)
+
+    /* Validate unset. */
+    if (unset && unset.length > 0) {
+        hostess = unset[0]
+console.log('HOSTESS', hostess)
+
+
+return
 // console.log('COMMUNITY PACKAGE', communityPkg)
 // console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
 
