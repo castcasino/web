@@ -26,9 +26,7 @@ const pokerTablesDb = new PouchDB(`http://${process.env.COUCHDB_USER}:${process.
 /* Initialize constants. */
 const CAST_POKER_ADDRESS = '0x3Dabb4d559C176ee7A149222404Af0deB7f8e889'
 
-export default async () => {
-// console.log('MANAGING COMMUNITY')
-
+const manageUndealt = async () => {
     /* Initialize locals. */
     let activeDeck
     let communityHashes
@@ -130,10 +128,19 @@ export default async () => {
             .catch(err => console.error(err))
 // console.log('RESPONSE (dealer)', response)
     }
+}
 
-
-console.log('Checking for UNSET tables...')
-
+const manageUnset = async () => {
+    /* Initialize locals. */
+    let activeDeck
+    let communityHashes
+    let communityPkg
+    let dealer
+    let hostess
+    let response
+    let selected
+    let undealt
+    let unset
 
     response = await pokerTablesDb
         .query('api/unsetTables', {
@@ -174,4 +181,11 @@ return
             .catch(err => console.error(err))
 // console.log('RESPONSE (dealer)', response)
     }
+}
+
+export default async () => {
+// console.log('MANAGING COMMUNITY')
+    await manageUndealt()
+console.log('Checking for UNSET tables...')
+    await manageUnset()
 }
