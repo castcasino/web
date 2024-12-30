@@ -118,12 +118,10 @@ const manageUndealt = async () => {
 // console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
 
         /* Update dealer. */
-        // dealer.state = 2 // COMMUNITY
         dealer.community = communityPkg
         dealer.updatedAt = moment().unix()
 
-// TODO Call contract with community cards.
-
+        /* Update database. */
         response = await pokerTablesDb
             .put(dealer)
             .catch(err => console.error(err))
@@ -179,71 +177,64 @@ console.log('HOSTESS', hostess)
         }).catch(err => console.error(err))
 console.log('TABLE', table)
 
-    /* Validate (on-chain) table state. */
-    if (table.state === 1) {
+        /* Validate (on-chain) table state. */
+        if (table.state === 1) {
 console.log('\n***HOSTESS NEEDS TO SET THIS TABLE')
 
-        /* Set cards. */
-        flop1Card = hostess.community.flop1
-        flop2Card = hostess.community.flop2
-        flop3Card = hostess.community.flop3
-        turnCard = hostess.community.turn
-        riverCard = hostess.community.river
+            /* Set cards. */
+            flop1Card = hostess.community.flop1
+            flop2Card = hostess.community.flop2
+            flop3Card = hostess.community.flop3
+            turnCard = hostess.community.turn
+            riverCard = hostess.community.river
 
-        params = {
-            address: CAST_POKER_ADDRESS,
-            abi: castPokerAbi,
-            functionName: 'dealCommunityCards',
-            args: [
-                BigInt(tableid),
-                flop1Card.cardIdx,
-                flop2Card.cardIdx,
-                flop3Card.cardIdx,
-                turnCard.cardIdx,
-                riverCard.cardIdx,
-            ],
-            account: baseAccount().account,
-        }
-console.log('CONTRACT PARAMS (payout)', params)
+            params = {
+                address: CAST_POKER_ADDRESS,
+                abi: castPokerAbi,
+                functionName: 'dealCommunityCards',
+                args: [
+                    BigInt(tableid),
+                    flop1Card.cardIdx,
+                    flop2Card.cardIdx,
+                    flop3Card.cardIdx,
+                    turnCard.cardIdx,
+                    riverCard.cardIdx,
+                ],
+                account: baseAccount().account,
+            }
+// console.log('CONTRACT PARAMS (payout)', params)
 
-        /* Validate cashier. */
-        response = await baseClient
-            .simulateContract(params)
-            .catch(err => {
-                // console.error(err)
-                console.error('ERROR MSG:', err.message)
-            })
+            /* Validate cashier. */
+            response = await baseClient
+                .simulateContract(params)
+                .catch(err => {
+                    // console.error(err)
+                    console.error('ERROR MSG:', err.message)
+                })
 console.log('RESPONSE (simulate payout)', response)
 
-return
+            if (typeof response !== 'undefined' && response.request) {
+                response = await baseAccount()
+                    .writeContract(response.request)
+                    .catch(err => console.error(err))
+console.log('RESPONSE (execute community setup)', response)
 
-        if (typeof response !== 'undefined' && response.request) {
-            response = await baseAccount()
-                .writeContract(response.request)
-                .catch(err => console.error(err))
-console.log('RESPONSE (execute payout)', response)
+                /* Update hostess. */
+                hostess.state = 2 // COMMUNITY
+                hostess.updatedAt = moment().unix()
+
+                response = await pokerTablesDb
+                    .put(hostess)
+                    .catch(err => console.error(err))
+console.log('RESPONSE (hostess)', response)
+            }
         }
-    }
-
-// console.log('COMMUNITY PACKAGE', communityPkg)
-// console.log('ACTIVE DECK (original)', activeDeck.length, activeDeck)
-
-        /* Update dealer. */
-        // dealer.state = 2 // COMMUNITY
-        dealer.community = communityPkg
-        dealer.updatedAt = moment().unix()
-
-// TODO Call contract with community cards.
-
-        response = await pokerTablesDb
-            .put(dealer)
-            .catch(err => console.error(err))
-// console.log('RESPONSE (dealer)', response)
     }
 }
 
 export default async () => {
-// console.log('MANAGING COMMUNITY')
+    console.log('  Manging community...')
+
     await manageUndealt()
 console.log('Checking for UNSET tables...')
     await manageUnset()
