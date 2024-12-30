@@ -137,6 +137,7 @@ const manageUnset = async () => {
     let flop2Card
     let flop3Card
     let hostess
+    let params
     let response
     let riverCard
     let table
