@@ -57,7 +57,7 @@ export default async () => {
             address: CAST_POKER_ADDRESS,
             abi: castPokerAbi,
             functionName: 'getSeated',
-            args: [BigInt(hostess._id)]
+            args: [ BigInt(hostess._id) ]
         }).catch(err => console.error(err))
 // console.log('SEATED', seated)
 

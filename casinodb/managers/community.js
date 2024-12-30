@@ -32,11 +32,9 @@ const manageUndealt = async () => {
     let communityHashes
     let communityPkg
     let dealer
-    let hostess
     let response
     let selected
     let undealt
-    let unset
 
     response = await pokerTablesDb
         .query('api/isUndealt', {
@@ -132,14 +130,9 @@ const manageUndealt = async () => {
 
 const manageUnset = async () => {
     /* Initialize locals. */
-    let activeDeck
-    let communityHashes
-    let communityPkg
-    let dealer
     let hostess
     let response
-    let selected
-    let undealt
+    let table
     let unset
 
     response = await pokerTablesDb
@@ -157,13 +150,20 @@ const manageUnset = async () => {
     unset = response.rows.map((_unset) => {
         return _unset.doc
     })
-console.log('UNSET', unset)
+// console.log('UNSET', unset)
 
     /* Validate unset. */
     if (unset && unset.length > 0) {
         hostess = unset[0]
 console.log('HOSTESS', hostess)
 
+        table = await baseClient.readContract({
+            address: CAST_POKER_ADDRESS,
+            abi: castPokerAbi,
+            functionName: 'getTable',
+            args: [ BigInt(hostess._id) ]
+        }).catch(err => console.error(err))
+console.log('TABLE', table)
 
 return
 // console.log('COMMUNITY PACKAGE', communityPkg)
