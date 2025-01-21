@@ -1,21 +1,27 @@
 {
-  "name": "cast-casino",
-  "version": "24.11.10",
+  "name": "cast-casino-web",
+  "version": "24.11.12",
   "license": "MIT",
-  "type": "module",
   "scripts": {
-    "test": "mocha test/test.js"
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nexajs/crypto": "24.9.5",
+    "@neynar/nodejs-sdk": "1.70.0",
+    "@nuxtjs/plausible": "0.2.1",
+    "@pinia/nuxt": "0.5.4",
     "moment": "2.29.4",
     "numeral": "2.0.6",
+    "nuxt": "3.12.4",
+    "pinia": "2.2.2",
     "pouchdb": "9.0.0",
     "uuid": "10.0.0"
   },
   "devDependencies": {
-    "debug": "4.3.4",
-    "mocha": "10.8.2",
-    "should": "13.2.3"
+    "@nuxtjs/i18n": "8.3.3",
+    "@nuxtjs/tailwindcss": "6.12.1"
   }
 }
