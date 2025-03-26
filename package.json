@@ -1,6 +1,6 @@
 {
   "name": "castcasino-web",
-  "version": "25.1.21",
+  "version": "25.2.26",
   "license": "MIT",
   "scripts": {
     "build": "nuxt build",
@@ -12,17 +12,17 @@
   "dependencies": {
     "@neynar/nodejs-sdk": "1.70.0",
     "@nuxtjs/i18n": "8.3.3",
-    "@nuxtjs/tailwindcss": "6.12.1",
     "@nuxtjs/plausible": "0.2.1",
+    "@nuxtjs/tailwindcss": "6.12.1",
     "@pinia/nuxt": "0.5.4",
     "moment": "2.29.4",
     "numeral": "2.0.6",
     "nuxt": "3.12.4",
     "pinia": "2.2.2",
+    "simple-analytics-vue": "3.0.2",
     "uuid": "10.0.0"
   },
-  "devDependencies": {},
-  "packageManager": "yarn@1.22.22",
+  "packageManager": "pnpm@9.15.4",
   "engines": {
     "node": ">=21.0.0"
   }
