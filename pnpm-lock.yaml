@@ -14,9 +14,6 @@ importers:
       '@nuxtjs/i18n':
         specifier: 8.3.3
         version: 8.3.3(magicast@0.3.5)(rollup@4.37.0)(vue@3.5.13)
-      '@nuxtjs/plausible':
-        specifier: 0.2.1
-        version: 0.2.1(magicast@0.3.5)
       '@nuxtjs/tailwindcss':
         specifier: 6.12.1
         version: 6.12.1(magicast@0.3.5)
@@ -879,9 +876,6 @@ packages:
     resolution: {integrity: sha512-um0xL3fO7Mf4fDxcqx9KryrB7zgRM5JSlvGN5AGkP6JLM5XEKyjeAiPbNxdXVXQ16isuAhYpvP88NgL2BGd6aA==}
     engines: {node: '>=8.0.0', npm: '>=5.0.0'}
     hasBin: true
-
-  '@nuxtjs/plausible@0.2.1':
-    resolution: {integrity: sha512-1AyV9woFeZKBhwYy05S7NBk4jeAXzWcF/SIK/S/GZ8C86G8x7f2hR2eJi9FRRQYGwHutBx2guU4tZAW4J71Azg==}
 
   '@nuxtjs/tailwindcss@6.12.1':
     resolution: {integrity: sha512-UKmaPRVpxlFqLorhL6neEba2tySlsj6w6yDb7jzS6A0AAjyBQ6k3BQqWO+AaTy2iQLX7eR+1yj3/w43HzY8RtA==}
@@ -3096,10 +3090,6 @@ packages:
   pkg-types@2.1.0:
     resolution: {integrity: sha512-wmJwA+8ihJixSoHKxZJRBQG1oY8Yr9pGLzRmSsNms0iNWyHHAlZCa7mmKiFR10YPZuz/2k169JiS/inOjBCZ2A==}
 
-  plausible-tracker@0.3.9:
-    resolution: {integrity: sha512-hMhneYm3GCPyQon88SZrVJx+LlqhM1kZFQbuAgXPoh/Az2YvO1B6bitT9qlhpiTdJlsT5lsr3gPmzoVjb5CDXA==}
-    engines: {node: '>=10'}
-
   portfinder@1.0.35:
     resolution: {integrity: sha512-73JaFg4NwYNAufDtS5FsFu/PdM49ahJrO1i44aCRsDWju1z5wuGDaqyFUQWR6aJoK2JPDWlaYYAGFNIGTSUHSw==}
     engines: {node: '>= 10.12'}
@@ -5123,15 +5113,6 @@ snapshots:
       node-fetch: 2.7.0
     transitivePeerDependencies:
       - encoding
-
-  '@nuxtjs/plausible@0.2.1(magicast@0.3.5)':
-    dependencies:
-      '@nuxt/kit': 3.16.1(magicast@0.3.5)
-      defu: 6.1.4
-      pathe: 1.1.2
-      plausible-tracker: 0.3.9
-    transitivePeerDependencies:
-      - magicast
 
   '@nuxtjs/tailwindcss@6.12.1(magicast@0.3.5)':
     dependencies:
@@ -7609,8 +7590,6 @@ snapshots:
       confbox: 0.2.1
       exsolve: 1.0.4
       pathe: 2.0.3
-
-  plausible-tracker@0.3.9: {}
 
   portfinder@1.0.35:
     dependencies:

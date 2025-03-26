@@ -23,14 +23,7 @@ export default defineNuxtConfig({
 
         /* Pinia */
         '@pinia/nuxt',
-
-        /* Plausible */
-        '@nuxtjs/plausible',
     ],
-
-    plausible: {
-        apiHost: 'https://plausible.cast.casino',
-    },
 
     /* Route Rules */
     routeRules: {
