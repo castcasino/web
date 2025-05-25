@@ -1,3 +1,19 @@
+/* Initialize (default) frame embed. */
+const frame = {
+    version: 'next',
+    imageUrl: 'https://cast.casino/poster.webp',
+    button: {
+        title: 'Betting with Frens',
+        action: {
+            type: 'launch_frame',
+            name: 'Cast Casino – Betting with Frens',
+            url: `https://cast.casino/`,
+            splashImageUrl: `https://cast.casino/splash.gif`,
+            splashBackgroundColor: '#78777c',
+        },
+    },
+}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     /* Application Settings */
@@ -6,9 +22,10 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
-            title: 'Cast Casino — Casual & Provably Fair Gaming',
+            title: 'Cast Casino – Betting with Frens',
             meta: [
-                { name: 'description', content: 'The first fairplay, permissionless real-money gaming network.' },
+                { name: 'description', content: 'Real-money betting with your Farcaster frens.' },
+                { name: 'fc:frame', content: JSON.stringify(frame) },
             ],
             link: [
                 { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -29,11 +46,8 @@ export default defineNuxtConfig({
     routeRules: {
         /* Disable server-side rendering for Admin area. */
         '/manager/**': { ssr: false },
-
-        /* Add CORS headers to API. */
-        '/v1/**': { cors: true },
     },
 
     /* Set compatibility date. */
-    compatibilityDate: '2024-12-05',
+    compatibilityDate: '2025-05-25',
 })
