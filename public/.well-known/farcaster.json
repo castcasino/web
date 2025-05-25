@@ -14,7 +14,7 @@
     "webhookUrl": "https://webhook.castr.guru/dc2aacd9-9680-4042-bfb7-dfadd1cbb2be",
 
     "subtitle": "Real-money Gaming with Frens",
-    "description": "Play 100% provably fair real-money games with your Farcaster frens.",
+    "description": "Play on-chain, real-money games with your Farcaster frens — Fairplay is 100% guaranteed on every wager.",
     "screenshotUrls": [
       "https://rewards.warpcast.com/screenshot1.png",
       "https://rewards.warpcast.com/screenshot2.png",
@@ -31,7 +31,7 @@
     "heroImageUrl": "https://cast.casino/poster.webp",
     "tagline": "Real-money Gaming with Frens",
     "ogTitle": "Cast Casino",
-    "ogDescription": "Play 100% provably fair real-money games with your Farcaster frens.",
+    "ogDescription": "Play on-chain, real-money games with your Farcaster frens — Fairplay is 100% guaranteed on every wager.",
     "ogImageUrl": "https://cast.casino/poster.webp"
   }
 }
