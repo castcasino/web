@@ -3,10 +3,10 @@ const frame = {
     version: 'next',
     imageUrl: 'https://cast.casino/poster.webp',
     button: {
-        title: 'Betting with Frens',
+        title: 'Real-money Gaming with Frens',
         action: {
             type: 'launch_frame',
-            name: 'Cast Casino – Betting with Frens',
+            name: 'Cast Casino – Bet with Frens',
             url: `https://cast.casino/`,
             splashImageUrl: `https://cast.casino/splash.gif`,
             splashBackgroundColor: '#78777c',
@@ -22,9 +22,9 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
-            title: 'Cast Casino – Betting with Frens',
+            title: 'Cast Casino – Real-money Gaming with Frens',
             meta: [
-                { name: 'description', content: 'Real-money betting with your Farcaster frens.' },
+                { name: 'description', content: 'Real-money gaming with your Farcaster frens – 100% provably Fairplay guarantee on every wager.' },
                 { name: 'fc:frame', content: JSON.stringify(frame) },
             ],
             link: [
