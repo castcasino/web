@@ -1,0 +1,37 @@
+{
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
+  },
+  "frame": {
+    "version": "1",
+    "name": "Cast Casino",
+    "iconUrl": "https://cast.casino/logo.png",
+    "splashImageUrl": "https://cast.casino/splash.gif",
+    "splashBackgroundColor": "#de711f",
+    "homeUrl": "https://cast.casino",
+    "webhookUrl": "https://webhook.castr.guru/dc2aacd9-9680-4042-bfb7-dfadd1cbb2be",
+
+    "subtitle": "100% Fairplay Gaming On-the-Go",
+    "description": "Play 100% provably fair real-money games with your Farcaster frens.",
+    "screenshotUrls": [
+      "https://rewards.warpcast.com/screenshot1.png",
+      "https://rewards.warpcast.com/screenshot2.png",
+      "https://rewards.warpcast.com/screenshot3.png"
+    ],
+    "primaryCategory": "games",
+    "tags": [
+      "casino",
+      "gamble",
+      "betting",
+      "earning",
+      "winning"
+    ],
+    "heroImageUrl": "https://cast.casino/poster.webp",
+    "tagline": "100% Fairplay Gaming On-the-Go",
+    "ogTitle": "Cast Casino",
+    "ogDescription": "Play 100% provably fair real-money games with your Farcaster frens.",
+    "ogImageUrl": "https://cast.casino/poster.webp"
+  }
+}
