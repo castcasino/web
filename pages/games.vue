@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-    title: 'Gallery — Casino Gallery',
+    title: 'Game Catalog — Cast Casino',
     meta: [
         { name: 'description', content: 'Casino Gaming offers a revolutionary blockchain experience.' }
     ],
@@ -10,7 +10,7 @@ useHead({
 <template>
     <main class="max-w-5xl mx-auto my-10 px-3">
         <h1 class="text-6xl font-light tracking-tight italic">
-            Games Gallery
+            Game Catalog
         </h1>
 
         <section class="mt-5 p-5 bg-gray-100">
